@@ -124,8 +124,7 @@ public class GCPDateSelectActivity extends AppCompatActivity implements AdapterV
                 fromDate.setText(date);
                 selectedFromDate = date;
 
-                System.out.println("selectedFromDate "+selectedFromDate);
-
+                System.out.println("selectedFromDate " + selectedFromDate);
 
 
             }
@@ -141,7 +140,7 @@ public class GCPDateSelectActivity extends AppCompatActivity implements AdapterV
                 toDate.setText(date);
                 selectedToDate = date;
 
-                System.out.println("selectedToDate "+selectedToDate);
+                System.out.println("selectedToDate " + selectedToDate);
 
             }
         };
@@ -154,7 +153,17 @@ public class GCPDateSelectActivity extends AppCompatActivity implements AdapterV
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String burner = parent.getItemAtPosition(position).toString();
         System.out.println("SelectedBurners" + burner);
-        selectedBurner = burner;
+
+        if (burner.equals("Left")) {
+
+            selectedBurner = "00";
+        } else if (burner.equals("Center")) {
+            selectedBurner = "01";
+        } else if (burner.equals("Right")) {
+            selectedBurner = "10";
+        }
+
+        //selectedBurner = burner;
 
     }
 

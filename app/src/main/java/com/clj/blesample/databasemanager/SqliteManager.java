@@ -154,7 +154,6 @@ public class SqliteManager extends SQLiteOpenHelper {
 
         List<GasConsumptionPatternDTO> gasConsumptionPatternDTOList = new ArrayList<>();
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyy");
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
 

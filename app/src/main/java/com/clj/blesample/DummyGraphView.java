@@ -2,6 +2,7 @@ package com.clj.blesample;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -24,9 +25,9 @@ public class DummyGraphView extends AppCompatActivity {
 
     LineChartView lineChartView;
 
-    String[] axisData = {"10/11", "11/11", "12/11", "13/11", "14/11", "15/11", "16/11"};
+    String[] xAxisDate = {"10/11", "11/11", "12/11", "13/11", "14/11", "15/11", "16/11"};
 
-    int[] yAxisData = {80, 30, 70, 20, 15, 50, 10};
+    int[] yAxisValue = {80, 30, 70, 20, 15, 50, 10};
 
     SqliteManager sqliteManager;
 
@@ -43,10 +44,23 @@ public class DummyGraphView extends AppCompatActivity {
         String selectedToDate = intent.getStringExtra("TODATE");
         String selectedBurner = intent.getStringExtra("BURNER");
 
-        List<GasConsumptionPatternDTO> gasConsumptionPatternDTOList = sqliteManager.searchByDates(selectedBurner,selectedFromDate,selectedToDate );
+        System.out.println("SelectedData " + selectedFromDate + " " + selectedToDate + " " + selectedBurner);
+
+        List<GasConsumptionPatternDTO> gasConsumptionPatternDTOList = sqliteManager.searchByDates(selectedBurner, selectedFromDate, selectedToDate);
+
+        /*new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        },1000);*/
+
+        System.out.println("RangeSizeOfGasConsumptionPatters " + gasConsumptionPatternDTOList.size());
+
         for (int i = 0; i < gasConsumptionPatternDTOList.size(); i++) {
 
-            System.out.println("RangeSizeOfGasConsumptionPatters " + gasConsumptionPatternDTOList.size());
+            System.out.println("DataGCPData " + gasConsumptionPatternDTOList.get(i).getGasUsageDate());
+            System.out.println("DataGCPData " + gasConsumptionPatternDTOList.get(i).getGasUsage());
 
 
         }
@@ -56,12 +70,19 @@ public class DummyGraphView extends AppCompatActivity {
 
         Line line = new Line(yAxisValues);
 
-        for (int i = 0; i < axisData.length; i++) {
-            axisValues.add(i, new AxisValue(i).setLabel(axisData[i]));
+        /*for (int i = 0; i < xAxisDate.length; i++) {
+            axisValues.add(i, new AxisValue(i).setLabel(xAxisDate[i]));
+        }*/
+        for (int i = 0; i < gasConsumptionPatternDTOList.size(); i++) {
+            axisValues.add(i, new AxisValue(i).setLabel(gasConsumptionPatternDTOList.get(i).getGasUsageDate()));
         }
 
-        for (int i = 0; i < yAxisData.length; i++) {
-            yAxisValues.add(new PointValue(i, yAxisData[i]));
+        /*for (int i = 0; i < yAxisValue.length; i++) {
+            yAxisValues.add(new PointValue(i, yAxisValue[i]));
+        }*/
+
+        for (int i = 0; i < gasConsumptionPatternDTOList.size(); i++) {
+            yAxisValues.add(new PointValue(i, gasConsumptionPatternDTOList.get(i).getGasUsage()));
         }
 
         List lines = new ArrayList();
