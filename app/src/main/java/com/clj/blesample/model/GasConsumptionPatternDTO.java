@@ -7,9 +7,9 @@ public class GasConsumptionPatternDTO {
     private int id;
     private String gasUsageBurner;
     private int gasUsage;
-    private Date gasUsageDate;
+    private String gasUsageDate;
 
-    public GasConsumptionPatternDTO(int id, String gasUsageBurner, int gasUsage, Date gasUsageDate) {
+    public GasConsumptionPatternDTO(int id, String gasUsageBurner, int gasUsage, String gasUsageDate) {
         this.id = id;
         this.gasUsageBurner = gasUsageBurner;
         this.gasUsage = gasUsage;
@@ -40,11 +40,11 @@ public class GasConsumptionPatternDTO {
         this.gasUsage = gasUsage;
     }
 
-    public Date getGasUsageDate() {
+    public String getGasUsageDate() {
         return gasUsageDate;
     }
 
-    public void setGasUsageDate(Date gasUsageDate) {
+    public void setGasUsageDate(String gasUsageDate) {
         this.gasUsageDate = gasUsageDate;
     }
 }

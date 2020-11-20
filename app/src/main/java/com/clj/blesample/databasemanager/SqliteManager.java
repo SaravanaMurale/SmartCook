@@ -146,36 +146,39 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     public List<GasConsumptionPatternDTO> searchByDates(String burner, Date startDate, Date endDate) {
 
-        String sDate = "02/11/2020";
-        String eDate = "07/11/2020";
+        String sDate = MathUtil.dateToStringConversion(startDate);
+        String eDate = MathUtil.dateToStringConversion(endDate);
+
+        System.out.println("StartDate " + sDate + " " + "EndDate" + eDate);
+
+        /*String sDate = "01/11/2020";
+        String eDate = "10/11/2020";*/
 
         List<GasConsumptionPatternDTO> gasConsumptionPatternDTOList = new ArrayList<>();
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyy");
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
 
-        /*Cursor cursor = sqLiteDatabase.rawQuery("select id,gcp_burner,gcp_usage_value,gcp_usage_date from " + GCP_TABLE + " where DATE(" + GCP_USAGE_DATE + ")>=? and DATE(" + GCP_USAGE_DATE + ")<=?",
-                new String[]{simpleDateFormat.format(startDate), simpleDateFormat.format(endDate)});
-*/
 
-        Cursor cursor = sqLiteDatabase.rawQuery("select id,gcp_burner,gcp_usage_value,gcp_usage_date from " + GCP_TABLE + " where " + GCP_USAGE_DATE + ">=? and " + GCP_USAGE_DATE + "<=?",
-                new String[]{sDate, eDate});
+        /*Cursor cursor = sqLiteDatabase.rawQuery("select id,gcp_burner,gcp_usage_value,gcp_usage_date from " + GCP_TABLE + " where " + GCP_USAGE_DATE + ">=? and " + GCP_USAGE_DATE + "<=?",
+                new String[]{sDate, eDate});*/
+
+        Cursor cursor = sqLiteDatabase.rawQuery("select id,gcp_burner,gcp_usage_value,gcp_usage_date from " + GCP_TABLE + " where " + GCP_USAGE_DATE + ">=? and " + GCP_USAGE_DATE + "<=? and " + GCP_BURNER + "=?",
+                new String[]{sDate, eDate, burner});
 
         if (cursor.moveToFirst()) {
 
             do {
-                try {
 
-                    System.out.println("RrangeID " + cursor.getInt(0));
-                    System.out.println("RrangeBURNER " + cursor.getString(1));
-                    System.out.println("RrangeUSAGE " + cursor.getInt(2));
-                    System.out.println("DATE " + cursor.getString(3));
 
-                    GasConsumptionPatternDTO gasConsumptionPatternDTO = new GasConsumptionPatternDTO(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), simpleDateFormat.parse(cursor.getString(3)));
-                    gasConsumptionPatternDTOList.add(gasConsumptionPatternDTO);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                System.out.println("RrangeID " + cursor.getInt(0));
+                System.out.println("RrangeBURNER " + cursor.getString(1));
+                System.out.println("RrangeUSAGE " + cursor.getInt(2));
+                System.out.println("DATE " + cursor.getString(3));
+
+                GasConsumptionPatternDTO gasConsumptionPatternDTO = new GasConsumptionPatternDTO(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getString(3));
+                gasConsumptionPatternDTOList.add(gasConsumptionPatternDTO);
+
             } while (cursor.moveToNext());
 
 
@@ -197,13 +200,13 @@ public class SqliteManager extends SQLiteOpenHelper {
 
             do {
 
-                System.out.println("ID " + cursor.getInt(0));
+                /*System.out.println("ID " + cursor.getInt(0));
                 System.out.println("BURNER " + cursor.getString(1));
                 System.out.println("USAGE " + cursor.getInt(2));
-                System.out.println("DATE " + cursor.getString(3));
+                System.out.println("DATE " + cursor.getString(3));*/
 
-                //GasConsumptionPatternDTO gasConsumptionPatternDTO = new GasConsumptionPatternDTO(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), simpleDateFormat.parse(cursor.getString(3)));
-                //gasConsumptionPatternDTOList.add(gasConsumptionPatternDTO);
+                GasConsumptionPatternDTO gasConsumptionPatternDTO = new GasConsumptionPatternDTO(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getString(3));
+                gasConsumptionPatternDTOList.add(gasConsumptionPatternDTO);
             } while (cursor.moveToNext());
 
 

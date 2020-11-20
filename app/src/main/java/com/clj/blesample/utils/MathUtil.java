@@ -90,12 +90,11 @@ public class MathUtil {
         return d;
     }
 
-    public static String date() {
+    public static String dateToStringConversion(Date dateInput) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date d = new Date();
-        String date = sdf.format(d);
-        return date;
+        String dateInString = sdf.format(dateInput);
+        return dateInString;
     }
 
     public static String time() {

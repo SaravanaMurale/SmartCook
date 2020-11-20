@@ -100,7 +100,7 @@ public class DummyActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 try {
-                    List<GasConsumptionPatternDTO> gasConsumptionPatternDTOList = sqliteManager.searchByDates("00", new SimpleDateFormat("dd/MM/yyyy").parse("02/11/2020"), new SimpleDateFormat("dd/MM/yyyy").parse("07/11/2020"));
+                    List<GasConsumptionPatternDTO> gasConsumptionPatternDTOList = sqliteManager.searchByDates("00", new SimpleDateFormat("dd/MM/yyyy").parse("01/11/2020"), new SimpleDateFormat("dd/MM/yyyy").parse("10/11/2020"));
                     for (int i = 0; i < gasConsumptionPatternDTOList.size(); i++) {
 
                         System.out.println("RangeSizeOfGasConsumptionPatters " + gasConsumptionPatternDTOList.size());
