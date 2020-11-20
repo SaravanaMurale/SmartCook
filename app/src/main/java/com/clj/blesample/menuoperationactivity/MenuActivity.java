@@ -47,7 +47,7 @@ public class MenuActivity extends AppCompatActivity {
         gasConsumptionBlock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this, BarChartActivity.class);
+                Intent intent = new Intent(MenuActivity.this, GCPDateSelectActivity.class);
                 startActivity(intent);
             }
         });

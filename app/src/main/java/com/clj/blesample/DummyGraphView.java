@@ -1,9 +1,14 @@
 package com.clj.blesample;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.clj.blesample.databasemanager.SqliteManager;
+import com.clj.blesample.model.GasConsumptionPatternDTO;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +24,11 @@ public class DummyGraphView extends AppCompatActivity {
 
     LineChartView lineChartView;
 
-    String[]  axisData = {"10/11", "11/11", "12/11", "13/11", "14/11", "15/11", "16/11" };
+    String[] axisData = {"10/11", "11/11", "12/11", "13/11", "14/11", "15/11", "16/11"};
 
     int[] yAxisData = {80, 30, 70, 20, 15, 50, 10};
+
+    SqliteManager sqliteManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,17 +36,31 @@ public class DummyGraphView extends AppCompatActivity {
         setContentView(R.layout.activity_dummy_graph_view);
 
         lineChartView = findViewById(R.id.chart);
+        sqliteManager = new SqliteManager(DummyGraphView.this);
+
+        Intent intent = getIntent();
+        String selectedFromDate = intent.getStringExtra("FROMDATE");
+        String selectedToDate = intent.getStringExtra("TODATE");
+        String selectedBurner = intent.getStringExtra("BURNER");
+
+        List<GasConsumptionPatternDTO> gasConsumptionPatternDTOList = sqliteManager.searchByDates(selectedBurner,selectedFromDate,selectedToDate );
+        for (int i = 0; i < gasConsumptionPatternDTOList.size(); i++) {
+
+            System.out.println("RangeSizeOfGasConsumptionPatters " + gasConsumptionPatternDTOList.size());
+
+
+        }
 
         List yAxisValues = new ArrayList();
         List axisValues = new ArrayList();
 
         Line line = new Line(yAxisValues);
 
-        for(int i = 0; i < axisData.length; i++){
+        for (int i = 0; i < axisData.length; i++) {
             axisValues.add(i, new AxisValue(i).setLabel(axisData[i]));
         }
 
-        for (int i = 0; i < yAxisData.length; i++){
+        for (int i = 0; i < yAxisData.length; i++) {
             yAxisValues.add(new PointValue(i, yAxisData[i]));
         }
 

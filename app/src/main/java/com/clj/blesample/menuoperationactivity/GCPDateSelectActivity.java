@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.clj.blesample.DummyGraphView;
 import com.clj.blesample.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.jjoe64.graphview.GraphView;
@@ -26,7 +27,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class BarChartActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class GCPDateSelectActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     LineChart lineChart;
 
@@ -63,13 +64,13 @@ public class BarChartActivity extends AppCompatActivity implements AdapterView.O
             public void onClick(View v) {
 
                 if (selectedFromDate != null && selectedToDate != null && selectedBurner != null) {
-                    Intent intent = new Intent(BarChartActivity.this, GasConsumptionActivity.class);
+                    Intent intent = new Intent(GCPDateSelectActivity.this, DummyGraphView.class);
                     intent.putExtra("FROMDATE", selectedFromDate);
                     intent.putExtra("TODATE", selectedToDate);
                     intent.putExtra("BURNER", selectedBurner);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(BarChartActivity.this, "Please Select", Toast.LENGTH_LONG).show();
+                    Toast.makeText(GCPDateSelectActivity.this, "Please Select", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -96,7 +97,7 @@ public class BarChartActivity extends AppCompatActivity implements AdapterView.O
             @Override
             public void onClick(View v) {
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(BarChartActivity.this, android.R.style.Theme_Holo_Light_Dialog, setListenerFromDate, year, month, date);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(GCPDateSelectActivity.this, android.R.style.Theme_Holo_Light_Dialog, setListenerFromDate, year, month, date);
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 datePickerDialog.show();
 
@@ -107,7 +108,7 @@ public class BarChartActivity extends AppCompatActivity implements AdapterView.O
             @Override
             public void onClick(View v) {
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(BarChartActivity.this, android.R.style.Theme_Holo_Light_Dialog, setListenerToDate, year, month, date);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(GCPDateSelectActivity.this, android.R.style.Theme_Holo_Light_Dialog, setListenerToDate, year, month, date);
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 datePickerDialog.show();
 
@@ -123,6 +124,10 @@ public class BarChartActivity extends AppCompatActivity implements AdapterView.O
                 fromDate.setText(date);
                 selectedFromDate = date;
 
+                System.out.println("selectedFromDate "+selectedFromDate);
+
+
+
             }
         };
 
@@ -135,6 +140,8 @@ public class BarChartActivity extends AppCompatActivity implements AdapterView.O
                 String date = dayOfMonth + "/" + month + "/" + year;
                 toDate.setText(date);
                 selectedToDate = date;
+
+                System.out.println("selectedToDate "+selectedToDate);
 
             }
         };

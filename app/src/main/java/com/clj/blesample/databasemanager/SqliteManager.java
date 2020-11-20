@@ -144,12 +144,10 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     }
 
-    public List<GasConsumptionPatternDTO> searchByDates(String burner, Date startDate, Date endDate) {
+    public List<GasConsumptionPatternDTO> searchByDates(String burner, String startDate, String endDate) {
 
-        String sDate = MathUtil.dateToStringConversion(startDate);
-        String eDate = MathUtil.dateToStringConversion(endDate);
 
-        System.out.println("StartDate " + sDate + " " + "EndDate" + eDate);
+        System.out.println("StartDate " + startDate + " " + "EndDate" + endDate);
 
         /*String sDate = "01/11/2020";
         String eDate = "10/11/2020";*/
@@ -164,7 +162,7 @@ public class SqliteManager extends SQLiteOpenHelper {
                 new String[]{sDate, eDate});*/
 
         Cursor cursor = sqLiteDatabase.rawQuery("select id,gcp_burner,gcp_usage_value,gcp_usage_date from " + GCP_TABLE + " where " + GCP_USAGE_DATE + ">=? and " + GCP_USAGE_DATE + "<=? and " + GCP_BURNER + "=?",
-                new String[]{sDate, eDate, burner});
+                new String[]{startDate, endDate, burner});
 
         if (cursor.moveToFirst()) {
 
