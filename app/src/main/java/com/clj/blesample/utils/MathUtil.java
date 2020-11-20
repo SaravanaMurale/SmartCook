@@ -3,6 +3,7 @@ package com.clj.blesample.utils;
 import android.content.Context;
 import android.graphics.Typeface;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -95,6 +96,16 @@ public class MathUtil {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String dateInString = sdf.format(dateInput);
         return dateInString;
+    }
+
+    public static Date stringToDateConversion(String date){
+        Date actualDate= null;
+        try {
+            actualDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return actualDate;
     }
 
     public static String time() {

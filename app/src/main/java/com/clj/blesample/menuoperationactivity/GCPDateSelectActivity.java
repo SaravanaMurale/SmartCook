@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.clj.blesample.DummyGraphView;
 import com.clj.blesample.R;
+import com.clj.blesample.utils.MathUtil;
 import com.github.mikephil.charting.charts.LineChart;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -26,6 +27,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class GCPDateSelectActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -122,9 +124,13 @@ public class GCPDateSelectActivity extends AppCompatActivity implements AdapterV
                 month = month + 1;
                 String date = dayOfMonth + "/" + month + "/" + year;
                 fromDate.setText(date);
-                selectedFromDate = date;
 
-                System.out.println("selectedFromDate " + selectedFromDate);
+                Date dat=MathUtil.stringToDateConversion(date);
+                String stringFromDate=MathUtil.dateToStringConversion(dat);
+
+                selectedFromDate = stringFromDate;
+
+                System.out.println("selectedFromDate " + stringFromDate);
 
 
             }
@@ -138,7 +144,11 @@ public class GCPDateSelectActivity extends AppCompatActivity implements AdapterV
                 month = month + 1;
                 String date = dayOfMonth + "/" + month + "/" + year;
                 toDate.setText(date);
-                selectedToDate = date;
+
+                Date dat=MathUtil.stringToDateConversion(date);
+                String stringToDate=MathUtil.dateToStringConversion(dat);
+
+                selectedToDate = stringToDate;
 
                 System.out.println("selectedToDate " + selectedToDate);
 

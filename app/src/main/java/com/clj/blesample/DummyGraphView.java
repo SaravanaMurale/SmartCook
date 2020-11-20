@@ -48,13 +48,6 @@ public class DummyGraphView extends AppCompatActivity {
 
         List<GasConsumptionPatternDTO> gasConsumptionPatternDTOList = sqliteManager.searchByDates(selectedBurner, selectedFromDate, selectedToDate);
 
-        /*new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        },1000);*/
-
         System.out.println("RangeSizeOfGasConsumptionPatters " + gasConsumptionPatternDTOList.size());
 
         for (int i = 0; i < gasConsumptionPatternDTOList.size(); i++) {
@@ -114,7 +107,7 @@ public class DummyGraphView extends AppCompatActivity {
         yAxis.setName("GasUsage in KG");
 
         Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
-        viewport.top = 110;
+        viewport.top = 10;
         lineChartView.setMaximumViewport(viewport);
         lineChartView.setCurrentViewport(viewport);
     }
