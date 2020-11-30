@@ -63,7 +63,9 @@
         android:gravity="left|center_vertical"
         android:hint="Address"
         android:inputType="textPostalAddress"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:visibility="gone"
+        />
 
 
     <Button
@@ -74,6 +76,7 @@
         android:layout_marginTop="15dp"
         android:text="Signup"
         android:enabled="false"
+        android:background="@color/sign_up_color"
 
         />
 

@@ -17,13 +17,14 @@ import com.clj.blesample.MainActivity;
 import com.clj.blesample.R;
 import com.clj.blesample.databasemanager.SqliteManager;
 
+import static com.clj.blesample.utils.MathUtil.validateEmail;
 import static com.clj.blesample.utils.MathUtil.validatePassword;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText loginUserName, loginPassword;
     private Button btnLogin;
-    private TextView signUp;
+    private TextView signUp, btn_Reset;
 
     SqliteManager sqliteManager;
 
@@ -42,16 +43,29 @@ public class LoginActivity extends AppCompatActivity {
         loginUserName = (EditText) findViewById(R.id.login_email);
         loginPassword = (EditText) findViewById(R.id.login_password);
         signUp = (TextView) findViewById(R.id.signUp);
+        btn_Reset = (TextView) findViewById(R.id.btn_Reset);
 
         btnLogin = (Button) findViewById(R.id.loginBtn);
 
-        loginUserName.addTextChangedListener(new MyTextWatcher(loginUserName));
-        loginPassword.addTextChangedListener(new MyTextWatcher(loginPassword));
+        //loginUserName.addTextChangedListener(new MyTextWatcher(loginUserName));
+        //loginPassword.addTextChangedListener(new MyTextWatcher(loginPassword));
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
+
+        btn_Reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
                 startActivity(intent);
             }
         });
@@ -61,15 +75,31 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //validate user from SQLITE
 
-                String userName = sqliteManager.validateLoginUser(loginUserName.getText().toString(), loginPassword.getText().toString());
+                String email = loginUserName.getText().toString().trim();
+                String password = loginPassword.getText().toString().trim();
 
-                if (!userName.equals("empty")) {
-                    Toast.makeText(LoginActivity.this, "Received UserName" + userName, Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(LoginActivity.this, "You have entered wrong username or password" + userName, Toast.LENGTH_LONG).show();
+                if (password.isEmpty() || password.equals("") || password.equals(null)) {
+                    Toast.makeText(LoginActivity.this, "Please enter valid password", Toast.LENGTH_LONG).show();
+                    loginPassword.findFocus();
+                }
+
+                if (email.isEmpty() || email.equals("") || email.equals(null)) {
+                    Toast.makeText(LoginActivity.this, "Please enter valid email", Toast.LENGTH_LONG).show();
+                    loginUserName.findFocus();
+                }
+
+                if (validateEmail(email) && validateEmail(password)) {
+                    String userName = sqliteManager.validateLoginUser(email, password);
+
+                    if (!userName.equals("empty")) {
+                        Toast.makeText(LoginActivity.this, "Received UserName" + userName, Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "You have entered wrong username or password" + userName, Toast.LENGTH_LONG).show();
+                    }
+
                 }
 
 

@@ -49,14 +49,14 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //save data in SqliteDatabase
 
-                boolean status = sqliteManager.addUser(signUpName.getText().toString(), signUpEmail.getText().toString(), signUpMobile.getText().toString(), signUpPassword.getText().toString(), signUpAddress.getText().toString());
+                boolean status = sqliteManager.addUser(signUpName.getText().toString(), signUpEmail.getText().toString(), signUpMobile.getText().toString(), signUpPassword.getText().toString());
                 if (status) {
 
                     signUpName.getText().clear();
                     signUpEmail.getText().clear();
                     signUpMobile.getText().clear();
                     signUpPassword.getText().clear();
-                    signUpAddress.getText().clear();
+                    //signUpAddress.getText().clear();
 
                     Toast.makeText(SignUpActivity.this, "User Added Successfully", Toast.LENGTH_LONG).show();
 
@@ -106,14 +106,14 @@ public class SignUpActivity extends AppCompatActivity {
             String email = signUpEmail.getText().toString().trim();
             String mobileNum = signUpMobile.getText().toString().trim();
             String password = signUpPassword.getText().toString().trim();
-            String address = signUpAddress.getText().toString().trim();
+           // String address = signUpAddress.getText().toString().trim();
 
-            btnSignUp.setEnabled(validateName(name) && validateEmail(email) && validateMobile(mobileNum) && validatePassword(password) && validateAddress(address));
+            btnSignUp.setEnabled(validateName(name) && validateEmail(email) && validateMobile(mobileNum) && validatePassword(password));
 
             if (btnSignUp.isEnabled()) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
-                    btnSignUp.setBackground(getResources().getDrawable(R.drawable.card_view_border));
+                    btnSignUp.setBackground(getResources().getDrawable(R.drawable.sign_up_bg));
 
                 }
             } else if (!btnSignUp.isEnabled()) {

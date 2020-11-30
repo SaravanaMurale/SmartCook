@@ -28,6 +28,7 @@
 
     <color name="timer_bg">#71a6db</color>
     <color name="whistle_bg">#d9d9d9</color>
+    <color name="sign_up_color">#4f97d7</color>
 
 
 </resources>

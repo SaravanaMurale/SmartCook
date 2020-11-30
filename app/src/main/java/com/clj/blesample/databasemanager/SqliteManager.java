@@ -214,7 +214,9 @@ public class SqliteManager extends SQLiteOpenHelper {
     }
 
 
-    public boolean addUser(String userName, String userEmail, String mobileNumber, String userPassword, String userAddress) {
+    public boolean addUser(String userName, String userEmail, String mobileNumber, String userPassword) {
+
+        String userAddress="address";
 
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
@@ -371,6 +373,18 @@ public class SqliteManager extends SQLiteOpenHelper {
         }
 
         return username;
+    }
+
+    public boolean resetPassword(String userEmail,String password){
+
+        SQLiteDatabase updateSqLiteDatabase = getWritableDatabase();
+
+        ContentValues updateContentValues = new ContentValues();
+
+        updateContentValues.put(USER_PASSWORD, password);
+
+        return updateSqLiteDatabase.update(TABLE_NAME, updateContentValues, USER_EMAIL + "=?", new String[]{userEmail}) > 0;
+
     }
 
 
