@@ -38,33 +38,63 @@ public class SignUpActivity extends AppCompatActivity {
 
         sqliteManager = new SqliteManager(SignUpActivity.this);
 
-        signUpName.addTextChangedListener(new MyTextWatcher(signUpName));
-        signUpEmail.addTextChangedListener(new MyTextWatcher(signUpEmail));
-        signUpMobile.addTextChangedListener(new MyTextWatcher(signUpMobile));
-        signUpPassword.addTextChangedListener(new MyTextWatcher(signUpPassword));
-        signUpAddress.addTextChangedListener(new MyTextWatcher(signUpAddress));
+        //signUpName.addTextChangedListener(new MyTextWatcher(signUpName));
+        //signUpEmail.addTextChangedListener(new MyTextWatcher(signUpEmail));
+        //signUpMobile.addTextChangedListener(new MyTextWatcher(signUpMobile));
+        //signUpPassword.addTextChangedListener(new MyTextWatcher(signUpPassword));
+        //signUpAddress.addTextChangedListener(new MyTextWatcher(signUpAddress));
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //save data in SqliteDatabase
 
-                boolean status = sqliteManager.addUser(signUpName.getText().toString(), signUpEmail.getText().toString(), signUpMobile.getText().toString(), signUpPassword.getText().toString());
-                if (status) {
+                String userName = signUpName.getText().toString();
+                String userEmail = signUpEmail.getText().toString();
+                String userMobile = signUpMobile.getText().toString();
+                String userPassword = signUpPassword.getText().toString();
 
-                    signUpName.getText().clear();
-                    signUpEmail.getText().clear();
-                    signUpMobile.getText().clear();
-                    signUpPassword.getText().clear();
-                    //signUpAddress.getText().clear();
 
-                    Toast.makeText(SignUpActivity.this, "User Added Successfully", Toast.LENGTH_LONG).show();
+                if (userName.isEmpty() || userName.equals("") || userName.equals(null)) {
+                    Toast.makeText(SignUpActivity.this, "Please enter valid Name", Toast.LENGTH_LONG).show();
 
-                    Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                    startActivity(intent);
+                }
 
-                } else {
-                    Toast.makeText(SignUpActivity.this, "User Is Not Added Successfully", Toast.LENGTH_LONG).show();
+                if (userEmail.isEmpty() || userEmail.equals("") || userEmail.equals(null)) {
+                    Toast.makeText(SignUpActivity.this, "Please enter valid email", Toast.LENGTH_LONG).show();
+
+                }
+
+                if (userMobile.isEmpty() || userMobile.equals("") || userMobile.equals(null)) {
+                    Toast.makeText(SignUpActivity.this, "Please enter valid mobile number", Toast.LENGTH_LONG).show();
+
+                }
+
+                if (userPassword.isEmpty() || userPassword.equals("") || userPassword.equals(null)) {
+                    Toast.makeText(SignUpActivity.this, "Please enter valid password", Toast.LENGTH_LONG).show();
+
+                }
+
+                if (validateName(userName) && validateEmail(userEmail) && validateMobile(userMobile) && validatePassword(userPassword)) {
+
+                    boolean status = sqliteManager.addUser(userName, userEmail, userMobile, userPassword);
+                    if (status) {
+
+                        signUpName.getText().clear();
+                        signUpEmail.getText().clear();
+                        signUpMobile.getText().clear();
+                        signUpPassword.getText().clear();
+                        //signUpAddress.getText().clear();
+
+                        Toast.makeText(SignUpActivity.this, "User Added Successfully", Toast.LENGTH_LONG).show();
+
+                        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                        startActivity(intent);
+
+                    } else {
+                        Toast.makeText(SignUpActivity.this, "User Is Not Added Successfully", Toast.LENGTH_LONG).show();
+                    }
+
                 }
 
 
@@ -106,7 +136,7 @@ public class SignUpActivity extends AppCompatActivity {
             String email = signUpEmail.getText().toString().trim();
             String mobileNum = signUpMobile.getText().toString().trim();
             String password = signUpPassword.getText().toString().trim();
-           // String address = signUpAddress.getText().toString().trim();
+            // String address = signUpAddress.getText().toString().trim();
 
             btnSignUp.setEnabled(validateName(name) && validateEmail(email) && validateMobile(mobileNum) && validatePassword(password));
 
