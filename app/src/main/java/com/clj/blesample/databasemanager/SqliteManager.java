@@ -363,7 +363,6 @@ public class SqliteManager extends SQLiteOpenHelper {
                 System.out.println("ReceivedUserId" + id);
 
                 PreferencesUtil.setValueSInt(mCtx, PreferencesUtil.USER_ID, id);
-
                 username = userData.getString(1);
 
 

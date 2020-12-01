@@ -90,7 +90,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="20dp"
         android:padding="10dp">
+
+        <TextView
+            android:id="@+id/switchStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ON"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            />
+
+        <Switch
+            android:id="@+id/switchShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/img_loading"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            />
 
         <Button
             android:id="@+id/btn_scan"
@@ -101,7 +122,11 @@
             android:fontFamily="sans-serif-condensed"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:text="@string/start_scan" />
+            android:text="@string/start_scan"
+            android:visibility="gone"
+
+            />
+
 
         <ImageView
             android:id="@+id/img_loading"
@@ -115,11 +140,24 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/bleConnectStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please turn on to connect nearby device"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black"
+
+        />
+
+
+
     <ListView
         android:id="@+id/list_device"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="0.5dp"
         android:paddingEnd="5dp"

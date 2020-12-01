@@ -66,7 +66,7 @@ public class CharacteristicListFragment extends Fragment {
 
     byte[] homeByte = new byte[12];
 
-    RippleBackground rippleLeft, rippleCenter, rippleRight;
+    //RippleBackground rippleLeft, rippleCenter, rippleRight;
 
 
     @Override
@@ -106,10 +106,10 @@ public class CharacteristicListFragment extends Fragment {
         /*EditActivity editActivity=new EditActivity();
         editActivity.EditActivityMethod(this);*/
 
-        setStoveData();
+       // setStoveData();
 
 
-        leftBurnerSettings.setOnClickListener(new View.OnClickListener() {
+        /*leftBurnerSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -158,11 +158,11 @@ public class CharacteristicListFragment extends Fragment {
                 CallEditActivity(right);
             }
         });
-
+*/
         return v;
     }
 
-    private void setStoveData() {
+   /* private void setStoveData() {
 
         homeByte[0] = 1; //active
         homeByte[1] = 1; //vessel
@@ -315,20 +315,20 @@ public class CharacteristicListFragment extends Fragment {
         //End Right Burner
 
 
-    }
+    }*/
 
-    private void blinkImage(ImageView timerIcon) {
+   /* private void blinkImage(ImageView timerIcon) {
         Animation animation = new AlphaAnimation(1, 0); //to change visibility from visible to invisible
         animation.setDuration(1000); //1 second duration for each animation cycle
         animation.setInterpolator(new LinearInterpolator());
         animation.setRepeatCount(Animation.INFINITE); //repeating indefinitely
         animation.setRepeatMode(Animation.REVERSE); //animation will start from end point once ended.
         timerIcon.startAnimation(animation);
-    }
+    }*/
 
-    private void stopImageBlinking(ImageView topTimerIcon) {
+    /*private void stopImageBlinking(ImageView topTimerIcon) {
         topTimerIcon.clearAnimation();
-    }
+    }*/
 
 
     @Override

@@ -13,7 +13,8 @@
         <!-- <activity android:name=".DummyGraphView"></activity> -->
         <activity
             android:name=".menuoperationactivity.GasConsumptionActivity"
-            android:screenOrientation="landscape" /> <!-- <activity android:name=".menuoperationactivity.LoginActivity" /> -->
+            android:screenOrientation="landscape" />
+         <activity android:name=".menuoperationactivity.LoginActivity" />
         <activity android:name=".menuoperationactivity.SignUpActivity" />
         <activity android:name=".menuoperationactivity.EditActivity" />
         <activity android:name=".menuoperationactivity.SettingsActivity" />
@@ -22,10 +23,10 @@
         <activity
             android:name=".DummyGraphView"
             android:screenOrientation="landscape" /> <!-- <activity android:name=".menuoperationactivity.GCPDateSelectActivity" /> -->
-        <!-- <activity android:name=".menuoperationactivity.MenuActivity" /> -->
+         <activity android:name=".menuoperationactivity.MenuActivity" />
          <activity android:name=".MainActivity" />
         <!-- <activity android:name=".DummyActivity"></activity> -->
-        <activity android:name=".menuoperationactivity.LoginActivity">
+        <activity android:name=".menuoperationactivity.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

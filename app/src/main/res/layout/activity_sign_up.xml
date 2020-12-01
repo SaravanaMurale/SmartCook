@@ -9,6 +9,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/signUpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Signup"
@@ -86,8 +87,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
         android:text="Signup"
-        android:enabled="false"
-        android:background="@color/sign_up_color"
+        android:background="@drawable/sign_up_bg"
 
         />
 

@@ -13,7 +13,7 @@
         android:layout_margin="10dp"
         android:background="@color/black"
         android:src="@drawable/menu1"
-        android:visibility="gone" />
+         />
 
 
    <!-- <RelativeLayout

@@ -57,21 +57,25 @@ public class SignUpActivity extends AppCompatActivity {
 
                 if (userName.isEmpty() || userName.equals("") || userName.equals(null)) {
                     Toast.makeText(SignUpActivity.this, "Please enter valid Name", Toast.LENGTH_LONG).show();
+                    return;
 
                 }
 
                 if (userEmail.isEmpty() || userEmail.equals("") || userEmail.equals(null)) {
                     Toast.makeText(SignUpActivity.this, "Please enter valid email", Toast.LENGTH_LONG).show();
+                    return;
 
                 }
 
                 if (userMobile.isEmpty() || userMobile.equals("") || userMobile.equals(null)) {
                     Toast.makeText(SignUpActivity.this, "Please enter valid mobile number", Toast.LENGTH_LONG).show();
+                    return;
 
                 }
 
                 if (userPassword.isEmpty() || userPassword.equals("") || userPassword.equals(null)) {
                     Toast.makeText(SignUpActivity.this, "Please enter valid password", Toast.LENGTH_LONG).show();
+                    return;
 
                 }
 
@@ -92,9 +96,11 @@ public class SignUpActivity extends AppCompatActivity {
                         startActivity(intent);
 
                     } else {
-                        Toast.makeText(SignUpActivity.this, "User Is Not Added Successfully", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignUpActivity.this, "User Is Not Added ", Toast.LENGTH_LONG).show();
                     }
 
+                }else {
+                    Toast.makeText(SignUpActivity.this, "Please enter valid formet", Toast.LENGTH_LONG).show();
                 }
 
 

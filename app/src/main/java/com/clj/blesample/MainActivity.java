@@ -28,6 +28,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -73,6 +74,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DeviceAdapter mDeviceAdapter;
     private ProgressDialog progressDialog;
 
+    private Switch switchShow;
+    private TextView switchStatus,bleConnectStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +95,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //startScan();
         checkPermissions();
+
+        switchShow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                System.out.println("SwitchClicked");
+
+                if (isChecked) {
+
+                    checkPermissions();
+
+                    Toast.makeText(MainActivity.this, "Switch On", Toast.LENGTH_LONG).show();
+                    switchStatus.setText("ON");
+
+
+
+                } else {
+                    Toast.makeText(MainActivity.this, "Switch Off", Toast.LENGTH_LONG).show();
+                    switchStatus.setText("OFF");
+                    bleConnectStatus.setText("Please turn on to connect nearby device");
+
+                    BleManager.getInstance().cancelScan();
+                }
+
+            }
+        });
+
+
     }
 
 
@@ -143,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
 
+
             case R.id.txt_setting:
                 if (layout_setting.getVisibility() == View.VISIBLE) {
                     layout_setting.setVisibility(View.GONE);
@@ -153,6 +186,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
         }
+
     }
 
     private void initView() {
@@ -162,6 +196,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_scan = (Button) findViewById(R.id.btn_scan);
         btn_scan.setText(getString(R.string.start_scan));
         btn_scan.setOnClickListener(this);
+
+        switchShow = (Switch) findViewById(R.id.switchShow);
+        switchStatus=(TextView)findViewById(R.id.switchStatus);
+        bleConnectStatus=(TextView)findViewById(R.id.bleConnectStatus);
 
         et_name = (EditText) findViewById(R.id.et_name);
         et_mac = (EditText) findViewById(R.id.et_mac);
@@ -282,6 +320,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 img_loading.startAnimation(operatingAnim);
                 img_loading.setVisibility(View.VISIBLE);
                 btn_scan.setText(getString(R.string.stop_scan));
+
+                switchShow.setChecked(true);
+                switchStatus.setText("ON");
+                bleConnectStatus.setText("Bluetooth On...");
+
             }
 
             @Override
@@ -293,7 +336,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onScanning(BleDevice bleDevice) {
 
                 //if (PreferencesUtil.getValueString(MainActivity.this, PreferencesUtil.BLE_MAC_ADDRESS).equals("no_value") &&)
-
+                bleConnectStatus.setText("Searching...");
                 mDeviceAdapter.addDevice(bleDevice);
                 mDeviceAdapter.notifyDataSetChanged();
             }
@@ -303,6 +346,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 img_loading.clearAnimation();
                 img_loading.setVisibility(View.INVISIBLE);
                 btn_scan.setText(getString(R.string.start_scan));
+                bleConnectStatus.setText("Please Connect");
 
                 System.out.println("CalledOnScanFinished");
 
@@ -353,8 +397,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onConnectSuccess(BleDevice bleDevice, BluetoothGatt gatt, int status) {
                 //progressDialog.dismiss();
+
                 mDeviceAdapter.addDevice(bleDevice);
                 mDeviceAdapter.notifyDataSetChanged();
+                bleConnectStatus.setText("Connected");
 
                 //Mycode
                 if (BleManager.getInstance().isConnected(bleDevice)) {
