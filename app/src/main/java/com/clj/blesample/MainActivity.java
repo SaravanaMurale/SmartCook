@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+
                 } else {
                     Toast.makeText(MainActivity.this, "Switch Off", Toast.LENGTH_LONG).show();
                     switchStatus.setText("OFF");
