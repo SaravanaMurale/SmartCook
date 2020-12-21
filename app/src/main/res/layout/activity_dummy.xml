@@ -18,21 +18,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/moveToFragment"
-        android:text="SaveInDB" />
+        android:text="SaveInDB"
+        android:visibility="gone"
+        />
 
     <Button
         android:id="@+id/searchByBurner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/saveInSqlite"
-        android:text="Search By Burner" />
+        android:text="Search By Burner"
+        android:visibility="gone"
+        />
 
     <Button
         android:id="@+id/searchByDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/searchByBurner"
-        android:text="Search By Date" />
+        android:text="Search By Date"
+        android:visibility="gone"
+        />
 
 
     <FrameLayout

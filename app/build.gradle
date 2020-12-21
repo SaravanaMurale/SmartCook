@@ -54,6 +54,9 @@ dependencies {
     //Material Design
     //implementation 'com.google.android.material:material:1.0.0'
 
+    //Batch Notification
+    //implementation 'com.nex3z:notification-badge:1.0.4'
+
 
 
 

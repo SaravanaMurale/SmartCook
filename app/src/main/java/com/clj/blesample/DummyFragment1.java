@@ -46,9 +46,9 @@ public class DummyFragment1 extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dummy, container, false);
 
-        initView(view);
+        //initView(view);
 
-        setValueToBurner();
+        //setValueToBurner();
 
 
         return view;
@@ -122,14 +122,16 @@ public class DummyFragment1 extends Fragment {
 
     private void initView(View view) {
 
-        leftBurner = (ImageView) view.findViewById(R.id.leftBurner);
+       // leftBurnerSetting = (Button) view.findViewById(R.id.leftBurnerSetting);
+
+        /*leftBurner = (ImageView) view.findViewById(R.id.leftBurner);
         leftBurnerVessel = (ImageView) view.findViewById(R.id.leftBurnerVessel);
         leftBurnerTime = (TextView) view.findViewById(R.id.leftBurnerTime);
         leftBurnerTimer = (ImageView) view.findViewById(R.id.leftBurnerTimer);
         leftBurnerWhistle = (ImageView) view.findViewById(R.id.leftBurnerWhistle);
         leftBurnerVesselEmpty = (ImageView) view.findViewById(R.id.leftBurnerVesselEmpty);
 
-        leftBurnerSetting = (Button) view.findViewById(R.id.leftBurnerSetting);
+
         leftBurnerEdit = (Button) view.findViewById(R.id.leftBurnerEdit);
 
 
@@ -156,7 +158,7 @@ public class DummyFragment1 extends Fragment {
         leftBurnerWidgetBlock = (LinearLayout) view.findViewById(R.id.leftBurnerWidgetsBlock);
         centerBurnerWidgetBlock = (LinearLayout) view.findViewById(R.id.centerBurnerWidgetsBlock);
         rightBurnerWidgetBlock = (LinearLayout) view.findViewById(R.id.rightBurnerWidgetsBlock);
-
+*/
         leftBurnerSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,7 +181,7 @@ public class DummyFragment1 extends Fragment {
         Intent intent = new Intent(getActivity(), EditActivity.class);
         startActivity(intent);
 
-        /*Fragment fragment = new DummyFragment2();
+        /*Fragment fragment = new DummyFragment1();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainer, fragment);
