@@ -116,6 +116,8 @@ public class SignUpActivity extends AppCompatActivity {
         signUpPassword = (EditText) findViewById(R.id.signup_password);
         signUpAddress = (EditText) findViewById(R.id.signup_address);
 
+        //signUpEmail.setTransformationMethod();
+
         btnSignUp = (Button) findViewById(R.id.btnSignup);
     }
 
