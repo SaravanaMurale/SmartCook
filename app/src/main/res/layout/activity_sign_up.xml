@@ -4,33 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="20dp"
     android:layout_gravity="center"
+    android:layout_margin="20dp"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/signUpText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Signup"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/red"
-        android:textSize="20sp"
-        />
-
-
-
-    <EditText
-        android:id="@+id/signup_name"
+    <Button
+        android:id="@+id/btnSignup"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:fontFamily="sans-serif-condensed"
-        android:gravity="left|center_vertical"
-        android:hint="Name"
-        android:inputType="text"
-        android:singleLine="true"
-        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/sign_up_bg"
+        android:text="Signup"
+
         />
+
 
     <EditText
         android:id="@+id/signup_email"
@@ -76,20 +64,30 @@
         android:hint="Address"
         android:inputType="textPostalAddress"
         android:singleLine="true"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
-
-    <Button
-        android:id="@+id/btnSignup"
+    <EditText
+        android:id="@+id/signup_name"
         android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="left|center_vertical"
+        android:hint="Name"
+        android:inputType="text"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/signUpText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
         android:text="Signup"
-        android:background="@drawable/sign_up_bg"
+        android:textColor="@color/red"
+        android:textSize="20sp" />
 
-        />
+
+
 
 
 </LinearLayout>

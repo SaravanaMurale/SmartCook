@@ -27,6 +27,8 @@ public class DummyFragment1 extends Fragment {
     ImageView leftBurner;
     ImageView notificationIcon;
 
+    TextView selectLeft,selectCenter,selectRight,selectSim,selectHigh,selectOff;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,6 +38,84 @@ public class DummyFragment1 extends Fragment {
 
         leftBurner = (ImageView) view.findViewById(R.id.leftBurner);
         notificationIcon = (ImageView) view.findViewById(R.id.notificationIcon);
+
+        selectLeft=(TextView)view.findViewById(R.id.selectLeft);
+        selectCenter=(TextView)view.findViewById(R.id.selectCenter);
+        selectRight=(TextView)view.findViewById(R.id.selectRight);
+
+        selectSim=(TextView)view.findViewById(R.id.selectSim);
+        selectHigh=(TextView)view.findViewById(R.id.selectHigh);
+        selectOff=(TextView)view.findViewById(R.id.selectOff);
+
+
+        selectLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
+                selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+                selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+
+            }
+        });
+
+        selectCenter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
+                selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+                selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+
+            }
+        });
+
+        selectRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
+                selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+                selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+
+
+            }
+        });
+
+        selectSim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectSim.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
+                selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+                selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+            }
+        });
+
+        selectHigh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectHigh.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
+                selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+                selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
+            }
+        });
+
+        selectOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectOff.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
+                selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+                selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
+
+            }
+        });
+
+
 
         notificationIcon.setOnClickListener(new View.OnClickListener() {
             @Override
