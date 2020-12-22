@@ -21,8 +21,8 @@ public class EditActivity extends AppCompatActivity {
     Button operateLeftBurner, operateCenterBurner, operateRightBurner, start, cancel;
     TextView operateTimer, operateWhistleCount, operateSub, operateAdd, minute, whistle, burnerSettingsText, flamModeText;
 
-    int timerInMin = 5;
-    int whistleInCount = 2;
+    int timerInMin = 0;
+    int whistleInCount = 0;
 
     TextView miniMinute, miniWhistle;
 
@@ -111,7 +111,7 @@ public class EditActivity extends AppCompatActivity {
                     onBackPressed();
 
                 } else {
-                    Toast.makeText(EditActivity.this, "Please Select Time or Whistle and Flame Mode", Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditActivity.this, "Please Select Time or Whistle", Toast.LENGTH_LONG).show();
                 }
 
 

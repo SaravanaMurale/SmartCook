@@ -19,11 +19,13 @@ import android.widget.Toast;
 
 import com.clj.blesample.menuoperationactivity.EditActivity;
 import com.clj.blesample.menuoperationactivity.MenuActivity;
+import com.clj.blesample.menuoperationactivity.NotificationActivity;
 
 
 public class DummyFragment1 extends Fragment {
 
     ImageView leftBurner;
+    ImageView notificationIcon;
 
 
     @Override
@@ -32,7 +34,17 @@ public class DummyFragment1 extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dummy, container, false);
 
-        leftBurner=(ImageView)view.findViewById(R.id.leftBurner);
+        leftBurner = (ImageView) view.findViewById(R.id.leftBurner);
+        notificationIcon = (ImageView) view.findViewById(R.id.notificationIcon);
+
+        notificationIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NotificationActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         leftBurner.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,11 +60,6 @@ public class DummyFragment1 extends Fragment {
 
         return view;
     }
-
-
-
-
-
 
 
     private void launchMenuActivity() {
