@@ -7,101 +7,253 @@
     android:orientation="vertical"
     tools:context=".menuoperationactivity.EditActivity">
 
-    <ImageView
-        android:layout_width="90dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/preethi_logo" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/editCardViewBlock"
+        android:layout_width="match_parent"
+        android:layout_height="310dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="3dp"
+        android:backgroundTint="@color/black"
+        app:cardCornerRadius="20dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/editLeftBurner"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="120dp"
+                android:src="@drawable/stove_burner" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Burner1"
+                android:layout_marginTop="100dp"
+                android:textColor="@color/white"
+                android:layout_marginLeft="60dp"
+                android:visibility="invisible"
+                />
+
+            <ImageView
+                android:id="@+id/editSelectedLeftVessel"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/editLeftBurner"
+                android:layout_marginLeft="75dp"
+                android:src="@drawable/vessel_present" />
+
+
+
+            <ImageView
+                android:id="@+id/editSelectedLeftWhistleCount"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@id/editSelectedLeftBurnerText"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/whistle" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@id/editSelectedLeftBurnerText"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/timer"
+
+                />
+
+            <TextView
+                android:id="@+id/editSelectedLeftBurnerText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editSelectedLeftVessel"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="5dp"
+                android:text="Burner1"
+                android:visibility="gone"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/editSelectedLeftTimerCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editSelectedLeftBurnerText"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="5dp"
+                android:text="25min"
+                android:textColor="@color/white"
+
+                />
+
+            <TextView
+                android:id="@+id/editSelectedLeftWhistle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editSelectedLeftBurnerText"
+                android:layout_alignBaseline="@id/editSelectedLeftTimerCount"
+                android:layout_marginLeft="130dp"
+                android:layout_marginTop="5dp"
+                android:text="25"
+                android:textColor="@color/white" />
+
+
+            <ImageView
+                android:id="@+id/editCenterBurner"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/stove_burner" />
+
+            <ImageView
+                android:id="@+id/editSelectedCenterVessel"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/editCenterBurner"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/vessel_present" />
+
+
+
+
+            <ImageView
+                android:id="@+id/editSelectedCenterWhistle"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_toRightOf="@id/editSelectedCenterTimerCount"
+                android:layout_below="@id/editSelectedCenterVessel"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/whistle"
+                />
+
+            <TextView
+                android:id="@+id/editSelectedCenterWhistleCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/editSelectedCenterWhistle"
+                android:layout_below="@id/editSelectedCenterVessel"
+                android:text="25"
+                android:textSize="10sp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:layout_marginLeft="5dp"
+                />
+
+            <TextView
+                android:id="@+id/editSelectedCenterTimerCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25min"
+                android:textColor="@color/white"
+                android:layout_below="@id/editSelectedCenterVessel"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:textSize="10sp"
+                android:layout_alignBaseline="@+id/editSelectedCenterWhistleCount"
+                />
+
+            <ImageView
+                android:id="@+id/editSelectedCenterTimer"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/timer"
+                android:layout_below="@id/editSelectedCenterVessel"
+                android:layout_toLeftOf="@id/editSelectedCenterTimerCount"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                />
+
+            <ImageView
+                android:id="@+id/editRightBurner"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="120dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/stove_burner" />
+
+            <ImageView
+                android:id="@+id/editSelectedRightVessel"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:text="25"
+                android:src="@drawable/vessel_present"
+                android:layout_marginRight="70dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/editRightBurner"
+                />
+            <TextView
+                android:id="@+id/editSelectedRightWhistleCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/editSelectedRightVessel"
+                android:layout_marginTop="13dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/white"
+                />
+
+            <ImageView
+                android:id="@+id/editSelectedRightWhistle"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/whistle"
+                android:layout_below="@+id/editSelectedRightVessel"
+                android:layout_toLeftOf="@+id/editSelectedRightWhistleCount"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                />
+
+            <TextView
+                android:id="@+id/editSelectedRightTimerCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25min"
+                android:layout_below="@+id/editSelectedRightVessel"
+                android:layout_toLeftOf="@+id/editSelectedRightWhistle"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"
+                android:layout_marginRight="10dp"
+                android:layout_alignBaseline="@+id/editSelectedRightWhistleCount"
+                />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/timer"
+                android:layout_below="@+id/editSelectedRightVessel"
+                android:layout_toLeftOf="@+id/editSelectedRightTimerCount"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="3dp"
+                />
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:padding="5dp">
-
-
-        <Button
-            android:id="@+id/cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/sim"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="70dp"
-            android:background="@drawable/rounded_border"
-            android:text="Cancel" />
-
-
-        <Button
-            android:id="@+id/start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/sim"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="70dp"
-            android:layout_marginRight="50dp"
-            android:background="@drawable/rounded_border"
-            android:text="Start"
-            android:textColor="@color/black" />
-
-        <Button
-            android:id="@+id/leftBurnerOperation"
-            android:layout_width="110dp"
-            android:layout_height="200dp"
-            android:layout_alignParentLeft="true"
-            android:layout_margin="10dp"
-            android:background="@drawable/burner_vessel_on"
-            android:text="B1"
-            android:visibility="invisible" />
-
-
-        <ImageView
-            android:id="@+id/burnerEdit"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_below="@+id/burnerSettingsText"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/burner" />
-
-        <ImageView
-            android:id="@+id/vesselEdit"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_below="@+id/burnerSettingsText"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="60dp"
-            android:layout_toRightOf="@+id/burnerEdit"
-            android:src="@drawable/vessel_present" />
-
-        <ImageView
-            android:id="@+id/timerEdit"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_below="@id/vesselEdit"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/burnerEdit"
-            android:src="@drawable/timer_present" />
-
-        <TextView
-            android:id="@+id/burnerSettingsText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Burner Settings"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-
-            android:textStyle="bold" />
-
+        android:padding="5dp"
+        android:layout_below="@+id/editCardViewBlock">
 
         <TextView
             android:id="@+id/timerText"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/burnerEdit"
             android:layout_marginTop="30dp"
             android:background="@drawable/edit_button_border_on"
             android:gravity="center"
@@ -115,7 +267,6 @@
             android:id="@+id/whistleText"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/burnerEdit"
             android:layout_alignParentRight="true"
             android:layout_marginTop="30dp"
             android:background="@color/whistle_bg"
@@ -206,63 +357,48 @@
             android:textStyle="bold"
             android:visibility="invisible" />
 
-        <TextView
-            android:id="@+id/flamMode"
+
+
+
+
+        <Button
+            android:id="@+id/cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/rounded_border"
+            android:text="Cancel"
             android:layout_below="@id/sub"
-            android:layout_marginTop="20dp"
-            android:text="Flame Mode"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            />
 
-        <TextView
-            android:id="@+id/sim"
+
+        <Button
+            android:id="@+id/start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/flamMode"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/rounded_border"
-            android:paddingLeft="25dp"
-            android:paddingTop="5dp"
-            android:paddingRight="25dp"
-            android:paddingBottom="5dp"
-            android:text="SIM" />
-
-        <TextView
-            android:id="@+id/high"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/flamMode"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/rounded_border"
-            android:paddingLeft="25dp"
-            android:paddingTop="5dp"
-            android:paddingRight="25dp"
-            android:paddingBottom="5dp"
-            android:text="HIGH"
-            android:textColor="@color/black" />
-
-
-        <TextView
-            android:id="@+id/off"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/flamMode"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="50dp"
             android:background="@drawable/rounded_border"
-            android:paddingLeft="25dp"
-            android:paddingTop="5dp"
-            android:paddingRight="25dp"
-            android:paddingBottom="5dp"
-            android:text="OFF"
+            android:text="Start"
+            android:layout_below="@id/add"
             android:textColor="@color/black" />
+
+
 
 
     </RelativeLayout>
 
+
+  <!--  <ImageView
+        android:layout_width="90dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/preethi_logo" />
+
+
+-->
 </RelativeLayout>

@@ -19,8 +19,8 @@ import java.util.ArrayList;
 public class EditActivity extends AppCompatActivity {
 
     Button operateLeftBurner, operateCenterBurner, operateRightBurner, start, cancel;
-    TextView operateTimer, operateWhistleCount, operateSub, operateAdd, sim, high, off, minute, whistle, burnerSettingsText, flamModeText;
-    RippleBackground rippleEditLeft, rippleEditCenter, rippleEditRight;
+    TextView operateTimer, operateWhistleCount, operateSub, operateAdd, minute, whistle, burnerSettingsText, flamModeText;
+
     int timerInMin = 5;
     int whistleInCount = 2;
 
@@ -33,7 +33,7 @@ public class EditActivity extends AppCompatActivity {
 
     String burner = "";
 
-    int flameMode = -1;
+
 
 
     @Override
@@ -83,7 +83,7 @@ public class EditActivity extends AppCompatActivity {
 
 
         backgroundChangeOperation();
-
+/*
         operateTimer.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
         miniWhistle.setVisibility(View.INVISIBLE);
         miniMinute.setVisibility(View.VISIBLE);
@@ -94,19 +94,19 @@ public class EditActivity extends AppCompatActivity {
         if (timerInMin > 0) {
             minute.setText("" + timerInMin);
             whistle.setVisibility(View.INVISIBLE);
-        }
+        }*/
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (timerInMin > 0 && whistleInCount > 0 && flameMode > 0) {
-                    System.out.println("ReceivedData" + burner + " " + timerInMin + " " + whistleInCount + " " + flameMode);
+                if (timerInMin > 0 && whistleInCount > 0 ) {
+                    System.out.println("ReceivedData" + burner + " " + timerInMin + " " + whistleInCount );
 
                     PreferencesUtil.setValueString(EditActivity.this, PreferencesUtil.BURNER, burner);
                     PreferencesUtil.setValueSInt(EditActivity.this, PreferencesUtil.TIMER_IN_MINUTE, timerInMin);
                     PreferencesUtil.setValueSInt(EditActivity.this, PreferencesUtil.WHISTLE_IN_COUNT, whistleInCount);
-                    PreferencesUtil.setValueSInt(EditActivity.this, PreferencesUtil.FLAME_MODE, flameMode);
+                    //PreferencesUtil.setValueSInt(EditActivity.this, PreferencesUtil.FLAME_MODE, flameMode);
 
                     onBackPressed();
 
@@ -139,24 +139,24 @@ public class EditActivity extends AppCompatActivity {
     private void setBurner() {
 
         if (burner.equals("00")) {
-            rippleEditLeft.startRippleAnimation();
+            /*rippleEditLeft.startRippleAnimation();
             rippleEditCenter.stopRippleAnimation();
-            rippleEditRight.stopRippleAnimation();
+            rippleEditRight.stopRippleAnimation();*/
 
             System.out.println("LeftBurnerSettings");
             burnerSettingsText.setText("Left Burner Settings");
 
         } else if (burner.equals("01")) {
-            rippleEditLeft.stopRippleAnimation();
+           /* rippleEditLeft.stopRippleAnimation();
             rippleEditCenter.startRippleAnimation();
-            rippleEditRight.stopRippleAnimation();
+            rippleEditRight.stopRippleAnimation();*/
             System.out.println("CenterBurnerSettings");
             burnerSettingsText.setText("Center Burner Settings");
 
         } else if (burner.equals("10")) {
-            rippleEditLeft.stopRippleAnimation();
+            /*rippleEditLeft.stopRippleAnimation();
             rippleEditCenter.stopRippleAnimation();
-            rippleEditRight.startRippleAnimation();
+            rippleEditRight.startRippleAnimation();*/
             System.out.println("RightBurnerSettings");
             burnerSettingsText.setText("Right Burner Settings");
         }
@@ -323,61 +323,6 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
-        sim.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                flameMode = 1;
-
-                sim.setTextColor(getResources().getColor(R.color.black));
-                sim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-                sim.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
-
-                high.setTextColor(getResources().getColor(R.color.black));
-                high.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-                off.setTextColor(getResources().getColor(R.color.black));
-                off.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-
-
-            }
-        });
-
-        high.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                flameMode = 2;
-
-                high.setTextColor(getResources().getColor(R.color.black));
-                high.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-                high.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
-
-                sim.setTextColor(getResources().getColor(R.color.black));
-                sim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-                off.setTextColor(getResources().getColor(R.color.black));
-                off.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-
-
-            }
-        });
-
-        off.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                flameMode = 0;
-
-                off.setTextColor(getResources().getColor(R.color.black));
-                off.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-                off.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
-
-                sim.setTextColor(getResources().getColor(R.color.black));
-                sim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-                high.setTextColor(getResources().getColor(R.color.black));
-                high.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-
-            }
-        });
 
 
     }
@@ -395,12 +340,7 @@ public class EditActivity extends AppCompatActivity {
         operateSub = (TextView) findViewById(R.id.sub);
         operateAdd = (TextView) findViewById(R.id.add);
 
-        sim = (TextView) findViewById(R.id.sim);
-        //sim.setTypeface(FontUtil.getOctinPrisonFont(EditActivity.this));
-        high = (TextView) findViewById(R.id.high);
-        //high.setTypeface(FontUtil.getOctinPrisonFont(EditActivity.this));
-        off = (TextView) findViewById(R.id.off);
-        //off.setTypeface(FontUtil.getOctinPrisonFont(EditActivity.this));
+
 
         start = (Button) findViewById(R.id.start);
         cancel = (Button) findViewById(R.id.cancel);

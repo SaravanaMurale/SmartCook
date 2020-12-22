@@ -210,6 +210,7 @@
                 android:layout_marginTop="100dp"
                 android:textColor="@color/white"
                 android:layout_marginLeft="60dp"
+                android:visibility="invisible"
                 />
 
             <ImageView
@@ -223,7 +224,7 @@
 
 
             <ImageView
-                android:id="@+id/selectedLeftWhistleCount"
+                android:id="@+id/selectedLeftWhistle"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_below="@id/selectedLeftBurnerText"
@@ -232,6 +233,7 @@
                 android:src="@drawable/whistle" />
 
             <ImageView
+                android:id="@+id/selectedLeftTimer"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_below="@id/selectedLeftBurnerText"
@@ -265,7 +267,7 @@
                 />
 
             <TextView
-                android:id="@+id/selectedLeftWhistle"
+                android:id="@+id/selectedLeftWhistleCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/selectedLeftBurnerText"
