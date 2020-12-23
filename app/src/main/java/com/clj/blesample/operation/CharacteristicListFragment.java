@@ -567,7 +567,7 @@ public class CharacteristicListFragment extends Fragment {
                      dateFormet = new SimpleDateFormat("dd/MM/yyyy").parse(dateFormation);
 
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                       e.printStackTrace();
                 }
 
                 int rightBurner = (data[4]&0x0FF) << 0 | (data[5]&0x0FF) << 8 | (data[6]&0x0FF) << 16 | (data[7]&0x0FF) << 24;

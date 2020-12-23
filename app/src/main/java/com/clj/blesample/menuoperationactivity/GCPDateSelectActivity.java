@@ -164,12 +164,11 @@ public class  GCPDateSelectActivity extends AppCompatActivity implements Adapter
         System.out.println("SelectedBurners" + burner);
 
         if (burner.equals("Left")) {
-
-            selectedBurner = "00";
-        } else if (burner.equals("Center")) {
             selectedBurner = "01";
-        } else if (burner.equals("Right")) {
+        } else if (burner.equals("Center")) {
             selectedBurner = "10";
+        } else if (burner.equals("Right")) {
+            selectedBurner = "00";
         }
 
         //selectedBurner = burner;
