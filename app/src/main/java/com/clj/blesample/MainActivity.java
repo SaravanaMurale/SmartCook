@@ -251,6 +251,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Intent intent = new Intent(MainActivity.this, OperationActivity.class);
                     intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
@@ -412,6 +413,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
                     progressDialog.dismiss();
                     startActivity(intent);
+                    finish();
 
                 } else {
 

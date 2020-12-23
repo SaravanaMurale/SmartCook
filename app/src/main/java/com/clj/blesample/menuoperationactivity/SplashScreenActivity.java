@@ -51,14 +51,17 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             if (userId > 0) {
                 intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
 
             } else {
                 intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
 
             }
 
-            startActivity(intent);
-            finish();
+
 
 
         }
