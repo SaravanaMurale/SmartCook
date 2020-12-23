@@ -24,7 +24,7 @@ import static com.clj.blesample.utils.MathUtil.validatePassword;
 public class SignUpActivity extends AppCompatActivity {
 
     private Button btnSignUp;
-    private EditText signUpName, signUpEmail, signUpMobile, signUpPassword, signUpAddress;
+    private EditText signUpName, signUpEmail, signUpMobile, signUpPassword, signUpCPassword;
 
     SqliteManager sqliteManager;
 
@@ -53,6 +53,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String userEmail = signUpEmail.getText().toString();
                 String userMobile = signUpMobile.getText().toString();
                 String userPassword = signUpPassword.getText().toString();
+                String userCPassword=signUpCPassword.getText().toString();
 
 
                 if (userName.isEmpty() || userName.equals("") || userName.equals(null)) {
@@ -79,7 +80,12 @@ public class SignUpActivity extends AppCompatActivity {
 
                 }
 
-                if (validateName(userName) && validateEmail(userEmail) && validateMobile(userMobile) && validatePassword(userPassword)) {
+                if(userCPassword.equals(userCPassword)){
+                    Toast.makeText(SignUpActivity.this, "Both Password and Confirm Password Should Match", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (validateName(userName) && validateEmail(userEmail) && validateMobile(userMobile) && validatePassword(userPassword) && validatePassword(userCPassword)) {
 
                     boolean status = sqliteManager.addUser(userName, userEmail, userMobile, userPassword);
                     if (status) {
@@ -88,12 +94,14 @@ public class SignUpActivity extends AppCompatActivity {
                         signUpEmail.getText().clear();
                         signUpMobile.getText().clear();
                         signUpPassword.getText().clear();
+                        signUpCPassword.getText().clear();
                         //signUpAddress.getText().clear();
 
                         Toast.makeText(SignUpActivity.this, "User Added Successfully", Toast.LENGTH_LONG).show();
 
                         Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                         startActivity(intent);
+                        finish();
 
                     } else {
                         Toast.makeText(SignUpActivity.this, "User Is Not Added ", Toast.LENGTH_LONG).show();
@@ -114,7 +122,7 @@ public class SignUpActivity extends AppCompatActivity {
         signUpEmail = (EditText) findViewById(R.id.signup_email);
         signUpMobile = (EditText) findViewById(R.id.signup_mobile);
         signUpPassword = (EditText) findViewById(R.id.signup_password);
-        signUpAddress = (EditText) findViewById(R.id.signup_address);
+        signUpCPassword = (EditText) findViewById(R.id.confirm_password);
 
         //signUpEmail.setTransformationMethod();
 
