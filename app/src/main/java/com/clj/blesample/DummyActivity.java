@@ -54,16 +54,17 @@ public class DummyActivity extends AppCompatActivity {
     List<String> burnerList = new ArrayList<>();
     List<String> listInString = new ArrayList<>();
     List<Integer> gasUsageLisst = new ArrayList<>();
-    String date1 = "1/11/2020";
-    String date2 = "2/11/2020";
-    String date3 = "3/11/2020";
-    String date4 = "4/11/2020";
-    String date5 = "5/11/2020";
-    String date6 = "6/11/2020";
-    String date7 = "7/11/2020";
-    String date8 = "8/11/2020";
-    String date9 = "9/11/2020";
-    String date10 = "10/11/2020";
+    String date1 = "14/12/2020";
+    String date2 = "15/12/2020";
+    String date3 = "16/12/2020";
+    String date4 = "17/12/2020";
+    String date5 = "18/12/2020";
+    String date6 = "19/12/2020";
+    String date7 = "20/12/2020";
+    String date8 = "21/12/2020";
+    String date9 = "22/12/2020";
+    String date10 = "23/12/2020";
+
 
     SqliteManager sqliteManager;
 
@@ -271,6 +272,7 @@ public class DummyActivity extends AppCompatActivity {
         gasUsageLisst.add(7, 5);
         gasUsageLisst.add(8, 7);
         gasUsageLisst.add(9, 2);
+
 
     }
 

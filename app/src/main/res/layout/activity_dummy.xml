@@ -19,7 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/moveToFragment"
         android:text="SaveInDB"
-        android:visibility="gone"
         />
 
     <Button

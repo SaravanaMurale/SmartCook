@@ -2,14 +2,12 @@ package com.clj.blesample;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.clj.blesample.databasemanager.SqliteManager;
 import com.clj.blesample.model.GasConsumptionPatternDTO;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +19,7 @@ import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
-public class DummyGraphView extends AppCompatActivity {
+public class GraphViewActivity extends AppCompatActivity {
 
     LineChartView lineChartView;
 
@@ -34,10 +32,10 @@ public class DummyGraphView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dummy_graph_view);
+        setContentView(R.layout.activity_graph_view);
 
         lineChartView = findViewById(R.id.chart);
-        sqliteManager = new SqliteManager(DummyGraphView.this);
+        sqliteManager = new SqliteManager(GraphViewActivity.this);
 
         Intent intent = getIntent();
         String selectedFromDate = intent.getStringExtra("FROMDATE");

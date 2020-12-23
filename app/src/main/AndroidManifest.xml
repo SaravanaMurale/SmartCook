@@ -21,11 +21,11 @@
         <activity android:name=".menuoperationactivity.ProductServiceActivity" />
         <activity android:name=".menuoperationactivity.ProfileSettingsActivity" />
         <activity
-            android:name=".DummyGraphView"
+            android:name=".GraphViewActivity"
             android:screenOrientation="landscape" /> <!-- <activity android:name=".menuoperationactivity.GCPDateSelectActivity" /> -->
         <activity android:name=".menuoperationactivity.MenuActivity" />
-        <activity android:name=".MainActivity" /> <!-- <activity android:name=".DummyActivity"></activity> -->
-        <activity android:name=".DummyActivity">
+        <!--<activity android:name=".MainActivity" />--> <!-- <activity android:name=".DummyActivity"></activity> -->
+        <activity android:name=".menuoperationactivity.GCPDateSelectActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

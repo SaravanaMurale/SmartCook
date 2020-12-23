@@ -17,7 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.clj.blesample.DummyGraphView;
+import com.clj.blesample.GraphViewActivity;
 import com.clj.blesample.R;
 import com.clj.blesample.utils.MathUtil;
 import com.github.mikephil.charting.charts.LineChart;
@@ -66,7 +66,7 @@ public class  GCPDateSelectActivity extends AppCompatActivity implements Adapter
             public void onClick(View v) {
 
                 if (selectedFromDate != null && selectedToDate != null && selectedBurner != null) {
-                    Intent intent = new Intent(GCPDateSelectActivity.this, DummyGraphView.class);
+                    Intent intent = new Intent(GCPDateSelectActivity.this, GraphViewActivity.class);
                     intent.putExtra("FROMDATE", selectedFromDate);
                     intent.putExtra("TODATE", selectedToDate);
                     intent.putExtra("BURNER", selectedBurner);
