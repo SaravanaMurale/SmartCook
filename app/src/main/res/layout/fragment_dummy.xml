@@ -8,7 +8,7 @@
     tools:context=".DummyFragment1">
 
 
-    <ImageView
+   <!-- <ImageView
         android:id="@+id/selectBatteryStatus"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -17,9 +17,9 @@
         android:layout_marginRight="10dp"
         android:src="@drawable/battery_status"
 
-        />
+        />-->
 
-    <de.hdodenhof.circleimageview.CircleImageView
+   <!-- <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/selectBluetoothStatus"
         android:layout_width="25dp"
         android:layout_height="25dp"
@@ -28,15 +28,15 @@
         android:layout_toLeftOf="@id/selectBatteryStatus"
         android:src="@drawable/bluetooth_status"
 
-        />
+        />-->
 
-    <ImageView
+    <!--<ImageView
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/preethi_logo" />
+        android:src="@drawable/preethi_logo" />-->
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <!--<de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/seletedUserProfile"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -44,9 +44,9 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
         android:layout_toLeftOf="@id/selectdUserName"
-        android:src="@drawable/person" />
+        android:src="@drawable/person" />-->
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/selectEStop"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -54,10 +54,10 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"
-        android:src="@drawable/estop" />
+        android:src="@drawable/estop" />-->
 
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/notificationIcon"
         android:layout_width="30dp"
         android:layout_height="30dp"
@@ -65,9 +65,9 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="15dp"
         android:layout_marginRight="20dp"
-        android:src="@drawable/notification" />
+        android:src="@drawable/notification" />-->
 
-    <android.support.v7.widget.CardView
+   <!-- <android.support.v7.widget.CardView
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_alignParentRight="true"
@@ -89,9 +89,9 @@
 
             />
 
-    </android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView>-->
 
-    <TextView
+    <!--<TextView
         android:id="@+id/selectdUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -99,10 +99,10 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="15dp"
         android:layout_marginRight="10dp"
-        android:text="Rajini" />
+        android:text="Rajini" />-->
 
 
-    <TextView
+    <!--<TextView
         android:id="@+id/selectLeft"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -115,9 +115,9 @@
         android:text="Burner 1"
         android:textColor="@color/black"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold" />-->
 
-    <TextView
+  <!--  <TextView
         android:id="@+id/selectCenter"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -130,9 +130,9 @@
         android:text="Burner 2"
         android:textColor="@color/black"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold" />-->
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/selectRight"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -145,9 +145,9 @@
         android:padding="6dp"
         android:text="Burner 3"
         android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textStyle="bold" />-->
 
-    <TextView
+    <!--<TextView
         android:id="@+id/selectFlameMode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -155,9 +155,9 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
         android:text="Flame Mode"
-        android:textColor="@color/black" />
+        android:textColor="@color/black" />-->
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/selectSim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -170,10 +170,10 @@
         android:paddingTop="5dp"
         android:paddingRight="25dp"
         android:paddingBottom="5dp"
-        android:text="SIM" />
+        android:text="SIM" />-->
 
 
-    <TextView
+    <!--<TextView
         android:id="@+id/selectHigh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -187,9 +187,9 @@
         android:paddingRight="25dp"
         android:paddingBottom="5dp"
         android:text="HIGH"
-        android:textColor="@color/black" />
+        android:textColor="@color/black" />-->
 
-    <TextView
+    <!--TextView
         android:id="@+id/selectOff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -203,7 +203,7 @@
         android:paddingRight="25dp"
         android:paddingBottom="5dp"
         android:text="OFF"
-        android:textColor="@color/black" />
+        android:textColor="@color/black" />-->
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardViewBlock"

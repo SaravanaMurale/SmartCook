@@ -1,10 +1,11 @@
-package com.clj.blesample;
+package com.clj.blesample.menuoperationactivity;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.clj.blesample.R;
 import com.clj.blesample.databasemanager.SqliteManager;
 import com.clj.blesample.model.GasConsumptionPatternDTO;
 

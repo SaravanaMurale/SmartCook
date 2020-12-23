@@ -21,7 +21,7 @@
         <activity android:name=".menuoperationactivity.ProductServiceActivity" />
         <activity android:name=".menuoperationactivity.ProfileSettingsActivity" />
         <activity
-            android:name=".GraphViewActivity"
+            android:name=".menuoperationactivity.GraphViewActivity"
             android:screenOrientation="landscape" /> <!-- <activity android:name=".menuoperationactivity.GCPDateSelectActivity" /> -->
         <activity android:name=".menuoperationactivity.MenuActivity" />
         <!--<activity android:name=".MainActivity" />--> <!-- <activity android:name=".DummyActivity"></activity> -->

@@ -36,7 +36,7 @@ public class DummyFragment1 extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dummy, container, false);
 
-        leftBurner = (ImageView) view.findViewById(R.id.leftBurner);
+       /* leftBurner = (ImageView) view.findViewById(R.id.leftBurner);
         notificationIcon = (ImageView) view.findViewById(R.id.notificationIcon);
 
         selectLeft=(TextView)view.findViewById(R.id.selectLeft);
@@ -45,9 +45,9 @@ public class DummyFragment1 extends Fragment {
 
         selectSim=(TextView)view.findViewById(R.id.selectSim);
         selectHigh=(TextView)view.findViewById(R.id.selectHigh);
-        selectOff=(TextView)view.findViewById(R.id.selectOff);
+        selectOff=(TextView)view.findViewById(R.id.selectOff);*/
 
-
+/*
         selectLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +135,7 @@ public class DummyFragment1 extends Fragment {
 
 
             }
-        });
+        });*/
 
 
         return view;

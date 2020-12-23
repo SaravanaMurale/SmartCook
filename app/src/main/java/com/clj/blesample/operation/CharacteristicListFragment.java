@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.clj.blesample.R;
 import com.clj.blesample.menuoperationactivity.EditActivity;
 import com.clj.blesample.menuoperationactivity.MenuActivity;
+import com.clj.blesample.menuoperationactivity.NotificationActivity;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
 import com.clj.blesample.utils.FontUtil;
 import com.clj.fastble.BleManager;
@@ -65,9 +66,12 @@ public class CharacteristicListFragment extends Fragment {
 
     String left = "00", center = "01", right = "10";
 
-    byte[] homeByte = new byte[12];
 
-    //RippleBackground rippleLeft, rippleCenter, rippleRight;
+    TextView selectLeft, selectCenter, selectRight, selectSim, selectHigh, selectOff;
+    ImageView notificationIcon;
+
+    ImageView selectedLeftWhistle,selectedRightWhistle,selectedCenterWhistle,selectedLeftTimer,selectedRightTimer,selectedCenterTimer;
+
 
 
     @Override
@@ -114,7 +118,7 @@ public class CharacteristicListFragment extends Fragment {
 
             Toast.makeText(getActivity(), "NotifyCalled", Toast.LENGTH_LONG).show();
 
-             callMe(0, null, 0, 0, 0);
+            callMe(0, null, 0, 0, 0);
 
         }
 
@@ -159,7 +163,6 @@ public class CharacteristicListFragment extends Fragment {
         }
 
 
-
     }
 
 
@@ -167,20 +170,149 @@ public class CharacteristicListFragment extends Fragment {
         mResultAdapter = new ResultAdapter(getActivity());
         ListView listView_device = (ListView) v.findViewById(R.id.list_service_character);
 
+        selectLeft = (TextView) v.findViewById(R.id.selectLeft);
+        selectCenter = (TextView) v.findViewById(R.id.selectCenter);
+        selectRight = (TextView) v.findViewById(R.id.selectRight);
+
+        selectSim = (TextView) v.findViewById(R.id.selectSim);
+        selectHigh = (TextView) v.findViewById(R.id.selectHigh);
+        selectOff = (TextView) v.findViewById(R.id.selectOff);
+
+        selectedLeftWhistle=(ImageView)v.findViewById(R.id.selectedLeftWhistle);
+        selectedRightWhistle=(ImageView)v.findViewById(R.id.selectedRightWhistle);
+        selectedCenterWhistle=(ImageView)v.findViewById(R.id.selectedCenterWhistle);
 
 
-        menuIcon = (ImageView) v.findViewById(R.id.menuIcon);
+        selectedLeftTimer=(ImageView)v.findViewById(R.id.selectedLeftTimer);
+        selectedRightTimer=(ImageView)v.findViewById(R.id.selectedRightTimer);
+        selectedCenterTimer=(ImageView)v.findViewById(R.id.selectedCenterTimer);
 
-        menuIcon.setOnClickListener(new View.OnClickListener() {
+
+
+        notificationIcon = (ImageView) v.findViewById(R.id.notificationIcon);
+
+
+        selectedLeftWhistle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MenuActivity.class);
-                startActivity(intent);
+
+                callEditActivity();
+
+            }
+        });
+
+        selectedRightWhistle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callEditActivity();
+            }
+        });
+
+        selectedCenterWhistle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callEditActivity();
+            }
+        });
+
+        selectedLeftTimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callEditActivity();
+            }
+        });
+
+        selectedRightTimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callEditActivity();
+            }
+        });
+
+        selectedCenterTimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callEditActivity();
             }
         });
 
 
 
+        selectLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
+                selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+                selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+
+            }
+        });
+
+        selectCenter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
+                selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+                selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+
+            }
+        });
+
+        selectRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
+                selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+                selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+
+
+            }
+        });
+
+        selectSim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectSim.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
+                selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+                selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+            }
+        });
+
+        selectHigh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectHigh.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
+                selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+                selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
+            }
+        });
+
+        selectOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                selectOff.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
+                selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+                selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
+
+            }
+        });
+
+        notificationIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NotificationActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
 
         listView_device.setAdapter(mResultAdapter);
@@ -235,6 +367,13 @@ public class CharacteristicListFragment extends Fragment {
 
             }
         });
+    }
+
+    private void callEditActivity() {
+
+        Intent intent=new Intent(getActivity(),EditActivity.class);
+        startActivity(intent);
+
     }
 
 
@@ -394,35 +533,35 @@ public class CharacteristicListFragment extends Fragment {
     @SuppressLint("NewApi")
     private void splitEachBurnerDataFromReceivedByte(byte[] data) {
 
+
+        byte[] gcp=new byte[17];
+        gcp=data;
+
         //Gas Consumption Pattern
-        if(data.length==17){
+        if (data.length == 17) {
 
-            if(data[0]==42 && data[16]==35 ){
+            if (data[0] == 42 && data[16] == 35) {
 
-                int date=data[2];
-                int month=data[3];
-                long rightBurner=data[4]<<0 |data[5]<<8 |data[6]<<16 | data[7]<<24;
-                long  leftBurner=data[8]<<0 |data[9]<<8 |data[10]<<16 | data[11]<<24;
-                long centerBurner=data[12]<<0 |data[13]<<8 |data[14]<<16 | data[15]<<24;
+                int date = data[2];
+                int month = data[3];
+                int rightBurner = (data[4]&0x0FF) << 0 | (data[5]&0x0FF) << 8 | (data[6]&0x0FF) << 16 | (data[7]&0x0FF) << 24;
+                int leftBurner = (data[8]&0x0FF) << 0 | (data[9]&0x0FF) << 8 | (data[10]&0x0FF) << 16 | (data[11]&0x0FF) << 24;
+                int centerBurner = (data[12]&0x0FF) << 0 | (data[13]&0x0FF) << 8 | (data[14]&0x0FF) << 16 | (data[15]&0x0FF) << 24;
 
-                float right=rightBurner/4096;
-                float left=leftBurner/4096;
-                long center=centerBurner/4096;
-
-                String s=Long.toUnsignedString(center);
+                float right = rightBurner / 4096;
+                float left = leftBurner / 4096;
+                long center = centerBurner / 4096;
 
 
-                System.out.println("GasUsage"+right+" "+left+" "+center+" "+s);
 
-                System.out.println("ReceivedGCP"+date+" "+" "+month+" "+rightBurner+" "+leftBurner+" "+centerBurner);
+                System.out.println("GasUsage" + right + " " + left + " " + center);
+
+                System.out.println("ReceivedGCP" + date + " " + " " + month + " " + rightBurner + " " + leftBurner + " " + centerBurner);
 
 
             }
 
         }
-
-
-
 
 
     }
