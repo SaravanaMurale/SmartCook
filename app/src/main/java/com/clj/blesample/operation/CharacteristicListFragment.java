@@ -1,6 +1,7 @@
 package com.clj.blesample.operation;
 
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothGattCharacteristic;
@@ -99,236 +100,9 @@ public class CharacteristicListFragment extends Fragment {
 
         initView(v);
 
-        /*String strtext = getArguments().getString("edttext");
 
-        System.out.println("ReceivedTExt" + strtext);*/
-
-        /*EditActivity editActivity=new EditActivity();
-        editActivity.EditActivityMethod(this);*/
-
-       // setStoveData();
-
-
-        /*leftBurnerSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                CallEditActivity(left);
-            }
-        });
-
-        centerBurnerSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                CallEditActivity(center);
-            }
-        });
-
-        rightBurnerSettings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                CallEditActivity(right);
-            }
-        });
-
-        leftBurnerEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                CallEditActivity(left);
-            }
-        });
-
-        centerBurnerEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                CallEditActivity(center);
-            }
-        });
-
-        rightBurnerEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                CallEditActivity(right);
-            }
-        });
-*/
         return v;
     }
-
-   /* private void setStoveData() {
-
-        homeByte[0] = 1; //active
-        homeByte[1] = 1; //vessel
-        homeByte[2] = 1; //timer
-        homeByte[3] = 0; //whistle
-
-        homeByte[4] = 0;
-        homeByte[5] = 0;
-        homeByte[6] = 0;
-        homeByte[7] = 0;
-
-        homeByte[8] = 1;
-        homeByte[9] = 0;
-        homeByte[10] = 0;
-        homeByte[11] = 0;
-
-        //Left Burner
-
-        if (homeByte[0] == 1 && homeByte[1] == 1) {
-            rippleLeft.startRippleAnimation();
-            leftBurner.setBackground(getResources().getDrawable(R.drawable.burner_vessel_on));
-            vesselLeft.setVisibility(View.VISIBLE);
-
-        } else if (homeByte[0] == 1 && homeByte[1] == 0) {
-            rippleLeft.startRippleAnimation();
-            leftBurner.setBackground(getResources().getDrawable(R.drawable.burner_on_vessel_off));
-            vesselLeft.setVisibility(View.INVISIBLE);
-        } else if (homeByte[0] == 0 && homeByte[1] == 0) {
-            if (rippleLeft.isRippleAnimationRunning()) {
-                rippleLeft.stopRippleAnimation();
-            }
-            leftBurner.setBackground(getResources().getDrawable(R.drawable.burner_off_vessel_off));
-            vesselLeft.setVisibility(View.INVISIBLE);
-
-        }
-
-        if (homeByte[2] == 1) {
-
-            leftBurner.setTypeface(FontUtil.getOctinPrisonFont(getActivity()));
-            leftBurner.setText("15:00");
-            leftBurner.setTextColor(getResources().getColor(R.color.black));
-            leftBurner.setTextSize(25);
-            timerLeft.setVisibility(View.VISIBLE);
-            blinkImage(timerLeft);
-
-        } else {
-
-            leftBurner.setText("");
-            timerLeft.setVisibility(View.INVISIBLE);
-            stopImageBlinking(timerLeft);
-        }
-
-        if (homeByte[3] == 1) {
-
-            Toast.makeText(getActivity(), "whistle set", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getActivity(), "whistle is not set", Toast.LENGTH_LONG).show();
-            //leftBurner.setText("");
-        }
-
-        //End Left Burner
-
-        //Center Burner
-        if (homeByte[4] == 1 && homeByte[5] == 1) {
-            rippleCenter.startRippleAnimation();
-            centerBurner.setBackground(getResources().getDrawable(R.drawable.burner_vessel_on));
-            vesselCenter.setVisibility(View.VISIBLE);
-        } else if (homeByte[4] == 1 && homeByte[5] == 0) {
-            rippleCenter.startRippleAnimation();
-            centerBurner.setBackground(getResources().getDrawable(R.drawable.burner_on_vessel_off));
-            vesselCenter.setVisibility(View.INVISIBLE);
-        } else if (homeByte[4] == 0 && homeByte[5] == 0) {
-
-            if (rippleCenter.isRippleAnimationRunning()) {
-                rippleCenter.stopRippleAnimation();
-            }
-            centerBurner.setBackground(getResources().getDrawable(R.drawable.burner_off_vessel_off));
-            vesselCenter.setVisibility(View.INVISIBLE);
-
-        }
-
-
-        if (homeByte[6] == 1) {
-            centerBurner.setTypeface(FontUtil.getOctinPrisonFont(getActivity()));
-            centerBurner.setText("15:00");
-            centerBurner.setTextSize(25);
-            timerCenter.setVisibility(View.VISIBLE);
-            blinkImage(timerCenter);
-
-
-        } else {
-
-            centerBurner.setText("");
-            timerCenter.setVisibility(View.INVISIBLE);
-            stopImageBlinking(timerCenter);
-        }
-
-        if (homeByte[7] == 1) {
-
-            Toast.makeText(getActivity(), "whistle set", Toast.LENGTH_LONG).show();
-        } else {
-
-            Toast.makeText(getActivity(), "whistle is not set", Toast.LENGTH_LONG).show();
-        }
-        //End Center Burner
-
-        //Right Burner
-
-
-        if (homeByte[8] == 1 && homeByte[9] == 1) {
-            rippleRight.startRippleAnimation();
-            rightBurner.setBackground(getResources().getDrawable(R.drawable.burner_vessel_on));
-            vesselRight.setVisibility(View.VISIBLE);
-        } else if (homeByte[8] == 1 && homeByte[9] == 0) {
-            rippleRight.startRippleAnimation();
-            rightBurner.setBackground(getResources().getDrawable(R.drawable.burner_on_vessel_off));
-            vesselRight.setVisibility(View.INVISIBLE);
-        } else if (homeByte[8] == 0 && homeByte[9] == 0) {
-            if (rippleRight.isRippleAnimationRunning()) {
-                rippleRight.stopRippleAnimation();
-            }
-            rightBurner.setBackground(getResources().getDrawable(R.drawable.burner_off_vessel_off));
-            vesselRight.setVisibility(View.INVISIBLE);
-
-
-        }
-
-
-        if (homeByte[10] == 1) {
-            rightBurner.setTypeface(FontUtil.getOctinPrisonFont(getActivity()));
-            rightBurner.setText("15:00");
-            rightBurner.setTextSize(30);
-
-            timerRight.setVisibility(View.VISIBLE);
-            blinkImage(timerCenter);
-
-        } else {
-            timerRight.setVisibility(View.INVISIBLE);
-            stopImageBlinking(timerRight);
-            rightBurner.setText("");
-        }
-
-        if (homeByte[11] == 1) {
-
-            Toast.makeText(getActivity(), "whistle set", Toast.LENGTH_LONG).show();
-        } else {
-
-            Toast.makeText(getActivity(), "whistle is not set", Toast.LENGTH_LONG).show();
-        }
-        //End Right Burner
-
-
-    }*/
-
-   /* private void blinkImage(ImageView timerIcon) {
-        Animation animation = new AlphaAnimation(1, 0); //to change visibility from visible to invisible
-        animation.setDuration(1000); //1 second duration for each animation cycle
-        animation.setInterpolator(new LinearInterpolator());
-        animation.setRepeatCount(Animation.INFINITE); //repeating indefinitely
-        animation.setRepeatMode(Animation.REVERSE); //animation will start from end point once ended.
-        timerIcon.startAnimation(animation);
-    }*/
-
-    /*private void stopImageBlinking(ImageView topTimerIcon) {
-        topTimerIcon.clearAnimation();
-    }*/
 
 
     @Override
@@ -385,39 +159,6 @@ public class CharacteristicListFragment extends Fragment {
         }
 
 
-        //Calls Notify
-       /* if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
-
-            callMe(0, null, null, 0);
-
-
-        }*/
-
-
-        //Notify
-        //Have to call without user clicking
-        /*notifyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
-                    callMe(0,null);
-                }
-
-            }
-        });*/
-        //Write
-        //Should be called after user clicked
-        /*writeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
-                    //callMe(1);
-                }
-
-            }
-        });*/
-
 
     }
 
@@ -426,36 +167,7 @@ public class CharacteristicListFragment extends Fragment {
         mResultAdapter = new ResultAdapter(getActivity());
         ListView listView_device = (ListView) v.findViewById(R.id.list_service_character);
 
-        /*leftBurner = (Button) v.findViewById(R.id.leftBurner);
-        leftBurnerSettings = (Button) v.findViewById(R.id.leftBurnerSettings);
-        leftBurnerEdit = (Button) v.findViewById(R.id.leftBurnerEdit);
-        leftBurnerSettings.setTypeface(FontUtil.getOctinPrisonFont(getActivity()));
-        leftBurnerEdit.setTypeface(FontUtil.getOctinPrisonFont(getActivity()));
 
-        centerBurner = (Button) v.findViewById(R.id.centerBurner);
-        centerBurnerSettings = (Button) v.findViewById(R.id.centerBurnerSettings);
-        centerBurnerEdit = (Button) v.findViewById(R.id.centerBurnerEdit);
-        centerBurnerEdit.setTypeface(FontUtil.getOctinPrisonFont(getActivity()));
-        centerBurnerSettings.setTypeface(FontUtil.getOctinPrisonFont(getActivity()));
-
-
-        rightBurner = (Button) v.findViewById(R.id.rightBurner);
-        rightBurnerSettings = (Button) v.findViewById(R.id.rightBurnerSettings);
-        rightBurnerEdit = (Button) v.findViewById(R.id.rightBurnerEdit);
-        rightBurnerEdit.setTypeface(FontUtil.getOctinPrisonFont(getActivity()));
-        rightBurnerSettings.setTypeface(FontUtil.getOctinPrisonFont(getActivity()));
-
-        rippleLeft = (RippleBackground) v.findViewById(R.id.leftBurnerRipple);
-        rippleCenter = (RippleBackground) v.findViewById(R.id.centerBurnerRipple);
-        rippleRight = (RippleBackground) v.findViewById(R.id.rightBurnerRipple);
-
-        vesselLeft = (ImageView) v.findViewById(R.id.vesselLeft);
-        vesselCenter = (ImageView) v.findViewById(R.id.vesselCenter);
-        vesselRight = (ImageView) v.findViewById(R.id.vesselRight);
-
-        timerLeft = (ImageView) v.findViewById(R.id.timerLeft);
-        timerCenter = (ImageView) v.findViewById(R.id.timerCenter);
-        timerRight = (ImageView) v.findViewById(R.id.timerRight);*/
 
         menuIcon = (ImageView) v.findViewById(R.id.menuIcon);
 
@@ -468,19 +180,7 @@ public class CharacteristicListFragment extends Fragment {
         });
 
 
-        //To check write Data
-        /*send_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                String data = edit_data.getText().toString();
-
-                if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
-                    callMe(1, data);
-                }
-
-            }
-        });*/
 
 
         listView_device.setAdapter(mResultAdapter);
@@ -681,7 +381,7 @@ public class CharacteristicListFragment extends Fragment {
                             public void run() {
 
 
-                                //splitEachBurnerDataFromReceivedByte(data);
+                                splitEachBurnerDataFromReceivedByte(data);
 
 
                             }
@@ -691,34 +391,43 @@ public class CharacteristicListFragment extends Fragment {
 
     }
 
+    @SuppressLint("NewApi")
     private void splitEachBurnerDataFromReceivedByte(byte[] data) {
 
-//        System.out.println(data[0]+" "+data[1]+" "+data[2]+" "+data[3]+" "+data[4]+" "+data[5]+" "+data[6]+" "+data[7]);
+        //Gas Consumption Pattern
+        if(data.length==17){
 
-        System.out.println("ReceivedLength " + data.length);
-        currentByte = data;
+            if(data[0]==42 && data[16]==35 ){
 
-        if(data.length==7){
-            Toast.makeText(getActivity(),"Length 7 Received",Toast.LENGTH_LONG).show();
-        }else if(data.length==9){
-            Toast.makeText(getActivity(),"Length 9 Received",Toast.LENGTH_LONG).show();
-        }
+                int date=data[2];
+                int month=data[3];
+                long rightBurner=data[4]<<0 |data[5]<<8 |data[6]<<16 | data[7]<<24;
+                long  leftBurner=data[8]<<0 |data[9]<<8 |data[10]<<16 | data[11]<<24;
+                long centerBurner=data[12]<<0 |data[13]<<8 |data[14]<<16 | data[15]<<24;
 
-        /*if (data.length == 7) {
+                float right=rightBurner/4096;
+                float left=leftBurner/4096;
+                long center=centerBurner/4096;
 
-            if (data[0] == 42) {
+                String s=Long.toUnsignedString(center);
+
+
+                System.out.println("GasUsage"+right+" "+left+" "+center+" "+s);
+
+                System.out.println("ReceivedGCP"+date+" "+" "+month+" "+rightBurner+" "+leftBurner+" "+centerBurner);
 
 
             }
 
-        } else {
-            Toast.makeText(getActivity(), "Length is less than 7", Toast.LENGTH_LONG).show();
-        }*/
+        }
+
+
+
 
 
     }
 
-    private void CallEditActivity(String burner) {
+   /* private void CallEditActivity(String burner) {
         currentByte = new byte[4];
         currentByte1 = new byte[5];
 
@@ -743,14 +452,14 @@ public class CharacteristicListFragment extends Fragment {
         //intent.putExtra("currentByte_size", arrayList.size());
         intent.putExtra("BURNER", burner);
         intent.putExtra("currentByteArrayList", arrayList);
-        /*for (int i = 0; i < arrayList.size(); i++) {
+        *//*for (int i = 0; i < arrayList.size(); i++) {
             intent.putExtra("currentByte" + i, arrayList.get(i));
         }
-*/
+*//*
         startActivity(intent);
 
 
-    }
+    }*/
 
 
     private void runOnUiThread(Runnable runnable) {
