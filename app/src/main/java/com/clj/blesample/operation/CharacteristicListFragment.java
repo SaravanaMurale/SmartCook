@@ -15,9 +15,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -26,20 +23,23 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.clj.blesample.DummyActivity;
 import com.clj.blesample.R;
+import com.clj.blesample.databasemanager.SqliteManager;
 import com.clj.blesample.menuoperationactivity.EditActivity;
 import com.clj.blesample.menuoperationactivity.MenuActivity;
 import com.clj.blesample.menuoperationactivity.NotificationActivity;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
-import com.clj.blesample.utils.FontUtil;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleNotifyCallback;
 import com.clj.fastble.callback.BleWriteCallback;
 import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.exception.BleException;
-import com.skyfishjy.library.RippleBackground;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
@@ -72,6 +72,8 @@ public class CharacteristicListFragment extends Fragment {
 
     ImageView selectedLeftWhistle,selectedRightWhistle,selectedCenterWhistle,selectedLeftTimer,selectedRightTimer,selectedCenterTimer;
 
+    private SqliteManager sqliteManager;
+
 
 
 
@@ -103,6 +105,8 @@ public class CharacteristicListFragment extends Fragment {
 
         //end of status bar
         View v = inflater.inflate(R.layout.fragment_characteric_list, null);
+
+        sqliteManager = new SqliteManager(getActivity());
 
         initView(v);
 
@@ -555,17 +559,36 @@ public class CharacteristicListFragment extends Fragment {
 
                 int date = data[2];
                 int month = data[3];
+
+                String dateFormation=date+"/"+month+"/"+"2020";
+
+                Date dateFormet=null;
+                try {
+                     dateFormet = new SimpleDateFormat("dd/MM/yyyy").parse(dateFormation);
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
                 int rightBurner = (data[4]&0x0FF) << 0 | (data[5]&0x0FF) << 8 | (data[6]&0x0FF) << 16 | (data[7]&0x0FF) << 24;
                 int leftBurner = (data[8]&0x0FF) << 0 | (data[9]&0x0FF) << 8 | (data[10]&0x0FF) << 16 | (data[11]&0x0FF) << 24;
                 int centerBurner = (data[12]&0x0FF) << 0 | (data[13]&0x0FF) << 8 | (data[14]&0x0FF) << 16 | (data[15]&0x0FF) << 24;
 
-                float right = rightBurner / 4096;
-                float left = leftBurner / 4096;
-                long center = centerBurner / 4096;
+                float rightBurGasUsage = rightBurner / 4096;
+
+                System.out.println("DateFormet "+dateFormet+" "+rightBurGasUsage);
+
+                sqliteManager.addGasConsumptionPattern(dateFormet, rightBurGasUsage, "00");
+
+                float leftBurGasUsage = leftBurner / 4096;
+                sqliteManager.addGasConsumptionPattern(dateFormet, leftBurGasUsage, "01");
+
+                float centerBurGasUsage = centerBurner / 4096;
+
+                sqliteManager.addGasConsumptionPattern(dateFormet, centerBurGasUsage, "10");
 
 
-
-                System.out.println("GasUsage" + right + " " + left + " " + center);
+                System.out.println("GasUsage" +date+" "+month+" " + right + " " + left + " " + center);
 
                 System.out.println("ReceivedGCP" + date + " " + " " + month + " " + rightBurner + " " + leftBurner + " " + centerBurner);
 

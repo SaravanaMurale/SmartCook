@@ -125,7 +125,7 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     }
 
-    public boolean addGasConsumptionPattern(Date date, int gasValue, String burner) {
+    public boolean addGasConsumptionPattern(Date date, float gasValue, String burner) {
 
         System.out.println("ReceivedValueInSqliteDB" + date + " " + gasValue + " " + burner);
 
