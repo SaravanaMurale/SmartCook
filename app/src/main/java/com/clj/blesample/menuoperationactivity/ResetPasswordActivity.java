@@ -13,10 +13,11 @@ import com.clj.blesample.R;
 import com.clj.blesample.databasemanager.SqliteManager;
 
 import static com.clj.blesample.utils.MathUtil.validateEmail;
+import static com.clj.blesample.utils.MathUtil.validatePassword;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
-    private EditText resetUserName, resetPassword;
+    private EditText resetUserName, resetPassword,reset_confirm_password;
     private Button btnReset;
 
     private SqliteManager sqliteManager;
@@ -35,6 +36,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
         resetUserName = (EditText) findViewById(R.id.reset_email);
         resetPassword = (EditText) findViewById(R.id.reset_password);
+        reset_confirm_password=(EditText)findViewById(R.id.reset_confirm_password);
         btnReset = (Button) findViewById(R.id.resetBtn);
 
         btnReset.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +45,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
                 String resetEmail = resetUserName.getText().toString().trim();
                 String setPassword = resetPassword.getText().toString().trim();
+                String resetConfirmPassword=reset_confirm_password.getText().toString().trim();
 
                 if (resetEmail.isEmpty() || resetEmail.equals("") || resetEmail.equals(null)) {
                     Toast.makeText(ResetPasswordActivity.this, "Please enter valid email", Toast.LENGTH_LONG).show();
@@ -54,7 +57,12 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     resetPassword.findFocus();
                 }
 
-                if (validateEmail(resetEmail) && validateEmail(setPassword)) {
+                if(!setPassword.equals(resetConfirmPassword)){
+                    Toast.makeText(ResetPasswordActivity.this, "Both Password and Confirm Password Should Match", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (validateEmail(resetEmail) && validatePassword(setPassword) &&validatePassword(resetConfirmPassword) && setPassword.equals(resetConfirmPassword)  ) {
 
                     boolean status = sqliteManager.resetPassword(resetEmail, setPassword);
 

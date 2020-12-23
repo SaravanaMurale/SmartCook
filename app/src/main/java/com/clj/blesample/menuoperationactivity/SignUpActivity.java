@@ -80,12 +80,12 @@ public class SignUpActivity extends AppCompatActivity {
 
                 }
 
-                if(userCPassword.equals(userCPassword)){
+                if(!userCPassword.equals(userCPassword)){
                     Toast.makeText(SignUpActivity.this, "Both Password and Confirm Password Should Match", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                if (validateName(userName) && validateEmail(userEmail) && validateMobile(userMobile) && validatePassword(userPassword) && validatePassword(userCPassword)) {
+                if (validateName(userName) && validateEmail(userEmail) && validateMobile(userMobile) && validatePassword(userPassword) && validatePassword(userCPassword) && userPassword.equals(userCPassword)) {
 
                     boolean status = sqliteManager.addUser(userName, userEmail, userMobile, userPassword);
                     if (status) {
