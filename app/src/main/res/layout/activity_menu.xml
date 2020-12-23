@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".menuoperationactivity.MenuActivity">
 
 
@@ -36,7 +37,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/myAccountBlock"
         android:layout_margin="8dp"
-        android:background="@color/white"
         android:padding="8dp">
 
         <ImageView
@@ -46,8 +46,8 @@
             android:src="@drawable/call_center" />
 
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:src="@drawable/arrow" />
 
@@ -61,9 +61,12 @@
             android:fontFamily="sans-serif-condensed"
             android:text="Profile Setting"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="15sp"
+             />
 
     </RelativeLayout>
+
+
 
     <RelativeLayout
         android:id="@+id/gasConsumptionBlock"
@@ -71,7 +74,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/profileSettingBlock"
         android:layout_margin="8dp"
-        android:background="@color/white"
         android:padding="8dp">
 
         <ImageView
@@ -81,8 +83,8 @@
             android:src="@drawable/call_center" />
 
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:src="@drawable/arrow" />
 
@@ -96,7 +98,7 @@
             android:fontFamily="sans-serif-condensed"
             android:text="Gas Consumption Pattern"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="15sp"/>
 
     </RelativeLayout>
 
@@ -106,7 +108,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/gasConsumptionBlock"
         android:layout_margin="8dp"
-        android:background="@color/white"
+        android:visibility="gone"
         android:padding="8dp">
 
         <ImageView
@@ -140,7 +142,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/recipeMenuBlock"
         android:layout_margin="8dp"
-        android:background="@color/white"
+        android:visibility="gone"
         android:padding="8dp">
 
         <ImageView
@@ -176,7 +178,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/productServiceBlock"
         android:layout_margin="8dp"
-        android:background="@color/white"
         android:padding="8dp">
 
         <ImageView
@@ -186,8 +187,8 @@
             android:src="@drawable/settings" />
 
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:src="@drawable/arrow" />
 
@@ -201,7 +202,7 @@
             android:fontFamily="sans-serif-condensed"
             android:text="Settings"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
 
     </RelativeLayout>
@@ -212,7 +213,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/settingsBlock"
         android:layout_margin="8dp"
-        android:background="@color/white"
         android:padding="8dp">
 
         <ImageView
@@ -222,8 +222,8 @@
             android:src="@drawable/aboutus" />
 
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:src="@drawable/arrow" />
 
@@ -237,7 +237,7 @@
             android:fontFamily="sans-serif-condensed"
             android:text="About Us"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
 
     </RelativeLayout>
@@ -248,7 +248,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/aboutUsBlock"
         android:layout_margin="8dp"
-        android:background="@color/white"
         android:padding="8dp">
 
         <ImageView
@@ -258,8 +257,8 @@
             android:src="@drawable/call_center" />
 
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:src="@drawable/arrow" />
 
@@ -273,7 +272,7 @@
             android:fontFamily="sans-serif-condensed"
             android:text="Contact Us"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
 
     </RelativeLayout>
@@ -284,7 +283,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/contactUsBlock"
         android:layout_margin="8dp"
-        android:background="@color/white"
         android:padding="8dp">
 
         <ImageView
@@ -294,8 +292,8 @@
             android:src="@drawable/signout" />
 
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:src="@drawable/arrow" />
 
@@ -309,7 +307,7 @@
             android:fontFamily="sans-serif-condensed"
             android:text="Sign Out"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
 
     </RelativeLayout>
@@ -321,7 +319,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/signOutBlock"
         android:layout_margin="8dp"
-        android:background="@color/white"
         android:padding="8dp"
         android:visibility="gone">
 
