@@ -353,7 +353,7 @@ public class SqliteManager extends SQLiteOpenHelper {
 
         SQLiteDatabase selectAllData = getReadableDatabase();
 
-        Cursor userData = selectAllData.rawQuery("select id,user_name from signuptable where user_email=? and user_password=? ", new String[]{userEmail, password});
+        Cursor userData = selectAllData.rawQuery("select id,user_name from signuptable where (user_email=? or user_mobile=?) and user_password=? ", new String[]{userEmail,userEmail, password});
 
         if (userData.moveToFirst()) {
 

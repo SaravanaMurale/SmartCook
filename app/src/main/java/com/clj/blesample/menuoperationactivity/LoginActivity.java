@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if (validateEmail(email) && validateEmail(password)) {
+                    //Email or Mobile
                     String userName = sqliteManager.validateLoginUser(email, password);
 
                     if (!userName.equals("empty")) {
