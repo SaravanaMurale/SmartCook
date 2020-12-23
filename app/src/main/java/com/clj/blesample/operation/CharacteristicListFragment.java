@@ -60,17 +60,19 @@ public class CharacteristicListFragment extends Fragment {
     int currentApiVersion;
 
     Button leftBurner, leftBurnerSettings, leftBurnerEdit, centerBurner, centerBurnerSettings, centerBurnerEdit, rightBurner, rightBurnerSettings, rightBurnerEdit;
-    ImageView menuIcon, vesselLeft, vesselCenter, vesselRight, timerLeft, timerCenter, timerRight;
+    ImageView  vesselLeft, vesselCenter, vesselRight, timerLeft, timerCenter, timerRight;
 
     byte[] currentByte, currentByte1;
 
     String left = "00", center = "01", right = "10";
 
 
-    TextView selectLeft, selectCenter, selectRight, selectSim, selectHigh, selectOff;
+    TextView selectLeft, selectCenter, selectRight, selectSim, selectHigh, selectOff,menuIcon;
     ImageView notificationIcon;
 
     ImageView selectedLeftWhistle,selectedRightWhistle,selectedCenterWhistle,selectedLeftTimer,selectedRightTimer,selectedCenterTimer;
+
+
 
 
 
@@ -186,6 +188,8 @@ public class CharacteristicListFragment extends Fragment {
         selectedLeftTimer=(ImageView)v.findViewById(R.id.selectedLeftTimer);
         selectedRightTimer=(ImageView)v.findViewById(R.id.selectedRightTimer);
         selectedCenterTimer=(ImageView)v.findViewById(R.id.selectedCenterTimer);
+
+        menuIcon=(TextView)v.findViewById(R.id.menuIcon);
 
 
 
@@ -311,6 +315,13 @@ public class CharacteristicListFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), NotificationActivity.class);
                 startActivity(intent);
 
+            }
+        });
+
+        menuIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callMenuItems();
             }
         });
 
