@@ -476,7 +476,7 @@ public class CharacteristicListFragment extends Fragment {
 
 
             flame[0] = (byte) ('*');
-            flame[1] = (byte) (0xC0);
+            flame[1] = (byte) (0xD0);
             flame[2] = (byte) (rightBurnerFlame);
             flame[3] = (byte) (leftBurnerFlame);
             flame[4] = (byte) (centerBurnerFlame);
@@ -668,6 +668,28 @@ public class CharacteristicListFragment extends Fragment {
 
     @SuppressLint("NewApi")
     private void splitEachBurnerDataFromReceivedByte(byte[] data) {
+
+
+        //Timer and Whistle
+        if(data.length==9){
+            System.out.println("Length6Recevied");
+            //C1
+        }
+
+        //Burner
+        if(data.length==6){
+            System.out.println("Length6Recevied");
+            //D1
+
+            if(data[0]==42 && data[1]==209){
+
+
+                int rightVessel = (data[0] & 0x80) >> 7;
+                int rightFlameMode = (data[0] & 0x7C) >> 2;
+
+            }
+
+        }
 
         //Gas Consumption Pattern
         if (data.length == 17) {
