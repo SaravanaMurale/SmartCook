@@ -447,62 +447,180 @@ public class CharacteristicListFragment extends Fragment {
             ((OperationActivity) getActivity()).setCharacteristic(characteristic);
             ((OperationActivity) getActivity()).setCharaProp(propList.get(0));
             //((OperationActivity) getActivity()).changePage(2);
-            wrietUserData(burner, timerInMin, whistleInCount, flameMode);
+            wrietUserData(burner, timerInMin, whistleInCount, flameMode,frameFormet);
         }
 
 
     }
 
 
-    private void wrietUserData(String burner, int timerInMin, int whistleInCount, int flameMode) {
+    private void wrietUserData(String burner, int timerInMin, int whistleInCount, int flameMode,int frameFormet) {
 
 
-        byte[] startBurner = new byte[9];
+        if(frameFormet==1){
+
+            byte[] flame = new byte[6];
+
+            int rightBurnerFlame=0,leftBurnerFlame=0,centerBurnerFlame=0;
+
+            if(burner.equals(MathUtil.RIGHT_BURNER)){
+                rightBurnerFlame=flameMode;
+                leftBurnerFlame=0;
+                centerBurnerFlame=0;
+            }else if(burner.equals(MathUtil.LEFT_BURNER)){
+                leftBurnerFlame=flameMode;
+                rightBurnerFlame=0;
+                centerBurnerFlame=0;
+
+            }else if(burner.equals(MathUtil.CENTER_BURNER)){
+                centerBurnerFlame=flameMode;
+                rightBurnerFlame=0;
+                leftBurnerFlame=0;
+
+            }
 
 
-        startBurner[0] = (byte) ('*');
-        startBurner[1] = (byte) (0xC0);
-                /*secondFrame[2] = (byte) (burner);
-                secondFrame[3] = (byte) ();
-                secondFrame[4] = (byte) ();
-                secondFrame[5] = (byte) (leftBurnerTimer);
-                secondFrame[6] = (byte) (rightBurnerWhistle);
-                secondFrame[7] = (byte) (rightBurnerTimer);*/
-        startBurner[8] = (byte) ('#');
+            flame[0] = (byte) ('*');
+            flame[1] = (byte) (0xC0);
+            flame[2]=(byte)(rightBurnerFlame);
+            flame[3]=(byte)(leftBurnerFlame);
+            flame[4]=(byte)(centerBurnerFlame);
+            flame[5] = (byte) ('#');
 
 
-        BleDevice bleDevice = ((OperationActivity) getActivity()).getBleDevice();
-        BluetoothGattCharacteristic characteristic = ((OperationActivity) getActivity()).getCharacteristic();
+            BleDevice bleDevice = ((OperationActivity) getActivity()).getBleDevice();
+            BluetoothGattCharacteristic characteristic = ((OperationActivity) getActivity()).getCharacteristic();
 
 
-        BleManager.getInstance().write(
-                bleDevice,
-                characteristic.getService().getUuid().toString(),
-                characteristic.getUuid().toString(),
-                startBurner,
-                new BleWriteCallback() {
+            BleManager.getInstance().write(
+                    bleDevice,
+                    characteristic.getService().getUuid().toString(),
+                    characteristic.getUuid().toString(),
+                    flame,
+                    new BleWriteCallback() {
 
-                    //Converting byte to String and displaying to user
-                    @Override
-                    public void onWriteSuccess(final int current, final int total, final byte[] justWrite) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
+                        //Converting byte to String and displaying to user
+                        @Override
+                        public void onWriteSuccess(final int current, final int total, final byte[] justWrite) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
 
-                            }
-                        });
-                    }
+                                }
+                            });
+                        }
 
-                    @Override
-                    public void onWriteFailure(final BleException exception) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                System.out.println("Exception" + exception.toString());
-                            }
-                        });
-                    }
-                });
+                        @Override
+                        public void onWriteFailure(final BleException exception) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    System.out.println("Exception" + exception.toString());
+                                }
+                            });
+                        }
+                    });
+
+
+
+        }else if(frameFormet==2){
+
+            byte[] timerOrWhistle = new byte[9];
+
+            int rightTimer=0,rightWhistle=0;
+            int leftTimer=0,leftWhistle=0;
+            int centerTimer=0,centerWhistle=0;
+
+
+            if(burner.equals(MathUtil.RIGHT_BURNER)){
+
+                rightTimer=timerInMin;
+                rightWhistle=whistleInCount;
+
+                leftTimer=0;
+                leftWhistle=0;
+                centerTimer=0;
+                centerWhistle=0;
+
+
+
+
+            }else if(burner.equals(MathUtil.LEFT_BURNER)){
+
+                leftTimer=timerInMin;
+                leftWhistle=whistleInCount;
+
+                rightTimer=0;
+                rightWhistle=0;
+                centerTimer=0;
+                centerWhistle=0;
+
+
+            }else if(burner.equals(MathUtil.CENTER_BURNER)){
+
+                centerTimer=timerInMin;
+                centerWhistle=whistleInCount;
+
+                rightTimer=0;
+                rightWhistle=0;
+                leftTimer=0;
+                leftWhistle=0;
+
+
+            }
+
+
+
+            timerOrWhistle[0] = (byte) ('*');
+            timerOrWhistle[1] = (byte) (0xC0);
+            timerOrWhistle[2] = (byte) (rightTimer);
+            timerOrWhistle[3] = (byte) (rightWhistle);
+            timerOrWhistle[4] = (byte) (leftTimer);
+            timerOrWhistle[5] = (byte) (leftWhistle);
+            timerOrWhistle[6] = (byte) (centerTimer);
+            timerOrWhistle[7] = (byte) (centerWhistle);
+            timerOrWhistle[8] = (byte) ('#');
+
+
+            BleDevice bleDevice = ((OperationActivity) getActivity()).getBleDevice();
+            BluetoothGattCharacteristic characteristic = ((OperationActivity) getActivity()).getCharacteristic();
+
+
+            BleManager.getInstance().write(
+                    bleDevice,
+                    characteristic.getService().getUuid().toString(),
+                    characteristic.getUuid().toString(),
+                    timerOrWhistle,
+                    new BleWriteCallback() {
+
+                        //Converting byte to String and displaying to user
+                        @Override
+                        public void onWriteSuccess(final int current, final int total, final byte[] justWrite) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onWriteFailure(final BleException exception) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    System.out.println("Exception" + exception.toString());
+                                }
+                            });
+                        }
+                    });
+
+
+
+        }
+
+
+
 
 
     }
