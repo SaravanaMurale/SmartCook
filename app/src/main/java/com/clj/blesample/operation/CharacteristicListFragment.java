@@ -501,17 +501,17 @@ public class CharacteristicListFragment extends Fragment {
 
             if (burner.equals(MathUtil.RIGHT_BURNER)) {
                 rightBurnerFlame = flameMode;
-                leftBurnerFlame = 0;
-                centerBurnerFlame = 0;
+                leftBurnerFlame = 0xff;
+                centerBurnerFlame = 0xff;
             } else if (burner.equals(MathUtil.LEFT_BURNER)) {
                 leftBurnerFlame = flameMode;
-                rightBurnerFlame = 0;
-                centerBurnerFlame = 0;
+                rightBurnerFlame = 0xff;
+                centerBurnerFlame = 0xff;
 
             } else if (burner.equals(MathUtil.CENTER_BURNER)) {
                 centerBurnerFlame = flameMode;
-                rightBurnerFlame = 0;
-                leftBurnerFlame = 0;
+                rightBurnerFlame = 0xff;
+                leftBurnerFlame = 0xff;
 
             }
 
