@@ -316,7 +316,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:padding="5dp"
-            android:text="15"
+            android:text="0"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:visibility="visible" />
@@ -330,6 +330,7 @@
             android:text="minute"
             android:textSize="15sp"
 
+
             />
 
         <TextView
@@ -340,6 +341,7 @@
             android:layout_centerHorizontal="true"
             android:text="whistle"
             android:textSize="15sp"
+            android:visibility="gone"
 
             />
 
@@ -351,7 +353,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:padding="10dp"
-            android:text="2"
+            android:text="0"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"

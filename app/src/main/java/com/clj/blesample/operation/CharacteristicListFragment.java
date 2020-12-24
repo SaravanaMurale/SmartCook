@@ -30,6 +30,7 @@ import com.clj.blesample.menuoperationactivity.EditActivity;
 import com.clj.blesample.menuoperationactivity.MenuActivity;
 import com.clj.blesample.menuoperationactivity.NotificationActivity;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
+import com.clj.blesample.utils.MathUtil;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleNotifyCallback;
 import com.clj.fastble.callback.BleWriteCallback;
@@ -64,8 +65,6 @@ public class CharacteristicListFragment extends Fragment {
 
     byte[] currentByte, currentByte1;
 
-    String left = "00", center = "01", right = "10";
-
 
     TextView selectLeft, selectCenter, selectRight, selectSim, selectHigh, selectOff,menuIcon;
     ImageView notificationIcon;
@@ -73,6 +72,8 @@ public class CharacteristicListFragment extends Fragment {
     ImageView selectedLeftWhistle,selectedRightWhistle,selectedCenterWhistle,selectedLeftTimer,selectedRightTimer,selectedCenterTimer;
 
     private SqliteManager sqliteManager;
+
+    String selectedBurner;
 
 
 
@@ -124,7 +125,7 @@ public class CharacteristicListFragment extends Fragment {
 
             Toast.makeText(getActivity(), "NotifyCalled", Toast.LENGTH_LONG).show();
 
-            callMe(0, null, 0, 0, 0);
+            callMe(0, null, 0, 0, 0,0);
 
         }
 
@@ -132,13 +133,13 @@ public class CharacteristicListFragment extends Fragment {
         String selectedBurner = PreferencesUtil.getValueString(getActivity(), PreferencesUtil.BURNER);
         int selectedTimer = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.TIMER_IN_MINUTE);
         int selectedWhistle = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.WHISTLE_IN_COUNT);
-        int selectedFlameModde = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.FLAME_MODE);
+        //int selectedFlameModde = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.FLAME_MODE);
 
-        if (selectedBurner.equals("no_value") && selectedTimer <= 0 && selectedWhistle <= 0 && selectedFlameModde <= 0) {
+        if (selectedBurner.equals("no_value") && selectedTimer <= 0 && selectedWhistle <= 0 ) {
             Toast.makeText(getActivity(), "Empty Write Data", Toast.LENGTH_LONG).show();
         } else {
 
-            if (selectedBurner.equals("00")) {
+           /* if (selectedBurner.equals("00")) {
                 leftBurnerSettings.setVisibility(View.INVISIBLE);
                 leftBurnerEdit.setVisibility(View.VISIBLE);
             } else if (selectedBurner.equals("01")) {
@@ -147,16 +148,16 @@ public class CharacteristicListFragment extends Fragment {
             } else if (selectedBurner.equals("10")) {
                 rightBurnerSettings.setVisibility(View.INVISIBLE);
                 rightBurnerEdit.setVisibility(View.VISIBLE);
-            }
+            }*/
 
             Toast.makeText(getActivity(), "WriteCalled", Toast.LENGTH_LONG).show();
 
-            System.out.println("ReceivedStoredPreferenceValue" + selectedBurner + " " + selectedTimer + " " + selectedWhistle + " " + selectedFlameModde);
+            System.out.println("ReceivedStoredPreferenceValue" + selectedBurner + " " + selectedTimer + " " + selectedWhistle );
 
             //Calls Write
             if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
 
-                //callMe(1, selectedBurner, selectedTimer, selectedWhistle, selectedFlameModde);
+                callMe(1, selectedBurner, selectedTimer, selectedWhistle,0,MathUtil.EDIT_FORMET);
 
                 PreferencesUtil.remove(getActivity(), PreferencesUtil.BURNER);
                 PreferencesUtil.remove(getActivity(), PreferencesUtil.TIMER_IN_MINUTE);
@@ -204,43 +205,45 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                callEditActivity();
+                callEditActivity(MathUtil.LEFT_BURNER);
 
-            }
-        });
-
-        selectedRightWhistle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callEditActivity();
-            }
-        });
-
-        selectedCenterWhistle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callEditActivity();
             }
         });
 
         selectedLeftTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callEditActivity();
+                callEditActivity(MathUtil.LEFT_BURNER);
+            }
+        });
+
+
+        selectedRightWhistle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callEditActivity(MathUtil.RIGHT_BURNER);
             }
         });
 
         selectedRightTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callEditActivity();
+                callEditActivity(MathUtil.RIGHT_BURNER);
             }
         });
+
+        selectedCenterWhistle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callEditActivity(MathUtil.CENTER_BURNER);
+            }
+        });
+
 
         selectedCenterTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callEditActivity();
+                callEditActivity(MathUtil.CENTER_BURNER);
             }
         });
 
@@ -249,6 +252,8 @@ public class CharacteristicListFragment extends Fragment {
         selectLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                selectedBurner=MathUtil.LEFT_BURNER;
 
                 selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
                 selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
@@ -261,6 +266,8 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                selectedBurner=MathUtil.CENTER_BURNER;
+
                 selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
                 selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
                 selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
@@ -271,6 +278,8 @@ public class CharacteristicListFragment extends Fragment {
         selectRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                selectedBurner=MathUtil.RIGHT_BURNER;
 
                 selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
                 selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
@@ -287,6 +296,8 @@ public class CharacteristicListFragment extends Fragment {
                 selectSim.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
                 selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
                 selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
+                callMe(1,selectedBurner,0,0,MathUtil.SIM,MathUtil.BURNER_FORMET);
             }
         });
 
@@ -298,6 +309,8 @@ public class CharacteristicListFragment extends Fragment {
                 selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
                 selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
 
+                callMe(1,selectedBurner,0,0,MathUtil.HIGH,MathUtil.BURNER_FORMET);
+
             }
         });
 
@@ -308,6 +321,8 @@ public class CharacteristicListFragment extends Fragment {
                 selectOff.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
                 selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
                 selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
+                callMe(1,selectedBurner,0,0,MathUtil.OFF,MathUtil.BURNER_FORMET);
 
 
             }
@@ -384,15 +399,16 @@ public class CharacteristicListFragment extends Fragment {
         });
     }
 
-    private void callEditActivity() {
+    private void callEditActivity(String burner) {
 
         Intent intent=new Intent(getActivity(),EditActivity.class);
+        intent.putExtra("BURNER", burner);
         startActivity(intent);
 
     }
 
 
-    private void callMe(int position, String burner, int timerInMin, int whistleInCount, int flameMode) {
+    private void callMe(int position, String burner, int timerInMin, int whistleInCount, int flameMode,int frameFormet) {
 
         //Position 0 -->Notify
         //Position 1 -->Write
@@ -548,10 +564,6 @@ public class CharacteristicListFragment extends Fragment {
     @SuppressLint("NewApi")
     private void splitEachBurnerDataFromReceivedByte(byte[] data) {
 
-
-        byte[] gcp=new byte[17];
-        gcp=data;
-
         //Gas Consumption Pattern
         if (data.length == 17) {
 
@@ -584,13 +596,12 @@ public class CharacteristicListFragment extends Fragment {
                 sqliteManager.addGasConsumptionPattern(dateFormet, leftBurGasUsage, "01");
 
                 float centerBurGasUsage = centerBurner / 4096;
-
                 sqliteManager.addGasConsumptionPattern(dateFormet, centerBurGasUsage, "10");
 
 
-                System.out.println("GasUsage" +date+" "+month+" " + right + " " + left + " " + center);
+                /*System.out.println("GasUsage" +date+" "+month+" " + right + " " + left + " " + center);
 
-                System.out.println("ReceivedGCP" + date + " " + " " + month + " " + rightBurner + " " + leftBurner + " " + centerBurner);
+                System.out.println("ReceivedGCP" + date + " " + " " + month + " " + rightBurner + " " + leftBurner + " " + centerBurner);*/
 
 
             }

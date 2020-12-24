@@ -100,7 +100,7 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (timerInMin > 0 && whistleInCount > 0 ) {
+                if (timerInMin > 0 || whistleInCount > 0 ) {
                     System.out.println("ReceivedData" + burner + " " + timerInMin + " " + whistleInCount );
 
                     PreferencesUtil.setValueString(EditActivity.this, PreferencesUtil.BURNER, burner);
