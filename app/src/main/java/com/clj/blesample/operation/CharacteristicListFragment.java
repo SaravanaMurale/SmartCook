@@ -74,6 +74,8 @@ public class CharacteristicListFragment extends Fragment {
 
     ImageView selectedRightVessel, selectedLeftVessel, selectedCenterVessel;
 
+    TextView selectedRightWhistleCount,selectedRightTimerCount,selectedLeftWhistleCount,selectedLeftTimerCount,selectedCenterWhistleCount,selectedCenterTimerCount;
+
     private SqliteManager sqliteManager;
 
     String selectedBurner;
@@ -197,6 +199,21 @@ public class CharacteristicListFragment extends Fragment {
         selectedRightVessel = (ImageView) v.findViewById(R.id.selectedRightVessel);
         selectedLeftVessel = (ImageView) v.findViewById(R.id.selectedLeftVessel);
         selectedCenterVessel = (ImageView) v.findViewById(R.id.selectedCenterVessel);
+
+
+        //Whistle and Timer
+        selectedRightWhistleCount=(TextView)v.findViewById(R.id.selectedRightWhistleCount);
+        selectedRightTimerCount=(TextView)v.findViewById(R.id.selectedRightTimerCount);
+
+
+        selectedLeftWhistleCount=(TextView)v.findViewById(R.id.selectedLeftWhistleCount);
+        selectedLeftTimerCount=(TextView)v.findViewById(R.id.selectedLeftTimerCount);
+
+
+        selectedCenterWhistleCount=(TextView)v.findViewById(R.id.selectedCenterWhistleCount);
+        selectedCenterTimerCount=(TextView)v.findViewById(R.id.selectedCenterTimerCount);
+
+        //End of Whistle and Timer
 
 
         menuIcon = (TextView) v.findViewById(R.id.menuIcon);
@@ -591,12 +608,12 @@ public class CharacteristicListFragment extends Fragment {
 
             timerOrWhistle[0] = (byte) ('*');
             timerOrWhistle[1] = (byte) (0xC0);
-            timerOrWhistle[2] = (byte) (rightTimer);
-            timerOrWhistle[3] = (byte) (rightWhistle);
-            timerOrWhistle[4] = (byte) (leftTimer);
-            timerOrWhistle[5] = (byte) (leftWhistle);
-            timerOrWhistle[6] = (byte) (centerTimer);
-            timerOrWhistle[7] = (byte) (centerWhistle);
+            timerOrWhistle[2] = (byte) (rightWhistle);
+            timerOrWhistle[3] = (byte) (rightTimer);
+            timerOrWhistle[4] = (byte) (leftWhistle);
+            timerOrWhistle[5] = (byte) (leftTimer);
+            timerOrWhistle[6] = (byte) (centerWhistle);
+            timerOrWhistle[7] = (byte) (centerTimer);
             timerOrWhistle[8] = (byte) ('#');
 
 
@@ -711,6 +728,20 @@ public class CharacteristicListFragment extends Fragment {
 
             if (data[0] == 42 && data[1] == -63) {
 
+                int rightWhistle=data[2];
+                int rightTimer=data[3];
+
+                int leftWhistle=data[4];
+                int leftTimer=data[5];
+
+                int centerWhistle=data[6];
+                int centerTimer=data[7];
+
+                setWhistleAndTimerValueInUI(rightWhistle,rightTimer,leftWhistle,leftTimer,centerWhistle,centerTimer);
+
+                System.out.println("WhistleAndTimerData"+rightWhistle+" "+rightTimer+" "+leftWhistle+" "+leftTimer+" "+centerWhistle+" "+centerTimer);
+
+
             }
 
         }
@@ -794,6 +825,23 @@ public class CharacteristicListFragment extends Fragment {
             }
 
         }
+
+
+    }
+
+    private void setWhistleAndTimerValueInUI(int rightWhistle, int rightTimer, int leftWhistle, int leftTimer, int centerWhistle, int centerTimer) {
+
+        selectedRightWhistleCount.setText(""+rightWhistle);
+        selectedRightTimerCount.setText(""+rightTimer+"min");
+
+        selectedLeftWhistleCount.setText(""+leftWhistle);
+        selectedLeftTimerCount.setText(""+leftTimer+"min");
+
+
+        selectedCenterWhistleCount.setText(""+centerWhistle);
+        selectedCenterTimerCount.setText(""+centerTimer+"min");
+
+
 
 
     }
