@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -156,10 +157,10 @@ public class CharacteristicListFragment extends Fragment {
 
                 callMe(1, selectedBurner, selectedTimer, selectedWhistle, 0, MathUtil.EDIT_FORMET);
 
-                PreferencesUtil.remove(getActivity(), PreferencesUtil.BURNER);
+                /*PreferencesUtil.remove(getActivity(), PreferencesUtil.BURNER);
                 PreferencesUtil.remove(getActivity(), PreferencesUtil.TIMER_IN_MINUTE);
                 PreferencesUtil.remove(getActivity(), PreferencesUtil.WHISTLE_IN_COUNT);
-                PreferencesUtil.remove(getActivity(), PreferencesUtil.FLAME_MODE);
+                PreferencesUtil.remove(getActivity(), PreferencesUtil.FLAME_MODE);*/
 
 
             }
@@ -403,7 +404,7 @@ public class CharacteristicListFragment extends Fragment {
     }
 
 
-    private void callMe(int position, String burner, int timerInMin, int whistleInCount, int flameMode, int frameFormet) {
+    private void callMe(int position, final String burner, final int timerInMin, final int whistleInCount, final int flameMode, final int frameFormet) {
 
         //Position 0 -->Notify
         //Position 1 -->Write
@@ -412,6 +413,9 @@ public class CharacteristicListFragment extends Fragment {
         final List<Integer> propList = new ArrayList<>();
         List<String> propNameList = new ArrayList<>();
         int charaProp = characteristic.getProperties();
+
+
+
         if ((charaProp & BluetoothGattCharacteristic.PROPERTY_WRITE) > 0) {
             propList.add(CharacteristicOperationFragment.PROPERTY_WRITE);
             propNameList.add("Write");
@@ -438,11 +442,25 @@ public class CharacteristicListFragment extends Fragment {
 
 
         }
-        if (propList.size() > 0 && position == 1) {
+        if (propList.size() > 0 && position == 1 && frameFormet==1) {
             ((OperationActivity) getActivity()).setCharacteristic(characteristic);
             ((OperationActivity) getActivity()).setCharaProp(propList.get(0));
             //((OperationActivity) getActivity()).changePage(2);
             wrietUserData(burner, timerInMin, whistleInCount, flameMode, frameFormet);
+        }
+        if (propList.size() > 0 && position == 1 && frameFormet==2) {
+            ((OperationActivity) getActivity()).setCharacteristic(characteristic);
+            ((OperationActivity) getActivity()).setCharaProp(propList.get(0));
+            //((OperationActivity) getActivity()).changePage(2);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    wrietUserData(burner, timerInMin, whistleInCount, flameMode, frameFormet);
+                }
+            },2000);
+
+
         }
 
 
@@ -500,7 +518,7 @@ public class CharacteristicListFragment extends Fragment {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-
+                                    Toast.makeText(getActivity(),"Write Success",Toast.LENGTH_LONG).show();
                                 }
                             });
                         }
@@ -510,6 +528,9 @@ public class CharacteristicListFragment extends Fragment {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+
+                                    Toast.makeText(getActivity(),"Write Failed",Toast.LENGTH_LONG).show();
+
                                     System.out.println("Exception" + exception.toString());
                                 }
                             });
@@ -562,6 +583,8 @@ public class CharacteristicListFragment extends Fragment {
             }
 
 
+
+
             timerOrWhistle[0] = (byte) ('*');
             timerOrWhistle[1] = (byte) (0xC0);
             timerOrWhistle[2] = (byte) (rightTimer);
@@ -577,6 +600,8 @@ public class CharacteristicListFragment extends Fragment {
             BluetoothGattCharacteristic characteristic = ((OperationActivity) getActivity()).getCharacteristic();
 
 
+            Toast.makeText(getActivity(), "New Data Write", Toast.LENGTH_LONG).show();
+
             BleManager.getInstance().write(
                     bleDevice,
                     characteristic.getService().getUuid().toString(),
@@ -591,6 +616,8 @@ public class CharacteristicListFragment extends Fragment {
                                 @Override
                                 public void run() {
 
+                                    Toast.makeText(getActivity(),"Write Success",Toast.LENGTH_LONG).show();
+
                                 }
                             });
                         }
@@ -600,7 +627,10 @@ public class CharacteristicListFragment extends Fragment {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    System.out.println("Exception" + exception.toString());
+
+                                    Toast.makeText(getActivity(),"Write Failed",Toast.LENGTH_LONG).show();
+
+                                    System.out.println("TimerException" + exception.toString());
                                 }
                             });
                         }
@@ -671,21 +701,54 @@ public class CharacteristicListFragment extends Fragment {
 
 
         //Timer and Whistle
-        if(data.length==9){
+        if (data.length == 9) {
             System.out.println("Length6Recevied");
             //C1
         }
 
         //Burner
-        if(data.length==6){
+        if (data.length == 6) {
             System.out.println("Length6Recevied");
             //D1
 
-            if(data[0]==42 && data[1]==209){
+            if (data[0] == 42 && data[1] == -47) {
+
+                byte[] rightVesselFlame = new byte[1];
+                byte[] leftVesselFlame = new byte[1];
+                byte[] centerVesselFlame = new byte[1];
 
 
-                int rightVessel = (data[0] & 0x80) >> 7;
-                int rightFlameMode = (data[0] & 0x7C) >> 2;
+                rightVesselFlame[0] = data[2];
+                int rightVessel = (rightVesselFlame[0] & 0x80) >> 7;
+                int rightFlameMode = (rightVesselFlame[0] & 0x7C) >> 2;
+
+                leftVesselFlame[0]=data[3];
+                int leftVessel = (leftVesselFlame[0] & 0x80) >> 7;
+                int leftFlameMode = (leftVesselFlame[0] & 0x7C) >> 2;
+
+                centerVesselFlame[0]=data[4];
+                int centerVessel = (centerVesselFlame[0] & 0x80) >> 7;
+                int centerFlameMode = (centerVesselFlame[0] & 0x7C) >> 2;
+
+                System.out.println("VesselAndFlameMode"+rightVessel+" "+rightFlameMode+" "+leftVessel+" "+leftFlameMode+" "+centerVessel+" "+centerFlameMode);
+
+               /* if(rightVessel==0){
+
+                }else {
+
+                }
+
+                if(rightFlameMode==1){
+
+                }else if(rightFlameMode==2){
+
+                }else if(rightFlameMode==3){
+
+                }*/
+
+
+
+
 
             }
 
