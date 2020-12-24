@@ -61,22 +61,19 @@ public class CharacteristicListFragment extends Fragment {
     int currentApiVersion;
 
     Button leftBurner, leftBurnerSettings, leftBurnerEdit, centerBurner, centerBurnerSettings, centerBurnerEdit, rightBurner, rightBurnerSettings, rightBurnerEdit;
-    ImageView  vesselLeft, vesselCenter, vesselRight, timerLeft, timerCenter, timerRight;
+    ImageView vesselLeft, vesselCenter, vesselRight, timerLeft, timerCenter, timerRight;
 
     byte[] currentByte, currentByte1;
 
 
-    TextView selectLeft, selectCenter, selectRight, selectSim, selectHigh, selectOff,menuIcon;
+    TextView selectLeft, selectCenter, selectRight, selectSim, selectHigh, selectOff, menuIcon;
     ImageView notificationIcon;
 
-    ImageView selectedLeftWhistle,selectedRightWhistle,selectedCenterWhistle,selectedLeftTimer,selectedRightTimer,selectedCenterTimer;
+    ImageView selectedLeftWhistle, selectedRightWhistle, selectedCenterWhistle, selectedLeftTimer, selectedRightTimer, selectedCenterTimer;
 
     private SqliteManager sqliteManager;
 
     String selectedBurner;
-
-
-
 
 
     @Override
@@ -125,7 +122,7 @@ public class CharacteristicListFragment extends Fragment {
 
             Toast.makeText(getActivity(), "NotifyCalled", Toast.LENGTH_LONG).show();
 
-            callMe(0, null, 0, 0, 0,0);
+            callMe(0, null, 0, 0, 0, 0);
 
         }
 
@@ -135,7 +132,7 @@ public class CharacteristicListFragment extends Fragment {
         int selectedWhistle = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.WHISTLE_IN_COUNT);
         //int selectedFlameModde = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.FLAME_MODE);
 
-        if (selectedBurner.equals("no_value") && selectedTimer <= 0 && selectedWhistle <= 0 ) {
+        if (selectedBurner.equals("no_value") && selectedTimer <= 0 && selectedWhistle <= 0) {
             Toast.makeText(getActivity(), "Empty Write Data", Toast.LENGTH_LONG).show();
         } else {
 
@@ -152,12 +149,12 @@ public class CharacteristicListFragment extends Fragment {
 
             Toast.makeText(getActivity(), "WriteCalled", Toast.LENGTH_LONG).show();
 
-            System.out.println("ReceivedStoredPreferenceValue" + selectedBurner + " " + selectedTimer + " " + selectedWhistle );
+            System.out.println("ReceivedStoredPreferenceValue" + selectedBurner + " " + selectedTimer + " " + selectedWhistle);
 
             //Calls Write
             if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
 
-                callMe(1, selectedBurner, selectedTimer, selectedWhistle,0,MathUtil.EDIT_FORMET);
+                callMe(1, selectedBurner, selectedTimer, selectedWhistle, 0, MathUtil.EDIT_FORMET);
 
                 PreferencesUtil.remove(getActivity(), PreferencesUtil.BURNER);
                 PreferencesUtil.remove(getActivity(), PreferencesUtil.TIMER_IN_MINUTE);
@@ -185,17 +182,16 @@ public class CharacteristicListFragment extends Fragment {
         selectHigh = (TextView) v.findViewById(R.id.selectHigh);
         selectOff = (TextView) v.findViewById(R.id.selectOff);
 
-        selectedLeftWhistle=(ImageView)v.findViewById(R.id.selectedLeftWhistle);
-        selectedRightWhistle=(ImageView)v.findViewById(R.id.selectedRightWhistle);
-        selectedCenterWhistle=(ImageView)v.findViewById(R.id.selectedCenterWhistle);
+        selectedLeftWhistle = (ImageView) v.findViewById(R.id.selectedLeftWhistle);
+        selectedRightWhistle = (ImageView) v.findViewById(R.id.selectedRightWhistle);
+        selectedCenterWhistle = (ImageView) v.findViewById(R.id.selectedCenterWhistle);
 
 
-        selectedLeftTimer=(ImageView)v.findViewById(R.id.selectedLeftTimer);
-        selectedRightTimer=(ImageView)v.findViewById(R.id.selectedRightTimer);
-        selectedCenterTimer=(ImageView)v.findViewById(R.id.selectedCenterTimer);
+        selectedLeftTimer = (ImageView) v.findViewById(R.id.selectedLeftTimer);
+        selectedRightTimer = (ImageView) v.findViewById(R.id.selectedRightTimer);
+        selectedCenterTimer = (ImageView) v.findViewById(R.id.selectedCenterTimer);
 
-        menuIcon=(TextView)v.findViewById(R.id.menuIcon);
-
+        menuIcon = (TextView) v.findViewById(R.id.menuIcon);
 
 
         notificationIcon = (ImageView) v.findViewById(R.id.notificationIcon);
@@ -248,12 +244,11 @@ public class CharacteristicListFragment extends Fragment {
         });
 
 
-
         selectLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                selectedBurner=MathUtil.LEFT_BURNER;
+                selectedBurner = MathUtil.LEFT_BURNER;
 
                 selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
                 selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
@@ -266,7 +261,7 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                selectedBurner=MathUtil.CENTER_BURNER;
+                selectedBurner = MathUtil.CENTER_BURNER;
 
                 selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
                 selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
@@ -279,7 +274,7 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                selectedBurner=MathUtil.RIGHT_BURNER;
+                selectedBurner = MathUtil.RIGHT_BURNER;
 
                 selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
                 selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
@@ -297,7 +292,7 @@ public class CharacteristicListFragment extends Fragment {
                 selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
                 selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
 
-                callMe(1,selectedBurner,0,0,MathUtil.SIM,MathUtil.BURNER_FORMET);
+                callMe(1, selectedBurner, 0, 0, MathUtil.SIM, MathUtil.BURNER_FORMET);
             }
         });
 
@@ -309,7 +304,7 @@ public class CharacteristicListFragment extends Fragment {
                 selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
                 selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
 
-                callMe(1,selectedBurner,0,0,MathUtil.HIGH,MathUtil.BURNER_FORMET);
+                callMe(1, selectedBurner, 0, 0, MathUtil.HIGH, MathUtil.BURNER_FORMET);
 
             }
         });
@@ -322,7 +317,7 @@ public class CharacteristicListFragment extends Fragment {
                 selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
                 selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
 
-                callMe(1,selectedBurner,0,0,MathUtil.OFF,MathUtil.BURNER_FORMET);
+                callMe(1, selectedBurner, 0, 0, MathUtil.OFF, MathUtil.BURNER_FORMET);
 
 
             }
@@ -401,14 +396,14 @@ public class CharacteristicListFragment extends Fragment {
 
     private void callEditActivity(String burner) {
 
-        Intent intent=new Intent(getActivity(),EditActivity.class);
+        Intent intent = new Intent(getActivity(), EditActivity.class);
         intent.putExtra("BURNER", burner);
         startActivity(intent);
 
     }
 
 
-    private void callMe(int position, String burner, int timerInMin, int whistleInCount, int flameMode,int frameFormet) {
+    private void callMe(int position, String burner, int timerInMin, int whistleInCount, int flameMode, int frameFormet) {
 
         //Position 0 -->Notify
         //Position 1 -->Write
@@ -447,44 +442,44 @@ public class CharacteristicListFragment extends Fragment {
             ((OperationActivity) getActivity()).setCharacteristic(characteristic);
             ((OperationActivity) getActivity()).setCharaProp(propList.get(0));
             //((OperationActivity) getActivity()).changePage(2);
-            wrietUserData(burner, timerInMin, whistleInCount, flameMode,frameFormet);
+            wrietUserData(burner, timerInMin, whistleInCount, flameMode, frameFormet);
         }
 
 
     }
 
 
-    private void wrietUserData(String burner, int timerInMin, int whistleInCount, int flameMode,int frameFormet) {
+    private void wrietUserData(String burner, int timerInMin, int whistleInCount, int flameMode, int frameFormet) {
 
 
-        if(frameFormet==1){
+        if (frameFormet == 1) {
 
             byte[] flame = new byte[6];
 
-            int rightBurnerFlame=0,leftBurnerFlame=0,centerBurnerFlame=0;
+            int rightBurnerFlame = 0, leftBurnerFlame = 0, centerBurnerFlame = 0;
 
-            if(burner.equals(MathUtil.RIGHT_BURNER)){
-                rightBurnerFlame=flameMode;
-                leftBurnerFlame=0;
-                centerBurnerFlame=0;
-            }else if(burner.equals(MathUtil.LEFT_BURNER)){
-                leftBurnerFlame=flameMode;
-                rightBurnerFlame=0;
-                centerBurnerFlame=0;
+            if (burner.equals(MathUtil.RIGHT_BURNER)) {
+                rightBurnerFlame = flameMode;
+                leftBurnerFlame = 0;
+                centerBurnerFlame = 0;
+            } else if (burner.equals(MathUtil.LEFT_BURNER)) {
+                leftBurnerFlame = flameMode;
+                rightBurnerFlame = 0;
+                centerBurnerFlame = 0;
 
-            }else if(burner.equals(MathUtil.CENTER_BURNER)){
-                centerBurnerFlame=flameMode;
-                rightBurnerFlame=0;
-                leftBurnerFlame=0;
+            } else if (burner.equals(MathUtil.CENTER_BURNER)) {
+                centerBurnerFlame = flameMode;
+                rightBurnerFlame = 0;
+                leftBurnerFlame = 0;
 
             }
 
 
             flame[0] = (byte) ('*');
             flame[1] = (byte) (0xC0);
-            flame[2]=(byte)(rightBurnerFlame);
-            flame[3]=(byte)(leftBurnerFlame);
-            flame[4]=(byte)(centerBurnerFlame);
+            flame[2] = (byte) (rightBurnerFlame);
+            flame[3] = (byte) (leftBurnerFlame);
+            flame[4] = (byte) (centerBurnerFlame);
             flame[5] = (byte) ('#');
 
 
@@ -522,53 +517,49 @@ public class CharacteristicListFragment extends Fragment {
                     });
 
 
-
-        }else if(frameFormet==2){
+        } else if (frameFormet == 2) {
 
             byte[] timerOrWhistle = new byte[9];
 
-            int rightTimer=0,rightWhistle=0;
-            int leftTimer=0,leftWhistle=0;
-            int centerTimer=0,centerWhistle=0;
+            int rightTimer = 0, rightWhistle = 0;
+            int leftTimer = 0, leftWhistle = 0;
+            int centerTimer = 0, centerWhistle = 0;
 
 
-            if(burner.equals(MathUtil.RIGHT_BURNER)){
+            if (burner.equals(MathUtil.RIGHT_BURNER)) {
 
-                rightTimer=timerInMin;
-                rightWhistle=whistleInCount;
+                rightTimer = timerInMin;
+                rightWhistle = whistleInCount;
 
-                leftTimer=0;
-                leftWhistle=0;
-                centerTimer=0;
-                centerWhistle=0;
-
-
+                leftTimer = 0;
+                leftWhistle = 0;
+                centerTimer = 0;
+                centerWhistle = 0;
 
 
-            }else if(burner.equals(MathUtil.LEFT_BURNER)){
+            } else if (burner.equals(MathUtil.LEFT_BURNER)) {
 
-                leftTimer=timerInMin;
-                leftWhistle=whistleInCount;
+                leftTimer = timerInMin;
+                leftWhistle = whistleInCount;
 
-                rightTimer=0;
-                rightWhistle=0;
-                centerTimer=0;
-                centerWhistle=0;
+                rightTimer = 0;
+                rightWhistle = 0;
+                centerTimer = 0;
+                centerWhistle = 0;
 
 
-            }else if(burner.equals(MathUtil.CENTER_BURNER)){
+            } else if (burner.equals(MathUtil.CENTER_BURNER)) {
 
-                centerTimer=timerInMin;
-                centerWhistle=whistleInCount;
+                centerTimer = timerInMin;
+                centerWhistle = whistleInCount;
 
-                rightTimer=0;
-                rightWhistle=0;
-                leftTimer=0;
-                leftWhistle=0;
+                rightTimer = 0;
+                rightWhistle = 0;
+                leftTimer = 0;
+                leftWhistle = 0;
 
 
             }
-
 
 
             timerOrWhistle[0] = (byte) ('*');
@@ -616,11 +607,7 @@ public class CharacteristicListFragment extends Fragment {
                     });
 
 
-
         }
-
-
-
 
 
     }
@@ -690,23 +677,23 @@ public class CharacteristicListFragment extends Fragment {
                 int date = data[2];
                 int month = data[3];
 
-                String dateFormation=date+"/"+month+"/"+"2020";
+                String dateFormation = date + "/" + month + "/" + "2020";
 
-                Date dateFormet=null;
+                Date dateFormet = null;
                 try {
-                     dateFormet = new SimpleDateFormat("dd/MM/yyyy").parse(dateFormation);
+                    dateFormet = new SimpleDateFormat("dd/MM/yyyy").parse(dateFormation);
 
                 } catch (ParseException e) {
-                       e.printStackTrace();
+                    e.printStackTrace();
                 }
 
-                int rightBurner = (data[4]&0x0FF) << 0 | (data[5]&0x0FF) << 8 | (data[6]&0x0FF) << 16 | (data[7]&0x0FF) << 24;
-                int leftBurner = (data[8]&0x0FF) << 0 | (data[9]&0x0FF) << 8 | (data[10]&0x0FF) << 16 | (data[11]&0x0FF) << 24;
-                int centerBurner = (data[12]&0x0FF) << 0 | (data[13]&0x0FF) << 8 | (data[14]&0x0FF) << 16 | (data[15]&0x0FF) << 24;
+                int rightBurner = (data[4] & 0x0FF) << 0 | (data[5] & 0x0FF) << 8 | (data[6] & 0x0FF) << 16 | (data[7] & 0x0FF) << 24;
+                int leftBurner = (data[8] & 0x0FF) << 0 | (data[9] & 0x0FF) << 8 | (data[10] & 0x0FF) << 16 | (data[11] & 0x0FF) << 24;
+                int centerBurner = (data[12] & 0x0FF) << 0 | (data[13] & 0x0FF) << 8 | (data[14] & 0x0FF) << 16 | (data[15] & 0x0FF) << 24;
 
                 float rightBurGasUsage = rightBurner / 4096;
 
-                System.out.println("DateFormet "+dateFormet+" "+rightBurGasUsage);
+                System.out.println("DateFormet " + dateFormet + " " + rightBurGasUsage);
 
                 sqliteManager.addGasConsumptionPattern(dateFormet, rightBurGasUsage, "00");
 
