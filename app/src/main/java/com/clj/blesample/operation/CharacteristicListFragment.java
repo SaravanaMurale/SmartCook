@@ -72,6 +72,8 @@ public class CharacteristicListFragment extends Fragment {
 
     ImageView selectedLeftWhistle, selectedRightWhistle, selectedCenterWhistle, selectedLeftTimer, selectedRightTimer, selectedCenterTimer;
 
+    ImageView selectedRightVessel, selectedLeftVessel, selectedCenterVessel;
+
     private SqliteManager sqliteManager;
 
     String selectedBurner;
@@ -191,6 +193,11 @@ public class CharacteristicListFragment extends Fragment {
         selectedLeftTimer = (ImageView) v.findViewById(R.id.selectedLeftTimer);
         selectedRightTimer = (ImageView) v.findViewById(R.id.selectedRightTimer);
         selectedCenterTimer = (ImageView) v.findViewById(R.id.selectedCenterTimer);
+
+        selectedRightVessel = (ImageView) v.findViewById(R.id.selectedRightVessel);
+        selectedLeftVessel = (ImageView) v.findViewById(R.id.selectedLeftVessel);
+        selectedCenterVessel = (ImageView) v.findViewById(R.id.selectedCenterVessel);
+
 
         menuIcon = (TextView) v.findViewById(R.id.menuIcon);
 
@@ -415,7 +422,6 @@ public class CharacteristicListFragment extends Fragment {
         int charaProp = characteristic.getProperties();
 
 
-
         if ((charaProp & BluetoothGattCharacteristic.PROPERTY_WRITE) > 0) {
             propList.add(CharacteristicOperationFragment.PROPERTY_WRITE);
             propNameList.add("Write");
@@ -442,13 +448,13 @@ public class CharacteristicListFragment extends Fragment {
 
 
         }
-        if (propList.size() > 0 && position == 1 && frameFormet==1) {
+        if (propList.size() > 0 && position == 1 && frameFormet == 1) {
             ((OperationActivity) getActivity()).setCharacteristic(characteristic);
             ((OperationActivity) getActivity()).setCharaProp(propList.get(0));
             //((OperationActivity) getActivity()).changePage(2);
             wrietUserData(burner, timerInMin, whistleInCount, flameMode, frameFormet);
         }
-        if (propList.size() > 0 && position == 1 && frameFormet==2) {
+        if (propList.size() > 0 && position == 1 && frameFormet == 2) {
             ((OperationActivity) getActivity()).setCharacteristic(characteristic);
             ((OperationActivity) getActivity()).setCharaProp(propList.get(0));
             //((OperationActivity) getActivity()).changePage(2);
@@ -458,7 +464,7 @@ public class CharacteristicListFragment extends Fragment {
                 public void run() {
                     wrietUserData(burner, timerInMin, whistleInCount, flameMode, frameFormet);
                 }
-            },2000);
+            }, 2000);
 
 
         }
@@ -518,7 +524,7 @@ public class CharacteristicListFragment extends Fragment {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(getActivity(),"Write Success",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), "Write Success", Toast.LENGTH_LONG).show();
                                 }
                             });
                         }
@@ -529,7 +535,7 @@ public class CharacteristicListFragment extends Fragment {
                                 @Override
                                 public void run() {
 
-                                    Toast.makeText(getActivity(),"Write Failed",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), "Write Failed", Toast.LENGTH_LONG).show();
 
                                     System.out.println("Exception" + exception.toString());
                                 }
@@ -552,10 +558,10 @@ public class CharacteristicListFragment extends Fragment {
                 rightTimer = timerInMin;
                 rightWhistle = whistleInCount;
 
-                leftTimer = 0;
-                leftWhistle = 0;
-                centerTimer = 0;
-                centerWhistle = 0;
+                leftTimer = 0xff;
+                leftWhistle = 0xff;
+                centerTimer = 0xff;
+                centerWhistle = 0xff;
 
 
             } else if (burner.equals(MathUtil.LEFT_BURNER)) {
@@ -563,10 +569,10 @@ public class CharacteristicListFragment extends Fragment {
                 leftTimer = timerInMin;
                 leftWhistle = whistleInCount;
 
-                rightTimer = 0;
-                rightWhistle = 0;
-                centerTimer = 0;
-                centerWhistle = 0;
+                rightTimer = 0xff;
+                rightWhistle = 0xff;
+                centerTimer = 0xff;
+                centerWhistle = 0xff;
 
 
             } else if (burner.equals(MathUtil.CENTER_BURNER)) {
@@ -574,15 +580,13 @@ public class CharacteristicListFragment extends Fragment {
                 centerTimer = timerInMin;
                 centerWhistle = whistleInCount;
 
-                rightTimer = 0;
-                rightWhistle = 0;
-                leftTimer = 0;
-                leftWhistle = 0;
+                rightTimer = 0xff;
+                rightWhistle = 0xff;
+                leftTimer = 0xff;
+                leftWhistle = 0xff;
 
 
             }
-
-
 
 
             timerOrWhistle[0] = (byte) ('*');
@@ -616,7 +620,7 @@ public class CharacteristicListFragment extends Fragment {
                                 @Override
                                 public void run() {
 
-                                    Toast.makeText(getActivity(),"Write Success",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), "Write Success", Toast.LENGTH_LONG).show();
 
                                 }
                             });
@@ -628,7 +632,7 @@ public class CharacteristicListFragment extends Fragment {
                                 @Override
                                 public void run() {
 
-                                    Toast.makeText(getActivity(),"Write Failed",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), "Write Failed", Toast.LENGTH_LONG).show();
 
                                     System.out.println("TimerException" + exception.toString());
                                 }
@@ -702,12 +706,17 @@ public class CharacteristicListFragment extends Fragment {
 
         //Timer and Whistle
         if (data.length == 9) {
-            System.out.println("Length6Recevied");
+            System.out.println("Length9Recevied");
             //C1
+
+            if (data[0] == 42 && data[1] == -63) {
+
+            }
+
         }
 
         //Burner
-        if (data.length == 6) {
+        if (data.length == 7) {
             System.out.println("Length6Recevied");
             //D1
 
@@ -722,32 +731,20 @@ public class CharacteristicListFragment extends Fragment {
                 int rightVessel = (rightVesselFlame[0] & 0x80) >> 7;
                 int rightFlameMode = (rightVesselFlame[0] & 0x7C) >> 2;
 
-                leftVesselFlame[0]=data[3];
+                leftVesselFlame[0] = data[3];
                 int leftVessel = (leftVesselFlame[0] & 0x80) >> 7;
                 int leftFlameMode = (leftVesselFlame[0] & 0x7C) >> 2;
 
-                centerVesselFlame[0]=data[4];
+                centerVesselFlame[0] = data[4];
                 int centerVessel = (centerVesselFlame[0] & 0x80) >> 7;
                 int centerFlameMode = (centerVesselFlame[0] & 0x7C) >> 2;
 
-                System.out.println("VesselAndFlameMode"+rightVessel+" "+rightFlameMode+" "+leftVessel+" "+leftFlameMode+" "+centerVessel+" "+centerFlameMode);
+                int batteryPercentage = data[5];
 
-               /* if(rightVessel==0){
-
-                }else {
-
-                }
-
-                if(rightFlameMode==1){
-
-                }else if(rightFlameMode==2){
-
-                }else if(rightFlameMode==3){
-
-                }*/
+                System.out.println("VesselAndFlameMode" + rightVessel + " " + rightFlameMode + " " + leftVessel + " " + leftFlameMode + " " + centerVessel + " " + centerFlameMode + " " + batteryPercentage);
 
 
-
+                setValueInUI(rightVessel, rightFlameMode, leftVessel, leftFlameMode, centerVessel, centerFlameMode);
 
 
             }
@@ -795,6 +792,101 @@ public class CharacteristicListFragment extends Fragment {
 
 
             }
+
+        }
+
+
+    }
+
+    private void setValueInUI(int rightVessel, int rightFlameMode, int leftVessel, int leftFlameMode, int centerVessel, int centerFlameMode) {
+
+        //Right
+        if (rightVessel == 0) {
+
+            selectedRightVessel.setVisibility(View.INVISIBLE);
+
+
+        } else if (rightVessel == 1) {
+            selectedRightVessel.setVisibility(View.VISIBLE);
+
+            selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
+            selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+            selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+        }
+
+        if (rightFlameMode == 1) {
+
+            selectSim.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
+            selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+            selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
+        } else if (rightFlameMode == 2) {
+
+            selectHigh.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
+            selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+            selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
+        } else if (rightFlameMode == 3) {
+
+            selectOff.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
+            selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+            selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
+        }
+
+        //Left
+        if (leftVessel == 0) {
+            selectedLeftVessel.setVisibility(View.INVISIBLE);
+        } else if (leftVessel == 1) {
+            selectedLeftVessel.setVisibility(View.VISIBLE);
+
+            selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
+            selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+            selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+        }
+
+        if (leftFlameMode == 1) {
+            selectSim.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
+            selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+            selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
+        } else if (leftFlameMode == 2) {
+
+            selectHigh.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
+            selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+            selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+        } else if (leftFlameMode == 3) {
+            selectOff.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
+            selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+            selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+        }
+
+        //Center
+        //Left
+        if (centerVessel == 0) {
+            selectedCenterVessel.setVisibility(View.INVISIBLE);
+        } else if (centerVessel == 1) {
+            selectedCenterVessel.setVisibility(View.VISIBLE);
+
+            selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
+            selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+            selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+        }
+
+        if (centerFlameMode == 1) {
+            selectSim.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
+            selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+            selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
+        } else if (centerFlameMode == 2) {
+            selectHigh.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
+            selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+            selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
+        } else if (centerFlameMode == 3) {
+            selectOff.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
+            selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+            selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
 
         }
 
