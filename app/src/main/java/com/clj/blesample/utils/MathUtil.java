@@ -10,18 +10,19 @@ import java.util.Date;
 public class MathUtil {
 
 
+    public static final String RIGHT_BURNER = "00";
+    public static final String LEFT_BURNER = "01";
+    public static final String CENTER_BURNER = "10";
 
-    public static final String RIGHT_BURNER="00";
-    public static final String LEFT_BURNER="01";
-    public static final String CENTER_BURNER="10";
+    public static final int SIM = 1;
+    public static final int HIGH = 2;
+    public static final int OFF = 3;
 
-    public static final int SIM=1;
-    public static final int HIGH=2;
-    public static final int OFF=3;
+    public static final int BURNER_FORMET = 1;
+    public static final int EDIT_FORMET = 2;
 
-    public static final int BURNER_FORMET=1;
-    public static final int EDIT_FORMET=2;
-
+    public static final int IMAGE_PICK_CODE = 1000;
+    public static final int PERMISSION_CODE = 1001;
 
     public static boolean validatePassword(String password) {
         if (password.length() < 6) {
@@ -112,8 +113,8 @@ public class MathUtil {
         return dateInString;
     }
 
-    public static Date stringToDateConversion(String date){
-        Date actualDate= null;
+    public static Date stringToDateConversion(String date) {
+        Date actualDate = null;
         try {
             actualDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
         } catch (ParseException e) {
@@ -139,8 +140,6 @@ public class MathUtil {
 
         return dateAndTime;
     }
-
-
 
 
 }
