@@ -3,8 +3,11 @@ package com.clj.blesample.menuoperationactivity;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -78,14 +81,48 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                     if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_DENIED){
                         String[] permission={Manifest.permission.READ_EXTERNAL_STORAGE};
 
-                       // requestPermissions(permission, MathUtil.);
+                        requestPermissions(permission, MathUtil.PERMISSION_CODE);
                     }
+                    else {
+                        pickImageFromGallery();
+                    }
+                }
+                else {
+                    pickImageFromGallery();
                 }
 
             }
         });
 
 
+    }
+
+    private void pickImageFromGallery() {
+
+        Intent intent=new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, MathUtil.IMAGE_PICK_CODE);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(resultCode==RESULT_OK && requestCode==MathUtil.IMAGE_PICK_CODE){
+            profilePic.setImageURI(data.getData());
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode){
+            case MathUtil.PERMISSION_CODE:{
+                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_DENIED){
+                    pickImageFromGallery();
+                }else {
+                    Toast.makeText(ProfileSettingsActivity.this,"Permission Denied",Toast.LENGTH_LONG).show();
+                }
+            }
+        }
     }
 
     private void openDialog(String hintData, int i) {
