@@ -8,7 +8,10 @@ public class StoreImageDTO {
     private String imageName;
     private Bitmap image;
 
-    public StoreImageDTO( String imageName, Bitmap image) {
+    public StoreImageDTO() {
+    }
+
+    public StoreImageDTO(String imageName, Bitmap image) {
         this.imageName = imageName;
         this.image = image;
     }

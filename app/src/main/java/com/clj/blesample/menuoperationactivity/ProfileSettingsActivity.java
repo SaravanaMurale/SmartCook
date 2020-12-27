@@ -53,6 +53,8 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         mobileBlock=(RelativeLayout)findViewById(R.id.mobileBlock);
         changePasswordBlock=(RelativeLayout)findViewById(R.id.changePasswordBlock);
 
+        getImageFromSqliteDB();
+
         profileBlock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,10 +131,19 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                 imageToStore= MediaStore.Images.Media.getBitmap(getContentResolver(),imageFilePath);
                 profilePic.setImageBitmap(imageToStore);
                 sqliteManager.storeImage(new StoreImageDTO("Murali",imageToStore));
+
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void getImageFromSqliteDB() {
+
+        StoreImageDTO storeImageDTO=sqliteManager.getImage();
+        profilePic.setImageBitmap(storeImageDTO.getImage());
     }
 
     @Override

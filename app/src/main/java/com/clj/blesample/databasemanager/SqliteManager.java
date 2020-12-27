@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.widget.Toast;
 
@@ -61,10 +62,10 @@ public class SqliteManager extends SQLiteOpenHelper {
     public static final String USER_ADDRESS = "user_address";
     public static final String USER_CREATION_DATE = "user_creation_date";
 
-    public static final String IMAGE_TABLE="imagetable";
-    public static final String IMAGE_NAME="imageName";
-    public static final String IMAGE="image";
-    public static final String USER_ID="user_id";
+    public static final String IMAGE_TABLE = "imagetable";
+    public static final String IMAGE_NAME = "imageName";
+    public static final String IMAGE = "image";
+    public static final String USER_ID = "user_id";
     ByteArrayOutputStream objectByteArrayOutputStream;
     private byte[] imageInByte;
 
@@ -150,30 +151,49 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     }
 
-    public void storeImage(StoreImageDTO objectModelClass){
-        SQLiteDatabase objectSqliteDatabase=getWritableDatabase();
-        Bitmap imageToStoreBitMap=objectModelClass.getImage();
+    public void storeImage(StoreImageDTO objectModelClass) {
+        SQLiteDatabase objectSqliteDatabase = getWritableDatabase();
+        Bitmap imageToStoreBitMap = objectModelClass.getImage();
 
-        objectByteArrayOutputStream=new ByteArrayOutputStream();
-        imageToStoreBitMap.compress(Bitmap.CompressFormat.JPEG,100,objectByteArrayOutputStream);
+        objectByteArrayOutputStream = new ByteArrayOutputStream();
+        imageToStoreBitMap.compress(Bitmap.CompressFormat.JPEG, 100, objectByteArrayOutputStream);
 
-        imageInByte=objectByteArrayOutputStream.toByteArray();
+        imageInByte = objectByteArrayOutputStream.toByteArray();
 
         int userId = PreferencesUtil.getValueInt(mCtx, PreferencesUtil.USER_ID);
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(USER_ID,userId);
-        contentValues.put(IMAGE_NAME,objectModelClass.getImageName());
-        contentValues.put(IMAGE,imageInByte);
+        contentValues.put(USER_ID, userId);
+        contentValues.put(IMAGE_NAME, objectModelClass.getImageName());
+        contentValues.put(IMAGE, imageInByte);
 
-        long checkIfImageQueryRuns=objectSqliteDatabase.insert(IMAGE_TABLE,null,contentValues);
+        long checkIfImageQueryRuns = objectSqliteDatabase.insert(IMAGE_TABLE, null, contentValues);
 
-        if(checkIfImageQueryRuns!=-1){
-            Toast.makeText(mCtx,"Image added into table",Toast.LENGTH_LONG).show();
+        if (checkIfImageQueryRuns != -1) {
+            Toast.makeText(mCtx, "Image added into table", Toast.LENGTH_LONG).show();
             objectSqliteDatabase.close();
-        }else {
-            Toast.makeText(mCtx,"Image is not added",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(mCtx, "Image is not added", Toast.LENGTH_LONG).show();
         }
+
+    }
+
+    public StoreImageDTO getImage() {
+
+        StoreImageDTO storeImageDTO=new StoreImageDTO();
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        Cursor objectCursor=sqLiteDatabase.rawQuery("select * from imagetable",null);
+        if(objectCursor.getCount()!=0){
+            while (objectCursor.moveToNext()){
+                byte[]  imageBytes=objectCursor.getBlob(3);
+                Bitmap objectBitMap= BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.length);
+
+                storeImageDTO.setImage(objectBitMap);
+            }
+        }
+
+        return storeImageDTO;
 
     }
 
@@ -268,7 +288,7 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     public boolean addUser(String userName, String userEmail, String mobileNumber, String userPassword) {
 
-        String userAddress="address";
+        String userAddress = "address";
 
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
@@ -405,7 +425,7 @@ public class SqliteManager extends SQLiteOpenHelper {
 
         SQLiteDatabase selectAllData = getReadableDatabase();
 
-        Cursor userData = selectAllData.rawQuery("select id,user_name from signuptable where (user_email=? or user_mobile=?) and user_password=? ", new String[]{userEmail,userEmail, password});
+        Cursor userData = selectAllData.rawQuery("select id,user_name from signuptable where (user_email=? or user_mobile=?) and user_password=? ", new String[]{userEmail, userEmail, password});
 
         if (userData.moveToFirst()) {
 
@@ -426,7 +446,7 @@ public class SqliteManager extends SQLiteOpenHelper {
         return username;
     }
 
-    public boolean resetPassword(String userEmail,String password){
+    public boolean resetPassword(String userEmail, String password) {
 
         SQLiteDatabase updateSqLiteDatabase = getWritableDatabase();
 
