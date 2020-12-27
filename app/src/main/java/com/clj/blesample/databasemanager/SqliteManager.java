@@ -5,18 +5,27 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.media.Image;
+import android.widget.Toast;
 
+import com.clj.blesample.menuoperationactivity.SplashScreenActivity;
 import com.clj.blesample.model.GasConsumptionPatternDTO;
 import com.clj.blesample.model.MaintenaceServiceDTO;
 import com.clj.blesample.model.StatisticsDTO;
+import com.clj.blesample.model.StoreImageDTO;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
 import com.clj.blesample.utils.MathUtil;
 
+import java.io.ByteArrayOutputStream;
+import java.sql.Blob;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static java.sql.Types.BLOB;
 
 public class SqliteManager extends SQLiteOpenHelper {
 
@@ -51,6 +60,13 @@ public class SqliteManager extends SQLiteOpenHelper {
     public static final String USER_PASSWORD = "user_password";
     public static final String USER_ADDRESS = "user_address";
     public static final String USER_CREATION_DATE = "user_creation_date";
+
+    public static final String IMAGE_TABLE="imagetable";
+    public static final String IMAGE_NAME="imageName";
+    public static final String IMAGE="image";
+    public static final String USER_ID="user_id";
+    ByteArrayOutputStream objectByteArrayOutputStream;
+    private byte[] imageInByte;
 
     public static final String GCP_TABLE = "gasconsumptionpattern";
     public static final String GCP_BURNER = "gcp_burner";
@@ -109,19 +125,55 @@ public class SqliteManager extends SQLiteOpenHelper {
                 "    " + USER_CREATION_DATE + " varchar(200) NOT NULL\n" +
                 ");";
 
+        //String saveImage="create table storeImage(imageName TEXT,image BLOB)";
+
+        String saveImage = "CREATE TABLE IF NOT EXISTS " + IMAGE_TABLE + "(\n" +
+                "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
+                "    " + USER_ID + " INTEGER(200) NOT NULL,\n" +
+                "    " + IMAGE_NAME + " varchar(200) NOT NULL,\n" +
+                "    " + IMAGE + " BLOB NOT NULL\n" +
+                ");";
+
 
         /*db.execSQL(sql);
         db.execSQL(statisticsTable);*/
 
         db.execSQL(gasConPatTable);
-
         db.execSQL(signUpTable);
+        db.execSQL(saveImage);
 
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
+
+    public void storeImage(StoreImageDTO objectModelClass){
+        SQLiteDatabase objectSqliteDatabase=getWritableDatabase();
+        Bitmap imageToStoreBitMap=objectModelClass.getImage();
+
+        objectByteArrayOutputStream=new ByteArrayOutputStream();
+        imageToStoreBitMap.compress(Bitmap.CompressFormat.JPEG,100,objectByteArrayOutputStream);
+
+        imageInByte=objectByteArrayOutputStream.toByteArray();
+
+        int userId = PreferencesUtil.getValueInt(mCtx, PreferencesUtil.USER_ID);
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(USER_ID,userId);
+        contentValues.put(IMAGE_NAME,objectModelClass.getImageName());
+        contentValues.put(IMAGE,imageInByte);
+
+        long checkIfImageQueryRuns=objectSqliteDatabase.insert(IMAGE_TABLE,null,contentValues);
+
+        if(checkIfImageQueryRuns!=-1){
+            Toast.makeText(mCtx,"Image added into table",Toast.LENGTH_LONG).show();
+            objectSqliteDatabase.close();
+        }else {
+            Toast.makeText(mCtx,"Image is not added",Toast.LENGTH_LONG).show();
+        }
 
     }
 

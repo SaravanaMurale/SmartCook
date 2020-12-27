@@ -5,7 +5,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +20,11 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.clj.blesample.R;
+import com.clj.blesample.databasemanager.SqliteManager;
+import com.clj.blesample.model.StoreImageDTO;
 import com.clj.blesample.utils.MathUtil;
+
+import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -26,11 +33,18 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     RelativeLayout profileBlock,emailBlock,mobileBlock,changePasswordBlock;
 
     CircleImageView profilePic;
+    Uri imageFilePath;
+    Bitmap imageToStore;
+
+    SqliteManager sqliteManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_settings);
+
+        sqliteManager=new SqliteManager(this);
 
         profilePic=(CircleImageView)findViewById(R.id.profilePic);
 
@@ -108,7 +122,16 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(resultCode==RESULT_OK && requestCode==MathUtil.IMAGE_PICK_CODE){
-            profilePic.setImageURI(data.getData());
+           // profilePic.setImageURI(data.getData());
+
+            imageFilePath=data.getData();
+            try {
+                imageToStore= MediaStore.Images.Media.getBitmap(getContentResolver(),imageFilePath);
+                profilePic.setImageBitmap(imageToStore);
+                sqliteManager.storeImage(new StoreImageDTO("Murali",imageToStore));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
