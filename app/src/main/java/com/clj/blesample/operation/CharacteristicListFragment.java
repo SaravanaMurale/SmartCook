@@ -30,6 +30,7 @@ import com.clj.blesample.databasemanager.SqliteManager;
 import com.clj.blesample.menuoperationactivity.EditActivity;
 import com.clj.blesample.menuoperationactivity.MenuActivity;
 import com.clj.blesample.menuoperationactivity.NotificationActivity;
+import com.clj.blesample.model.NotificationResponseDTO;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
 import com.clj.blesample.utils.MathUtil;
 import com.clj.fastble.BleManager;
@@ -178,7 +179,14 @@ public class CharacteristicListFragment extends Fragment {
 
     private void getNotificationDetails() {
 
-        sqliteManager.getAllNotificationDetails();
+        List<NotificationResponseDTO> notificationResponseDTOList=sqliteManager.getAllNotificationDetails();
+
+        if(notificationResponseDTOList==null){
+            Toast.makeText(getActivity(),"Notification List Is Empty",Toast.LENGTH_LONG).show();
+        }else {
+
+        }
+
 
     }
 

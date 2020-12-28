@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.clj.blesample.menuoperationactivity.SplashScreenActivity;
 import com.clj.blesample.model.GasConsumptionPatternDTO;
 import com.clj.blesample.model.MaintenaceServiceDTO;
+import com.clj.blesample.model.NotificationDTO;
+import com.clj.blesample.model.NotificationResponseDTO;
 import com.clj.blesample.model.StatisticsDTO;
 import com.clj.blesample.model.StoreImageDTO;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
@@ -592,7 +594,9 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     }
 
-    public void getAllNotificationDetails() {
+    public List<NotificationResponseDTO> getAllNotificationDetails() {
+
+        List<NotificationResponseDTO> notificationResponseDTOList=new ArrayList<>();
 
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
@@ -615,9 +619,19 @@ public class SqliteManager extends SQLiteOpenHelper {
                 System.out.println("CENTER_TIMER_STATUS " + cursorNoti.getString(9));
 
 
+                NotificationResponseDTO notificationResponseDTO=new NotificationResponseDTO(cursorNoti.getInt(1),cursorNoti.getString(2),
+                        cursorNoti.getString(3),cursorNoti.getInt(4),cursorNoti.getString(5),cursorNoti.getString(6),
+                        cursorNoti.getInt(7),cursorNoti.getString(8),cursorNoti.getString(9));
+
+                notificationResponseDTOList.add(notificationResponseDTO);
+
+
+
             } while (cursorNoti.moveToNext());
 
 
         }
+
+        return notificationResponseDTOList;
     }
 }
