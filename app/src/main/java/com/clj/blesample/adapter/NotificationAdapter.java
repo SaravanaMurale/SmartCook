@@ -49,6 +49,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
 
         if(notificationDTOList.get(i).getRightVesselStatus()==0){
+
             notificationViewHolder.notiText.setText(MathUtil.RIGHT_VESSEL_0);
         }else {
             notificationViewHolder.notiText.setText(MathUtil.RIGHT_VESSEL_1);
@@ -87,7 +88,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         public NotificationViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            notiImg = (ImageView) itemView.findViewById(R.id.notifImage);
+            //notiImg = (ImageView) itemView.findViewById(R.id.notifImage);
             notiText = (TextView) itemView.findViewById(R.id.notifyText);
 
         }
