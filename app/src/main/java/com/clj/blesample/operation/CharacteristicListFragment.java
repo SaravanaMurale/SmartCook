@@ -75,11 +75,14 @@ public class CharacteristicListFragment extends Fragment {
 
     ImageView selectedRightVessel, selectedLeftVessel, selectedCenterVessel;
 
-    TextView selectedRightWhistleCount,selectedRightTimerCount,selectedLeftWhistleCount,selectedLeftTimerCount,selectedCenterWhistleCount,selectedCenterTimerCount;
+    TextView selectedRightWhistleCount, selectedRightTimerCount, selectedLeftWhistleCount, selectedLeftTimerCount, selectedCenterWhistleCount, selectedCenterTimerCount;
 
     private SqliteManager sqliteManager;
 
     String selectedBurner;
+
+    int setNotification = 0;
+    TextView notificationCount;
 
 
     @Override
@@ -132,7 +135,9 @@ public class CharacteristicListFragment extends Fragment {
 
         }
 
-        getNotificationDetails();
+        if (setNotification == 1) {
+            getNotificationDetails();
+        }
 
 
         String selectedBurner = PreferencesUtil.getValueString(getActivity(), PreferencesUtil.BURNER);
@@ -179,12 +184,12 @@ public class CharacteristicListFragment extends Fragment {
 
     private void getNotificationDetails() {
 
-        List<NotificationResponseDTO> notificationResponseDTOList=sqliteManager.getAllNotificationDetails();
+        List<NotificationResponseDTO> notificationResponseDTOList = sqliteManager.getAllNotificationDetails();
 
-        if(notificationResponseDTOList==null){
-            Toast.makeText(getActivity(),"Notification List Is Empty",Toast.LENGTH_LONG).show();
-        }else {
-
+        if (notificationResponseDTOList == null) {
+            Toast.makeText(getActivity(), "Notification List Is Empty", Toast.LENGTH_LONG).show();
+        } else {
+            notificationCount.setText("" + notificationResponseDTOList.size());
         }
 
 
@@ -218,16 +223,18 @@ public class CharacteristicListFragment extends Fragment {
 
 
         //Whistle and Timer
-        selectedRightWhistleCount=(TextView)v.findViewById(R.id.selectedRightWhistleCount);
-        selectedRightTimerCount=(TextView)v.findViewById(R.id.selectedRightTimerCount);
+        selectedRightWhistleCount = (TextView) v.findViewById(R.id.selectedRightWhistleCount);
+        selectedRightTimerCount = (TextView) v.findViewById(R.id.selectedRightTimerCount);
 
 
-        selectedLeftWhistleCount=(TextView)v.findViewById(R.id.selectedLeftWhistleCount);
-        selectedLeftTimerCount=(TextView)v.findViewById(R.id.selectedLeftTimerCount);
+        selectedLeftWhistleCount = (TextView) v.findViewById(R.id.selectedLeftWhistleCount);
+        selectedLeftTimerCount = (TextView) v.findViewById(R.id.selectedLeftTimerCount);
 
 
-        selectedCenterWhistleCount=(TextView)v.findViewById(R.id.selectedCenterWhistleCount);
-        selectedCenterTimerCount=(TextView)v.findViewById(R.id.selectedCenterTimerCount);
+        selectedCenterWhistleCount = (TextView) v.findViewById(R.id.selectedCenterWhistleCount);
+        selectedCenterTimerCount = (TextView) v.findViewById(R.id.selectedCenterTimerCount);
+
+        notificationCount = (TextView) v.findViewById(R.id.notificationCount);
 
         //End of Whistle and Timer
 
@@ -333,9 +340,9 @@ public class CharacteristicListFragment extends Fragment {
                 selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
                 selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
 
-                if( selectedBurner==null ){
-                    Toast.makeText(getActivity(),"Please Select Burner",Toast.LENGTH_LONG).show();
-                }else {
+                if (selectedBurner == null) {
+                    Toast.makeText(getActivity(), "Please Select Burner", Toast.LENGTH_LONG).show();
+                } else {
                     callMe(1, selectedBurner, 0, 0, MathUtil.SIM, MathUtil.BURNER_FORMET);
                 }
 
@@ -351,12 +358,11 @@ public class CharacteristicListFragment extends Fragment {
                 selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
                 selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
 
-                if( selectedBurner==null ){
-                    Toast.makeText(getActivity(),"Please Select Burner",Toast.LENGTH_LONG).show();
-                }else {
+                if (selectedBurner == null) {
+                    Toast.makeText(getActivity(), "Please Select Burner", Toast.LENGTH_LONG).show();
+                } else {
                     callMe(1, selectedBurner, 0, 0, MathUtil.HIGH, MathUtil.BURNER_FORMET);
                 }
-
 
 
             }
@@ -370,13 +376,11 @@ public class CharacteristicListFragment extends Fragment {
                 selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
                 selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
 
-                if(selectedBurner==null ){
-                    Toast.makeText(getActivity(),"Please Select Burner",Toast.LENGTH_LONG).show();
-                }else {
+                if (selectedBurner == null) {
+                    Toast.makeText(getActivity(), "Please Select Burner", Toast.LENGTH_LONG).show();
+                } else {
                     callMe(1, selectedBurner, 0, 0, MathUtil.OFF, MathUtil.BURNER_FORMET);
                 }
-
-
 
 
             }
@@ -762,22 +766,21 @@ public class CharacteristicListFragment extends Fragment {
 
             if (data[0] == 42 && data[1] == -63) {
 
-                int rightWhistle=data[2];
-                int rightTimer=data[3];
+                int rightWhistle = data[2];
+                int rightTimer = data[3];
 
-                int leftWhistle=data[4];
-                int leftTimer=data[5];
+                int leftWhistle = data[4];
+                int leftTimer = data[5];
 
-                int centerWhistle=data[6];
-                int centerTimer=data[7];
+                int centerWhistle = data[6];
+                int centerTimer = data[7];
 
-                setWhistleAndTimerValueInUI(rightWhistle,rightTimer,leftWhistle,leftTimer,centerWhistle,centerTimer);
+                setWhistleAndTimerValueInUI(rightWhistle, rightTimer, leftWhistle, leftTimer, centerWhistle, centerTimer);
 
-                setNotificationForWhistleAndTimer(rightWhistle,rightTimer,leftWhistle,leftTimer,centerWhistle,centerTimer);
+                setNotificationForWhistleAndTimer(rightWhistle, rightTimer, leftWhistle, leftTimer, centerWhistle, centerTimer);
 
 
-
-                System.out.println("WhistleAndTimerData"+rightWhistle+" "+rightTimer+" "+leftWhistle+" "+leftTimer+" "+centerWhistle+" "+centerTimer);
+                System.out.println("WhistleAndTimerData" + rightWhistle + " " + rightTimer + " " + leftWhistle + " " + leftTimer + " " + centerWhistle + " " + centerTimer);
 
 
             }
@@ -817,6 +820,7 @@ public class CharacteristicListFragment extends Fragment {
 
                 setNotification(rightVessel, rightFlameMode, leftVessel, leftFlameMode, centerVessel, centerFlameMode);
 
+                setNotification = 1;
 
 
             }
@@ -872,32 +876,29 @@ public class CharacteristicListFragment extends Fragment {
 
     private void setNotificationForWhistleAndTimer(int rightWhistle, int rightTimer, int leftWhistle, int leftTimer, int centerWhistle, int centerTimer) {
 
-        sqliteManager.storeWhistleAndTimerNotificationDetails(rightWhistle,rightTimer,leftWhistle,leftTimer,centerWhistle,centerTimer);
+        sqliteManager.storeWhistleAndTimerNotificationDetails(rightWhistle, rightTimer, leftWhistle, leftTimer, centerWhistle, centerTimer);
 
     }
 
 
     private void setWhistleAndTimerValueInUI(int rightWhistle, int rightTimer, int leftWhistle, int leftTimer, int centerWhistle, int centerTimer) {
 
-        selectedRightWhistleCount.setText(""+rightWhistle);
-        selectedRightTimerCount.setText(""+rightTimer+"min");
+        selectedRightWhistleCount.setText("" + rightWhistle);
+        selectedRightTimerCount.setText("" + rightTimer + "min");
 
-        selectedLeftWhistleCount.setText(""+leftWhistle);
-        selectedLeftTimerCount.setText(""+leftTimer+"min");
-
-
-        selectedCenterWhistleCount.setText(""+centerWhistle);
-        selectedCenterTimerCount.setText(""+centerTimer+"min");
+        selectedLeftWhistleCount.setText("" + leftWhistle);
+        selectedLeftTimerCount.setText("" + leftTimer + "min");
 
 
+        selectedCenterWhistleCount.setText("" + centerWhistle);
+        selectedCenterTimerCount.setText("" + centerTimer + "min");
 
 
     }
 
     private void setNotification(int rightVessel, int rightFlameMode, int leftVessel, int leftFlameMode, int centerVessel, int centerFlameMode) {
 
-        sqliteManager.storeVesselNotificationDetils(rightVessel,rightFlameMode,leftVessel,leftFlameMode,centerVessel,centerFlameMode);
-
+        sqliteManager.storeVesselNotificationDetils(rightVessel, rightFlameMode, leftVessel, leftFlameMode, centerVessel, centerFlameMode);
 
 
     }
