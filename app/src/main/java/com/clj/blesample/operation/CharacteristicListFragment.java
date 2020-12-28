@@ -131,6 +131,8 @@ public class CharacteristicListFragment extends Fragment {
 
         }
 
+        getNotificationDetails();
+
 
         String selectedBurner = PreferencesUtil.getValueString(getActivity(), PreferencesUtil.BURNER);
         int selectedTimer = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.TIMER_IN_MINUTE);
@@ -171,6 +173,12 @@ public class CharacteristicListFragment extends Fragment {
 
         }
 
+
+    }
+
+    private void getNotificationDetails() {
+
+        sqliteManager.getAllNotificationDetails();
 
     }
 
@@ -757,6 +765,10 @@ public class CharacteristicListFragment extends Fragment {
 
                 setWhistleAndTimerValueInUI(rightWhistle,rightTimer,leftWhistle,leftTimer,centerWhistle,centerTimer);
 
+                setNotificationForWhistleAndTimer(rightWhistle,rightTimer,leftWhistle,leftTimer,centerWhistle,centerTimer);
+
+
+
                 System.out.println("WhistleAndTimerData"+rightWhistle+" "+rightTimer+" "+leftWhistle+" "+leftTimer+" "+centerWhistle+" "+centerTimer);
 
 
@@ -794,6 +806,9 @@ public class CharacteristicListFragment extends Fragment {
 
 
                 setValueInUI(rightVessel, rightFlameMode, leftVessel, leftFlameMode, centerVessel, centerFlameMode);
+
+                setNotification(rightVessel, rightFlameMode, leftVessel, leftFlameMode, centerVessel, centerFlameMode);
+
 
 
             }
@@ -847,6 +862,13 @@ public class CharacteristicListFragment extends Fragment {
 
     }
 
+    private void setNotificationForWhistleAndTimer(int rightWhistle, int rightTimer, int leftWhistle, int leftTimer, int centerWhistle, int centerTimer) {
+
+        sqliteManager.storeWhistleAndTimerNotificationDetails(rightWhistle,rightTimer,leftWhistle,leftTimer,centerWhistle,centerTimer);
+
+    }
+
+
     private void setWhistleAndTimerValueInUI(int rightWhistle, int rightTimer, int leftWhistle, int leftTimer, int centerWhistle, int centerTimer) {
 
         selectedRightWhistleCount.setText(""+rightWhistle);
@@ -863,6 +885,15 @@ public class CharacteristicListFragment extends Fragment {
 
 
     }
+
+    private void setNotification(int rightVessel, int rightFlameMode, int leftVessel, int leftFlameMode, int centerVessel, int centerFlameMode) {
+
+        sqliteManager.storeVesselNotificationDetils(rightVessel,rightFlameMode,leftVessel,leftFlameMode,centerVessel,centerFlameMode);
+
+
+
+    }
+
 
     private void setValueInUI(int rightVessel, int rightFlameMode, int leftVessel, int leftFlameMode, int centerVessel, int centerFlameMode) {
 

@@ -26,6 +26,25 @@ public class MathUtil {
     public static final int IMAGE_PICK_CODE = 1000;
     public static final int PERMISSION_CODE = 1001;
 
+
+    public static final String LEFT_VESSEL_0="Vessel is not placed on left burner";
+    public static final String LEFT_VESSEL_1="Vessel is placed on left burner";
+    public static final String LEFT_WHISTLE="Whistle is set on left burner";
+    public static final String LEFT_TIMER="Timer is set on left burner";
+
+
+    public static final String RIGHT_VESSEL_0="Vessel is not placed on right burner";
+    public static final String RIGHT_VESSEL_1="Vessel is placed on right burner";
+    public static final String RIGHT_WHISTLE="Whistle is set on right burner";
+    public static final String RIGHT_TIMER="Timer is set on right burner";
+
+
+    public static final String CENTER_VESSEL_0="Vessel is not placed on center burner";
+    public static final String CENTER_VESSEL_1="Vessel is placed on center burner";
+    public static final String CENTER_WHISTLE="Whistle is set on center burner";
+    public static final String CENTER_TIMER="Timer is set on center burner";
+
+
     public static boolean validatePassword(String password) {
         if (password.length() < 6) {
 

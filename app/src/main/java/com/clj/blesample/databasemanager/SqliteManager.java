@@ -62,6 +62,19 @@ public class SqliteManager extends SQLiteOpenHelper {
     public static final String USER_ADDRESS = "user_address";
     public static final String USER_CREATION_DATE = "user_creation_date";
 
+
+    public static final String NOTIFI_TABLE="notificationtable";
+    public static final String LEFT_VESSEL_STATUS="left_vessel_status";
+    public static final String LEFT_WHISTLE_STATUS="left_whistle_status";
+    public static final String LEFT_TIMER_STATUS="left_timer_status";
+    public static final String RIGHT_VESSEL_STATUS="right_vessel_status";
+    public static final String RIGHT_WHISTLE_STATUS="right_whistle_status";
+    public static final String RIGHT_TIMER_STATUS="right_timer_status";
+    public static final String CENTER_VESSEL_STATUS="center_vessel_status";
+    public static final String CENTER_WHISTLE_STATUS="center_whistle_status";
+    public static final String CENTER_TIMER_STATUS="center_timer_status";
+
+
     public static final String IMAGE_TABLE = "imagetable";
     public static final String IMAGE_NAME = "imageName";
     public static final String IMAGE = "image";
@@ -125,6 +138,21 @@ public class SqliteManager extends SQLiteOpenHelper {
                 "    " + USER_ADDRESS + " varchar(200) NOT NULL\n," +
                 "    " + USER_CREATION_DATE + " varchar(200) NOT NULL\n" +
                 ");";
+
+
+        String notificationTable = "CREATE TABLE IF NOT EXISTS " + NOTIFI_TABLE + "(\n" +
+                "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
+                "    " + LEFT_VESSEL_STATUS + " tinyint(10) NOT NULL,\n" +
+                "    " + LEFT_WHISTLE_STATUS + " varchar(4) NOT NULL,\n" +
+                "    " + LEFT_TIMER_STATUS + " varchar(200) NOT NULL,\n" +
+                "    " + RIGHT_VESSEL_STATUS + " tinyint(200) NOT NULL,\n" +
+                "    " + RIGHT_WHISTLE_STATUS + " varchar(200) NOT NULL\n," +
+                "    " + RIGHT_TIMER_STATUS + " varchar(200) NOT NULL\n" +
+                "    " + CENTER_VESSEL_STATUS + " tinyint(200) NOT NULL,\n" +
+                "    " + CENTER_WHISTLE_STATUS + " varchar(200) NOT NULL\n," +
+                "    " + CENTER_TIMER_STATUS + " varchar(200) NOT NULL\n" +
+                ");";
+
 
         //String saveImage="create table storeImage(imageName TEXT,image BLOB)";
 
@@ -196,6 +224,7 @@ public class SqliteManager extends SQLiteOpenHelper {
         return storeImageDTO;
 
     }
+    
 
     public boolean addGasConsumptionPattern(Date date, float gasValue, String burner) {
 
@@ -519,4 +548,52 @@ public class SqliteManager extends SQLiteOpenHelper {
     }
 
 
+    public boolean storeVesselNotificationDetils(int rightVessel, int rightFlameMode, int leftVessel, int leftFlameMode, int centerVessel, int centerFlameMode) {
+
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(RIGHT_VESSEL_STATUS,rightVessel);
+        contentValues.put(RIGHT_WHISTLE_STATUS,"--");
+        contentValues.put(RIGHT_TIMER_STATUS,"--");
+        contentValues.put(LEFT_VESSEL_STATUS,leftVessel);
+        contentValues.put(LEFT_WHISTLE_STATUS,"--");
+        contentValues.put(LEFT_TIMER_STATUS,"--");
+        contentValues.put(CENTER_VESSEL_STATUS,centerVessel);
+        contentValues.put(CENTER_WHISTLE_STATUS,"--");
+        contentValues.put(CENTER_TIMER_STATUS,"--");
+
+        return sqLiteDatabase.insert(NOTIFI_TABLE, null, contentValues) != -1;
+
+
+    }
+
+    public boolean storeWhistleAndTimerNotificationDetails(int rightWhistle, int rightTimer, int leftWhistle, int leftTimer, int centerWhistle, int centerTimer) {
+
+
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(RIGHT_VESSEL_STATUS,"--");
+        contentValues.put(RIGHT_WHISTLE_STATUS,rightWhistle);
+        contentValues.put(RIGHT_TIMER_STATUS,rightTimer);
+        contentValues.put(LEFT_VESSEL_STATUS,"--");
+        contentValues.put(LEFT_WHISTLE_STATUS,leftWhistle);
+        contentValues.put(LEFT_TIMER_STATUS,leftTimer);
+        contentValues.put(CENTER_VESSEL_STATUS,"--");
+        contentValues.put(CENTER_WHISTLE_STATUS,centerWhistle);
+        contentValues.put(CENTER_TIMER_STATUS,centerTimer);
+
+        return sqLiteDatabase.insert(NOTIFI_TABLE, null, contentValues) != -1;
+
+
+    }
+
+    public void getAllNotificationDetails() {
+
+
+
+    }
 }
