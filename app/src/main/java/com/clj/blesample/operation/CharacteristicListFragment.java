@@ -317,7 +317,13 @@ public class CharacteristicListFragment extends Fragment {
                 selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
                 selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
 
-                callMe(1, selectedBurner, 0, 0, MathUtil.SIM, MathUtil.BURNER_FORMET);
+                if( selectedBurner==null ){
+                    Toast.makeText(getActivity(),"Please Select Burner",Toast.LENGTH_LONG).show();
+                }else {
+                    callMe(1, selectedBurner, 0, 0, MathUtil.SIM, MathUtil.BURNER_FORMET);
+                }
+
+
             }
         });
 
@@ -329,7 +335,13 @@ public class CharacteristicListFragment extends Fragment {
                 selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
                 selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
 
-                callMe(1, selectedBurner, 0, 0, MathUtil.HIGH, MathUtil.BURNER_FORMET);
+                if( selectedBurner==null ){
+                    Toast.makeText(getActivity(),"Please Select Burner",Toast.LENGTH_LONG).show();
+                }else {
+                    callMe(1, selectedBurner, 0, 0, MathUtil.HIGH, MathUtil.BURNER_FORMET);
+                }
+
+
 
             }
         });
@@ -342,7 +354,13 @@ public class CharacteristicListFragment extends Fragment {
                 selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
                 selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
 
-                callMe(1, selectedBurner, 0, 0, MathUtil.OFF, MathUtil.BURNER_FORMET);
+                if(selectedBurner==null ){
+                    Toast.makeText(getActivity(),"Please Select Burner",Toast.LENGTH_LONG).show();
+                }else {
+                    callMe(1, selectedBurner, 0, 0, MathUtil.OFF, MathUtil.BURNER_FORMET);
+                }
+
+
 
 
             }

@@ -18,7 +18,9 @@ public class MathUtil {
     public static final int HIGH = 2;
     public static final int OFF = 3;
 
+    //sets sim,high,off
     public static final int BURNER_FORMET = 1;
+    //sets whistle and timer
     public static final int EDIT_FORMET = 2;
 
     public static final int IMAGE_PICK_CODE = 1000;
