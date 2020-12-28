@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.clj.blesample.R;
 import com.clj.blesample.model.NotificationDTO;
+import com.clj.blesample.model.NotificationResponseDTO;
+import com.clj.blesample.utils.MathUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -19,15 +21,15 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
 
     private Context mCtx;
-    private List<NotificationDTO> notificationDTOList;
+    private List<NotificationResponseDTO> notificationDTOList;
 
 
-    public NotificationAdapter(Context mCtx, List<NotificationDTO> notificationDTOList) {
+    public NotificationAdapter(Context mCtx, List<NotificationResponseDTO> notificationDTOList) {
         this.mCtx = mCtx;
         this.notificationDTOList = notificationDTOList;
     }
 
-    public void dataSet(List<NotificationDTO> notificationDTOList) {
+    public void dataSet(List<NotificationResponseDTO> notificationDTOList) {
         this.notificationDTOList = notificationDTOList;
         notifyDataSetChanged();
     }
@@ -46,8 +48,28 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public void onBindViewHolder(@NonNull NotificationViewHolder notificationViewHolder, int i) {
 
 
-        Picasso.get().load(notificationDTOList.get(i).getNotiImage()).into(notificationViewHolder.notiImg);
-        notificationViewHolder.notiText.setText(notificationDTOList.get(i).getNotiText());
+        if(notificationDTOList.get(i).getRightVesselStatus()==0){
+            notificationViewHolder.notiText.setText(MathUtil.RIGHT_VESSEL_0);
+        }else {
+            notificationViewHolder.notiText.setText(MathUtil.RIGHT_VESSEL_1);
+        }
+
+        if(notificationDTOList.get(i).getLeftVesselStatus()==0){
+            notificationViewHolder.notiText.setText(MathUtil.LEFT_VESSEL_0);
+        }else {
+            notificationViewHolder.notiText.setText(MathUtil.LEFT_VESSEL_1);
+        }
+
+        if(notificationDTOList.get(i).getCenterVesselStatus()==0){
+            notificationViewHolder.notiText.setText(MathUtil.CENTER_VESSEL_0);
+        }else {
+            notificationViewHolder.notiText.setText(MathUtil.CENTER_VESSEL_1);
+        }
+
+
+
+       // Picasso.get().load(notificationDTOList.get(i).getNotiImage()).into(notificationViewHolder.notiImg);
+        //notificationViewHolder.notiText.setText(notificationDTOList.get(i).getNotiText());
 
     }
 
