@@ -63,16 +63,16 @@ public class SqliteManager extends SQLiteOpenHelper {
     public static final String USER_CREATION_DATE = "user_creation_date";
 
 
-    public static final String NOTIFI_TABLE="notificationtable";
-    public static final String LEFT_VESSEL_STATUS="left_vessel_status";
-    public static final String LEFT_WHISTLE_STATUS="left_whistle_status";
-    public static final String LEFT_TIMER_STATUS="left_timer_status";
-    public static final String RIGHT_VESSEL_STATUS="right_vessel_status";
-    public static final String RIGHT_WHISTLE_STATUS="right_whistle_status";
-    public static final String RIGHT_TIMER_STATUS="right_timer_status";
-    public static final String CENTER_VESSEL_STATUS="center_vessel_status";
-    public static final String CENTER_WHISTLE_STATUS="center_whistle_status";
-    public static final String CENTER_TIMER_STATUS="center_timer_status";
+    public static final String NOTIFI_TABLE = "notificationtable";
+    public static final String LEFT_VESSEL_STATUS = "left_vessel_status";
+    public static final String LEFT_WHISTLE_STATUS = "left_whistle_status";
+    public static final String LEFT_TIMER_STATUS = "left_timer_status";
+    public static final String RIGHT_VESSEL_STATUS = "right_vessel_status";
+    public static final String RIGHT_WHISTLE_STATUS = "right_whistle_status";
+    public static final String RIGHT_TIMER_STATUS = "right_timer_status";
+    public static final String CENTER_VESSEL_STATUS = "center_vessel_status";
+    public static final String CENTER_WHISTLE_STATUS = "center_whistle_status";
+    public static final String CENTER_TIMER_STATUS = "center_timer_status";
 
 
     public static final String IMAGE_TABLE = "imagetable";
@@ -132,7 +132,7 @@ public class SqliteManager extends SQLiteOpenHelper {
         String signUpTable = "CREATE TABLE IF NOT EXISTS " + SIGNUP_TABLE + "(\n" +
                 "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
                 "    " + USER_NAME + " varchar(200) NOT NULL,\n" +
-                "    " + USER_EMAIL + " tinyint(4) NOT NULL,\n" +
+                "    " + USER_EMAIL + " varchar(200) NOT NULL,\n" +
                 "    " + USER_MOBILE + " varchar(200) NOT NULL,\n" +
                 "    " + USER_PASSWORD + " varchar(200) NOT NULL,\n" +
                 "    " + USER_ADDRESS + " varchar(200) NOT NULL\n," +
@@ -143,13 +143,13 @@ public class SqliteManager extends SQLiteOpenHelper {
         String notificationTable = "CREATE TABLE IF NOT EXISTS " + NOTIFI_TABLE + "(\n" +
                 "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
                 "    " + LEFT_VESSEL_STATUS + " tinyint(10) NOT NULL,\n" +
-                "    " + LEFT_WHISTLE_STATUS + " varchar(4) NOT NULL,\n" +
+                "    " + LEFT_WHISTLE_STATUS + " varchar(200) NOT NULL,\n" +
                 "    " + LEFT_TIMER_STATUS + " varchar(200) NOT NULL,\n" +
-                "    " + RIGHT_VESSEL_STATUS + " tinyint(200) NOT NULL,\n" +
-                "    " + RIGHT_WHISTLE_STATUS + " varchar(200) NOT NULL\n," +
-                "    " + RIGHT_TIMER_STATUS + " varchar(200) NOT NULL\n" +
-                "    " + CENTER_VESSEL_STATUS + " tinyint(200) NOT NULL,\n" +
-                "    " + CENTER_WHISTLE_STATUS + " varchar(200) NOT NULL\n," +
+                "    " + RIGHT_VESSEL_STATUS + " tinyint(10) NOT NULL,\n" +
+                "    " + RIGHT_WHISTLE_STATUS + " varchar(200) NOT NULL,\n" +
+                "    " + RIGHT_TIMER_STATUS + " varchar(200) NOT NULL,\n" +
+                "    " + CENTER_VESSEL_STATUS + " tinyint(10) NOT NULL,\n" +
+                "    " + CENTER_WHISTLE_STATUS + " varchar(200) NOT NULL,\n" +
                 "    " + CENTER_TIMER_STATUS + " varchar(200) NOT NULL\n" +
                 ");";
 
@@ -170,6 +170,7 @@ public class SqliteManager extends SQLiteOpenHelper {
         db.execSQL(gasConPatTable);
         db.execSQL(signUpTable);
         db.execSQL(saveImage);
+        db.execSQL(notificationTable);
 
 
     }
@@ -208,14 +209,14 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     public StoreImageDTO getImage() {
 
-        StoreImageDTO storeImageDTO=new StoreImageDTO();
+        StoreImageDTO storeImageDTO = new StoreImageDTO();
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
-        Cursor objectCursor=sqLiteDatabase.rawQuery("select * from imagetable",null);
-        if(objectCursor.getCount()!=0){
-            while (objectCursor.moveToNext()){
-                byte[]  imageBytes=objectCursor.getBlob(3);
-                Bitmap objectBitMap= BitmapFactory.decodeByteArray(imageBytes,0,imageBytes.length);
+        Cursor objectCursor = sqLiteDatabase.rawQuery("select * from imagetable", null);
+        if (objectCursor.getCount() != 0) {
+            while (objectCursor.moveToNext()) {
+                byte[] imageBytes = objectCursor.getBlob(3);
+                Bitmap objectBitMap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
 
                 storeImageDTO.setImage(objectBitMap);
             }
@@ -224,7 +225,7 @@ public class SqliteManager extends SQLiteOpenHelper {
         return storeImageDTO;
 
     }
-    
+
 
     public boolean addGasConsumptionPattern(Date date, float gasValue, String burner) {
 
@@ -554,15 +555,15 @@ public class SqliteManager extends SQLiteOpenHelper {
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(RIGHT_VESSEL_STATUS,rightVessel);
-        contentValues.put(RIGHT_WHISTLE_STATUS,"--");
-        contentValues.put(RIGHT_TIMER_STATUS,"--");
-        contentValues.put(LEFT_VESSEL_STATUS,leftVessel);
-        contentValues.put(LEFT_WHISTLE_STATUS,"--");
-        contentValues.put(LEFT_TIMER_STATUS,"--");
-        contentValues.put(CENTER_VESSEL_STATUS,centerVessel);
-        contentValues.put(CENTER_WHISTLE_STATUS,"--");
-        contentValues.put(CENTER_TIMER_STATUS,"--");
+        contentValues.put(RIGHT_VESSEL_STATUS, rightVessel);
+        contentValues.put(RIGHT_WHISTLE_STATUS, "--");
+        contentValues.put(RIGHT_TIMER_STATUS, "--");
+        contentValues.put(LEFT_VESSEL_STATUS, leftVessel);
+        contentValues.put(LEFT_WHISTLE_STATUS, "--");
+        contentValues.put(LEFT_TIMER_STATUS, "--");
+        contentValues.put(CENTER_VESSEL_STATUS, centerVessel);
+        contentValues.put(CENTER_WHISTLE_STATUS, "--");
+        contentValues.put(CENTER_TIMER_STATUS, "--");
 
         return sqLiteDatabase.insert(NOTIFI_TABLE, null, contentValues) != -1;
 
@@ -576,15 +577,15 @@ public class SqliteManager extends SQLiteOpenHelper {
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(RIGHT_VESSEL_STATUS,"--");
-        contentValues.put(RIGHT_WHISTLE_STATUS,rightWhistle);
-        contentValues.put(RIGHT_TIMER_STATUS,rightTimer);
-        contentValues.put(LEFT_VESSEL_STATUS,"--");
-        contentValues.put(LEFT_WHISTLE_STATUS,leftWhistle);
-        contentValues.put(LEFT_TIMER_STATUS,leftTimer);
-        contentValues.put(CENTER_VESSEL_STATUS,"--");
-        contentValues.put(CENTER_WHISTLE_STATUS,centerWhistle);
-        contentValues.put(CENTER_TIMER_STATUS,centerTimer);
+        contentValues.put(RIGHT_VESSEL_STATUS, "--");
+        contentValues.put(RIGHT_WHISTLE_STATUS, rightWhistle);
+        contentValues.put(RIGHT_TIMER_STATUS, rightTimer);
+        contentValues.put(LEFT_VESSEL_STATUS, "--");
+        contentValues.put(LEFT_WHISTLE_STATUS, leftWhistle);
+        contentValues.put(LEFT_TIMER_STATUS, leftTimer);
+        contentValues.put(CENTER_VESSEL_STATUS, "--");
+        contentValues.put(CENTER_WHISTLE_STATUS, centerWhistle);
+        contentValues.put(CENTER_TIMER_STATUS, centerTimer);
 
         return sqLiteDatabase.insert(NOTIFI_TABLE, null, contentValues) != -1;
 
@@ -593,7 +594,30 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     public void getAllNotificationDetails() {
 
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        Cursor cursorNoti = sqLiteDatabase.rawQuery("select * from notificationtable", null);
+
+        if (cursorNoti.moveToFirst()) {
+
+            do {
 
 
+                System.out.println("COLUMN_ID " + cursorNoti.getInt(0));
+                System.out.println("LEFT_VESSEL_STATUS " + cursorNoti.getInt(1));
+                System.out.println("LEFT_WHISTLE_STATUS " + cursorNoti.getString(2));
+                System.out.println("LEFT_TIMER_STATUS " + cursorNoti.getString(3));
+                System.out.println("RIGHT_VESSEL_STATUS " + cursorNoti.getInt(4));
+                System.out.println("RIGHT_WHISTLE_STATUS " + cursorNoti.getString(5));
+                System.out.println("RIGHT_TIMER_STATUS " + cursorNoti.getString(6));
+                System.out.println("CENTER_VESSEL_STATUS " + cursorNoti.getInt(7));
+                System.out.println("CENTER_WHISTLE_STATUS " + cursorNoti.getString(8));
+                System.out.println("CENTER_TIMER_STATUS " + cursorNoti.getString(9));
+
+
+            } while (cursorNoti.moveToNext());
+
+
+        }
     }
 }
