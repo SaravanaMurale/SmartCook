@@ -50,21 +50,22 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         if(notificationDTOList.get(i).getRightVesselStatus()==0){
 
-            notificationViewHolder.notiText.setText(MathUtil.RIGHT_VESSEL_0);
+            notificationViewHolder.notifyRight.setText(MathUtil.RIGHT_VESSEL_0);
+
         }else {
-            notificationViewHolder.notiText.setText(MathUtil.RIGHT_VESSEL_1);
+            notificationViewHolder.notifyRight.setText(MathUtil.RIGHT_VESSEL_1);
         }
 
         if(notificationDTOList.get(i).getLeftVesselStatus()==0){
-            notificationViewHolder.notiText.setText(MathUtil.LEFT_VESSEL_0);
+            notificationViewHolder.notifyLeft.setText(MathUtil.LEFT_VESSEL_0);
         }else {
-            notificationViewHolder.notiText.setText(MathUtil.LEFT_VESSEL_1);
+            notificationViewHolder.notifyLeft.setText(MathUtil.LEFT_VESSEL_1);
         }
 
         if(notificationDTOList.get(i).getCenterVesselStatus()==0){
-            notificationViewHolder.notiText.setText(MathUtil.CENTER_VESSEL_0);
+            notificationViewHolder.notifyCenter.setText(MathUtil.CENTER_VESSEL_0);
         }else {
-            notificationViewHolder.notiText.setText(MathUtil.CENTER_VESSEL_1);
+            notificationViewHolder.notifyCenter.setText(MathUtil.CENTER_VESSEL_1);
         }
 
 
@@ -82,14 +83,16 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     class NotificationViewHolder extends RecyclerView.ViewHolder {
 
         ImageView notiImg;
-        TextView notiText;
+        TextView notifyRight,notifyLeft,notifyCenter;
 
 
         public NotificationViewHolder(@NonNull View itemView) {
             super(itemView);
 
             //notiImg = (ImageView) itemView.findViewById(R.id.notifImage);
-            notiText = (TextView) itemView.findViewById(R.id.notifyText);
+            notifyRight = (TextView) itemView.findViewById(R.id.notifyRight);
+            notifyLeft = (TextView) itemView.findViewById(R.id.notifyLeft);
+            notifyCenter = (TextView) itemView.findViewById(R.id.notifyCenter);
 
         }
     }

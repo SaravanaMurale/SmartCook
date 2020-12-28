@@ -5,49 +5,107 @@
     android:background="@color/grey"
     android:orientation="vertical">
 
-   <!-- <RelativeLayout
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/notifImage"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:visibility="gone"
+        <TextView
+            android:id="@+id/notifyRight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="Vessel is placed in Burner1" />
+
+        <TextView
+            android:id="@+id/notifyRightWhistle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="Right Whistle Placed"
 
             />
 
         <TextView
-            android:id="@+id/notifyText"
+            android:id="@+id/notifyRightTimer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
-            android:layout_toRightOf="@+id/notifImage"
-            android:text="Vessel is placed in Burner1" />
+            android:padding="5dp"
+            android:text="Right Timer Placed"
 
-        <view
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/notifImage"
-            android:layout_marginTop="8dp"
-            android:background="@color/grey" />
-
-    </RelativeLayout>-->
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            />
 
         <TextView
-            android:id="@+id/notifyText"
+            android:id="@+id/notifyLeft"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
+            android:padding="5dp"
             android:text="Vessel is placed in Burner1" />
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/notifyLeftWhistle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="Right Whistle Placed"
+
+            />
+
+        <TextView
+            android:id="@+id/notifyLeftTimer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="Right Timer Placed"
+
+            />
+
+
+        <TextView
+            android:id="@+id/notifyCenter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="Vessel is placed in Burner1" />
+
+        <TextView
+            android:id="@+id/notifyCenterWhistle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="Right Whistle Placed"
+
+            />
+
+        <TextView
+            android:id="@+id/notifyCenterTimer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:text="Right Timer Placed"
+
+            />
+
+    </LinearLayout>
 
 </RelativeLayout>
