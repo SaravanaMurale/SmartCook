@@ -84,6 +84,8 @@ public class CharacteristicListFragment extends Fragment {
     int setNotification = 0;
     TextView notificationCount;
 
+    int rightVesselForNoti,leftVesselForNoti,centerVesselForNoti;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -777,8 +779,7 @@ public class CharacteristicListFragment extends Fragment {
 
                 setWhistleAndTimerValueInUI(rightWhistle, rightTimer, leftWhistle, leftTimer, centerWhistle, centerTimer);
 
-                setNotificationForWhistleAndTimer(rightWhistle, rightTimer, leftWhistle, leftTimer, centerWhistle, centerTimer);
-
+                setNotificationForWhistleAndTimer(rightVesselForNoti,  rightWhistle, rightTimer,leftVesselForNoti ,leftWhistle, leftTimer, centerVesselForNoti,centerWhistle, centerTimer);
 
                 System.out.println("WhistleAndTimerData" + rightWhistle + " " + rightTimer + " " + leftWhistle + " " + leftTimer + " " + centerWhistle + " " + centerTimer);
 
@@ -789,7 +790,7 @@ public class CharacteristicListFragment extends Fragment {
 
         //Burner
         if (data.length == 7) {
-            System.out.println("Length6Recevied");
+            System.out.println("Length7Recevied");
             //D1
 
             if (data[0] == 42 && data[1] == -47) {
@@ -803,13 +804,19 @@ public class CharacteristicListFragment extends Fragment {
                 int rightVessel = (rightVesselFlame[0] & 0x80) >> 7;
                 int rightFlameMode = (rightVesselFlame[0] & 0x7C) >> 2;
 
+                rightVesselForNoti=rightVessel;
+
                 leftVesselFlame[0] = data[3];
                 int leftVessel = (leftVesselFlame[0] & 0x80) >> 7;
                 int leftFlameMode = (leftVesselFlame[0] & 0x7C) >> 2;
 
+                leftVesselForNoti=leftVessel;
+
                 centerVesselFlame[0] = data[4];
                 int centerVessel = (centerVesselFlame[0] & 0x80) >> 7;
                 int centerFlameMode = (centerVesselFlame[0] & 0x7C) >> 2;
+
+                centerVesselForNoti=centerVessel;
 
                 int batteryPercentage = data[5];
 
@@ -874,9 +881,9 @@ public class CharacteristicListFragment extends Fragment {
 
     }
 
-    private void setNotificationForWhistleAndTimer(int rightWhistle, int rightTimer, int leftWhistle, int leftTimer, int centerWhistle, int centerTimer) {
+    private void setNotificationForWhistleAndTimer(int rightVessel,int rightWhistle, int rightTimer,int leftVessel, int leftWhistle, int leftTimer,int centerVessel, int centerWhistle, int centerTimer) {
 
-        sqliteManager.storeWhistleAndTimerNotificationDetails(rightWhistle, rightTimer, leftWhistle, leftTimer, centerWhistle, centerTimer);
+        sqliteManager.storeWhistleAndTimerNotificationDetails(rightVessel,rightWhistle, rightTimer,leftVessel, leftWhistle, leftTimer, centerVessel,centerWhistle, centerTimer);
 
     }
 

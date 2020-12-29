@@ -144,12 +144,12 @@ public class SqliteManager extends SQLiteOpenHelper {
 
         String notificationTable = "CREATE TABLE IF NOT EXISTS " + NOTIFI_TABLE + "(\n" +
                 "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
-                "    " + LEFT_VESSEL_STATUS + " tinyint(10) NOT NULL,\n" +
-                "    " + LEFT_WHISTLE_STATUS + " tinyint(200) NOT NULL,\n" +
-                "    " + LEFT_TIMER_STATUS + " tinyint(200) NOT NULL,\n" +
                 "    " + RIGHT_VESSEL_STATUS + " tinyint(10) NOT NULL,\n" +
                 "    " + RIGHT_WHISTLE_STATUS + " tinyint(200) NOT NULL,\n" +
                 "    " + RIGHT_TIMER_STATUS + " tinyint(200) NOT NULL,\n" +
+                "    " + LEFT_VESSEL_STATUS + " tinyint(10) NOT NULL,\n" +
+                "    " + LEFT_WHISTLE_STATUS + " tinyint(200) NOT NULL,\n" +
+                "    " + LEFT_TIMER_STATUS + " tinyint(200) NOT NULL,\n" +
                 "    " + CENTER_VESSEL_STATUS + " tinyint(10) NOT NULL,\n" +
                 "    " + CENTER_WHISTLE_STATUS + " tinyint(200) NOT NULL,\n" +
                 "    " + CENTER_TIMER_STATUS + " tinyint(200) NOT NULL\n" +
@@ -558,34 +558,34 @@ public class SqliteManager extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(RIGHT_VESSEL_STATUS, rightVessel);
-        contentValues.put(RIGHT_WHISTLE_STATUS, "--");
-        contentValues.put(RIGHT_TIMER_STATUS, "--");
+        contentValues.put(RIGHT_WHISTLE_STATUS, 0);
+        contentValues.put(RIGHT_TIMER_STATUS, 0);
         contentValues.put(LEFT_VESSEL_STATUS, leftVessel);
-        contentValues.put(LEFT_WHISTLE_STATUS, "--");
-        contentValues.put(LEFT_TIMER_STATUS, "--");
+        contentValues.put(LEFT_WHISTLE_STATUS, 0);
+        contentValues.put(LEFT_TIMER_STATUS, 0);
         contentValues.put(CENTER_VESSEL_STATUS, centerVessel);
-        contentValues.put(CENTER_WHISTLE_STATUS, "--");
-        contentValues.put(CENTER_TIMER_STATUS, "--");
+        contentValues.put(CENTER_WHISTLE_STATUS, 0);
+        contentValues.put(CENTER_TIMER_STATUS, 0);
 
         return sqLiteDatabase.insert(NOTIFI_TABLE, null, contentValues) != -1;
 
 
     }
 
-    public boolean storeWhistleAndTimerNotificationDetails(int rightWhistle, int rightTimer, int leftWhistle, int leftTimer, int centerWhistle, int centerTimer) {
+    public boolean storeWhistleAndTimerNotificationDetails(int rightVessel, int rightWhistle, int rightTimer, int leftVessel, int leftWhistle, int leftTimer,int centerVessel, int centerWhistle, int centerTimer) {
 
 
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(RIGHT_VESSEL_STATUS, "--");
+        contentValues.put(RIGHT_VESSEL_STATUS, 5);
         contentValues.put(RIGHT_WHISTLE_STATUS, rightWhistle);
         contentValues.put(RIGHT_TIMER_STATUS, rightTimer);
-        contentValues.put(LEFT_VESSEL_STATUS, "--");
+        contentValues.put(LEFT_VESSEL_STATUS, 5);
         contentValues.put(LEFT_WHISTLE_STATUS, leftWhistle);
         contentValues.put(LEFT_TIMER_STATUS, leftTimer);
-        contentValues.put(CENTER_VESSEL_STATUS, "--");
+        contentValues.put(CENTER_VESSEL_STATUS, 5);
         contentValues.put(CENTER_WHISTLE_STATUS, centerWhistle);
         contentValues.put(CENTER_TIMER_STATUS, centerTimer);
 
@@ -596,24 +596,27 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     public List<NotificationResponseDTO> getAllNotificationDetails() {
 
+        deleteRecordsMoreThanHundred();
+
+
         List<NotificationResponseDTO> notificationResponseDTOList=new ArrayList<>();
 
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
-        Cursor cursorNoti = sqLiteDatabase.rawQuery("select * from notificationtable", null);
+        Cursor cursorNoti = sqLiteDatabase.rawQuery("select * from notificationtable ORDER BY id DESC LIMIT 5", null);
 
         if (cursorNoti.moveToFirst()) {
 
             do {
 
 
-                System.out.println("COLUMN_ID " + cursorNoti.getInt(0));
-                System.out.println("LEFT_VESSEL_STATUS " + cursorNoti.getInt(1));
-                System.out.println("LEFT_WHISTLE_STATUS " + cursorNoti.getInt(2));
-                System.out.println("LEFT_TIMER_STATUS " + cursorNoti.getInt(3));
-                System.out.println("RIGHT_VESSEL_STATUS " + cursorNoti.getInt(4));
-                System.out.println("RIGHT_WHISTLE_STATUS " + cursorNoti.getInt(5));
-                System.out.println("RIGHT_TIMER_STATUS " + cursorNoti.getInt(6));
+                System.out.println("COLUMN_ID_DESC " + cursorNoti.getInt(0));
+                System.out.println("RIGHT_VESSEL_STATUS " + cursorNoti.getInt(1));
+                System.out.println("RIGHT_WHISTLE_STATUS " + cursorNoti.getInt(2));
+                System.out.println("RIGHT_TIMER_STATUS " + cursorNoti.getInt(3));
+                System.out.println("LEFT_VESSEL_STATUS " + cursorNoti.getInt(4));
+                System.out.println("LEFT_WHISTLE_STATUS " + cursorNoti.getInt(5));
+                System.out.println("LEFT_TIMER_STATUS " + cursorNoti.getInt(6));
                 System.out.println("CENTER_VESSEL_STATUS " + cursorNoti.getInt(7));
                 System.out.println("CENTER_WHISTLE_STATUS " + cursorNoti.getInt(8));
                 System.out.println("CENTER_TIMER_STATUS " + cursorNoti.getInt(9));
@@ -633,5 +636,11 @@ public class SqliteManager extends SQLiteOpenHelper {
         }
 
         return notificationResponseDTOList;
+    }
+
+    private void deleteRecordsMoreThanHundred() {
+
+
+
     }
 }
