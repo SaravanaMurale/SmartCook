@@ -19,9 +19,13 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
             android:padding="5dp"
+            android:textSize="20sp"
             android:text="Right Vessel is placed "
             android:visibility="gone"
             />
+
+
+
 
         <TextView
             android:id="@+id/notifyRightWhistle"
@@ -32,8 +36,11 @@
             android:padding="5dp"
             android:text="Right Whistle Placed"
             android:visibility="gone"
+            android:textSize="20sp"
+
 
             />
+
 
         <TextView
             android:id="@+id/notifyRightTimer"
@@ -44,8 +51,12 @@
             android:padding="5dp"
             android:text="Right Timer Placed"
             android:visibility="gone"
+            android:textSize="20sp"
 
             />
+
+
+
 
         <TextView
             android:id="@+id/notifyLeftVessel"
@@ -56,7 +67,10 @@
             android:padding="5dp"
             android:text="Left Vessel is placed "
             android:visibility="gone"
+            android:textSize="20sp"
             />
+
+
 
         <TextView
             android:id="@+id/notifyLeftWhistle"
@@ -67,8 +81,12 @@
             android:padding="5dp"
             android:text="Left Whistle Placed"
             android:visibility="gone"
+            android:textSize="20sp"
 
             />
+
+
+
 
         <TextView
             android:id="@+id/notifyLeftTimer"
@@ -79,8 +97,11 @@
             android:padding="5dp"
             android:text="Left Timer Placed"
             android:visibility="gone"
+            android:textSize="20sp"
 
             />
+
+
 
 
         <TextView
@@ -90,9 +111,12 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
             android:padding="5dp"
+            android:textSize="20sp"
             android:text="Center Vessel is placed "
             android:visibility="gone"
             />
+
+
 
         <TextView
             android:id="@+id/notifyCenterWhistle"
@@ -103,8 +127,12 @@
             android:padding="5dp"
             android:text="Center Whistle Placed"
             android:visibility="gone"
+            android:textSize="20sp"
 
             />
+
+
+
 
         <TextView
             android:id="@+id/notifyCenterTimer"
@@ -115,8 +143,11 @@
             android:padding="5dp"
             android:text="Center Timer Placed"
             android:visibility="gone"
+            android:textSize="20sp"
 
             />
+
+
 
     </LinearLayout>
 

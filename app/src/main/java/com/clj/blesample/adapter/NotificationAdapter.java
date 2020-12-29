@@ -1,6 +1,7 @@
 package com.clj.blesample.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -62,6 +63,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         }else {
 
         }
+
+
+
 
         if (notificationDTOList.get(i).getLeftVesselStatus() == 0) {
             notificationViewHolder.notifyLeftVessel.setVisibility(View.VISIBLE);
