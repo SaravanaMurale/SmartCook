@@ -35,7 +35,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileSettingsActivity extends AppCompatActivity {
 
-    RelativeLayout profileBlock,emailBlock,mobileBlock,changePasswordBlock;
+    RelativeLayout profileBlock, emailBlock, mobileBlock, changePasswordBlock;
 
     CircleImageView profilePic;
     Uri imageFilePath;
@@ -43,7 +43,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
     SqliteManager sqliteManager;
 
-    TextView userName,email,mobile;
+    TextView userName, email, mobile;
 
 
     @Override
@@ -51,21 +51,21 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_settings);
 
-        sqliteManager=new SqliteManager(this);
+        sqliteManager = new SqliteManager(this);
 
-        profilePic=(CircleImageView)findViewById(R.id.profilePic);
+        profilePic = (CircleImageView) findViewById(R.id.profilePic);
 
-        userName=(TextView)findViewById(R.id.userName);
-        email=(TextView)findViewById(R.id.email);
-        mobile=(TextView)findViewById(R.id.mobile);
+        userName = (TextView) findViewById(R.id.userName);
+        email = (TextView) findViewById(R.id.email);
+        mobile = (TextView) findViewById(R.id.mobile);
 
-        profileBlock=(RelativeLayout)findViewById(R.id.profileBlock);
-        emailBlock=(RelativeLayout)findViewById(R.id.emailBlock);
-        mobileBlock=(RelativeLayout)findViewById(R.id.mobileBlock);
-        changePasswordBlock=(RelativeLayout)findViewById(R.id.changePasswordBlock);
+        profileBlock = (RelativeLayout) findViewById(R.id.profileBlock);
+        emailBlock = (RelativeLayout) findViewById(R.id.emailBlock);
+        mobileBlock = (RelativeLayout) findViewById(R.id.mobileBlock);
+        changePasswordBlock = (RelativeLayout) findViewById(R.id.changePasswordBlock);
 
         getImageFromSqliteDB();
-        
+
         getUserDetails();
 
         profileBlock.setOnClickListener(new View.OnClickListener() {
@@ -106,17 +106,15 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-                    if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_DENIED){
-                        String[] permission={Manifest.permission.READ_EXTERNAL_STORAGE};
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                        String[] permission = {Manifest.permission.READ_EXTERNAL_STORAGE};
 
                         requestPermissions(permission, MathUtil.PERMISSION_CODE);
-                    }
-                    else {
+                    } else {
                         pickImageFromGallery();
                     }
-                }
-                else {
+                } else {
                     pickImageFromGallery();
                 }
 
@@ -128,20 +126,23 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
     private void getUserDetails() {
 
-        List<UserDTO> userDTOList =sqliteManager.getUserDetails();
+        List<UserDTO> userDTOList = sqliteManager.getUserDetails();
 
-        userName.setText(userDTOList.get(0).getUserName());
-        email.setText(userDTOList.get(0).getUserEmail());
-        mobile.setText(userDTOList.get(0).getUserMobile());
+        if (userDTOList != null) {
+            userName.setText(userDTOList.get(0).getUserName());
+            email.setText(userDTOList.get(0).getUserEmail());
+            mobile.setText(userDTOList.get(0).getUserMobile());
 
-
+        } else {
+            Toast.makeText(ProfileSettingsActivity.this, "Please Signup", Toast.LENGTH_LONG).show();
+        }
 
 
     }
 
     private void pickImageFromGallery() {
 
-        Intent intent=new Intent(Intent.ACTION_PICK);
+        Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, MathUtil.IMAGE_PICK_CODE);
 
@@ -149,15 +150,14 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(resultCode==RESULT_OK && requestCode==MathUtil.IMAGE_PICK_CODE){
-           // profilePic.setImageURI(data.getData());
+        if (resultCode == RESULT_OK && requestCode == MathUtil.IMAGE_PICK_CODE) {
+            // profilePic.setImageURI(data.getData());
 
-            imageFilePath=data.getData();
+            imageFilePath = data.getData();
             try {
-                imageToStore= MediaStore.Images.Media.getBitmap(getContentResolver(),imageFilePath);
+                imageToStore = MediaStore.Images.Media.getBitmap(getContentResolver(), imageFilePath);
                 profilePic.setImageBitmap(imageToStore);
-                sqliteManager.storeImage(new StoreImageDTO("Murali",imageToStore));
-
+                sqliteManager.storeImage(new StoreImageDTO("Murali", imageToStore));
 
 
             } catch (IOException e) {
@@ -168,18 +168,18 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
     private void getImageFromSqliteDB() {
 
-        StoreImageDTO storeImageDTO=sqliteManager.getImage();
+        StoreImageDTO storeImageDTO = sqliteManager.getImage();
         profilePic.setImageBitmap(storeImageDTO.getImage());
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode){
-            case MathUtil.PERMISSION_CODE:{
-                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_DENIED){
+        switch (requestCode) {
+            case MathUtil.PERMISSION_CODE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_DENIED) {
                     pickImageFromGallery();
-                }else {
-                    Toast.makeText(ProfileSettingsActivity.this,"Permission Denied",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(ProfileSettingsActivity.this, "Permission Denied", Toast.LENGTH_LONG).show();
                 }
             }
         }
@@ -200,50 +200,47 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                if(i==1){
+                if (i == 1) {
                     //update name
 
-                    boolean status=sqliteManager.updateUserName(update.getText().toString());
-                    if(status){
+                    boolean status = sqliteManager.updateUserName(update.getText().toString());
+                    if (status) {
                         Toast.makeText(ProfileSettingsActivity.this, "Updated UserName", Toast.LENGTH_LONG).show();
 
                         getUserDetails();
                     }
 
-                }else if(i==2){
+                } else if (i == 2) {
                     //update Email
-                    boolean status=sqliteManager.updateEmail(update.getText().toString());
-                    if(status){
+                    boolean status = sqliteManager.updateEmail(update.getText().toString());
+                    if (status) {
                         Toast.makeText(ProfileSettingsActivity.this, "Updated Email", Toast.LENGTH_LONG).show();
 
                         getUserDetails();
                     }
 
-                }else if(i==3){
+                } else if (i == 3) {
 
                     //update mobile
 
-                    boolean status=sqliteManager.updateMobile(update.getText().toString());
-                    if(status){
+                    boolean status = sqliteManager.updateMobile(update.getText().toString());
+                    if (status) {
                         Toast.makeText(ProfileSettingsActivity.this, "Updated Mobile Number", Toast.LENGTH_LONG).show();
 
                         getUserDetails();
                     }
 
 
-                }else if(i==4){
+                } else if (i == 4) {
                     //update password
 
-                    boolean status=sqliteManager.updatePassword(update.getText().toString());
-                    if(status){
+                    boolean status = sqliteManager.updatePassword(update.getText().toString());
+                    if (status) {
                         Toast.makeText(ProfileSettingsActivity.this, "Updated Password", Toast.LENGTH_LONG).show();
 
                         getUserDetails();
                     }
                 }
-
-
-
 
 
             }
@@ -260,7 +257,6 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-
 
 
     }
