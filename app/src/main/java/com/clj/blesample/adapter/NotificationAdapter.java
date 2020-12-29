@@ -51,65 +51,80 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         //Set Vessel
         if (notificationDTOList.get(i).getRightVesselStatus() == 0) {
 
+            notificationViewHolder.notifyRightVessel.setVisibility(View.VISIBLE);
             notificationViewHolder.notifyRightVessel.setText(MathUtil.RIGHT_VESSEL_0);
 
+
         } else {
+            notificationViewHolder.notifyRightVessel.setVisibility(View.VISIBLE);
             notificationViewHolder.notifyRightVessel.setText(MathUtil.RIGHT_VESSEL_1);
+
         }
 
         if (notificationDTOList.get(i).getLeftVesselStatus() == 0) {
+            notificationViewHolder.notifyLeftVessel.setVisibility(View.VISIBLE);
             notificationViewHolder.notifyLeftVessel.setText(MathUtil.LEFT_VESSEL_0);
+
         } else {
+            notificationViewHolder.notifyLeftVessel.setVisibility(View.VISIBLE);
             notificationViewHolder.notifyLeftVessel.setText(MathUtil.LEFT_VESSEL_1);
         }
 
         if (notificationDTOList.get(i).getCenterVesselStatus() == 0) {
+            notificationViewHolder.notifyCenterVessel.setVisibility(View.VISIBLE);
             notificationViewHolder.notifyCenterVessel.setText(MathUtil.CENTER_VESSEL_0);
         } else {
+            notificationViewHolder.notifyCenterVessel.setVisibility(View.VISIBLE);
             notificationViewHolder.notifyCenterVessel.setText(MathUtil.CENTER_VESSEL_1);
         }//End of Set Vessel
 
         //Right Whistle and Timer
         if(notificationDTOList.get(i).getRightWhistleStatus()>0){
+            notificationViewHolder.notifyRightWhistle.setVisibility(View.VISIBLE);
             notificationViewHolder.notifyRightWhistle.setText(""+notificationDTOList.get(i).getRightWhistleStatus()+" "+MathUtil.RIGHT_WHISTLE);
-        }else {
+        }/*else {
             notificationViewHolder.notifyRightWhistle.setVisibility(View.GONE);
-        }
+        }*/
         if(notificationDTOList.get(i).getRightTimerStatus()>0){
+            notificationViewHolder.notifyRightTimer.setVisibility(View.VISIBLE);
             notificationViewHolder.notifyRightTimer.setText(""+notificationDTOList.get(i).getRightTimerStatus()+" "+MathUtil.RIGHT_TIMER);
-        }else {
+        }/*else {
             notificationViewHolder.notifyRightWhistle.setVisibility(View.GONE);
-        }
+        }*/
 
         // End of Right Whistle and Timer
 
 
         //Left Whistle and Timer
         if(notificationDTOList.get(i).getLeftWhistleStatus()>0){
+            notificationViewHolder.notifyLeftWhistle.setVisibility(View.VISIBLE);
             notificationViewHolder.notifyLeftWhistle.setText(""+notificationDTOList.get(i).getLeftWhistleStatus()+" "+MathUtil.LEFT_WHISTLE);
-        }else {
+        }/*else {
             notificationViewHolder.notifyLeftWhistle.setVisibility(View.GONE);
-        }
+        }*/
         if(notificationDTOList.get(i).getLeftTimerStatus()>0){
+            notificationViewHolder.notifyLeftTimer.setVisibility(View.VISIBLE);
             notificationViewHolder.notifyLeftTimer.setText(""+notificationDTOList.get(i).getLeftTimerStatus()+" "+MathUtil.LEFT_TIMER);
-        }else {
+        }/*else {
             notificationViewHolder.notifyLeftTimer.setVisibility(View.GONE);
-        }
+        }*/
 
         // End of LEFT Whistle and Timer
 
 
         //Center Whistle and Timer
         if(notificationDTOList.get(i).getCenterWhistleStatus()>0){
+            notificationViewHolder.notifyCenterWhistle.setVisibility(View.VISIBLE);
             notificationViewHolder.notifyCenterWhistle.setText(""+notificationDTOList.get(i).getCenterWhistleStatus()+" "+MathUtil.CENTER_WHISTLE);
-        }else {
+        }/*else {
             notificationViewHolder.notifyCenterWhistle.setVisibility(View.GONE);
-        }
+        }*/
         if(notificationDTOList.get(i).getCenterTimerStatus()>0){
+            notificationViewHolder.notifyCenterTimer.setVisibility(View.VISIBLE);
             notificationViewHolder.notifyCenterTimer.setText(""+notificationDTOList.get(i).getCenterTimerStatus()+" "+MathUtil.CENTER_TIMER);
-        }else {
+        }/*else {
             notificationViewHolder.notifyCenterTimer.setVisibility(View.GONE);
-        }// End of Center Whistle and Timer
+        }*/// End of Center Whistle and Timer
 
 
 
