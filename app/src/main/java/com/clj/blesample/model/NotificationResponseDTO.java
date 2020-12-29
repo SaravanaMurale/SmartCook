@@ -3,18 +3,18 @@ package com.clj.blesample.model;
 public class NotificationResponseDTO {
 
     private int rightVesselStatus;
-    private String rightWhistleStatus;
-    private String rightTimerStatus;
+    private int rightWhistleStatus;
+    private int rightTimerStatus;
 
     private int leftVesselStatus;
-    private String leftWhistleStatus;
-    private String leftTimerStatus;
+    private int leftWhistleStatus;
+    private int leftTimerStatus;
 
     private int centerVesselStatus;
-    private String centerWhistleStatus;
-    private String centerTimerStatus;
+    private int centerWhistleStatus;
+    private int centerTimerStatus;
 
-    public NotificationResponseDTO(int rightVesselStatus, String rightWhistleStatus, String rightTimerStatus, int leftVesselStatus, String leftWhistleStatus, String leftTimerStatus, int centerVesselStatus, String centerWhistleStatus, String centerTimerStatus) {
+    public NotificationResponseDTO(int rightVesselStatus, int rightWhistleStatus, int rightTimerStatus, int leftVesselStatus, int leftWhistleStatus, int leftTimerStatus, int centerVesselStatus, int centerWhistleStatus, int centerTimerStatus) {
         this.rightVesselStatus = rightVesselStatus;
         this.rightWhistleStatus = rightWhistleStatus;
         this.rightTimerStatus = rightTimerStatus;
@@ -34,19 +34,19 @@ public class NotificationResponseDTO {
         this.rightVesselStatus = rightVesselStatus;
     }
 
-    public String getRightWhistleStatus() {
+    public int getRightWhistleStatus() {
         return rightWhistleStatus;
     }
 
-    public void setRightWhistleStatus(String rightWhistleStatus) {
+    public void setRightWhistleStatus(int rightWhistleStatus) {
         this.rightWhistleStatus = rightWhistleStatus;
     }
 
-    public String getRightTimerStatus() {
+    public int getRightTimerStatus() {
         return rightTimerStatus;
     }
 
-    public void setRightTimerStatus(String rightTimerStatus) {
+    public void setRightTimerStatus(int rightTimerStatus) {
         this.rightTimerStatus = rightTimerStatus;
     }
 
@@ -58,19 +58,19 @@ public class NotificationResponseDTO {
         this.leftVesselStatus = leftVesselStatus;
     }
 
-    public String getLeftWhistleStatus() {
+    public int getLeftWhistleStatus() {
         return leftWhistleStatus;
     }
 
-    public void setLeftWhistleStatus(String leftWhistleStatus) {
+    public void setLeftWhistleStatus(int leftWhistleStatus) {
         this.leftWhistleStatus = leftWhistleStatus;
     }
 
-    public String getLeftTimerStatus() {
+    public int getLeftTimerStatus() {
         return leftTimerStatus;
     }
 
-    public void setLeftTimerStatus(String leftTimerStatus) {
+    public void setLeftTimerStatus(int leftTimerStatus) {
         this.leftTimerStatus = leftTimerStatus;
     }
 
@@ -82,19 +82,19 @@ public class NotificationResponseDTO {
         this.centerVesselStatus = centerVesselStatus;
     }
 
-    public String getCenterWhistleStatus() {
+    public int getCenterWhistleStatus() {
         return centerWhistleStatus;
     }
 
-    public void setCenterWhistleStatus(String centerWhistleStatus) {
+    public void setCenterWhistleStatus(int centerWhistleStatus) {
         this.centerWhistleStatus = centerWhistleStatus;
     }
 
-    public String getCenterTimerStatus() {
+    public int getCenterTimerStatus() {
         return centerTimerStatus;
     }
 
-    public void setCenterTimerStatus(String centerTimerStatus) {
+    public void setCenterTimerStatus(int centerTimerStatus) {
         this.centerTimerStatus = centerTimerStatus;
     }
 }

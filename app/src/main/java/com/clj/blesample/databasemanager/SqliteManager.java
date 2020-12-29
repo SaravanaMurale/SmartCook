@@ -145,14 +145,14 @@ public class SqliteManager extends SQLiteOpenHelper {
         String notificationTable = "CREATE TABLE IF NOT EXISTS " + NOTIFI_TABLE + "(\n" +
                 "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
                 "    " + LEFT_VESSEL_STATUS + " tinyint(10) NOT NULL,\n" +
-                "    " + LEFT_WHISTLE_STATUS + " varchar(200) NOT NULL,\n" +
-                "    " + LEFT_TIMER_STATUS + " varchar(200) NOT NULL,\n" +
+                "    " + LEFT_WHISTLE_STATUS + " tinyint(200) NOT NULL,\n" +
+                "    " + LEFT_TIMER_STATUS + " tinyint(200) NOT NULL,\n" +
                 "    " + RIGHT_VESSEL_STATUS + " tinyint(10) NOT NULL,\n" +
-                "    " + RIGHT_WHISTLE_STATUS + " varchar(200) NOT NULL,\n" +
-                "    " + RIGHT_TIMER_STATUS + " varchar(200) NOT NULL,\n" +
+                "    " + RIGHT_WHISTLE_STATUS + " tinyint(200) NOT NULL,\n" +
+                "    " + RIGHT_TIMER_STATUS + " tinyint(200) NOT NULL,\n" +
                 "    " + CENTER_VESSEL_STATUS + " tinyint(10) NOT NULL,\n" +
-                "    " + CENTER_WHISTLE_STATUS + " varchar(200) NOT NULL,\n" +
-                "    " + CENTER_TIMER_STATUS + " varchar(200) NOT NULL\n" +
+                "    " + CENTER_WHISTLE_STATUS + " tinyint(200) NOT NULL,\n" +
+                "    " + CENTER_TIMER_STATUS + " tinyint(200) NOT NULL\n" +
                 ");";
 
 
@@ -609,19 +609,19 @@ public class SqliteManager extends SQLiteOpenHelper {
 
                 System.out.println("COLUMN_ID " + cursorNoti.getInt(0));
                 System.out.println("LEFT_VESSEL_STATUS " + cursorNoti.getInt(1));
-                System.out.println("LEFT_WHISTLE_STATUS " + cursorNoti.getString(2));
-                System.out.println("LEFT_TIMER_STATUS " + cursorNoti.getString(3));
+                System.out.println("LEFT_WHISTLE_STATUS " + cursorNoti.getInt(2));
+                System.out.println("LEFT_TIMER_STATUS " + cursorNoti.getInt(3));
                 System.out.println("RIGHT_VESSEL_STATUS " + cursorNoti.getInt(4));
-                System.out.println("RIGHT_WHISTLE_STATUS " + cursorNoti.getString(5));
-                System.out.println("RIGHT_TIMER_STATUS " + cursorNoti.getString(6));
+                System.out.println("RIGHT_WHISTLE_STATUS " + cursorNoti.getInt(5));
+                System.out.println("RIGHT_TIMER_STATUS " + cursorNoti.getInt(6));
                 System.out.println("CENTER_VESSEL_STATUS " + cursorNoti.getInt(7));
-                System.out.println("CENTER_WHISTLE_STATUS " + cursorNoti.getString(8));
-                System.out.println("CENTER_TIMER_STATUS " + cursorNoti.getString(9));
+                System.out.println("CENTER_WHISTLE_STATUS " + cursorNoti.getInt(8));
+                System.out.println("CENTER_TIMER_STATUS " + cursorNoti.getInt(9));
 
 
-                NotificationResponseDTO notificationResponseDTO=new NotificationResponseDTO(cursorNoti.getInt(1),cursorNoti.getString(2),
-                        cursorNoti.getString(3),cursorNoti.getInt(4),cursorNoti.getString(5),cursorNoti.getString(6),
-                        cursorNoti.getInt(7),cursorNoti.getString(8),cursorNoti.getString(9));
+                NotificationResponseDTO notificationResponseDTO=new NotificationResponseDTO(cursorNoti.getInt(1),cursorNoti.getInt(2),
+                        cursorNoti.getInt(3),cursorNoti.getInt(4),cursorNoti.getInt(5),cursorNoti.getInt(6),
+                        cursorNoti.getInt(7),cursorNoti.getInt(8),cursorNoti.getInt(9));
 
                 notificationResponseDTOList.add(notificationResponseDTO);
 

@@ -13,13 +13,13 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/notifyRight"
+            android:id="@+id/notifyRightVessel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="Vessel is placed in Burner1" />
+            android:text="" />
 
         <TextView
             android:id="@+id/notifyRightWhistle"
@@ -28,7 +28,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="Right Whistle Placed"
+            android:text=""
 
             />
 
@@ -39,18 +39,18 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="Right Timer Placed"
+            android:text=""
 
             />
 
         <TextView
-            android:id="@+id/notifyLeft"
+            android:id="@+id/notifyLeftVessel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="Vessel is placed in Burner1" />
+            android:text="" />
 
         <TextView
             android:id="@+id/notifyLeftWhistle"
@@ -59,7 +59,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="Right Whistle Placed"
+            android:text=""
 
             />
 
@@ -70,19 +70,19 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="Right Timer Placed"
+            android:text=""
 
             />
 
 
         <TextView
-            android:id="@+id/notifyCenter"
+            android:id="@+id/notifyCenterVessel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="Vessel is placed in Burner1" />
+            android:text="" />
 
         <TextView
             android:id="@+id/notifyCenterWhistle"
@@ -91,7 +91,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="Right Whistle Placed"
+            android:text=""
 
             />
 
@@ -102,7 +102,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
             android:padding="5dp"
-            android:text="Right Timer Placed"
+            android:text=""
 
             />
 
