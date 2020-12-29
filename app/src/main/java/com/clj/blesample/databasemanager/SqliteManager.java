@@ -17,6 +17,7 @@ import com.clj.blesample.model.NotificationDTO;
 import com.clj.blesample.model.NotificationResponseDTO;
 import com.clj.blesample.model.StatisticsDTO;
 import com.clj.blesample.model.StoreImageDTO;
+import com.clj.blesample.model.UserDTO;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
 import com.clj.blesample.utils.MathUtil;
 
@@ -339,6 +340,34 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     }
 
+    public List<UserDTO> getUserDetails(){
+
+        List<UserDTO> userDTOList=new ArrayList<>();
+
+        SQLiteDatabase selectAllData = getReadableDatabase();
+
+        Cursor cursor = selectAllData.rawQuery("select user_name,user_email,user_mobile from signuptable where id=?", new String[]{String.valueOf(PreferencesUtil.getValueInt(mCtx,PreferencesUtil.USER_ID))});
+
+        if (cursor.moveToFirst()) {
+
+            do {
+
+                UserDTO userDTO=new UserDTO(cursor.getString(0),cursor.getString(1),cursor.getString(2));
+                userDTOList.add(userDTO);
+
+            }
+            while (cursor.moveToNext());
+
+        }
+
+
+        return  userDTOList;
+
+    }
+
+
+
+
 
     public boolean addMaintenanceServiceData(String m_issueID, String issueFixedDate, String personName, String issue, String deviceID) {
 
@@ -486,7 +515,55 @@ public class SqliteManager extends SQLiteOpenHelper {
 
         updateContentValues.put(USER_PASSWORD, password);
 
-        return updateSqLiteDatabase.update(TABLE_NAME, updateContentValues, USER_EMAIL + "=?", new String[]{userEmail}) > 0;
+        return updateSqLiteDatabase.update(SIGNUP_TABLE, updateContentValues, USER_EMAIL + "=?", new String[]{userEmail}) > 0;
+
+    }
+
+    public boolean updateUserName(String userName){
+
+        SQLiteDatabase updateSqLiteDatabase = getWritableDatabase();
+        ContentValues updateContentValues = new ContentValues();
+
+        updateContentValues.put(USER_NAME, userName);
+
+        return updateSqLiteDatabase.update(SIGNUP_TABLE,updateContentValues,COLUMN_ID+"=?",new String[]{String.valueOf(PreferencesUtil.getValueInt(mCtx,PreferencesUtil.USER_ID))})>0;
+
+
+    }
+
+    public boolean updateEmail(String userEmail){
+
+        SQLiteDatabase updateSqLiteDatabase = getWritableDatabase();
+        ContentValues updateContentValues = new ContentValues();
+
+        updateContentValues.put(USER_EMAIL, userEmail);
+
+        return updateSqLiteDatabase.update(SIGNUP_TABLE,updateContentValues,COLUMN_ID+"=?",new String[]{String.valueOf(PreferencesUtil.getValueInt(mCtx,PreferencesUtil.USER_ID))})>0;
+
+
+    }
+
+    public boolean updateMobile(String userMobile){
+
+        SQLiteDatabase updateSqLiteDatabase = getWritableDatabase();
+        ContentValues updateContentValues = new ContentValues();
+
+        updateContentValues.put(USER_MOBILE, userMobile);
+
+        return updateSqLiteDatabase.update(SIGNUP_TABLE,updateContentValues,COLUMN_ID+"=?",new String[]{String.valueOf(PreferencesUtil.getValueInt(mCtx,PreferencesUtil.USER_ID))})>0;
+
+
+    }
+
+    public boolean updatePassword(String userPassword){
+
+        SQLiteDatabase updateSqLiteDatabase = getWritableDatabase();
+        ContentValues updateContentValues = new ContentValues();
+
+        updateContentValues.put(USER_PASSWORD, userPassword);
+
+        return updateSqLiteDatabase.update(SIGNUP_TABLE,updateContentValues,COLUMN_ID+"=?",new String[]{String.valueOf(PreferencesUtil.getValueInt(mCtx,PreferencesUtil.USER_ID))})>0;
+
 
     }
 

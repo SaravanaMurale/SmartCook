@@ -17,14 +17,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.clj.blesample.R;
 import com.clj.blesample.databasemanager.SqliteManager;
 import com.clj.blesample.model.StoreImageDTO;
+import com.clj.blesample.model.UserDTO;
 import com.clj.blesample.utils.MathUtil;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -38,6 +43,8 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
     SqliteManager sqliteManager;
 
+    TextView userName,email,mobile;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +55,18 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
         profilePic=(CircleImageView)findViewById(R.id.profilePic);
 
+        userName=(TextView)findViewById(R.id.userName);
+        email=(TextView)findViewById(R.id.email);
+        mobile=(TextView)findViewById(R.id.mobile);
+
         profileBlock=(RelativeLayout)findViewById(R.id.profileBlock);
         emailBlock=(RelativeLayout)findViewById(R.id.emailBlock);
         mobileBlock=(RelativeLayout)findViewById(R.id.mobileBlock);
         changePasswordBlock=(RelativeLayout)findViewById(R.id.changePasswordBlock);
 
         getImageFromSqliteDB();
+        
+        getUserDetails();
 
         profileBlock.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +81,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                openDialog("Enter Email", 1);
+                openDialog("Enter Email", 2);
 
             }
         });
@@ -76,7 +89,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         mobileBlock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialog("Enter Your Name", 1);
+                openDialog("Enter Your Name", 3);
             }
         });
 
@@ -84,7 +97,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                openDialog("Enter Password", 1);
+                openDialog("Enter Password", 4);
 
             }
         });
@@ -109,6 +122,19 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
             }
         });
+
+
+    }
+
+    private void getUserDetails() {
+
+        List<UserDTO> userDTOList =sqliteManager.getUserDetails();
+
+        userName.setText(userDTOList.get(0).getUserName());
+        email.setText(userDTOList.get(0).getUserEmail());
+        mobile.setText(userDTOList.get(0).getUserMobile());
+
+
 
 
     }
@@ -159,7 +185,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         }
     }
 
-    private void openDialog(String hintData, int i) {
+    private void openDialog(String hintData, final int i) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater layoutInflater = this.getLayoutInflater();
@@ -174,7 +200,49 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                Toast.makeText(ProfileSettingsActivity.this, "Updated", Toast.LENGTH_LONG).show();
+                if(i==1){
+                    //update name
+
+                    boolean status=sqliteManager.updateUserName(update.getText().toString());
+                    if(status){
+                        Toast.makeText(ProfileSettingsActivity.this, "Updated UserName", Toast.LENGTH_LONG).show();
+
+                        getUserDetails();
+                    }
+
+                }else if(i==2){
+                    //update Email
+                    boolean status=sqliteManager.updateEmail(update.getText().toString());
+                    if(status){
+                        Toast.makeText(ProfileSettingsActivity.this, "Updated Email", Toast.LENGTH_LONG).show();
+
+                        getUserDetails();
+                    }
+
+                }else if(i==3){
+
+                    //update mobile
+
+                    boolean status=sqliteManager.updateMobile(update.getText().toString());
+                    if(status){
+                        Toast.makeText(ProfileSettingsActivity.this, "Updated Mobile Number", Toast.LENGTH_LONG).show();
+
+                        getUserDetails();
+                    }
+
+
+                }else if(i==4){
+                    //update password
+
+                    boolean status=sqliteManager.updatePassword(update.getText().toString());
+                    if(status){
+                        Toast.makeText(ProfileSettingsActivity.this, "Updated Password", Toast.LENGTH_LONG).show();
+
+                        getUserDetails();
+                    }
+                }
+
+
 
 
 
