@@ -31,6 +31,7 @@ import com.clj.blesample.menuoperationactivity.EditActivity;
 import com.clj.blesample.menuoperationactivity.MenuActivity;
 import com.clj.blesample.menuoperationactivity.NotificationActivity;
 import com.clj.blesample.model.NotificationResponseDTO;
+import com.clj.blesample.model.StoreImageDTO;
 import com.clj.blesample.notificationpackage.CenterNotiDTO;
 import com.clj.blesample.notificationpackage.LeftNotiDTO;
 import com.clj.blesample.notificationpackage.NotificationAct;
@@ -123,8 +124,18 @@ public class CharacteristicListFragment extends Fragment {
 
         initView(v);
 
+        getImageFromSqliteDB();
+
+
+
 
         return v;
+    }
+
+    private void getImageFromSqliteDB() {
+
+
+
     }
 
 
@@ -808,8 +819,8 @@ public class CharacteristicListFragment extends Fragment {
                 int rightVessel = (rightVesselFlame[0] & 0x80) >> 7;
                 int rightFlameMode = (rightVesselFlame[0] & 0x7C) >> 2;
 
-                sqliteManager.addRight(rightVessel,"00");
-                List<RightNotiDTO> rightNotiDTOList =sqliteManager.getRightNoti();
+                /*sqliteManager.addRight(rightVessel,"00");
+                List<RightNotiDTO> rightNotiDTOList =sqliteManager.getRightNoti();*/
 
                 rightVesselForNoti=rightVessel;
 
@@ -817,8 +828,8 @@ public class CharacteristicListFragment extends Fragment {
                 int leftVessel = (leftVesselFlame[0] & 0x80) >> 7;
                 int leftFlameMode = (leftVesselFlame[0] & 0x7C) >> 2;
 
-                sqliteManager.addLeft(leftVessel,"01");
-                List<LeftNotiDTO> leftNotiDTOList=sqliteManager.getLeftNoti();
+                /*sqliteManager.addLeft(leftVessel,"01");
+                List<LeftNotiDTO> leftNotiDTOList=sqliteManager.getLeftNoti();*/
 
                 leftVesselForNoti=leftVessel;
 
@@ -826,11 +837,11 @@ public class CharacteristicListFragment extends Fragment {
                 int centerVessel = (centerVesselFlame[0] & 0x80) >> 7;
                 int centerFlameMode = (centerVesselFlame[0] & 0x7C) >> 2;
 
-                sqliteManager.addCenter(centerVessel,"10");
-               List<CenterNotiDTO> centerNotiDTOList= sqliteManager.getCenterNoti();
+                /*sqliteManager.addCenter(centerVessel,"10");
+               List<CenterNotiDTO> centerNotiDTOList= sqliteManager.getCenterNoti();*/
 
-               int notiSize=rightNotiDTOList.size()+leftNotiDTOList.size()+centerNotiDTOList.size();
-               notificationCount.setText(""+notiSize);
+               /*int notiSize=rightNotiDTOList.size()+leftNotiDTOList.size()+centerNotiDTOList.size();
+               notificationCount.setText(""+notiSize);*/
 
                 centerVesselForNoti=centerVessel;
 

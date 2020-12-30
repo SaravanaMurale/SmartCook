@@ -1,5 +1,6 @@
 package com.clj.blesample.notificationpackage;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,18 +43,20 @@ public class NotificationAct extends AppCompatActivity {
 
         sqliteManager=new SqliteManager(NotificationAct.this);
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getRightNoti();
+                getLeftNoti();
+                getCenterNoti();
 
+                getAllNotificationListDTO=new GetAllNotificationListDTO(rightNotiDTOList,leftNotiDTOList,centerNotiDTOList);
 
-        getRightNoti();
-        getLeftNoti();
-        getCenterNoti();
+                getAllNotificationListDTOList.add(getAllNotificationListDTO);
 
-        getAllNotificationListDTO=new GetAllNotificationListDTO(rightNotiDTOList,leftNotiDTOList,centerNotiDTOList);
-
-        getAllNotificationListDTOList.add(getAllNotificationListDTO);
-
-        notiAdapter.setDate(getAllNotificationListDTOList);
-
+                notiAdapter.setDate(getAllNotificationListDTOList);
+            }
+        },3000);
 
 
     }
