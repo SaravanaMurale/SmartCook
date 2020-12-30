@@ -31,6 +31,9 @@ import com.clj.blesample.menuoperationactivity.EditActivity;
 import com.clj.blesample.menuoperationactivity.MenuActivity;
 import com.clj.blesample.menuoperationactivity.NotificationActivity;
 import com.clj.blesample.model.NotificationResponseDTO;
+import com.clj.blesample.notificationpackage.CenterNotiDTO;
+import com.clj.blesample.notificationpackage.LeftNotiDTO;
+import com.clj.blesample.notificationpackage.RightNotiDTO;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
 import com.clj.blesample.utils.MathUtil;
 import com.clj.fastble.BleManager;
@@ -137,9 +140,9 @@ public class CharacteristicListFragment extends Fragment {
 
         }
 
-        if (setNotification == 1) {
+       /* if (setNotification == 1) {
             getNotificationDetails();
-        }
+        }*/
 
 
         String selectedBurner = PreferencesUtil.getValueString(getActivity(), PreferencesUtil.BURNER);
@@ -191,7 +194,7 @@ public class CharacteristicListFragment extends Fragment {
         if (notificationResponseDTOList == null) {
             Toast.makeText(getActivity(), "Notification List Is Empty", Toast.LENGTH_LONG).show();
         } else {
-            notificationCount.setText("" + notificationResponseDTOList.size());
+            //notificationCount.setText("" + notificationResponseDTOList.size());
         }
 
 
@@ -779,7 +782,7 @@ public class CharacteristicListFragment extends Fragment {
 
                 setWhistleAndTimerValueInUI(rightWhistle, rightTimer, leftWhistle, leftTimer, centerWhistle, centerTimer);
 
-                setNotificationForWhistleAndTimer(rightVesselForNoti,  rightWhistle, rightTimer,leftVesselForNoti ,leftWhistle, leftTimer, centerVesselForNoti,centerWhistle, centerTimer);
+               // setNotificationForWhistleAndTimer(rightVesselForNoti,  rightWhistle, rightTimer,leftVesselForNoti ,leftWhistle, leftTimer, centerVesselForNoti,centerWhistle, centerTimer);
 
                 System.out.println("WhistleAndTimerData" + rightWhistle + " " + rightTimer + " " + leftWhistle + " " + leftTimer + " " + centerWhistle + " " + centerTimer);
 
@@ -804,17 +807,29 @@ public class CharacteristicListFragment extends Fragment {
                 int rightVessel = (rightVesselFlame[0] & 0x80) >> 7;
                 int rightFlameMode = (rightVesselFlame[0] & 0x7C) >> 2;
 
+                sqliteManager.addRight(rightVessel,"00");
+                List<RightNotiDTO> rightNotiDTOList =sqliteManager.getRightNoti();
+
                 rightVesselForNoti=rightVessel;
 
                 leftVesselFlame[0] = data[3];
                 int leftVessel = (leftVesselFlame[0] & 0x80) >> 7;
                 int leftFlameMode = (leftVesselFlame[0] & 0x7C) >> 2;
 
+                sqliteManager.addLeft(leftVessel,"01");
+                List<LeftNotiDTO> leftNotiDTOList=sqliteManager.getLeftNoti();
+
                 leftVesselForNoti=leftVessel;
 
                 centerVesselFlame[0] = data[4];
                 int centerVessel = (centerVesselFlame[0] & 0x80) >> 7;
                 int centerFlameMode = (centerVesselFlame[0] & 0x7C) >> 2;
+
+                sqliteManager.addCenter(centerVessel,"10");
+               List<CenterNotiDTO> centerNotiDTOList= sqliteManager.getCenterNoti();
+
+               int notiSize=rightNotiDTOList.size()+leftNotiDTOList.size()+centerNotiDTOList.size();
+               notificationCount.setText(""+notiSize);
 
                 centerVesselForNoti=centerVessel;
 
@@ -825,7 +840,7 @@ public class CharacteristicListFragment extends Fragment {
 
                 setValueInUI(rightVessel, rightFlameMode, leftVessel, leftFlameMode, centerVessel, centerFlameMode);
 
-                setNotification(rightVessel, rightFlameMode, leftVessel, leftFlameMode, centerVessel, centerFlameMode);
+               // setNotification(rightVessel, rightFlameMode, leftVessel, leftFlameMode, centerVessel, centerFlameMode);
 
                 setNotification = 1;
 

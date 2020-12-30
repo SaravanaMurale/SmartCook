@@ -18,6 +18,9 @@ import com.clj.blesample.model.NotificationResponseDTO;
 import com.clj.blesample.model.StatisticsDTO;
 import com.clj.blesample.model.StoreImageDTO;
 import com.clj.blesample.model.UserDTO;
+import com.clj.blesample.notificationpackage.CenterNotiDTO;
+import com.clj.blesample.notificationpackage.LeftNotiDTO;
+import com.clj.blesample.notificationpackage.RightNotiDTO;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
 import com.clj.blesample.utils.MathUtil;
 
@@ -90,6 +93,18 @@ public class SqliteManager extends SQLiteOpenHelper {
     public static final String GCP_USAGE_DATE = "gcp_usage_date";
     public static final String GCP_USAGE_VALUE = "gcp_usage_value";
 
+    public static final String RIGHT_TABLE = "righttable";
+    public static final String RI_VESSELL_STATUS = "ri_vessel_status";
+    public static final String RI_BURNER = "ri_burner";
+
+    public static final String LEFT_TABLE = "lefttable";
+    public static final String LE_VESSELL_STATUS = "le_vessel_status";
+    public static final String LE_BURNER = "le_burner";
+
+    public static final String CENTER_TABLE = "centertable";
+    public static final String CE_VESSELL_STATUS = "ce_vessel_status";
+    public static final String CE_BURNER = "ce_burner";
+
 
     Context mCtx;
 
@@ -125,12 +140,16 @@ public class SqliteManager extends SQLiteOpenHelper {
                 "    " + DEVICE_ID + " varchar(200) NOT NULL\n" +
                 ");";*/
 
-        String gasConPatTable = "CREATE TABLE IF NOT EXISTS " + GCP_TABLE + "(\n" +
+
+
+
+        String gasConPatTable  = "CREATE TABLE IF NOT EXISTS " + GCP_TABLE + "(\n" +
                 "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
                 "    " + GCP_BURNER + " varchar(200) NOT NULL,\n" +
                 "    " + GCP_USAGE_VALUE + " INTEGER NOT NULL,\n" +
                 "    " + GCP_USAGE_DATE + " text NOT NULL\n" +
                 ");";
+
 
         String signUpTable = "CREATE TABLE IF NOT EXISTS " + SIGNUP_TABLE + "(\n" +
                 "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
@@ -167,6 +186,25 @@ public class SqliteManager extends SQLiteOpenHelper {
                 ");";
 
 
+        String notiRight = "CREATE TABLE IF NOT EXISTS " + RIGHT_TABLE + "(\n" +
+                "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
+                "    " + RI_VESSELL_STATUS + " INTEGER(200) NOT NULL,\n" +
+                "    " + RI_BURNER + " varchar(200) NOT NULL\n" +
+                ");";
+
+        String notiLeft = "CREATE TABLE IF NOT EXISTS " + LEFT_TABLE + "(\n" +
+                "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
+                "    " + LE_VESSELL_STATUS + " INTEGER(200) NOT NULL,\n" +
+                "    " + LE_BURNER + " varchar(200) NOT NULL\n" +
+                ");";
+
+        String notiCenter = "CREATE TABLE IF NOT EXISTS " + CENTER_TABLE + "(\n" +
+                "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
+                "    " + CE_VESSELL_STATUS + " INTEGER(200) NOT NULL,\n" +
+                "    " + CE_BURNER + " varchar(200) NOT NULL\n" +
+                ");";
+
+
         /*db.execSQL(sql);
         db.execSQL(statisticsTable);*/
 
@@ -175,6 +213,10 @@ public class SqliteManager extends SQLiteOpenHelper {
         db.execSQL(saveImage);
         db.execSQL(notificationTable);
 
+        db.execSQL(notiRight);
+        db.execSQL(notiLeft);
+        db.execSQL(notiCenter);
+
 
     }
 
@@ -182,6 +224,176 @@ public class SqliteManager extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+    public boolean addUser(String userName, String userEmail, String mobileNumber, String userPassword) {
+
+        String userAddress = "address";
+
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        /*try {*/
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(USER_NAME, userName);
+        contentValues.put(USER_EMAIL, userEmail);
+        contentValues.put(USER_MOBILE, mobileNumber);
+        contentValues.put(USER_PASSWORD, userPassword);
+        contentValues.put(USER_ADDRESS, userAddress);
+        contentValues.put(USER_CREATION_DATE, MathUtil.dateAndTime());
+
+        return sqLiteDatabase.insert(SIGNUP_TABLE, null, contentValues) != -1;
+
+    }
+
+    public boolean addRight(int vesselStatus,String burner){
+
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(RI_VESSELL_STATUS,vesselStatus);
+        contentValues.put(RI_BURNER,burner);
+
+        return sqLiteDatabase.insert(RIGHT_TABLE, null, contentValues) != -1;
+
+
+    }
+
+    public boolean addLeft(int vesselStatus,String burner){
+
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(LE_VESSELL_STATUS,vesselStatus);
+        contentValues.put(LE_BURNER,burner);
+
+        return sqLiteDatabase.insert(LEFT_TABLE, null, contentValues) != -1;
+
+
+    }
+
+    public boolean addCenter(int vesselStatus,String burner){
+
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(CE_VESSELL_STATUS,vesselStatus);
+        contentValues.put(CE_BURNER,burner);
+
+        return sqLiteDatabase.insert(CENTER_TABLE, null, contentValues) != -1;
+
+
+    }
+
+    public List<RightNotiDTO> getRightNoti(){
+
+        List<RightNotiDTO> rightNotiDTOList=new ArrayList<>();
+
+        SQLiteDatabase selectAllData = getReadableDatabase();
+
+        Cursor cursor = selectAllData.rawQuery("select id,ri_vessel_status,ri_burner from righttable",null);
+
+        if (cursor.moveToFirst()) {
+
+            do {
+
+                RightNotiDTO rightNotiDTO = new RightNotiDTO(cursor.getInt(0), cursor.getInt(1),cursor.getString(2));
+                rightNotiDTOList.add(rightNotiDTO);
+
+
+            }
+            while (cursor.moveToNext());
+
+        }
+
+        return rightNotiDTOList;
+
+
+    }
+
+
+    public List<LeftNotiDTO> getLeftNoti(){
+
+        List<LeftNotiDTO> leftNotiDTOList=new ArrayList<>();
+
+        SQLiteDatabase selectAllData = getReadableDatabase();
+
+        Cursor cursor = selectAllData.rawQuery("select id,le_vessel_status,le_burner from lefttable",null);
+
+        if (cursor.moveToFirst()) {
+
+            do {
+
+                LeftNotiDTO leftNotiDTO = new LeftNotiDTO(cursor.getInt(0), cursor.getInt(1),cursor.getString(2));
+                leftNotiDTOList.add(leftNotiDTO);
+
+
+            }
+            while (cursor.moveToNext());
+
+        }
+
+        return leftNotiDTOList;
+
+
+    }
+
+    public List<CenterNotiDTO> getCenterNoti(){
+
+        List<CenterNotiDTO> centerNotiDTOList=new ArrayList<>();
+
+        SQLiteDatabase selectAllData = getReadableDatabase();
+
+        Cursor cursor = selectAllData.rawQuery("select id,ce_vessel_status,ce_burner from centertable",null);
+
+        if (cursor.moveToFirst()) {
+
+            do {
+
+                CenterNotiDTO centerNotiDTO = new CenterNotiDTO(cursor.getInt(0), cursor.getInt(1),cursor.getString(2));
+                centerNotiDTOList.add(centerNotiDTO);
+
+
+            }
+            while (cursor.moveToNext());
+
+        }
+
+        return centerNotiDTOList;
+
+
+    }
+
+
+    public List<UserDTO> getUserDetails() {
+
+        List<UserDTO> userDTOList = new ArrayList<>();
+
+        SQLiteDatabase selectAllData = getReadableDatabase();
+
+        Cursor cursor = selectAllData.rawQuery("select user_name,user_email,user_mobile from signuptable where id=?", new String[]{String.valueOf(PreferencesUtil.getValueInt(mCtx, PreferencesUtil.USER_ID))});
+
+        if (cursor.moveToFirst()) {
+
+            do {
+
+                UserDTO userDTO = new UserDTO(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+                userDTOList.add(userDTO);
+
+            }
+            while (cursor.moveToNext());
+
+        }
+
+
+        return userDTOList;
+
+    }
+
+
 
     public void storeImage(StoreImageDTO objectModelClass) {
         SQLiteDatabase objectSqliteDatabase = getWritableDatabase();
@@ -319,51 +531,6 @@ public class SqliteManager extends SQLiteOpenHelper {
     }
 
 
-    public boolean addUser(String userName, String userEmail, String mobileNumber, String userPassword) {
-
-        String userAddress = "address";
-
-        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-
-        /*try {*/
-
-        ContentValues contentValues = new ContentValues();
-
-        contentValues.put(USER_NAME, userName);
-        contentValues.put(USER_EMAIL, userEmail);
-        contentValues.put(USER_MOBILE, mobileNumber);
-        contentValues.put(USER_PASSWORD, userPassword);
-        contentValues.put(USER_ADDRESS, userAddress);
-        contentValues.put(USER_CREATION_DATE, MathUtil.dateAndTime());
-
-        return sqLiteDatabase.insert(SIGNUP_TABLE, null, contentValues) != -1;
-
-    }
-
-    public List<UserDTO> getUserDetails(){
-
-        List<UserDTO> userDTOList=new ArrayList<>();
-
-        SQLiteDatabase selectAllData = getReadableDatabase();
-
-        Cursor cursor = selectAllData.rawQuery("select user_name,user_email,user_mobile from signuptable where id=?", new String[]{String.valueOf(PreferencesUtil.getValueInt(mCtx,PreferencesUtil.USER_ID))});
-
-        if (cursor.moveToFirst()) {
-
-            do {
-
-                UserDTO userDTO=new UserDTO(cursor.getString(0),cursor.getString(1),cursor.getString(2));
-                userDTOList.add(userDTO);
-
-            }
-            while (cursor.moveToNext());
-
-        }
-
-
-        return  userDTOList;
-
-    }
 
 
 
@@ -519,50 +686,50 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     }
 
-    public boolean updateUserName(String userName){
+    public boolean updateUserName(String userName) {
 
         SQLiteDatabase updateSqLiteDatabase = getWritableDatabase();
         ContentValues updateContentValues = new ContentValues();
 
         updateContentValues.put(USER_NAME, userName);
 
-        return updateSqLiteDatabase.update(SIGNUP_TABLE,updateContentValues,COLUMN_ID+"=?",new String[]{String.valueOf(PreferencesUtil.getValueInt(mCtx,PreferencesUtil.USER_ID))})>0;
+        return updateSqLiteDatabase.update(SIGNUP_TABLE, updateContentValues, COLUMN_ID + "=?", new String[]{String.valueOf(PreferencesUtil.getValueInt(mCtx, PreferencesUtil.USER_ID))}) > 0;
 
 
     }
 
-    public boolean updateEmail(String userEmail){
+    public boolean updateEmail(String userEmail) {
 
         SQLiteDatabase updateSqLiteDatabase = getWritableDatabase();
         ContentValues updateContentValues = new ContentValues();
 
         updateContentValues.put(USER_EMAIL, userEmail);
 
-        return updateSqLiteDatabase.update(SIGNUP_TABLE,updateContentValues,COLUMN_ID+"=?",new String[]{String.valueOf(PreferencesUtil.getValueInt(mCtx,PreferencesUtil.USER_ID))})>0;
+        return updateSqLiteDatabase.update(SIGNUP_TABLE, updateContentValues, COLUMN_ID + "=?", new String[]{String.valueOf(PreferencesUtil.getValueInt(mCtx, PreferencesUtil.USER_ID))}) > 0;
 
 
     }
 
-    public boolean updateMobile(String userMobile){
+    public boolean updateMobile(String userMobile) {
 
         SQLiteDatabase updateSqLiteDatabase = getWritableDatabase();
         ContentValues updateContentValues = new ContentValues();
 
         updateContentValues.put(USER_MOBILE, userMobile);
 
-        return updateSqLiteDatabase.update(SIGNUP_TABLE,updateContentValues,COLUMN_ID+"=?",new String[]{String.valueOf(PreferencesUtil.getValueInt(mCtx,PreferencesUtil.USER_ID))})>0;
+        return updateSqLiteDatabase.update(SIGNUP_TABLE, updateContentValues, COLUMN_ID + "=?", new String[]{String.valueOf(PreferencesUtil.getValueInt(mCtx, PreferencesUtil.USER_ID))}) > 0;
 
 
     }
 
-    public boolean updatePassword(String userPassword){
+    public boolean updatePassword(String userPassword) {
 
         SQLiteDatabase updateSqLiteDatabase = getWritableDatabase();
         ContentValues updateContentValues = new ContentValues();
 
         updateContentValues.put(USER_PASSWORD, userPassword);
 
-        return updateSqLiteDatabase.update(SIGNUP_TABLE,updateContentValues,COLUMN_ID+"=?",new String[]{String.valueOf(PreferencesUtil.getValueInt(mCtx,PreferencesUtil.USER_ID))})>0;
+        return updateSqLiteDatabase.update(SIGNUP_TABLE, updateContentValues, COLUMN_ID + "=?", new String[]{String.valueOf(PreferencesUtil.getValueInt(mCtx, PreferencesUtil.USER_ID))}) > 0;
 
 
     }
@@ -649,7 +816,7 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     }
 
-    public boolean storeWhistleAndTimerNotificationDetails(int rightVessel, int rightWhistle, int rightTimer, int leftVessel, int leftWhistle, int leftTimer,int centerVessel, int centerWhistle, int centerTimer) {
+    public boolean storeWhistleAndTimerNotificationDetails(int rightVessel, int rightWhistle, int rightTimer, int leftVessel, int leftWhistle, int leftTimer, int centerVessel, int centerWhistle, int centerTimer) {
 
 
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
@@ -676,7 +843,7 @@ public class SqliteManager extends SQLiteOpenHelper {
         deleteRecordsMoreThanHundred();
 
 
-        List<NotificationResponseDTO> notificationResponseDTOList=new ArrayList<>();
+        List<NotificationResponseDTO> notificationResponseDTOList = new ArrayList<>();
 
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
@@ -699,12 +866,11 @@ public class SqliteManager extends SQLiteOpenHelper {
                 System.out.println("CENTER_TIMER_STATUS " + cursorNoti.getInt(9));
 
 
-                NotificationResponseDTO notificationResponseDTO=new NotificationResponseDTO(cursorNoti.getInt(1),cursorNoti.getInt(2),
-                        cursorNoti.getInt(3),cursorNoti.getInt(4),cursorNoti.getInt(5),cursorNoti.getInt(6),
-                        cursorNoti.getInt(7),cursorNoti.getInt(8),cursorNoti.getInt(9));
+                NotificationResponseDTO notificationResponseDTO = new NotificationResponseDTO(cursorNoti.getInt(1), cursorNoti.getInt(2),
+                        cursorNoti.getInt(3), cursorNoti.getInt(4), cursorNoti.getInt(5), cursorNoti.getInt(6),
+                        cursorNoti.getInt(7), cursorNoti.getInt(8), cursorNoti.getInt(9));
 
                 notificationResponseDTOList.add(notificationResponseDTO);
-
 
 
             } while (cursorNoti.moveToNext());
@@ -716,7 +882,6 @@ public class SqliteManager extends SQLiteOpenHelper {
     }
 
     private void deleteRecordsMoreThanHundred() {
-
 
 
     }
