@@ -9,11 +9,25 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.clj.blesample.R;
-import com.clj.blesample.adapter.NotificationAdapter;
+import com.clj.blesample.utils.MathUtil;
+
+import java.util.List;
 
 public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.NotiViewHolder> {
 
     Context mCtx;
+    List<GetAllNotificationListDTO> getAllNotificationListDTOList;
+
+    public NotiAdapter(Context mCtx, List<GetAllNotificationListDTO> getAllNotificationListDTOList) {
+        this.mCtx = mCtx;
+        this.getAllNotificationListDTOList = getAllNotificationListDTOList;
+    }
+
+    public void setDate(List<GetAllNotificationListDTO> getAllNotificationListDTOList) {
+        this.getAllNotificationListDTOList = getAllNotificationListDTOList;
+        notifyDataSetChanged();
+    }
+
 
     @NonNull
     @Override
@@ -26,21 +40,55 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.NotiViewHolder
     @Override
     public void onBindViewHolder(@NonNull NotiViewHolder notiViewHolder, int i) {
 
+
+        if (getAllNotificationListDTOList.get(i).getRightNotiDTOListt().get(i).getRightBunrer().equals( "00") ){
+
+            if (getAllNotificationListDTOList.get(i).getRightNotiDTOListt().get(i).getRightVesselStatus() == 0) {
+                notiViewHolder.notiText.setText(MathUtil.RIGHT_VESSEL_0);
+            } else {
+                notiViewHolder.notiText.setText(MathUtil.RIGHT_VESSEL_1);
+            }
+        }
+
+        if(getAllNotificationListDTOList.get(i).getLeftNotiDTOListt().get(i).getLeftBunrer().equals("01")){
+
+            if(getAllNotificationListDTOList.get(i).getLeftNotiDTOListt().get(i).getLeftVesselStatus()==0){
+                notiViewHolder.notiText.setText(MathUtil.LEFT_VESSEL_0);
+            }else {
+                notiViewHolder.notiText.setText(MathUtil.LEFT_VESSEL_1);
+            }
+
+        }
+
+        if(getAllNotificationListDTOList.get(i).getCenterNotiDTOList().get(i).getCenterBunrer().equals("10")){
+            if(getAllNotificationListDTOList.get(i).getCenterNotiDTOList().get(i).getCenterVesselStatus()==0){
+                notiViewHolder.notiText.setText(MathUtil.CENTER_VESSEL_0);
+            }else {
+                notiViewHolder.notiText.setText(MathUtil.CENTER_VESSEL_1);
+            }
+        }
+
+
+
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+
+        System.out.println("NotificationListSize"+getAllNotificationListDTOList.size());
+
+        return getAllNotificationListDTOList == null ? 0 : getAllNotificationListDTOList.size();
     }
 
-    class NotiViewHolder extends RecyclerView.ViewHolder{
+    class NotiViewHolder extends RecyclerView.ViewHolder {
 
         TextView notiText;
 
         public NotiViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            notiText=(TextView)itemView.findViewById(R.id.notiText);
+            notiText = (TextView) itemView.findViewById(R.id.notiText);
 
         }
     }

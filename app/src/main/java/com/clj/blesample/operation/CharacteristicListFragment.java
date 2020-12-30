@@ -33,6 +33,7 @@ import com.clj.blesample.menuoperationactivity.NotificationActivity;
 import com.clj.blesample.model.NotificationResponseDTO;
 import com.clj.blesample.notificationpackage.CenterNotiDTO;
 import com.clj.blesample.notificationpackage.LeftNotiDTO;
+import com.clj.blesample.notificationpackage.NotificationAct;
 import com.clj.blesample.notificationpackage.RightNotiDTO;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
 import com.clj.blesample.utils.MathUtil;
@@ -394,7 +395,7 @@ public class CharacteristicListFragment extends Fragment {
         notificationIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), NotificationActivity.class);
+                Intent intent = new Intent(getActivity(), NotificationAct.class);
                 startActivity(intent);
 
             }

@@ -294,7 +294,7 @@ public class SqliteManager extends SQLiteOpenHelper {
 
         SQLiteDatabase selectAllData = getReadableDatabase();
 
-        Cursor cursor = selectAllData.rawQuery("select id,ri_vessel_status,ri_burner from righttable",null);
+        Cursor cursor = selectAllData.rawQuery("select id,ri_vessel_status,ri_burner from righttable ",null);
 
         if (cursor.moveToFirst()) {
 
