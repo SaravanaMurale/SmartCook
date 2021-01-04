@@ -300,7 +300,7 @@
                 android:layout_below="@id/selectedLeftBurnerText"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="5dp"
-                android:text="25min"
+                android:text=""
                 android:textColor="@color/white"
 
                 />
@@ -313,7 +313,7 @@
                 android:layout_alignBaseline="@id/selectedLeftTimerCount"
                 android:layout_marginLeft="130dp"
                 android:layout_marginTop="5dp"
-                android:text="25"
+                android:text=""
                 android:textColor="@color/white" />
 
 
@@ -353,7 +353,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/selectedCenterWhistle"
                 android:layout_below="@id/selectedCenterVessel"
-                android:text="25"
+                android:text=""
                 android:textSize="10sp"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/white"
@@ -362,9 +362,9 @@
 
             <TextView
                 android:id="@+id/selectedCenterTimerCount"
-                android:layout_width="wrap_content"
+                android:layout_width="25dp"
                 android:layout_height="wrap_content"
-                android:text="25min"
+                android:text=""
                 android:textColor="@color/white"
                 android:layout_below="@id/selectedCenterVessel"
                 android:layout_centerHorizontal="true"
@@ -407,7 +407,7 @@
                 android:id="@+id/selectedRightWhistleCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="25"
+                android:text=""
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/selectedRightVessel"
                 android:layout_marginTop="13dp"
@@ -428,9 +428,9 @@
 
             <TextView
                 android:id="@+id/selectedRightTimerCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="25min"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:text=""
                 android:layout_below="@+id/selectedRightVessel"
                 android:layout_toLeftOf="@+id/selectedRightWhistle"
                 android:layout_marginTop="10dp"

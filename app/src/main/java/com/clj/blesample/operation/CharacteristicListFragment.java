@@ -89,7 +89,7 @@ public class CharacteristicListFragment extends Fragment {
     int setNotification = 0;
     TextView notificationCount;
 
-    int rightVesselForNoti,leftVesselForNoti,centerVesselForNoti;
+    int rightVesselForNoti, leftVesselForNoti, centerVesselForNoti;
 
 
     @Override
@@ -127,13 +127,10 @@ public class CharacteristicListFragment extends Fragment {
         getImageFromSqliteDB();
 
 
-
-
         return v;
     }
 
     private void getImageFromSqliteDB() {
-
 
 
     }
@@ -548,6 +545,7 @@ public class CharacteristicListFragment extends Fragment {
     private void wrietUserData(String burner, int timerInMin, int whistleInCount, int flameMode, int frameFormet) {
 
 
+        //Burner
         if (frameFormet == 1) {
 
             byte[] flame = new byte[6];
@@ -617,6 +615,8 @@ public class CharacteristicListFragment extends Fragment {
 
 
         } else if (frameFormet == 2) {
+
+            //Whistle and Timer
 
             byte[] timerOrWhistle = new byte[9];
 
@@ -794,9 +794,11 @@ public class CharacteristicListFragment extends Fragment {
 
                 setWhistleAndTimerValueInUI(rightWhistle, rightTimer, leftWhistle, leftTimer, centerWhistle, centerTimer);
 
-               // setNotificationForWhistleAndTimer(rightVesselForNoti,  rightWhistle, rightTimer,leftVesselForNoti ,leftWhistle, leftTimer, centerVesselForNoti,centerWhistle, centerTimer);
+                // setNotificationForWhistleAndTimer(rightVesselForNoti,  rightWhistle, rightTimer,leftVesselForNoti ,leftWhistle, leftTimer, centerVesselForNoti,centerWhistle, centerTimer);
 
                 System.out.println("WhistleAndTimerData" + rightWhistle + " " + rightTimer + " " + leftWhistle + " " + leftTimer + " " + centerWhistle + " " + centerTimer);
+
+                setWhistleAndTimerNotification(rightWhistle, rightTimer, leftWhistle, leftTimer, centerWhistle, centerTimer);
 
 
             }
@@ -822,7 +824,7 @@ public class CharacteristicListFragment extends Fragment {
                 /*sqliteManager.addRight(rightVessel,"00");
                 List<RightNotiDTO> rightNotiDTOList =sqliteManager.getRightNoti();*/
 
-                rightVesselForNoti=rightVessel;
+                rightVesselForNoti = rightVessel;
 
                 leftVesselFlame[0] = data[3];
                 int leftVessel = (leftVesselFlame[0] & 0x80) >> 7;
@@ -831,7 +833,7 @@ public class CharacteristicListFragment extends Fragment {
                 /*sqliteManager.addLeft(leftVessel,"01");
                 List<LeftNotiDTO> leftNotiDTOList=sqliteManager.getLeftNoti();*/
 
-                leftVesselForNoti=leftVessel;
+                leftVesselForNoti = leftVessel;
 
                 centerVesselFlame[0] = data[4];
                 int centerVessel = (centerVesselFlame[0] & 0x80) >> 7;
@@ -843,7 +845,7 @@ public class CharacteristicListFragment extends Fragment {
                /*int notiSize=rightNotiDTOList.size()+leftNotiDTOList.size()+centerNotiDTOList.size();
                notificationCount.setText(""+notiSize);*/
 
-                centerVesselForNoti=centerVessel;
+                centerVesselForNoti = centerVessel;
 
                 int batteryPercentage = data[5];
 
@@ -852,7 +854,7 @@ public class CharacteristicListFragment extends Fragment {
 
                 setValueInUI(rightVessel, rightFlameMode, leftVessel, leftFlameMode, centerVessel, centerFlameMode);
 
-               // setNotification(rightVessel, rightFlameMode, leftVessel, leftFlameMode, centerVessel, centerFlameMode);
+                // setNotification(rightVessel, rightFlameMode, leftVessel, leftFlameMode, centerVessel, centerFlameMode);
 
                 setNotification = 1;
 
@@ -908,9 +910,39 @@ public class CharacteristicListFragment extends Fragment {
 
     }
 
-    private void setNotificationForWhistleAndTimer(int rightVessel,int rightWhistle, int rightTimer,int leftVessel, int leftWhistle, int leftTimer,int centerVessel, int centerWhistle, int centerTimer) {
+    private void setWhistleAndTimerNotification(int rightWhistle, int rightTimer, int leftWhistle, int leftTimer, int centerWhistle, int centerTimer) {
 
-        sqliteManager.storeWhistleAndTimerNotificationDetails(rightVessel,rightWhistle, rightTimer,leftVessel, leftWhistle, leftTimer, centerVessel,centerWhistle, centerTimer);
+        if (rightWhistle == 0) {
+            sqliteManager.setNotification("Whistle is completed for Right Burner");
+            sqliteManager.getAllNotificationDetails();
+        }
+
+        if (rightTimer == 0) {
+            sqliteManager.setNotification("Timer is completed for Right Burner");
+        }
+
+        if (leftWhistle == 0) {
+            sqliteManager.setNotification("Whistle is completed for Left Burner");
+        }
+
+        if (leftTimer == 0) {
+            sqliteManager.setNotification("Timer is completed for Left Burner");
+        }
+
+        if (centerWhistle == 0) {
+            sqliteManager.setNotification("Whistle is completed for Center Burner");
+        }
+
+        if (centerTimer == 0) {
+            sqliteManager.setNotification("Timer is completed for Center Burner");
+        }
+
+
+    }
+
+    private void setNotificationForWhistleAndTimer(int rightVessel, int rightWhistle, int rightTimer, int leftVessel, int leftWhistle, int leftTimer, int centerVessel, int centerWhistle, int centerTimer) {
+
+        sqliteManager.storeWhistleAndTimerNotificationDetails(rightVessel, rightWhistle, rightTimer, leftVessel, leftWhistle, leftTimer, centerVessel, centerWhistle, centerTimer);
 
     }
 

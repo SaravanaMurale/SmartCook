@@ -80,6 +80,10 @@ public class SqliteManager extends SQLiteOpenHelper {
     public static final String CENTER_WHISTLE_STATUS = "center_whistle_status";
     public static final String CENTER_TIMER_STATUS = "center_timer_status";
 
+    public static final String NOTIFI_ALERT = "notificationalerttable";
+    public static final String NOTIFI_TEXT = "notifi_text";
+    public static final String READ_STATUS = "read_status";
+
 
     public static final String IMAGE_TABLE = "imagetable";
     public static final String IMAGE_NAME = "imageName";
@@ -141,9 +145,7 @@ public class SqliteManager extends SQLiteOpenHelper {
                 ");";*/
 
 
-
-
-        String gasConPatTable  = "CREATE TABLE IF NOT EXISTS " + GCP_TABLE + "(\n" +
+        String gasConPatTable = "CREATE TABLE IF NOT EXISTS " + GCP_TABLE + "(\n" +
                 "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
                 "    " + GCP_BURNER + " varchar(200) NOT NULL,\n" +
                 "    " + GCP_USAGE_VALUE + " INTEGER NOT NULL,\n" +
@@ -173,6 +175,12 @@ public class SqliteManager extends SQLiteOpenHelper {
                 "    " + CENTER_VESSEL_STATUS + " tinyint(10) NOT NULL,\n" +
                 "    " + CENTER_WHISTLE_STATUS + " tinyint(200) NOT NULL,\n" +
                 "    " + CENTER_TIMER_STATUS + " tinyint(200) NOT NULL\n" +
+                ");";
+
+        String notificationAlertTable = "CREATE TABLE IF NOT EXISTS " + NOTIFI_ALERT + "(\n" +
+                "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
+                "    " + NOTIFI_TEXT + " varchar(500) NOT NULL,\n" +
+                "    " + READ_STATUS + " varchar(200) NOT NULL\n" +
                 ");";
 
 
@@ -211,11 +219,12 @@ public class SqliteManager extends SQLiteOpenHelper {
         db.execSQL(gasConPatTable);
         db.execSQL(signUpTable);
         db.execSQL(saveImage);
-        db.execSQL(notificationTable);
+        //db.execSQL(notificationTable);
+        db.execSQL(notificationAlertTable);
 
-        db.execSQL(notiRight);
-        db.execSQL(notiLeft);
-        db.execSQL(notiCenter);
+        //db.execSQL(notiRight);
+        //db.execSQL(notiLeft);
+        //db.execSQL(notiCenter);
 
 
     }
@@ -246,61 +255,61 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     }
 
-    public boolean addRight(int vesselStatus,String burner){
+    public boolean addRight(int vesselStatus, String burner) {
 
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(RI_VESSELL_STATUS,vesselStatus);
-        contentValues.put(RI_BURNER,burner);
+        contentValues.put(RI_VESSELL_STATUS, vesselStatus);
+        contentValues.put(RI_BURNER, burner);
 
         return sqLiteDatabase.insert(RIGHT_TABLE, null, contentValues) != -1;
 
 
     }
 
-    public boolean addLeft(int vesselStatus,String burner){
+    public boolean addLeft(int vesselStatus, String burner) {
 
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(LE_VESSELL_STATUS,vesselStatus);
-        contentValues.put(LE_BURNER,burner);
+        contentValues.put(LE_VESSELL_STATUS, vesselStatus);
+        contentValues.put(LE_BURNER, burner);
 
         return sqLiteDatabase.insert(LEFT_TABLE, null, contentValues) != -1;
 
 
     }
 
-    public boolean addCenter(int vesselStatus,String burner){
+    public boolean addCenter(int vesselStatus, String burner) {
 
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(CE_VESSELL_STATUS,vesselStatus);
-        contentValues.put(CE_BURNER,burner);
+        contentValues.put(CE_VESSELL_STATUS, vesselStatus);
+        contentValues.put(CE_BURNER, burner);
 
         return sqLiteDatabase.insert(CENTER_TABLE, null, contentValues) != -1;
 
 
     }
 
-    public List<RightNotiDTO> getRightNoti(){
+    public List<RightNotiDTO> getRightNoti() {
 
-        List<RightNotiDTO> rightNotiDTOList=new ArrayList<>();
+        List<RightNotiDTO> rightNotiDTOList = new ArrayList<>();
 
         SQLiteDatabase selectAllData = getReadableDatabase();
 
-        Cursor cursor = selectAllData.rawQuery("select id,ri_vessel_status,ri_burner from righttable ",null);
+        Cursor cursor = selectAllData.rawQuery("select id,ri_vessel_status,ri_burner from righttable ", null);
 
         if (cursor.moveToFirst()) {
 
             do {
 
-                RightNotiDTO rightNotiDTO = new RightNotiDTO(cursor.getInt(0), cursor.getInt(1),cursor.getString(2));
+                RightNotiDTO rightNotiDTO = new RightNotiDTO(cursor.getInt(0), cursor.getInt(1), cursor.getString(2));
                 rightNotiDTOList.add(rightNotiDTO);
 
 
@@ -315,19 +324,19 @@ public class SqliteManager extends SQLiteOpenHelper {
     }
 
 
-    public List<LeftNotiDTO> getLeftNoti(){
+    public List<LeftNotiDTO> getLeftNoti() {
 
-        List<LeftNotiDTO> leftNotiDTOList=new ArrayList<>();
+        List<LeftNotiDTO> leftNotiDTOList = new ArrayList<>();
 
         SQLiteDatabase selectAllData = getReadableDatabase();
 
-        Cursor cursor = selectAllData.rawQuery("select id,le_vessel_status,le_burner from lefttable",null);
+        Cursor cursor = selectAllData.rawQuery("select id,le_vessel_status,le_burner from lefttable", null);
 
         if (cursor.moveToFirst()) {
 
             do {
 
-                LeftNotiDTO leftNotiDTO = new LeftNotiDTO(cursor.getInt(0), cursor.getInt(1),cursor.getString(2));
+                LeftNotiDTO leftNotiDTO = new LeftNotiDTO(cursor.getInt(0), cursor.getInt(1), cursor.getString(2));
                 leftNotiDTOList.add(leftNotiDTO);
 
 
@@ -341,19 +350,19 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     }
 
-    public List<CenterNotiDTO> getCenterNoti(){
+    public List<CenterNotiDTO> getCenterNoti() {
 
-        List<CenterNotiDTO> centerNotiDTOList=new ArrayList<>();
+        List<CenterNotiDTO> centerNotiDTOList = new ArrayList<>();
 
         SQLiteDatabase selectAllData = getReadableDatabase();
 
-        Cursor cursor = selectAllData.rawQuery("select id,ce_vessel_status,ce_burner from centertable",null);
+        Cursor cursor = selectAllData.rawQuery("select id,ce_vessel_status,ce_burner from centertable", null);
 
         if (cursor.moveToFirst()) {
 
             do {
 
-                CenterNotiDTO centerNotiDTO = new CenterNotiDTO(cursor.getInt(0), cursor.getInt(1),cursor.getString(2));
+                CenterNotiDTO centerNotiDTO = new CenterNotiDTO(cursor.getInt(0), cursor.getInt(1), cursor.getString(2));
                 centerNotiDTOList.add(centerNotiDTO);
 
 
@@ -392,7 +401,6 @@ public class SqliteManager extends SQLiteOpenHelper {
         return userDTOList;
 
     }
-
 
 
     public void storeImage(StoreImageDTO objectModelClass) {
@@ -529,11 +537,6 @@ public class SqliteManager extends SQLiteOpenHelper {
         return gasConsumptionPatternDTOList;
 
     }
-
-
-
-
-
 
 
     public boolean addMaintenanceServiceData(String m_issueID, String issueFixedDate, String personName, String issue, String deviceID) {
@@ -838,16 +841,30 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     }
 
+    public boolean setNotification(String notificationText) {
+
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(NOTIFI_TEXT, notificationText);
+        contentValues.put(READ_STATUS, "0");
+
+        return sqLiteDatabase.insert(NOTIFI_ALERT, null, contentValues) != -1;
+
+    }
+
+
     public List<NotificationResponseDTO> getAllNotificationDetails() {
 
-        deleteRecordsMoreThanHundred();
+        //deleteRecordsMoreThanHundred();
 
 
         List<NotificationResponseDTO> notificationResponseDTOList = new ArrayList<>();
 
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
-        Cursor cursorNoti = sqLiteDatabase.rawQuery("select * from notificationtable ORDER BY id DESC LIMIT 5", null);
+        Cursor cursorNoti = sqLiteDatabase.rawQuery("select * from notificationalerttable where read_status=? ORDER BY id DESC LIMIT 5", new String[]{"0"});
 
         if (cursorNoti.moveToFirst()) {
 
@@ -855,22 +872,16 @@ public class SqliteManager extends SQLiteOpenHelper {
 
 
                 System.out.println("COLUMN_ID_DESC " + cursorNoti.getInt(0));
-                System.out.println("RIGHT_VESSEL_STATUS " + cursorNoti.getInt(1));
-                System.out.println("RIGHT_WHISTLE_STATUS " + cursorNoti.getInt(2));
-                System.out.println("RIGHT_TIMER_STATUS " + cursorNoti.getInt(3));
-                System.out.println("LEFT_VESSEL_STATUS " + cursorNoti.getInt(4));
-                System.out.println("LEFT_WHISTLE_STATUS " + cursorNoti.getInt(5));
-                System.out.println("LEFT_TIMER_STATUS " + cursorNoti.getInt(6));
-                System.out.println("CENTER_VESSEL_STATUS " + cursorNoti.getInt(7));
-                System.out.println("CENTER_WHISTLE_STATUS " + cursorNoti.getInt(8));
-                System.out.println("CENTER_TIMER_STATUS " + cursorNoti.getInt(9));
+                System.out.println("NotificationStatus " + cursorNoti.getString(1));
+                System.out.println("NotificationReadStatus " + cursorNoti.getString(2));
 
 
-                NotificationResponseDTO notificationResponseDTO = new NotificationResponseDTO(cursorNoti.getInt(1), cursorNoti.getInt(2),
+
+               /* NotificationResponseDTO notificationResponseDTO = new NotificationResponseDTO(cursorNoti.getInt(1), cursorNoti.getInt(2),
                         cursorNoti.getInt(3), cursorNoti.getInt(4), cursorNoti.getInt(5), cursorNoti.getInt(6),
                         cursorNoti.getInt(7), cursorNoti.getInt(8), cursorNoti.getInt(9));
 
-                notificationResponseDTOList.add(notificationResponseDTO);
+                notificationResponseDTOList.add(notificationResponseDTO);*/
 
 
             } while (cursorNoti.moveToNext());
