@@ -69,7 +69,8 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
     private void updateReadStatus() {
-        sqliteManager.updateReadStatus();
+        boolean status=sqliteManager.updateReadStatus();
+        System.out.println("UpdatedStatus "+status);
     }
 
 }

@@ -900,7 +900,7 @@ public class SqliteManager extends SQLiteOpenHelper {
 
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
-        Cursor cursorNoti = sqLiteDatabase.rawQuery("select * from notificationalerttable  ORDER BY id DESC LIMIT 5", null);
+        Cursor cursorNoti = sqLiteDatabase.rawQuery("select * from notificationalerttable  ORDER BY id DESC LIMIT 30", null);
 
         if (cursorNoti.moveToFirst()) {
 
