@@ -22,13 +22,21 @@ import java.util.List;
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder> {
 
 
+    DeleteNotiListener deleteNotiListener;
+
+    public interface DeleteNotiListener{
+        public void deleteNoti(NotificationResponseDTO notificationResponseDTO);
+    }
+
+
     private Context mCtx;
     private List<NotificationResponseDTO> notificationDTOList;
 
 
-    public NotificationAdapter(Context mCtx, List<NotificationResponseDTO> notificationDTOList) {
+    public NotificationAdapter(Context mCtx, List<NotificationResponseDTO> notificationDTOList,DeleteNotiListener deleteNotiListener) {
         this.mCtx = mCtx;
         this.notificationDTOList = notificationDTOList;
+        this.deleteNotiListener=deleteNotiListener;
     }
 
     public void dataSet(List<NotificationResponseDTO> notificationDTOList) {
@@ -50,16 +58,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public void onBindViewHolder(@NonNull NotificationViewHolder notificationViewHolder, int i) {
 
 
-        if(notificationDTOList.get(i).getNotiReadStatus().equals("0")){
+        if (notificationDTOList.get(i).getNotiReadStatus().equals("0")) {
             notificationViewHolder.notiBlock.setBackgroundColor(Color.WHITE);
             notificationViewHolder.notiAlertText.setText(notificationDTOList.get(i).getNotiText());
-        }else if(notificationDTOList.get(i).getNotiReadStatus().equals("1")){
+        } else if (notificationDTOList.get(i).getNotiReadStatus().equals("1")) {
             notificationViewHolder.notiBlock.setBackgroundColor(Color.GRAY);
             notificationViewHolder.notiAlertText.setText(notificationDTOList.get(i).getNotiText());
         }
-
-
-
 
 
         // Picasso.get().load(notificationDTOList.get(i).getNotiImage()).into(notificationViewHolder.notiImg);
@@ -74,7 +79,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     class NotificationViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView notiImg;
+        ImageView deleteNoti;
         TextView notiAlertText;
         RelativeLayout notiBlock;
 
@@ -82,9 +87,21 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         public NotificationViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            //notiImg = (ImageView) itemView.findViewById(R.id.notifImage);
-            notiBlock=(RelativeLayout)itemView.findViewById(R.id.notiBlock);
+            deleteNoti = (ImageView) itemView.findViewById(R.id.deleteNoti);
+            notiBlock = (RelativeLayout) itemView.findViewById(R.id.notiBlock);
             notiAlertText = (TextView) itemView.findViewById(R.id.notiAlertText);
+
+            deleteNoti.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    NotificationResponseDTO notificationResponseDTO = notificationDTOList.get(getAdapterPosition());
+
+                    deleteNotiListener.deleteNoti(notificationResponseDTO);
+
+
+                }
+            });
 
 
         }

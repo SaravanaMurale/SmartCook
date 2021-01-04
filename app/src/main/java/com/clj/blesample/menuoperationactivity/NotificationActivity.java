@@ -14,7 +14,7 @@ import com.clj.blesample.model.NotificationResponseDTO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationActivity extends AppCompatActivity {
+public class NotificationActivity extends AppCompatActivity implements NotificationAdapter.DeleteNotiListener {
 
     RecyclerView notificationRecyclerView;
 
@@ -24,31 +24,27 @@ public class NotificationActivity extends AppCompatActivity {
     SqliteManager sqliteManager;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
 
 
-
-        notificationRecyclerView=(RecyclerView)findViewById(R.id.notificationRecyclerView);
+        notificationRecyclerView = (RecyclerView) findViewById(R.id.notificationRecyclerView);
         notificationRecyclerView.setLayoutManager(new LinearLayoutManager(NotificationActivity.this));
         notificationRecyclerView.setHasFixedSize(true);
 
-        notificationResponseDTOList=new ArrayList<>();
-        notificationAdapter=new NotificationAdapter(NotificationActivity.this,notificationResponseDTOList);
+        notificationResponseDTOList = new ArrayList<>();
+        notificationAdapter = new NotificationAdapter(NotificationActivity.this, notificationResponseDTOList, NotificationActivity.this);
         notificationRecyclerView.setAdapter(notificationAdapter);
 
-        sqliteManager=new SqliteManager(NotificationActivity.this);
+        sqliteManager = new SqliteManager(NotificationActivity.this);
 
         System.out.println("NotificationCalled");
 
         getAllNotifications();
 
         updateReadStatus();
-
 
 
     }
@@ -69,8 +65,21 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
     private void updateReadStatus() {
-        boolean status=sqliteManager.updateReadStatus();
-        System.out.println("UpdatedStatus "+status);
+        boolean status = sqliteManager.updateReadStatus();
+        System.out.println("UpdatedStatus " + status);
     }
 
+    @Override
+    public void deleteNoti(NotificationResponseDTO notificationResponseDTO) {
+
+       boolean deleteStatus= sqliteManager.deleteNotiById(notificationResponseDTO.getNotiColumnID());
+
+       if(deleteStatus){
+           getAllNotifications();
+       }
+
+        //delete record
+
+
+    }
 }

@@ -2,9 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/grey"
     android:orientation="vertical">
 
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="1dp"
+        >
 
     <RelativeLayout
         android:id="@+id/notiBlock"
@@ -17,11 +24,25 @@
             android:layout_height="wrap_content"
             android:text="text"
             android:textSize="15sp"
-            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:layout_centerVertical="true"
+
+            />
+        <ImageView
+            android:id="@+id/deleteNoti"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/close"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+
             />
 
 
     </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
 
 
 </RelativeLayout>
