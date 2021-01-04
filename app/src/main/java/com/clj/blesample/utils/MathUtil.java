@@ -26,6 +26,9 @@ public class MathUtil {
     public static final int IMAGE_PICK_CODE = 1000;
     public static final int PERMISSION_CODE = 1001;
 
+    //0- non read
+    //1-read
+
 
     public static final String LEFT_VESSEL_0="Vessel is not placed on left burner";
     public static final String LEFT_VESSEL_1="Vessel is placed on left burner";

@@ -89,7 +89,7 @@ public class CharacteristicListFragment extends Fragment {
     int setNotification = 0;
     TextView notificationCount;
 
-    int rightVesselForNoti, leftVesselForNoti, centerVesselForNoti;
+    List<NotificationResponseDTO> nonReadNotiCount;
 
 
     @Override
@@ -624,31 +624,35 @@ public class CharacteristicListFragment extends Fragment {
                 if(selectedWhistle>0){
 
                     sqliteManager.setNotification(selectedWhistle+" Whistle is set for Right Burner");
-                    sqliteManager.getNonReadNotifications();
+                    //sqliteManager.getNonReadNotifications();
                 }if(selectedTimer>0){
                     sqliteManager.setNotification(selectedTimer+" Min Timer is set for Right Burner");
-                    sqliteManager.getNonReadNotifications();
+                    //sqliteManager.getNonReadNotifications();
                 }
             }else if(selectedBurner.equals("01")){
 
                 if(selectedWhistle>0){
                     sqliteManager.setNotification(selectedWhistle+" Whistle is set for Left Burner");
-                    sqliteManager.getNonReadNotifications();
+                    //sqliteManager.getNonReadNotifications();
                 }if(selectedTimer>0){
                     sqliteManager.setNotification(selectedTimer+" Min Timer is set for Left Burner");
-                    sqliteManager.getNonReadNotifications();
+                    //sqliteManager.getNonReadNotifications();
                 }
 
             }else if(selectedBurner.equals("10")){
                 if(selectedWhistle>0){
                     sqliteManager.setNotification(selectedWhistle+" Whistle is set for Center Burner");
-                    sqliteManager.getNonReadNotifications();
+                    //sqliteManager.getNonReadNotifications();
                 }if(selectedTimer>0){
                     sqliteManager.setNotification(selectedTimer+" Min Timer is set for Center Burner");
-                    sqliteManager.getNonReadNotifications();
+                    //sqliteManager.getNonReadNotifications();
                 }
             }
 
+
+            nonReadNotiCount=sqliteManager.getNonReadNotifications();
+
+            notificationCount.setText(""+nonReadNotiCount.size());
 
             //Whistle and Timer
 
@@ -863,7 +867,7 @@ public class CharacteristicListFragment extends Fragment {
                 /*sqliteManager.addRight(rightVessel,"00");
                 List<RightNotiDTO> rightNotiDTOList =sqliteManager.getRightNoti();*/
 
-                rightVesselForNoti = rightVessel;
+
 
                 leftVesselFlame[0] = data[3];
                 int leftVessel = (leftVesselFlame[0] & 0x80) >> 7;
@@ -872,7 +876,7 @@ public class CharacteristicListFragment extends Fragment {
                 /*sqliteManager.addLeft(leftVessel,"01");
                 List<LeftNotiDTO> leftNotiDTOList=sqliteManager.getLeftNoti();*/
 
-                leftVesselForNoti = leftVessel;
+
 
                 centerVesselFlame[0] = data[4];
                 int centerVessel = (centerVesselFlame[0] & 0x80) >> 7;
@@ -884,7 +888,7 @@ public class CharacteristicListFragment extends Fragment {
                /*int notiSize=rightNotiDTOList.size()+leftNotiDTOList.size()+centerNotiDTOList.size();
                notificationCount.setText(""+notiSize);*/
 
-                centerVesselForNoti = centerVessel;
+
 
                 int batteryPercentage = data[5];
 
