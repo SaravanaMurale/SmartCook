@@ -95,44 +95,15 @@ public class CharacteristicListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        //Hides status bar
-        getActivity().getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
-                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        currentApiVersion = android.os.Build.VERSION.SDK_INT;
-        final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-        if (currentApiVersion >= Build.VERSION_CODES.KITKAT) {
-            getActivity().getWindow().getDecorView().setSystemUiVisibility(flags);
-            final View decorView = getActivity().getWindow().getDecorView();
-            decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
-                @Override
-                public void onSystemUiVisibilityChange(int visibility) {
-                    if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
-                        decorView.setSystemUiVisibility(flags);
-                    }
-                }
-            });
-        }
+        hideStatusBar();
 
-        //end of status bar
         View v = inflater.inflate(R.layout.fragment_characteric_list, null);
-
-        sqliteManager = new SqliteManager(getActivity());
 
         initView(v);
 
         getImageFromSqliteDB();
 
-
         return v;
-    }
-
-    private void getImageFromSqliteDB() {
-
-
     }
 
 
@@ -149,9 +120,8 @@ public class CharacteristicListFragment extends Fragment {
 
         }
 
-       /* if (setNotification == 1) {
-            getNotificationDetails();
-        }*/
+
+        setNonReadNotificationCount();
 
 
         String selectedBurner = PreferencesUtil.getValueString(getActivity(), PreferencesUtil.BURNER);
@@ -163,17 +133,6 @@ public class CharacteristicListFragment extends Fragment {
             Toast.makeText(getActivity(), "Empty Write Data", Toast.LENGTH_LONG).show();
         } else {
 
-           /* if (selectedBurner.equals("00")) {
-                leftBurnerSettings.setVisibility(View.INVISIBLE);
-                leftBurnerEdit.setVisibility(View.VISIBLE);
-            } else if (selectedBurner.equals("01")) {
-                centerBurnerSettings.setVisibility(View.INVISIBLE);
-                centerBurnerEdit.setVisibility(View.VISIBLE);
-            } else if (selectedBurner.equals("10")) {
-                rightBurnerSettings.setVisibility(View.INVISIBLE);
-                rightBurnerEdit.setVisibility(View.VISIBLE);
-            }*/
-
             Toast.makeText(getActivity(), "WriteCalled", Toast.LENGTH_LONG).show();
 
             System.out.println("ReceivedStoredPreferenceValue" + selectedBurner + " " + selectedTimer + " " + selectedWhistle);
@@ -183,10 +142,10 @@ public class CharacteristicListFragment extends Fragment {
 
                 callMe(1, selectedBurner, selectedTimer, selectedWhistle, 0, MathUtil.EDIT_FORMET);
 
-                /*PreferencesUtil.remove(getActivity(), PreferencesUtil.BURNER);
+                PreferencesUtil.remove(getActivity(), PreferencesUtil.BURNER);
                 PreferencesUtil.remove(getActivity(), PreferencesUtil.TIMER_IN_MINUTE);
                 PreferencesUtil.remove(getActivity(), PreferencesUtil.WHISTLE_IN_COUNT);
-                PreferencesUtil.remove(getActivity(), PreferencesUtil.FLAME_MODE);*/
+                PreferencesUtil.remove(getActivity(), PreferencesUtil.FLAME_MODE);
 
 
             }
@@ -196,23 +155,12 @@ public class CharacteristicListFragment extends Fragment {
 
     }
 
-    private void getNotificationDetails() {
-
-       /* List<NotificationResponseDTO> notificationResponseDTOList = sqliteManager.getAllNotificationDetails();
-
-        if (notificationResponseDTOList == null) {
-            Toast.makeText(getActivity(), "Notification List Is Empty", Toast.LENGTH_LONG).show();
-        } else {
-            //notificationCount.setText("" + notificationResponseDTOList.size());
-        }*/
-
-
-    }
-
 
     private void initView(View v) {
         mResultAdapter = new ResultAdapter(getActivity());
         ListView listView_device = (ListView) v.findViewById(R.id.list_service_character);
+
+        sqliteManager = new SqliteManager(getActivity());
 
         selectLeft = (TextView) v.findViewById(R.id.selectLeft);
         selectCenter = (TextView) v.findViewById(R.id.selectCenter);
@@ -252,10 +200,7 @@ public class CharacteristicListFragment extends Fragment {
 
         //End of Whistle and Timer
 
-
         menuIcon = (TextView) v.findViewById(R.id.menuIcon);
-
-
         notificationIcon = (ImageView) v.findViewById(R.id.notificationIcon);
 
 
@@ -471,15 +416,6 @@ public class CharacteristicListFragment extends Fragment {
         });
     }
 
-    private void callEditActivity(String burner) {
-
-        Intent intent = new Intent(getActivity(), EditActivity.class);
-        intent.putExtra("BURNER", burner);
-        startActivity(intent);
-
-    }
-
-
     private void callMe(int position, final String burner, final int timerInMin, final int whistleInCount, final int flameMode, final int frameFormet) {
 
         //Position 0 -->Notify
@@ -620,39 +556,40 @@ public class CharacteristicListFragment extends Fragment {
             int selectedTimer = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.TIMER_IN_MINUTE);
             int selectedWhistle = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.WHISTLE_IN_COUNT);
 
-            if(selectedBurner.equals("00")){
-                if(selectedWhistle>0){
+            if (selectedBurner.equals("00")) {
+                if (selectedWhistle > 0) {
 
-                    sqliteManager.setNotification(selectedWhistle+" Whistle is set for Right Burner");
-                    //sqliteManager.getNonReadNotifications();
-                }if(selectedTimer>0){
-                    sqliteManager.setNotification(selectedTimer+" Min Timer is set for Right Burner");
+                    sqliteManager.setNotification(selectedWhistle + " Whistle is set for Right Burner");
                     //sqliteManager.getNonReadNotifications();
                 }
-            }else if(selectedBurner.equals("01")){
-
-                if(selectedWhistle>0){
-                    sqliteManager.setNotification(selectedWhistle+" Whistle is set for Left Burner");
+                if (selectedTimer > 0) {
+                    sqliteManager.setNotification(selectedTimer + " Min Timer is set for Right Burner");
                     //sqliteManager.getNonReadNotifications();
-                }if(selectedTimer>0){
-                    sqliteManager.setNotification(selectedTimer+" Min Timer is set for Left Burner");
+                }
+            } else if (selectedBurner.equals("01")) {
+
+                if (selectedWhistle > 0) {
+                    sqliteManager.setNotification(selectedWhistle + " Whistle is set for Left Burner");
+                    //sqliteManager.getNonReadNotifications();
+                }
+                if (selectedTimer > 0) {
+                    sqliteManager.setNotification(selectedTimer + " Min Timer is set for Left Burner");
                     //sqliteManager.getNonReadNotifications();
                 }
 
-            }else if(selectedBurner.equals("10")){
-                if(selectedWhistle>0){
-                    sqliteManager.setNotification(selectedWhistle+" Whistle is set for Center Burner");
+            } else if (selectedBurner.equals("10")) {
+                if (selectedWhistle > 0) {
+                    sqliteManager.setNotification(selectedWhistle + " Whistle is set for Center Burner");
                     //sqliteManager.getNonReadNotifications();
-                }if(selectedTimer>0){
-                    sqliteManager.setNotification(selectedTimer+" Min Timer is set for Center Burner");
+                }
+                if (selectedTimer > 0) {
+                    sqliteManager.setNotification(selectedTimer + " Min Timer is set for Center Burner");
                     //sqliteManager.getNonReadNotifications();
                 }
             }
 
+            setNonReadNotificationCount();
 
-            nonReadNotiCount=sqliteManager.getNonReadNotifications();
-
-            notificationCount.setText(""+nonReadNotiCount.size());
 
             //Whistle and Timer
 
@@ -669,8 +606,6 @@ public class CharacteristicListFragment extends Fragment {
                 rightWhistle = whistleInCount;
 
 
-
-
                 leftTimer = 0xff;
                 leftWhistle = 0xff;
                 centerTimer = 0xff;
@@ -681,7 +616,6 @@ public class CharacteristicListFragment extends Fragment {
 
                 leftTimer = timerInMin;
                 leftWhistle = whistleInCount;
-
 
 
                 rightTimer = 0xff;
@@ -868,14 +802,12 @@ public class CharacteristicListFragment extends Fragment {
                 List<RightNotiDTO> rightNotiDTOList =sqliteManager.getRightNoti();*/
 
 
-
                 leftVesselFlame[0] = data[3];
                 int leftVessel = (leftVesselFlame[0] & 0x80) >> 7;
                 int leftFlameMode = (leftVesselFlame[0] & 0x7C) >> 2;
 
                 /*sqliteManager.addLeft(leftVessel,"01");
                 List<LeftNotiDTO> leftNotiDTOList=sqliteManager.getLeftNoti();*/
-
 
 
                 centerVesselFlame[0] = data[4];
@@ -889,15 +821,17 @@ public class CharacteristicListFragment extends Fragment {
                notificationCount.setText(""+notiSize);*/
 
 
-
                 int batteryPercentage = data[5];
+
+                if (batteryPercentage <= 30) {
+                    sqliteManager.setNotification("Your Battery is Criticaly Low");
+                }
+
 
                 System.out.println("VesselAndFlameMode" + rightVessel + " " + rightFlameMode + " " + leftVessel + " " + leftFlameMode + " " + centerVessel + " " + centerFlameMode + " " + batteryPercentage);
 
 
                 setValueInUI(rightVessel, rightFlameMode, leftVessel, leftFlameMode, centerVessel, centerFlameMode);
-
-                // setNotification(rightVessel, rightFlameMode, leftVessel, leftFlameMode, centerVessel, centerFlameMode);
 
                 setNotification = 1;
 
@@ -957,7 +891,7 @@ public class CharacteristicListFragment extends Fragment {
 
         if (rightWhistle == 0) {
             sqliteManager.setNotification("Whistle is completed for Right Burner");
-            sqliteManager.getNonReadNotifications();
+
         }
 
         if (rightTimer == 0) {
@@ -980,12 +914,23 @@ public class CharacteristicListFragment extends Fragment {
             sqliteManager.setNotification("Timer is completed for Center Burner");
         }
 
+        setNonReadNotificationCount();
+
 
     }
 
-    private void setNotificationForWhistleAndTimer(int rightVessel, int rightWhistle, int rightTimer, int leftVessel, int leftWhistle, int leftTimer, int centerVessel, int centerWhistle, int centerTimer) {
+    private void setNonReadNotificationCount() {
 
-        sqliteManager.storeWhistleAndTimerNotificationDetails(rightVessel, rightWhistle, rightTimer, leftVessel, leftWhistle, leftTimer, centerVessel, centerWhistle, centerTimer);
+        nonReadNotiCount = sqliteManager.getNonReadNotifications();
+
+        int count = nonReadNotiCount.size();
+
+        if (count > 0) {
+            notificationCount.setText("" + count);
+        } else {
+
+        }
+
 
     }
 
@@ -1001,13 +946,6 @@ public class CharacteristicListFragment extends Fragment {
 
         selectedCenterWhistleCount.setText("" + centerWhistle);
         selectedCenterTimerCount.setText("" + centerTimer + "min");
-
-
-    }
-
-    private void setNotification(int rightVessel, int rightFlameMode, int leftVessel, int leftFlameMode, int centerVessel, int centerFlameMode) {
-
-        sqliteManager.storeVesselNotificationDetils(rightVessel, rightFlameMode, leftVessel, leftFlameMode, centerVessel, centerFlameMode);
 
 
     }
@@ -1296,5 +1234,44 @@ public class CharacteristicListFragment extends Fragment {
 
     }
 
+    private void hideStatusBar() {
+
+        //Hides status bar
+        getActivity().getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        currentApiVersion = android.os.Build.VERSION.SDK_INT;
+        final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        if (currentApiVersion >= Build.VERSION_CODES.KITKAT) {
+            getActivity().getWindow().getDecorView().setSystemUiVisibility(flags);
+            final View decorView = getActivity().getWindow().getDecorView();
+            decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+                @Override
+                public void onSystemUiVisibilityChange(int visibility) {
+                    if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                        decorView.setSystemUiVisibility(flags);
+                    }
+                }
+            });
+        }
+
+    }
+
+
+    private void callEditActivity(String burner) {
+
+        Intent intent = new Intent(getActivity(), EditActivity.class);
+        intent.putExtra("BURNER", burner);
+        startActivity(intent);
+
+    }
+
+    private void getImageFromSqliteDB() {
+
+
+    }
 
 }

@@ -43,37 +43,12 @@ public class NotificationAct extends AppCompatActivity {
 
         sqliteManager=new SqliteManager(NotificationAct.this);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getRightNoti();
-                getLeftNoti();
-                getCenterNoti();
 
-                getAllNotificationListDTO=new GetAllNotificationListDTO(rightNotiDTOList,leftNotiDTOList,centerNotiDTOList);
-
-                getAllNotificationListDTOList.add(getAllNotificationListDTO);
-
-                notiAdapter.setDate(getAllNotificationListDTOList);
-            }
-        },3000);
 
 
     }
 
-    private void getCenterNoti() {
 
-        rightNotiDTOList =sqliteManager.getRightNoti();
-
-    }
-
-    private void getLeftNoti() {
-        leftNotiDTOList=  sqliteManager.getLeftNoti();
-    }
-
-    private void getRightNoti() {
-        centerNotiDTOList= sqliteManager.getCenterNoti();
-    }
 
 
 }
