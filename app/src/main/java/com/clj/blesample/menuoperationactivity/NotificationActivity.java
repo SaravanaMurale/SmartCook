@@ -47,13 +47,17 @@ public class NotificationActivity extends AppCompatActivity {
 
         getAllNotifications();
 
+        updateReadStatus();
+
 
 
     }
 
+
     private void getAllNotifications() {
 
-        notificationResponseDTOList = sqliteManager.getAllNotificationDetails();
+        notificationResponseDTOList = sqliteManager.getAllNotifications();
+
 
         if (notificationResponseDTOList == null) {
             Toast.makeText(NotificationActivity.this, "Notification List Is Empty", Toast.LENGTH_LONG).show();
@@ -63,4 +67,9 @@ public class NotificationActivity extends AppCompatActivity {
         }
 
     }
+
+    private void updateReadStatus() {
+        sqliteManager.updateReadStatus();
+    }
+
 }

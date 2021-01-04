@@ -198,13 +198,13 @@ public class CharacteristicListFragment extends Fragment {
 
     private void getNotificationDetails() {
 
-        List<NotificationResponseDTO> notificationResponseDTOList = sqliteManager.getAllNotificationDetails();
+       /* List<NotificationResponseDTO> notificationResponseDTOList = sqliteManager.getAllNotificationDetails();
 
         if (notificationResponseDTOList == null) {
             Toast.makeText(getActivity(), "Notification List Is Empty", Toast.LENGTH_LONG).show();
         } else {
             //notificationCount.setText("" + notificationResponseDTOList.size());
-        }
+        }*/
 
 
     }
@@ -403,7 +403,7 @@ public class CharacteristicListFragment extends Fragment {
         notificationIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), NotificationAct.class);
+                Intent intent = new Intent(getActivity(), NotificationActivity.class);
                 startActivity(intent);
 
             }
@@ -616,6 +616,40 @@ public class CharacteristicListFragment extends Fragment {
 
         } else if (frameFormet == 2) {
 
+            String selectedBurner = PreferencesUtil.getValueString(getActivity(), PreferencesUtil.BURNER);
+            int selectedTimer = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.TIMER_IN_MINUTE);
+            int selectedWhistle = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.WHISTLE_IN_COUNT);
+
+            if(selectedBurner.equals("00")){
+                if(selectedWhistle>0){
+
+                    sqliteManager.setNotification(selectedWhistle+" Whistle is set for Right Burner");
+                    sqliteManager.getNonReadNotifications();
+                }if(selectedTimer>0){
+                    sqliteManager.setNotification(selectedTimer+" Min Timer is set for Right Burner");
+                    sqliteManager.getNonReadNotifications();
+                }
+            }else if(selectedBurner.equals("01")){
+
+                if(selectedWhistle>0){
+                    sqliteManager.setNotification(selectedWhistle+" Whistle is set for Left Burner");
+                    sqliteManager.getNonReadNotifications();
+                }if(selectedTimer>0){
+                    sqliteManager.setNotification(selectedTimer+" Min Timer is set for Left Burner");
+                    sqliteManager.getNonReadNotifications();
+                }
+
+            }else if(selectedBurner.equals("10")){
+                if(selectedWhistle>0){
+                    sqliteManager.setNotification(selectedWhistle+" Whistle is set for Center Burner");
+                    sqliteManager.getNonReadNotifications();
+                }if(selectedTimer>0){
+                    sqliteManager.setNotification(selectedTimer+" Min Timer is set for Center Burner");
+                    sqliteManager.getNonReadNotifications();
+                }
+            }
+
+
             //Whistle and Timer
 
             byte[] timerOrWhistle = new byte[9];
@@ -630,11 +664,7 @@ public class CharacteristicListFragment extends Fragment {
                 rightTimer = timerInMin;
                 rightWhistle = whistleInCount;
 
-                if(rightWhistle>0){
-                    sqliteManager.setNotification(rightWhistle+" Whistle is set for Right Burner");
-                }if(rightTimer>0){
-                    sqliteManager.setNotification(rightTimer+" Min Timer is set for Right Burner");
-                }
+
 
 
                 leftTimer = 0xff;
@@ -648,11 +678,7 @@ public class CharacteristicListFragment extends Fragment {
                 leftTimer = timerInMin;
                 leftWhistle = whistleInCount;
 
-                if(leftWhistle>0){
-                    sqliteManager.setNotification(leftWhistle+" Whistle is set for Left Burner");
-                }if(leftTimer>0){
-                    sqliteManager.setNotification(leftTimer+" Min Timer is set for Left Burner");
-                }
+
 
                 rightTimer = 0xff;
                 rightWhistle = 0xff;
@@ -927,7 +953,7 @@ public class CharacteristicListFragment extends Fragment {
 
         if (rightWhistle == 0) {
             sqliteManager.setNotification("Whistle is completed for Right Burner");
-            sqliteManager.getAllNotificationDetails();
+            sqliteManager.getNonReadNotifications();
         }
 
         if (rightTimer == 0) {

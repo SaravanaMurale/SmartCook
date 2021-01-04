@@ -855,7 +855,7 @@ public class SqliteManager extends SQLiteOpenHelper {
     }
 
 
-    public List<NotificationResponseDTO> getAllNotificationDetails() {
+    public List<NotificationResponseDTO> getNonReadNotifications() {
 
         //deleteRecordsMoreThanHundred();
 
@@ -877,11 +877,10 @@ public class SqliteManager extends SQLiteOpenHelper {
 
 
 
-               /* NotificationResponseDTO notificationResponseDTO = new NotificationResponseDTO(cursorNoti.getInt(1), cursorNoti.getInt(2),
-                        cursorNoti.getInt(3), cursorNoti.getInt(4), cursorNoti.getInt(5), cursorNoti.getInt(6),
-                        cursorNoti.getInt(7), cursorNoti.getInt(8), cursorNoti.getInt(9));
+                NotificationResponseDTO notificationResponseDTO = new NotificationResponseDTO(cursorNoti.getInt(0), cursorNoti.getString(1),
+                        cursorNoti.getString(2));
 
-                notificationResponseDTOList.add(notificationResponseDTO);*/
+                notificationResponseDTOList.add(notificationResponseDTO);
 
 
             } while (cursorNoti.moveToNext());
@@ -890,6 +889,54 @@ public class SqliteManager extends SQLiteOpenHelper {
         }
 
         return notificationResponseDTOList;
+    }
+
+    public List<NotificationResponseDTO> getAllNotifications() {
+
+        //deleteRecordsMoreThanHundred();
+
+
+        List<NotificationResponseDTO> notificationResponseDTOList = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        Cursor cursorNoti = sqLiteDatabase.rawQuery("select * from notificationalerttable  ORDER BY id DESC LIMIT 5", null);
+
+        if (cursorNoti.moveToFirst()) {
+
+            do {
+
+
+                System.out.println("COLUMN_ID_DESC " + cursorNoti.getInt(0));
+                System.out.println("NotificationStatus " + cursorNoti.getString(1));
+                System.out.println("NotificationReadStatus " + cursorNoti.getString(2));
+
+
+
+                NotificationResponseDTO notificationResponseDTO = new NotificationResponseDTO(cursorNoti.getInt(0), cursorNoti.getString(1),
+                        cursorNoti.getString(2));
+
+                notificationResponseDTOList.add(notificationResponseDTO);
+
+
+            } while (cursorNoti.moveToNext());
+
+
+        }
+
+        return notificationResponseDTOList;
+    }
+
+    public boolean updateReadStatus() {
+
+        SQLiteDatabase updateSqLiteDatabase = getWritableDatabase();
+        ContentValues updateContentValues = new ContentValues();
+
+        updateContentValues.put(READ_STATUS, "1");
+
+        return updateSqLiteDatabase.update(NOTIFI_ALERT, updateContentValues, null, null) > 0;
+
+
     }
 
     private void deleteRecordsMoreThanHundred() {

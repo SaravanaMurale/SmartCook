@@ -6,149 +6,22 @@
     android:orientation="vertical">
 
 
-
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/notiBlock"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/notifyRightVessel"
+            android:id="@+id/notiAlertText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:textSize="20sp"
-            android:text="Right Vessel is placed "
-            android:visibility="gone"
+            android:text="text"
+            android:textSize="15sp"
+            android:layout_margin="10dp"
             />
 
 
+    </RelativeLayout>
 
-
-        <TextView
-            android:id="@+id/notifyRightWhistle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:text="Right Whistle Placed"
-            android:visibility="gone"
-            android:textSize="20sp"
-
-
-            />
-
-
-        <TextView
-            android:id="@+id/notifyRightTimer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:text="Right Timer Placed"
-            android:visibility="gone"
-            android:textSize="20sp"
-
-            />
-
-
-
-
-        <TextView
-            android:id="@+id/notifyLeftVessel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:text="Left Vessel is placed "
-            android:visibility="gone"
-            android:textSize="20sp"
-            />
-
-
-
-        <TextView
-            android:id="@+id/notifyLeftWhistle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:text="Left Whistle Placed"
-            android:visibility="gone"
-            android:textSize="20sp"
-
-            />
-
-
-
-
-        <TextView
-            android:id="@+id/notifyLeftTimer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:text="Left Timer Placed"
-            android:visibility="gone"
-            android:textSize="20sp"
-
-            />
-
-
-
-
-        <TextView
-            android:id="@+id/notifyCenterVessel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:textSize="20sp"
-            android:text="Center Vessel is placed "
-            android:visibility="gone"
-            />
-
-
-
-        <TextView
-            android:id="@+id/notifyCenterWhistle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:text="Center Whistle Placed"
-            android:visibility="gone"
-            android:textSize="20sp"
-
-            />
-
-
-
-
-        <TextView
-            android:id="@+id/notifyCenterTimer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="5dp"
-            android:padding="5dp"
-            android:text="Center Timer Placed"
-            android:visibility="gone"
-            android:textSize="20sp"
-
-            />
-
-
-
-    </LinearLayout>
 
 </RelativeLayout>
