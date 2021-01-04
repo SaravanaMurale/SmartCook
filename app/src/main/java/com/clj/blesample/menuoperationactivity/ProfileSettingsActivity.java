@@ -169,7 +169,15 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     private void getImageFromSqliteDB() {
 
         StoreImageDTO storeImageDTO = sqliteManager.getImage();
-        profilePic.setImageBitmap(storeImageDTO.getImage());
+
+        if (storeImageDTO.getImage() == null) {
+            profilePic.setImageDrawable(getResources().getDrawable(R.drawable.person));
+            System.out.println("ImageIsNotAvaliable");
+        } else if (storeImageDTO.getImage() != null) {
+            profilePic.setImageBitmap(storeImageDTO.getImage());
+
+        }
+
     }
 
     @Override

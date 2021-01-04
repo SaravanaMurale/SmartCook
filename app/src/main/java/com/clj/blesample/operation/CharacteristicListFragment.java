@@ -9,6 +9,7 @@ import android.bluetooth.BluetoothGattService;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,27 +17,26 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.clj.blesample.DummyActivity;
 import com.clj.blesample.R;
 import com.clj.blesample.databasemanager.SqliteManager;
 import com.clj.blesample.menuoperationactivity.EditActivity;
 import com.clj.blesample.menuoperationactivity.MenuActivity;
 import com.clj.blesample.menuoperationactivity.NotificationActivity;
+import com.clj.blesample.menuoperationactivity.ProfileSettingsActivity;
 import com.clj.blesample.model.NotificationResponseDTO;
 import com.clj.blesample.model.StoreImageDTO;
-import com.clj.blesample.notificationpackage.CenterNotiDTO;
-import com.clj.blesample.notificationpackage.LeftNotiDTO;
-import com.clj.blesample.notificationpackage.NotificationAct;
-import com.clj.blesample.notificationpackage.RightNotiDTO;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
+import com.clj.blesample.utils.FontUtil;
 import com.clj.blesample.utils.MathUtil;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleNotifyCallback;
@@ -49,6 +49,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class CharacteristicListFragment extends Fragment {
@@ -67,14 +69,13 @@ public class CharacteristicListFragment extends Fragment {
 
     int currentApiVersion;
 
-    Button leftBurner, leftBurnerSettings, leftBurnerEdit, centerBurner, centerBurnerSettings, centerBurnerEdit, rightBurner, rightBurnerSettings, rightBurnerEdit;
-    ImageView vesselLeft, vesselCenter, vesselRight, timerLeft, timerCenter, timerRight;
 
-    byte[] currentByte, currentByte1;
-
+    CircleImageView seletedUserProfile;
+    ImageView selectBluetoothStatus;
 
     TextView selectLeft, selectCenter, selectRight, selectSim, selectHigh, selectOff, menuIcon;
     ImageView notificationIcon;
+    Typeface octinPrisonFont;
 
     ImageView selectedLeftWhistle, selectedRightWhistle, selectedCenterWhistle, selectedLeftTimer, selectedRightTimer, selectedCenterTimer;
 
@@ -101,15 +102,22 @@ public class CharacteristicListFragment extends Fragment {
 
         initView(v);
 
-        getImageFromSqliteDB();
+        getFont();
+
+        startBlinking(selectBluetoothStatus);
+
 
         return v;
     }
 
 
+
+
     @Override
     public void onResume() {
         super.onResume();
+
+        getImageFromSqliteDB();
 
         //Calls Notify
         if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
@@ -152,6 +160,15 @@ public class CharacteristicListFragment extends Fragment {
 
         }
 
+        selectLeft.setTypeface(octinPrisonFont);
+        selectRight.setTypeface(octinPrisonFont);
+        selectCenter.setTypeface(octinPrisonFont);
+
+        selectSim.setTypeface(octinPrisonFont);
+        selectHigh.setTypeface(octinPrisonFont);
+        selectOff.setTypeface(octinPrisonFont);
+
+
 
     }
 
@@ -162,9 +179,13 @@ public class CharacteristicListFragment extends Fragment {
 
         sqliteManager = new SqliteManager(getActivity());
 
+        seletedUserProfile = (CircleImageView) v.findViewById(R.id.seletedUserProfile);
+        selectBluetoothStatus=(ImageView)v.findViewById(R.id.selectBluetoothStatus);
+
         selectLeft = (TextView) v.findViewById(R.id.selectLeft);
         selectCenter = (TextView) v.findViewById(R.id.selectCenter);
         selectRight = (TextView) v.findViewById(R.id.selectRight);
+
 
         selectSim = (TextView) v.findViewById(R.id.selectSim);
         selectHigh = (TextView) v.findViewById(R.id.selectHigh);
@@ -186,15 +207,21 @@ public class CharacteristicListFragment extends Fragment {
 
         //Whistle and Timer
         selectedRightWhistleCount = (TextView) v.findViewById(R.id.selectedRightWhistleCount);
+        selectedRightWhistleCount.setTypeface(octinPrisonFont);
         selectedRightTimerCount = (TextView) v.findViewById(R.id.selectedRightTimerCount);
+        selectedRightTimerCount.setTypeface(octinPrisonFont);
 
 
         selectedLeftWhistleCount = (TextView) v.findViewById(R.id.selectedLeftWhistleCount);
+        selectedLeftWhistleCount.setTypeface(octinPrisonFont);
         selectedLeftTimerCount = (TextView) v.findViewById(R.id.selectedLeftTimerCount);
+        selectedLeftTimerCount.setTypeface(octinPrisonFont);
 
 
         selectedCenterWhistleCount = (TextView) v.findViewById(R.id.selectedCenterWhistleCount);
+        selectedCenterWhistleCount.setTypeface(octinPrisonFont);
         selectedCenterTimerCount = (TextView) v.findViewById(R.id.selectedCenterTimerCount);
+        selectedCenterTimerCount.setTypeface(octinPrisonFont);
 
         notificationCount = (TextView) v.findViewById(R.id.notificationCount);
 
@@ -202,6 +229,14 @@ public class CharacteristicListFragment extends Fragment {
 
         menuIcon = (TextView) v.findViewById(R.id.menuIcon);
         notificationIcon = (ImageView) v.findViewById(R.id.notificationIcon);
+
+        seletedUserProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ProfileSettingsActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         selectedLeftWhistle.setOnClickListener(new View.OnClickListener() {
@@ -257,6 +292,8 @@ public class CharacteristicListFragment extends Fragment {
 
                 selectedBurner = MathUtil.LEFT_BURNER;
 
+                selectLeft.setTypeface(octinPrisonFont);
+
                 selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
                 selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
                 selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
@@ -267,6 +304,8 @@ public class CharacteristicListFragment extends Fragment {
         selectCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                selectCenter.setTypeface(octinPrisonFont);
 
                 selectedBurner = MathUtil.CENTER_BURNER;
 
@@ -280,6 +319,8 @@ public class CharacteristicListFragment extends Fragment {
         selectRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                selectRight.setTypeface(octinPrisonFont);
 
                 selectedBurner = MathUtil.RIGHT_BURNER;
 
@@ -938,14 +979,20 @@ public class CharacteristicListFragment extends Fragment {
     private void setWhistleAndTimerValueInUI(int rightWhistle, int rightTimer, int leftWhistle, int leftTimer, int centerWhistle, int centerTimer) {
 
         selectedRightWhistleCount.setText("" + rightWhistle);
+        selectedRightWhistleCount.setTypeface(octinPrisonFont);
         selectedRightTimerCount.setText("" + rightTimer + "min");
+        selectedRightTimerCount.setTypeface(octinPrisonFont);
 
         selectedLeftWhistleCount.setText("" + leftWhistle);
+        selectedLeftWhistleCount.setTypeface(octinPrisonFont);
         selectedLeftTimerCount.setText("" + leftTimer + "min");
+        selectedLeftTimerCount.setTypeface(octinPrisonFont);
 
 
         selectedCenterWhistleCount.setText("" + centerWhistle);
+        selectedCenterWhistleCount.setTypeface(octinPrisonFont);
         selectedCenterTimerCount.setText("" + centerTimer + "min");
+        selectedCenterTimerCount.setTypeface(octinPrisonFont);
 
 
     }
@@ -1271,7 +1318,39 @@ public class CharacteristicListFragment extends Fragment {
 
     private void getImageFromSqliteDB() {
 
+        StoreImageDTO storeImageDTO = sqliteManager.getImage();
+
+        if (storeImageDTO.getImage() == null) {
+            seletedUserProfile.setImageDrawable(getResources().getDrawable(R.drawable.person));
+            System.out.println("ImageIsNotAvaliable");
+        } else if (storeImageDTO.getImage() != null) {
+            seletedUserProfile.setImageBitmap(storeImageDTO.getImage());
+
+        }
+
 
     }
+
+    private void stopBlinking(ImageView bluetoothIcon) {
+        bluetoothIcon.clearAnimation();
+    }
+
+    private void startBlinking(ImageView bluetoothIcon) {
+
+        Animation animation = new AlphaAnimation(1, 0); //to change visibility from visible to invisible
+        animation.setDuration(1000); //1 second duration for each animation cycle
+        animation.setInterpolator(new LinearInterpolator());
+        animation.setRepeatCount(Animation.INFINITE); //repeating indefinitely
+        animation.setRepeatMode(Animation.REVERSE); //animation will start from end point once ended.
+        bluetoothIcon.startAnimation(animation);
+
+    }
+
+    private void getFont() {
+
+        octinPrisonFont = FontUtil.getOctinPrisonFont(getActivity());
+
+    }
+
 
 }

@@ -24,5 +24,15 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+    <style name="EditTextHintColor" parent="TextAppearance.AppCompat">
+
+        <item name="android:textColorHint">@color/color_grey_ke</item>
+        <item name="android:textSize">20sp</item>
+        <!--<item name="colorControlNormal">@color/color_grey_ke</item>
+        &lt;!&ndash; Label color in TRUE state and bar color FALSE and TRUE State &ndash;&gt;
+        <item name="colorAccent">@android:color/white</item>
+        <item name="colorControlActivated">@android:color/black</item>-->
+    </style>
+
 
 </resources>
