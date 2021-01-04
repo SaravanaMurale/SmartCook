@@ -630,6 +630,13 @@ public class CharacteristicListFragment extends Fragment {
                 rightTimer = timerInMin;
                 rightWhistle = whistleInCount;
 
+                if(rightWhistle>0){
+                    sqliteManager.setNotification(rightWhistle+" Whistle is set for Right Burner");
+                }if(rightTimer>0){
+                    sqliteManager.setNotification(rightTimer+" Min Timer is set for Right Burner");
+                }
+
+
                 leftTimer = 0xff;
                 leftWhistle = 0xff;
                 centerTimer = 0xff;
@@ -640,6 +647,12 @@ public class CharacteristicListFragment extends Fragment {
 
                 leftTimer = timerInMin;
                 leftWhistle = whistleInCount;
+
+                if(leftWhistle>0){
+                    sqliteManager.setNotification(leftWhistle+" Whistle is set for Left Burner");
+                }if(leftTimer>0){
+                    sqliteManager.setNotification(leftTimer+" Min Timer is set for Left Burner");
+                }
 
                 rightTimer = 0xff;
                 rightWhistle = 0xff;
@@ -692,7 +705,7 @@ public class CharacteristicListFragment extends Fragment {
                                 @Override
                                 public void run() {
 
-                                    Toast.makeText(getActivity(), "Write Success", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), "Whistle and Timer Is Set", Toast.LENGTH_LONG).show();
 
                                 }
                             });
@@ -704,7 +717,7 @@ public class CharacteristicListFragment extends Fragment {
                                 @Override
                                 public void run() {
 
-                                    Toast.makeText(getActivity(), "Write Failed", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), "Whistle and Timer Is Not Set", Toast.LENGTH_LONG).show();
 
                                     System.out.println("TimerException" + exception.toString());
                                 }
