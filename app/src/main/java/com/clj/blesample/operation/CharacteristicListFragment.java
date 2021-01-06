@@ -230,6 +230,8 @@ public class CharacteristicListFragment extends Fragment {
         menuIcon = (TextView) v.findViewById(R.id.menuIcon);
         notificationIcon = (ImageView) v.findViewById(R.id.notificationIcon);
 
+        menuIcon.setTypeface(octinPrisonFont);
+
         seletedUserProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
