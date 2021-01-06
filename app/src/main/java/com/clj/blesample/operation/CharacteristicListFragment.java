@@ -43,6 +43,7 @@ import com.clj.fastble.callback.BleNotifyCallback;
 import com.clj.fastble.callback.BleWriteCallback;
 import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.exception.BleException;
+import com.sdsmdg.harjot.crollerTest.Croller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -84,6 +85,8 @@ public class CharacteristicListFragment extends Fragment {
     TextView selectedRightWhistleCount, selectedRightTimerCount, selectedLeftWhistleCount, selectedLeftTimerCount, selectedCenterWhistleCount, selectedCenterTimerCount;
 
     private SqliteManager sqliteManager;
+
+    Croller leftCroller,rightCroller,centerCroller;
 
     String selectedBurner;
 
@@ -183,40 +186,43 @@ public class CharacteristicListFragment extends Fragment {
         selectBluetoothStatus=(ImageView)v.findViewById(R.id.selectBluetoothStatus);
 
 
+        leftCroller=(Croller)v.findViewById(R.id.leftBurner);
+        rightCroller=(Croller)v.findViewById(R.id.rightBurner);
+        centerCroller=(Croller)v.findViewById(R.id.centerBurner);
 
-        /*selectedLeftWhistle = (ImageView) v.findViewById(R.id.selectedLeftWhistle);
-        selectedRightWhistle = (ImageView) v.findViewById(R.id.selectedRightWhistle);
-        selectedCenterWhistle = (ImageView) v.findViewById(R.id.selectedCenterWhistle);
+        selectedLeftWhistle = (ImageView) v.findViewById(R.id.leftWhistle);
+        selectedRightWhistle = (ImageView) v.findViewById(R.id.rightWhistle);
+        selectedCenterWhistle = (ImageView) v.findViewById(R.id.centerWhistle);
 
 
-        selectedLeftTimer = (ImageView) v.findViewById(R.id.selectedLeftTimer);
-        selectedRightTimer = (ImageView) v.findViewById(R.id.selectedRightTimer);
-        selectedCenterTimer = (ImageView) v.findViewById(R.id.selectedCenterTimer);
+        selectedLeftTimer = (ImageView) v.findViewById(R.id.leftTimer);
+        selectedRightTimer = (ImageView) v.findViewById(R.id.rightTimer);
+        selectedCenterTimer = (ImageView) v.findViewById(R.id.centerTimer);
 
-        selectedRightVessel = (ImageView) v.findViewById(R.id.selectedRightVessel);
-        selectedLeftVessel = (ImageView) v.findViewById(R.id.selectedLeftVessel);
-        selectedCenterVessel = (ImageView) v.findViewById(R.id.selectedCenterVessel);
+        selectedRightVessel = (ImageView) v.findViewById(R.id.rightVessel);
+        selectedLeftVessel = (ImageView) v.findViewById(R.id.LeftVessel);
+        selectedCenterVessel = (ImageView) v.findViewById(R.id.centerVessel);
 
 
         //Whistle and Timer
-        selectedRightWhistleCount = (TextView) v.findViewById(R.id.selectedRightWhistleCount);
+        selectedRightWhistleCount = (TextView) v.findViewById(R.id.rightWhistleCount);
         selectedRightWhistleCount.setTypeface(octinPrisonFont);
-        selectedRightTimerCount = (TextView) v.findViewById(R.id.selectedRightTimerCount);
+        selectedRightTimerCount = (TextView) v.findViewById(R.id.rightTimerCount);
         selectedRightTimerCount.setTypeface(octinPrisonFont);
 
 
-        selectedLeftWhistleCount = (TextView) v.findViewById(R.id.selectedLeftWhistleCount);
+        selectedLeftWhistleCount = (TextView) v.findViewById(R.id.leftWhistleCount);
         selectedLeftWhistleCount.setTypeface(octinPrisonFont);
-        selectedLeftTimerCount = (TextView) v.findViewById(R.id.selectedLeftTimerCount);
+        selectedLeftTimerCount = (TextView) v.findViewById(R.id.leftTimerCount);
         selectedLeftTimerCount.setTypeface(octinPrisonFont);
 
 
-        selectedCenterWhistleCount = (TextView) v.findViewById(R.id.selectedCenterWhistleCount);
+        selectedCenterWhistleCount = (TextView) v.findViewById(R.id.centerWhistleCount);
         selectedCenterWhistleCount.setTypeface(octinPrisonFont);
-        selectedCenterTimerCount = (TextView) v.findViewById(R.id.selectedCenterTimerCount);
+        selectedCenterTimerCount = (TextView) v.findViewById(R.id.centerTimerCount);
         selectedCenterTimerCount.setTypeface(octinPrisonFont);
 
-        notificationCount = (TextView) v.findViewById(R.id.notificationCount);*/
+        notificationCount = (TextView) v.findViewById(R.id.notificationCount);
 
         //End of Whistle and Timer
 

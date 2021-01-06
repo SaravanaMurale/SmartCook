@@ -352,7 +352,7 @@ public class EditActivity extends AppCompatActivity {
         //cancel.setTypeface(FontUtil.getOctinPrisonFont(EditActivity.this));
 
 
-        burnerSettingsText = (TextView) findViewById(R.id.burnerSettingsText);
+        //burnerSettingsText = (TextView) findViewById(R.id.burnerSettingsText);
         //burnerSettingsText.setTypeface(FontUtil.getOctinPrisonFont(EditActivity.this));
         flamModeText = (TextView) findViewById(R.id.flamMode);
         //flamModeText.setTypeface(FontUtil.getOctinPrisonFont(EditActivity.this));
