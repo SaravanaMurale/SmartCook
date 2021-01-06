@@ -74,7 +74,7 @@ public class CharacteristicListFragment extends Fragment {
     CircleImageView seletedUserProfile;
     ImageView selectBluetoothStatus;
 
-    TextView selectLeft, selectCenter, selectRight, selectSim, selectHigh, selectOff, menuIcon;
+    TextView  menuIcon;
     ImageView notificationIcon;
     Typeface octinPrisonFont;
 
@@ -162,15 +162,6 @@ public class CharacteristicListFragment extends Fragment {
             }
 
         }
-
-        selectLeft.setTypeface(octinPrisonFont);
-        selectRight.setTypeface(octinPrisonFont);
-        selectCenter.setTypeface(octinPrisonFont);
-
-        selectSim.setTypeface(octinPrisonFont);
-        selectHigh.setTypeface(octinPrisonFont);
-        selectOff.setTypeface(octinPrisonFont);
-
 
 
     }
@@ -287,105 +278,11 @@ public class CharacteristicListFragment extends Fragment {
         });
 
 
-        selectLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                selectedBurner = MathUtil.LEFT_BURNER;
-
-                selectLeft.setTypeface(octinPrisonFont);
-
-                selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
-                selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
-                selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
-
-            }
-        });
-
-        selectCenter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                selectCenter.setTypeface(octinPrisonFont);
-
-                selectedBurner = MathUtil.CENTER_BURNER;
-
-                selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
-                selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
-                selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
-
-            }
-        });
-
-        selectRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                selectRight.setTypeface(octinPrisonFont);
-
-                selectedBurner = MathUtil.RIGHT_BURNER;
-
-                selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
-                selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
-                selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
 
 
-            }
-        });
-
-        selectSim.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                selectSim.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
-                selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-                selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-
-                if (selectedBurner == null) {
-                    Toast.makeText(getActivity(), "Please Select Burner", Toast.LENGTH_LONG).show();
-                } else {
-                    callMe(1, selectedBurner, 0, 0, MathUtil.SIM, MathUtil.BURNER_FORMET);
-                }
 
 
-            }
-        });
 
-        selectHigh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                selectHigh.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
-                selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-                selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-
-                if (selectedBurner == null) {
-                    Toast.makeText(getActivity(), "Please Select Burner", Toast.LENGTH_LONG).show();
-                } else {
-                    callMe(1, selectedBurner, 0, 0, MathUtil.HIGH, MathUtil.BURNER_FORMET);
-                }
-
-
-            }
-        });
-
-        selectOff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                selectOff.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
-                selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-                selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-
-                if (selectedBurner == null) {
-                    Toast.makeText(getActivity(), "Please Select Burner", Toast.LENGTH_LONG).show();
-                } else {
-                    callMe(1, selectedBurner, 0, 0, MathUtil.OFF, MathUtil.BURNER_FORMET);
-                }
-
-
-            }
-        });
 
         notificationIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1010,28 +907,20 @@ public class CharacteristicListFragment extends Fragment {
         } else if (rightVessel == 1) {
             selectedRightVessel.setVisibility(View.VISIBLE);
 
-            selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
-            selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
-            selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+
         }
 
         if (rightFlameMode == 1) {
 
-            selectSim.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
-            selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-            selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
 
         } else if (rightFlameMode == 2) {
 
-            selectHigh.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
-            selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-            selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
 
         } else if (rightFlameMode == 3) {
 
-            selectOff.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
-            selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-            selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
 
         }
 
@@ -1041,25 +930,18 @@ public class CharacteristicListFragment extends Fragment {
         } else if (leftVessel == 1) {
             selectedLeftVessel.setVisibility(View.VISIBLE);
 
-            selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
-            selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
-            selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+
         }
 
         if (leftFlameMode == 1) {
-            selectSim.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
-            selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-            selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
+
 
         } else if (leftFlameMode == 2) {
 
-            selectHigh.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
-            selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-            selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
         } else if (leftFlameMode == 3) {
-            selectOff.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
-            selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-            selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
         }
 
         //Center
@@ -1069,25 +951,17 @@ public class CharacteristicListFragment extends Fragment {
         } else if (centerVessel == 1) {
             selectedCenterVessel.setVisibility(View.VISIBLE);
 
-            selectCenter.setBackground(getResources().getDrawable(R.drawable.edit_button_border_on));
-            selectLeft.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
-            selectRight.setBackground(getResources().getDrawable(R.drawable.edit_button_border_off));
+
         }
 
         if (centerFlameMode == 1) {
-            selectSim.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
-            selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-            selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
 
         } else if (centerFlameMode == 2) {
-            selectHigh.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
-            selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-            selectOff.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
 
         } else if (centerFlameMode == 3) {
-            selectOff.setBackgroundColor(getResources().getColor(R.color.burner_on_green));
-            selectHigh.setBackground(getResources().getDrawable(R.drawable.rounded_border));
-            selectSim.setBackground(getResources().getDrawable(R.drawable.rounded_border));
+
 
         }
 
