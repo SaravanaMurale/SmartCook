@@ -18,26 +18,6 @@ public class CircularActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_circular);
 
-        croller=(Croller)findViewById(R.id.crollerLeft);
-
-        croller.setOnCrollerChangeListener(new OnCrollerChangeListener() {
-            @Override
-            public void onProgressChanged(Croller croller, int progress) {
-
-                System.out.println("CrollerChangeListener"+progress);
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(Croller croller) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(Croller croller) {
-
-            }
-        });
 
 
     }

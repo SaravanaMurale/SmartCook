@@ -182,16 +182,9 @@ public class CharacteristicListFragment extends Fragment {
         seletedUserProfile = (CircleImageView) v.findViewById(R.id.seletedUserProfile);
         selectBluetoothStatus=(ImageView)v.findViewById(R.id.selectBluetoothStatus);
 
-        selectLeft = (TextView) v.findViewById(R.id.selectLeft);
-        selectCenter = (TextView) v.findViewById(R.id.selectCenter);
-        selectRight = (TextView) v.findViewById(R.id.selectRight);
 
 
-        selectSim = (TextView) v.findViewById(R.id.selectSim);
-        selectHigh = (TextView) v.findViewById(R.id.selectHigh);
-        selectOff = (TextView) v.findViewById(R.id.selectOff);
-
-        selectedLeftWhistle = (ImageView) v.findViewById(R.id.selectedLeftWhistle);
+        /*selectedLeftWhistle = (ImageView) v.findViewById(R.id.selectedLeftWhistle);
         selectedRightWhistle = (ImageView) v.findViewById(R.id.selectedRightWhistle);
         selectedCenterWhistle = (ImageView) v.findViewById(R.id.selectedCenterWhistle);
 
@@ -223,7 +216,7 @@ public class CharacteristicListFragment extends Fragment {
         selectedCenterTimerCount = (TextView) v.findViewById(R.id.selectedCenterTimerCount);
         selectedCenterTimerCount.setTypeface(octinPrisonFont);
 
-        notificationCount = (TextView) v.findViewById(R.id.notificationCount);
+        notificationCount = (TextView) v.findViewById(R.id.notificationCount);*/
 
         //End of Whistle and Timer
 
