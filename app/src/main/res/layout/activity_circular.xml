@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:seekarc="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CircularActivity"
+    tools:ignore="NamespaceTypo,ResAuto">
+
+   <!--<com.triggertrap.seekarc.SeekArc
+       android:id="@+id/seekArc"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       app:startAngle="45"
+       seekarc:rotation="180"
+       seekarc:max="180"
+       app:clockwise="false"
+       />-->
+
+
+
+
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardViewBlockCir"
+        android:layout_width="match_parent"
+        android:layout_height="310dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="3dp"
+        android:backgroundTint="@color/black"
+        app:cardCornerRadius="20dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+
+            <ImageView
+                android:id="@+id/leftBurnerCir"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="120dp"
+                android:src="@drawable/stove_burner" />
+
+            <com.sdsmdg.harjot.crollerTest.Croller
+                android:id="@+id/crollerLeft"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                app:anticlockwise="true"
+                android:layout_marginTop="120dp"
+                app:max="90"
+                app:min="0"
+                app:label=""
+                app:indicator_color="@color/blue"
+                android:layout_marginLeft="20dp"
+                />
+
+            <ImageView
+                android:id="@+id/selectedLeftVesselCir"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/leftBurnerCir"
+                android:layout_marginLeft="75dp"
+                android:src="@drawable/vessel_present" />
+
+            <ImageView
+                android:id="@+id/selectedLeftWhistleCir"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@id/selectedLeftBurnerTextCir"
+                android:layout_marginLeft="95dp"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/whistle" />
+
+
+            <ImageView
+                android:id="@+id/selectedLeftTimerCir"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@id/selectedLeftBurnerTextCir"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/timer"
+
+                />
+
+            <ImageView
+                android:id="@+id/centerBurnerCir"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/stove_burner" />
+
+            <ImageView
+                android:id="@+id/selectedCenterVesselCir"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/centerBurnerCir"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/vessel_present" />
+
+            <ImageView
+                android:id="@+id/selectedCenterWhistleCir"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/selectedCenterVesselCir"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/selectedCenterTimerCountCir"
+                android:src="@drawable/whistle" />
+
+            <ImageView
+                android:id="@+id/selectedCenterTimerCir"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/selectedCenterVesselCir"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@id/selectedCenterTimerCountCir"
+                android:src="@drawable/timer" />
+
+
+            <ImageView
+                android:id="@+id/rightBurnerCir"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="120dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/stove_burner" />
+
+            <ImageView
+                android:id="@+id/selectedRightVesselCir"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@id/rightBurnerCir"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="70dp"
+                android:src="@drawable/vessel_present"
+                android:text="25" />
+
+
+            <ImageView
+                android:id="@+id/selectedRightWhistleCir"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@+id/selectedRightVesselCir"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@+id/selectedRightWhistleCountCir"
+                android:src="@drawable/whistle" />
+
+            <ImageView
+                android:id="@+id/selectedRightTimerCir"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@+id/selectedRightVesselCir"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="3dp"
+                android:layout_toLeftOf="@+id/selectedRightTimerCountCir"
+                android:src="@drawable/timer" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="100dp"
+                android:text="Burner1"
+                android:textColor="@color/white"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/selectedLeftBurnerTextCir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/selectedLeftVesselCir"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="5dp"
+                android:text="Burner1"
+                android:textColor="@color/white"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/selectedLeftTimerCountCir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/selectedLeftBurnerTextCir"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="8dp"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="12sp"
+
+                />
+
+            <TextView
+                android:id="@+id/selectedLeftWhistleCountCir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/selectedLeftBurnerTextCir"
+                android:layout_alignBaseline="@id/selectedLeftTimerCountCir"
+                android:layout_marginLeft="125dp"
+                android:layout_marginTop="8dp"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/selectedCenterWhistleCountCir"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@id/selectedCenterVesselCir"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/selectedCenterWhistleCir"
+                android:text="25"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/selectedCenterTimerCountCir"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/selectedCenterVesselCir"
+                android:layout_alignBaseline="@+id/selectedCenterWhistleCountCir"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="25min"
+                android:textColor="@color/white"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/selectedRightWhistleCountCir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/selectedRightVesselCir"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="13dp"
+                android:layout_marginRight="20dp"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/selectedRightTimerCountCir"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_below="@+id/selectedRightVesselCir"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/selectedRightWhistleCir"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="12sp"
+
+                />
+
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>
