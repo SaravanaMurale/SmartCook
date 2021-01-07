@@ -143,30 +143,33 @@
             />
 
             <TextView
-                android:id="@+id/leftOff"
+                android:id="@+id/leftSim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SIM"
                 android:layout_marginLeft="2dp"
                 android:layout_marginTop="195dp"
+                android:textSize="14sp"
                 android:textColor="@color/white"
+                />
+
+            <TextView
+                android:id="@+id/leftOff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OFF"
+                android:layout_marginTop="195dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_marginLeft="115dp"
                 />
 
             <TextView
                 android:id="@+id/leftHigh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="OFF"
-                android:layout_marginTop="195dp"
-                android:textColor="@color/white"
-                android:layout_marginLeft="115dp"
-                />
-
-            <TextView
-                android:id="@+id/leftSim"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="HIGH"
+                android:textSize="14sp"
                 android:layout_marginTop="145dp"
                 android:textColor="@color/white"
                 android:layout_marginLeft="55dp"
@@ -230,12 +233,51 @@
 
             <ImageView
                 android:id="@+id/rightBurner"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:src="@drawable/knob"
                 android:layout_alignParentRight="true"
-                android:layout_marginTop="120dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="160dp"
                 />
+
+            <TextView
+                android:id="@+id/rightOff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OFF"
+                android:textSize="14sp"
+                android:layout_marginTop="195dp"
+                android:textColor="@color/white"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="3dp"
+                />
+
+            <TextView
+                android:id="@+id/rightHigh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HIGH"
+                android:textSize="14sp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="145dp"
+                android:layout_marginRight="53dp"
+                android:textColor="@color/white"
+                />
+
+            <TextView
+                android:id="@+id/rightSim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SIM"
+                android:textSize="14sp"
+                android:layout_marginTop="195dp"
+                android:textColor="@color/white"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="115dp"
+                />
+
+
 
             <ImageView
                 android:id="@+id/rightVessel"
@@ -243,7 +285,7 @@
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
                 android:layout_below="@id/rightBurner"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="60dp"
                 android:src="@drawable/vessel_present"
                 android:layout_marginTop="@dimen/five_dp"
                 />
@@ -298,13 +340,48 @@
                 />
 
 
-         <ImageView
-             android:id="@+id/centerBurner"
-             android:layout_width="100dp"
-             android:layout_height="100dp"
-             android:src="@drawable/knob"
-             android:layout_centerHorizontal="true"
-             />
+            <TextView
+                android:id="@+id/centerHigh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HIGH"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                />
+
+            <ImageView
+                android:id="@+id/centerBurner"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/knob"
+                android:layout_below="@id/centerHigh"
+                android:layout_centerHorizontal="true"
+                />
+
+            <TextView
+                android:id="@+id/centerOff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OFF"
+                android:textSize="14sp"
+                android:layout_toRightOf="@id/centerVessel"
+                android:layout_marginTop="65dp"
+                android:textColor="@color/white"
+                android:layout_marginLeft="40dp"
+                />
+
+            <TextView
+                android:id="@+id/centerSim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/centerVessel"
+                android:text="SIM"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="65dp"
+                android:layout_marginRight="40dp"
+                />
 
             <ImageView
                 android:id="@+id/centerVessel"

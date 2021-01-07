@@ -9,6 +9,7 @@ import android.bluetooth.BluetoothGattService;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -88,7 +89,9 @@ public class CharacteristicListFragment extends Fragment {
 
     private SqliteManager sqliteManager;
 
-    ImageView leftCroller, rightCroller, centerCroller;
+    ImageView leftBurner,rightBurner,centerBurner;
+
+    TextView leftOff,leftHigh,leftSim,rightOff,rightHigh,rightSim,centerOff,centerHigh,centerSim;
 
     String selectedBurner;
 
@@ -181,9 +184,11 @@ public class CharacteristicListFragment extends Fragment {
         selectBluetoothStatus = (ImageView) v.findViewById(R.id.selectBluetoothStatus);
 
 
-        leftCroller = (ImageView) v.findViewById(R.id.leftBurner);
-        rightCroller = (ImageView) v.findViewById(R.id.rightBurner);
-        centerCroller = (ImageView) v.findViewById(R.id.centerBurner);
+        leftBurner = (ImageView) v.findViewById(R.id.leftBurner);
+        rightBurner = (ImageView) v.findViewById(R.id.rightBurner);
+        centerBurner = (ImageView) v.findViewById(R.id.centerBurner);
+
+
 
         eStop=(ImageView)v.findViewById(R.id.eStop);
 
@@ -227,6 +232,104 @@ public class CharacteristicListFragment extends Fragment {
         notificationIcon = (ImageView) v.findViewById(R.id.notificationIcon);
 
         menuIcon.setTypeface(octinPrisonFont);
+
+
+        leftOff=(TextView)v.findViewById(R.id.leftOff);
+        leftHigh=(TextView)v.findViewById(R.id.leftHigh);
+        leftSim=(TextView)v.findViewById(R.id.leftSim);
+
+        rightOff=(TextView)v.findViewById(R.id.rightOff);
+        rightHigh=(TextView)v.findViewById(R.id.rightHigh);
+        rightSim=(TextView)v.findViewById(R.id.rightSim);
+
+        centerOff=(TextView)v.findViewById(R.id.centerOff);
+        centerHigh=(TextView)v.findViewById(R.id.centerHigh);
+        centerSim=(TextView)v.findViewById(R.id.centerSim);
+
+
+        leftOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                leftOff.setTextColor(Color.WHITE);
+                leftHigh.setTextColor(Color.WHITE);
+                leftSim.setTextColor(Color.WHITE);
+            }
+        });
+
+        leftHigh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                leftHigh.setTextColor(Color.RED);
+                leftSim.setTextColor(Color.WHITE);
+                leftOff.setTextColor(Color.WHITE);
+            }
+        });
+
+        leftSim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                leftSim.setTextColor(Color.RED);
+                leftHigh.setTextColor(Color.WHITE);
+                leftOff.setTextColor(Color.WHITE);
+            }
+        });
+
+        rightOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rightOff.setTextColor(Color.WHITE);
+                rightHigh.setTextColor(Color.WHITE);
+                rightSim.setTextColor(Color.WHITE);
+
+            }
+        });
+
+        rightHigh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rightOff.setTextColor(Color.WHITE);
+                rightHigh.setTextColor(Color.RED);
+                rightSim.setTextColor(Color.WHITE);
+            }
+        });
+        rightSim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rightOff.setTextColor(Color.WHITE);
+                rightHigh.setTextColor(Color.WHITE);
+                rightSim.setTextColor(Color.RED);
+            }
+        });
+
+
+        centerOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                centerOff.setTextColor(Color.WHITE);
+                centerHigh.setTextColor(Color.WHITE);
+                centerSim.setTextColor(Color.WHITE);
+            }
+        });
+
+        centerHigh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                centerOff.setTextColor(Color.WHITE);
+                centerHigh.setTextColor(Color.RED);
+                centerSim.setTextColor(Color.WHITE);
+            }
+        });
+
+        centerSim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                centerOff.setTextColor(Color.WHITE);
+                centerHigh.setTextColor(Color.WHITE);
+                centerSim.setTextColor(Color.RED);
+            }
+        });
+
+
 
         seletedUserProfile.setOnClickListener(new View.OnClickListener() {
             @Override
