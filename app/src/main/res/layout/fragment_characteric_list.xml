@@ -55,7 +55,7 @@
         android:src="@drawable/notification" />
 
     <ListView
-        android:id="@+id/list_service_character"
+        android:id="@+id/list_service"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginTop="10dp"
@@ -133,39 +133,52 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.sdsmdg.harjot.crollerTest.Croller
-                android:id="@+id/leftBurner"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                app:label=""
-                app:min="0"
-                app:max="18"
-                app:indicator_width="15"
-                app:indicator_color="@color/blue"
-                app:progress_primary_color="@color/blue"
-                app:progress_primary_circle_size="4"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="120dp"
-                android:layout_marginLeft="5dp"
-                app:main_circle_color="@color/color_grey_ke"
-                app:anticlockwise="true"
+        <ImageView
+            android:id="@+id/leftBurner"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/knob"
+            android:layout_marginTop="160dp"
+            android:layout_marginLeft="30dp"
+            />
 
+            <TextView
+                android:id="@+id/leftOff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SIM"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="195dp"
+                android:textColor="@color/white"
                 />
 
-            <ImageView
-                android:layout_width="47dp"
-                android:layout_height="47dp"
-                android:src="@drawable/volume_knob"
-                android:layout_marginTop="158dp"
-                android:layout_marginLeft="40dp"
+            <TextView
+                android:id="@+id/leftHigh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OFF"
+                android:layout_marginTop="195dp"
+                android:textColor="@color/white"
+                android:layout_marginLeft="115dp"
                 />
+
+            <TextView
+                android:id="@+id/leftSim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HIGH"
+                android:layout_marginTop="145dp"
+                android:textColor="@color/white"
+                android:layout_marginLeft="55dp"
+                />
+
 
             <ImageView
                 android:id="@+id/LeftVessel"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_below="@id/leftBurner"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="65dp"
                 android:src="@drawable/vessel_present"
                 android:layout_marginTop="5dp"
                 />
@@ -177,7 +190,7 @@
                 android:src="@drawable/timer"
                 android:layout_below="@id/LeftVessel"
                 android:layout_marginTop="5dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="15dp"
 
                 />
 
@@ -188,7 +201,7 @@
                 android:text="5min"
                 android:layout_below="@id/LeftVessel"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="38dp"
+                android:layout_marginLeft="45dp"
                 android:textColor="@color/white"
                 android:layout_alignBaseline="@id/leftTimer"
                 />
@@ -199,7 +212,7 @@
                 android:layout_height="@dimen/twenty_five_dp"
                 android:layout_below="@id/LeftVessel"
                 android:layout_marginTop="@dimen/five_dp"
-                android:layout_marginLeft="80dp"
+                android:layout_marginLeft="90dp"
                 android:src="@drawable/whistle"
                 />
 
@@ -211,31 +224,17 @@
                 android:textColor="@color/white"
                 android:layout_below="@id/LeftVessel"
                 android:layout_alignBaseline="@id/leftTimerCount"
-                android:layout_marginLeft="110dp"
+                android:layout_marginLeft="120dp"
                 />
 
 
-            <com.sdsmdg.harjot.crollerTest.Croller
+            <ImageView
                 android:id="@+id/rightBurner"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/knob"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="120dp"
-                android:layout_marginRight="@dimen/five_dp"
-                app:main_circle_color="@color/color_grey_ke"
-                app:label=""
-                app:progress_radius="1"
-                app:progress_primary_stroke_width="1"
-                app:progress_primary_color="@color/black"
-                app:min="3"
-                app:max="18"
-                app:is_continuous="false"
-                app:progress_secondary_circle_size="1"
-                app:progress_secondary_color="@color/black"
-                app:progress_secondary_stroke_width="1"
-                app:progress_primary_circle_size="4"
-                app:anticlockwise="true"
-                app:indicator_color="@color/yellow"
                 />
 
             <ImageView
@@ -299,17 +298,13 @@
                 />
 
 
-            <com.sdsmdg.harjot.crollerTest.Croller
-                android:id="@+id/centerBurner"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_centerHorizontal="true"
-                app:label=""
-                app:min="3"
-                app:max="18"
-                app:progress_primary_circle_size="4"
-                app:anticlockwise="true"
-                />
+         <ImageView
+             android:id="@+id/centerBurner"
+             android:layout_width="100dp"
+             android:layout_height="100dp"
+             android:src="@drawable/knob"
+             android:layout_centerHorizontal="true"
+             />
 
             <ImageView
                 android:id="@+id/centerVessel"

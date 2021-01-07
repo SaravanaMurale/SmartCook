@@ -73,9 +73,6 @@ public class CharacteristicListFragment extends Fragment {
 
     int currentApiVersion;
 
-    Spinner mSpinner, mSpinnerWhistleCount, mSelectBurner;
-
-
     CircleImageView seletedUserProfile;
     ImageView selectBluetoothStatus;
 
@@ -91,7 +88,7 @@ public class CharacteristicListFragment extends Fragment {
 
     private SqliteManager sqliteManager;
 
-    Croller leftCroller, rightCroller, centerCroller;
+    ImageView leftCroller, rightCroller, centerCroller;
 
     String selectedBurner;
 
@@ -176,7 +173,7 @@ public class CharacteristicListFragment extends Fragment {
 
     private void initView(View v) {
         mResultAdapter = new ResultAdapter(getActivity());
-        ListView listView_device = (ListView) v.findViewById(R.id.list_service_character);
+        ListView listView_device = (ListView) v.findViewById(R.id.list_service);
 
         sqliteManager = new SqliteManager(getActivity());
 
@@ -184,9 +181,9 @@ public class CharacteristicListFragment extends Fragment {
         selectBluetoothStatus = (ImageView) v.findViewById(R.id.selectBluetoothStatus);
 
 
-        leftCroller = (Croller) v.findViewById(R.id.leftBurner);
-        rightCroller = (Croller) v.findViewById(R.id.rightBurner);
-        centerCroller = (Croller) v.findViewById(R.id.centerBurner);
+        leftCroller = (ImageView) v.findViewById(R.id.leftBurner);
+        rightCroller = (ImageView) v.findViewById(R.id.rightBurner);
+        centerCroller = (ImageView) v.findViewById(R.id.centerBurner);
 
         eStop=(ImageView)v.findViewById(R.id.eStop);
 
@@ -450,7 +447,9 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                if (mSpinnerWhistleCount.getSelectedItem().toString().equals("Whistle")) {
+                int burnerWhistleCount = Integer.parseInt(setWhistleCount.getText().toString());
+
+                if (burnerWhistleCount==0) {
 
                     Toast.makeText(getActivity(), "Please Select Whistle Count", Toast.LENGTH_LONG).show();
 
@@ -458,7 +457,7 @@ public class CharacteristicListFragment extends Fragment {
 
                     if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
 
-                        int burnerWhistleCount = Integer.parseInt(mSpinnerWhistleCount.getSelectedItem().toString());
+
 
                         callMe(1, burner, 0, burnerWhistleCount, 0, 1);
 
