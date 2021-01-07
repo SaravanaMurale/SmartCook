@@ -46,7 +46,9 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="-80dp"
         android:layout_marginRight="-100dp"
-        android:src="@drawable/circletransparant" />
+        android:src="@drawable/circletransparant"
+        android:visibility="gone"
+        />
 
     <ImageView
         android:id="@+id/circle2"
@@ -66,7 +68,9 @@
         android:layout_alignParentBottom="true"
         android:layout_marginRight="-80dp"
         android:layout_marginBottom="-30dp"
-        android:src="@drawable/circle" />
+        android:src="@drawable/circle"
+        android:visibility="gone"
+        />
 
     <ImageView
         android:id="@+id/circle4"
@@ -76,13 +80,17 @@
         android:layout_marginRight="-50dp"
         android:layout_marginBottom="-50dp"
         android:layout_toLeftOf="@+id/circle3"
-        android:src="@drawable/circletransparant" />
+        android:src="@drawable/circletransparant"
+        android:visibility="gone"
+        />
 
     <ScrollView
         android:id="@+id/sv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/bgHeader">
+        android:layout_below="@+id/bgHeader"
+        android:layout_marginTop="40dp"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -107,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="Email/Mobile"
-                        android:textColor="@color/colorPurple"
+                        android:textColor="@color/red"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -124,7 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="Password"
-                        android:textColor="@color/colorPurple"
+                        android:textColor="@color/red"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -156,7 +164,9 @@
                     android:background="@drawable/bg_ui"
                     android:text="Login"
                     android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:fontFamily="sans-serif-condensed"
+                    android:textSize="20sp"
+                    android:textColor="@color/red" />
             </RelativeLayout>
 
 
@@ -168,10 +178,11 @@
                 android:layout_below="@+id/cv"
                 android:layout_marginTop="10dp"
                 android:elevation="5dp"
+                android:fontFamily="sans-serif-condensed"
                 android:layout_marginLeft="20dp"
                 android:text="Reset password?"
-                android:textColor="@color/colorPurple"
-                android:textSize="14sp" />
+                android:textColor="@color/red"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/signUp"
@@ -181,8 +192,9 @@
                 android:layout_below="@+id/cv"
                 android:layout_marginTop="10dp"
                 android:elevation="5dp"
-                android:textSize="14sp"
-                android:textColor="@color/colorPurple"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/red"
                 android:layout_marginRight="20dp"
                 android:layout_alignParentRight="true"
 
@@ -193,6 +205,13 @@
     </ScrollView>
 
 
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:src="@drawable/preethi_logo"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        />
 
 
 

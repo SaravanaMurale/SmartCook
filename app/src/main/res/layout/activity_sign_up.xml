@@ -202,7 +202,7 @@
         android:elevation="10dp"
         android:text="Create Account"
         android:textColor="@color/red"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:fontFamily="sans-serif"
         android:transitionName="tvLogin" />
@@ -212,9 +212,16 @@
         android:id="@+id/bgHeader"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-
         android:background="@drawable/header_register"
         android:elevation="5dp" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:src="@drawable/preethi_logo"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        />
 
     <!--<com.triggertrap.seekarc.SeekArc
         android:id="@+id/seekArc"
