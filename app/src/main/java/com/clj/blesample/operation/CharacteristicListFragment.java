@@ -21,9 +21,11 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,6 +71,8 @@ public class CharacteristicListFragment extends Fragment {
 
 
     int currentApiVersion;
+
+    Spinner mSpinner, mSpinnerWhistleCount, mSelectBurner;
 
 
     CircleImageView seletedUserProfile;
@@ -235,7 +239,7 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                callEditActivity(MathUtil.LEFT_BURNER);
+                setWhistle(MathUtil.LEFT_BURNER);
 
             }
         });
@@ -243,7 +247,7 @@ public class CharacteristicListFragment extends Fragment {
         selectedLeftTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callEditActivity(MathUtil.LEFT_BURNER);
+                setTimer(MathUtil.LEFT_BURNER);
             }
         });
 
@@ -251,21 +255,21 @@ public class CharacteristicListFragment extends Fragment {
         selectedRightWhistle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callEditActivity(MathUtil.RIGHT_BURNER);
+                setWhistle(MathUtil.RIGHT_BURNER);
             }
         });
 
         selectedRightTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callEditActivity(MathUtil.RIGHT_BURNER);
+                setTimer(MathUtil.RIGHT_BURNER);
             }
         });
 
         selectedCenterWhistle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callEditActivity(MathUtil.CENTER_BURNER);
+                setWhistle(MathUtil.CENTER_BURNER);
             }
         });
 
@@ -273,7 +277,7 @@ public class CharacteristicListFragment extends Fragment {
         selectedCenterTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callEditActivity(MathUtil.CENTER_BURNER);
+                setTimer(MathUtil.CENTER_BURNER);
             }
         });
 
@@ -353,6 +357,77 @@ public class CharacteristicListFragment extends Fragment {
 
             }
         });
+    }
+
+    private void setTimer(String burner) {
+    }
+
+    private void setWhistle(final String  burner) {
+
+        String burners[] = {"Burner", "Center", "Left", "Right"};
+        String whistleCount[] = {"Whistle", "1", "2", "3", "4", "5","6"};
+
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+        View mView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
+        mBuilder.setTitle("Select");
+
+
+
+        mSpinner = (Spinner) mView.findViewById(R.id.spinnerData);
+        mSpinnerWhistleCount = (Spinner) mView.findViewById(R.id.spinnerWhistleCount);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,
+                burners);
+
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        ArrayAdapter<String> arrayAdapterWhistle = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,
+                whistleCount);
+
+        arrayAdapterWhistle.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        mSpinner.setAdapter(arrayAdapter);
+        mSpinnerWhistleCount.setAdapter(arrayAdapterWhistle);
+
+        mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if ( mSpinnerWhistleCount.getSelectedItem().toString().equals("Whistle")) {
+
+                    Toast.makeText(getActivity(), "Please Select Whistle Count", Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
+
+                        int burnerWhistleCount = Integer.parseInt(mSpinnerWhistleCount.getSelectedItem().toString());
+
+                        callMe(1, burner,0, burnerWhistleCount, 0,1);
+
+                    }
+
+
+                    }
+
+
+            }
+        });
+
+        mBuilder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.cancel();
+            }
+        });
+
+
+        mBuilder.setView(mView);
+        AlertDialog alertDialog = mBuilder.create();
+        alertDialog.show();
+
+
     }
 
     private void callMe(int position, final String burner, final int timerInMin, final int whistleInCount, final int flameMode, final int frameFormet) {
@@ -490,6 +565,8 @@ public class CharacteristicListFragment extends Fragment {
 
 
         } else if (frameFormet == 2) {
+
+            //Whhistle and Timer
 
             String selectedBurner = PreferencesUtil.getValueString(getActivity(), PreferencesUtil.BURNER);
             int selectedTimer = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.TIMER_IN_MINUTE);
