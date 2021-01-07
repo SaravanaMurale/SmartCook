@@ -250,9 +250,16 @@ public class CharacteristicListFragment extends Fragment {
         leftOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                leftOff.setTextColor(Color.WHITE);
+                leftOff.setTextColor(Color.RED);
                 leftHigh.setTextColor(Color.WHITE);
                 leftSim.setTextColor(Color.WHITE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        leftOff.setTextColor(Color.WHITE);
+                    }
+                },1000);
+
             }
         });
 
@@ -277,9 +284,10 @@ public class CharacteristicListFragment extends Fragment {
         rightOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rightOff.setTextColor(Color.WHITE);
+                rightOff.setTextColor(Color.RED);
                 rightHigh.setTextColor(Color.WHITE);
                 rightSim.setTextColor(Color.WHITE);
+                rightOff.setTextColor(Color.WHITE);
 
             }
         });
@@ -305,9 +313,10 @@ public class CharacteristicListFragment extends Fragment {
         centerOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                centerOff.setTextColor(Color.WHITE);
+                centerOff.setTextColor(Color.RED);
                 centerHigh.setTextColor(Color.WHITE);
                 centerSim.setTextColor(Color.WHITE);
+                centerOff.setTextColor(Color.WHITE);
             }
         });
 
