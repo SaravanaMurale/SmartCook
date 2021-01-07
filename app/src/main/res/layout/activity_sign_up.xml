@@ -1,239 +1,476 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:seekarc="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_margin="20dp"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CircularActivity">
 
 
+    <ImageView
+        android:id="@+id/circle1"
+        android:layout_width="134dp"
+        android:layout_height="134dp"
+        android:layout_below="@+id/bgHeader"
+        android:layout_marginLeft="-25dp"
+        android:layout_marginTop="-5dp"
+        android:src="@drawable/circletransparant" />
 
-    <TextView
-        android:id="@+id/signUpText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Signup"
-        android:textColor="@color/red"
-        android:textSize="20sp" />
+    <ImageView
+        android:id="@+id/circle3"
+        android:layout_width="182dp"
+        android:layout_height="182dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="-80dp"
+        android:layout_marginBottom="-30dp"
+        android:src="@drawable/circle" />
 
-    <EditText
-        android:id="@+id/signup_name"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="sans-serif-condensed"
-        android:gravity="left|center_vertical"
-        android:hint="Name"
-        android:inputType="text"
-        android:theme="@style/EditTextHintColor"
-        android:singleLine="true" />
-
-    <EditText
-        android:id="@+id/signup_email"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-condensed"
-        android:gravity="left|center_vertical"
-        android:hint="Email"
-        android:theme="@style/EditTextHintColor"
-        android:inputType="textEmailAddress"
-        android:singleLine="true" />
-
-    <EditText
-        android:id="@+id/signup_mobile"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-condensed"
-        android:gravity="left|center_vertical"
-        android:hint="Mobile Number"
-        android:inputType="phone"
-        android:theme="@style/EditTextHintColor"
-        android:singleLine="true" />
-
-    <EditText
-        android:id="@+id/signup_password"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-condensed"
-        android:gravity="left|center_vertical"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:longClickable="false"
-        android:theme="@style/EditTextHintColor"
-        android:singleLine="true" />
-
-    <EditText
-        android:id="@+id/confirm_password"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-condensed"
-        android:gravity="left|center_vertical"
-        android:hint="Confirm Password"
-        android:inputType="textPassword"
-        android:longClickable="false"
-        android:theme="@style/EditTextHintColor"
-        android:singleLine="true" />
-
-
-    <EditText
-        android:id="@+id/signup_address"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-condensed"
-        android:gravity="left|center_vertical"
-        android:hint="Address"
-        android:inputType="textPostalAddress"
-        android:singleLine="true"
-        android:visibility="gone" />
-
-
-
-
-    <Button
-        android:id="@+id/btnSignup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/sign_up_bg"
-        android:text="Signup"
-
-        />
-
-
-
-
-
-
-</LinearLayout>
-
-    <!--<LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_below="@+id/bgHeader"
+        android:layout_margin="20dp"
+        >
 
-        <Button
-            android:id="@+id/btnSignup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:text="Signup" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_email"
+        <RelativeLayout
+            android:id="@+id/rlayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            >
 
-            <EditText
-                android:id="@+id/login_email"
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cv"
+                android:layout_alignLeft="@+id/cv"
+                android:layout_alignRight="@+id/cv"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="-30dp"
+                android:layout_marginRight="35dp"
+                android:elevation="10dp">
+
+                <Button
+                    android:id="@+id/btnSignup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_ui"
+                    android:text="Sign up"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:fontFamily="sans-serif-condensed"
-                android:gravity="left|center_vertical"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:singleLine="true"
-                android:textColorHint="@color/white" />
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="4dp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="50dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_mobile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="UserName"
+                        android:textColor="@color/colorPurple"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/login_mobile"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:fontFamily="sans-serif-condensed"
-                android:gravity="left|center_vertical"
-                android:hint="Mobile Number"
-                android:inputType="phone"
-                android:singleLine="true"
-                android:textColorHint="@color/white" />
+                    <EditText
+                        android:id="@+id/signup_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="left|center_vertical"
+                        android:textSize="15sp"
+                        android:inputType="text"
+                        android:singleLine="true" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Email"
+                        android:textColor="@color/colorPurple"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp">
+                    <EditText
+                        android:id="@+id/signup_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="left|center_vertical"
+                        android:textSize="15sp"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true" />
 
-            <EditText
-                android:id="@+id/login_password"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:fontFamily="sans-serif-condensed"
-                android:gravity="left|center_vertical"
-                android:hint="Password"
-                android:inputType="textVisiblePassword"
-                android:singleLine="true"
-                android:textColorHint="@color/white" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp">
-
-            <EditText
-                android:id="@+id/login_address"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:fontFamily="sans-serif-condensed"
-                android:gravity="left|center_vertical"
-                android:hint="Address"
-                android:inputType="textPostalAddress"
-                android:singleLine="true"
-                android:textColorHint="@color/white" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp">
-
-            <EditText
-                android:id="@+id/login_name"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:fontFamily="sans-serif-condensed"
-                android:gravity="left|center_vertical"
-                android:hint="Name"
-                android:inputType="text"
-                android:singleLine="true"
-                android:textColorHint="@color/white" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Mobile Number"
+                        android:textColor="@color/colorPurple"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
 
-    </LinearLayout>-->
+                    <EditText
+                        android:id="@+id/signup_mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="left|center_vertical"
+                        android:inputType="phone"
+                        android:textSize="15sp"
+                        android:singleLine="true" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Password"
+                        android:textColor="@color/colorPurple"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+
+                    <EditText
+                        android:id="@+id/signup_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="left|center_vertical"
+                        android:textSize="15sp"
+                        android:inputType="textPassword"
+                        android:longClickable="false"
+                        android:singleLine="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Retype Password"
+                        android:textColor="@color/colorPurple"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+
+                    <EditText
+                        android:id="@+id/confirm_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="left|center_vertical"
+                        android:inputType="textPassword"
+                        android:longClickable="false"
+                        android:textSize="15sp"
+                        android:singleLine="true" />
+
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/tvSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:elevation="10dp"
+        android:text="Create Account"
+        android:textColor="@color/red"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        android:transitionName="tvLogin" />
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/bgHeader"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+
+        android:background="@drawable/header_register"
+        android:elevation="5dp" />
+
+    <!--<com.triggertrap.seekarc.SeekArc
+        android:id="@+id/seekArc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:startAngle="45"
+        seekarc:rotation="180"
+        seekarc:max="180"
+        app:clockwise="false"
+        />-->
+
+
+    <!-- <android.support.v7.widget.CardView
+         android:id="@+id/cardViewBlock"
+         android:layout_width="match_parent"
+         android:layout_height="310dp"
+         android:layout_marginLeft="3dp"
+         android:layout_marginTop="200dp"
+         android:layout_marginRight="3dp"
+         android:backgroundTint="@color/black"
+         app:cardCornerRadius="20dp">
+
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
+
+             <com.sdsmdg.harjot.crollerTest.Croller
+                 android:id="@+id/leftBurner"
+                 android:layout_width="120dp"
+                 android:layout_height="120dp"
+                 app:label=""
+                 app:min="0"
+                 app:max="18"
+                 app:indicator_width="15"
+                 app:indicator_color="@color/blue"
+                 app:progress_primary_color="@color/blue"
+                 app:progress_primary_circle_size="4"
+                 android:layout_alignParentLeft="true"
+                 android:layout_marginTop="120dp"
+                 android:layout_marginLeft="5dp"
+                 app:main_circle_color="@color/color_grey_ke"
+                 app:anticlockwise="true"
+
+                 />
+
+             <ImageView
+                 android:layout_width="47dp"
+                 android:layout_height="47dp"
+                 android:src="@drawable/volume_knob"
+                 android:layout_marginTop="158dp"
+                 android:layout_marginLeft="40dp"
+                 />
+
+             <ImageView
+                 android:id="@+id/LeftVessel"
+                 android:layout_width="20dp"
+                 android:layout_height="20dp"
+                 android:layout_below="@id/leftBurner"
+                 android:layout_marginLeft="50dp"
+                 android:src="@drawable/vessel_present"
+                 android:layout_marginTop="5dp"
+                 />
+
+             <ImageView
+                 android:id="@+id/leftTimer"
+                 android:layout_width="25dp"
+                 android:layout_height="25dp"
+                 android:src="@drawable/timer"
+                 android:layout_below="@id/LeftVessel"
+                 android:layout_marginTop="5dp"
+                 android:layout_marginLeft="8dp"
+
+                 />
+
+             <TextView
+                 android:id="@+id/leftTimerCount"
+                 android:layout_width="40dp"
+                 android:layout_height="25dp"
+                 android:text="5min"
+                 android:layout_below="@id/LeftVessel"
+                 android:layout_marginTop="10dp"
+                 android:layout_marginLeft="38dp"
+                 android:textColor="@color/white"
+                 android:layout_alignBaseline="@id/leftTimer"
+                 />
+
+             <ImageView
+                 android:id="@+id/leftWhistle"
+                 android:layout_width="@dimen/twenty_five_dp"
+                 android:layout_height="@dimen/twenty_five_dp"
+                 android:layout_below="@id/LeftVessel"
+                 android:layout_marginTop="@dimen/five_dp"
+                 android:layout_marginLeft="80dp"
+                 android:src="@drawable/whistle"
+                 />
+
+             <TextView
+                 android:id="@+id/leftWhistleCount"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="5"
+                 android:textColor="@color/white"
+                 android:layout_below="@id/LeftVessel"
+                 android:layout_alignBaseline="@id/leftTimerCount"
+                 android:layout_marginLeft="110dp"
+                 />
+
+
+             <com.sdsmdg.harjot.crollerTest.Croller
+                 android:id="@+id/rightBurner"
+                 android:layout_width="120dp"
+                 android:layout_height="120dp"
+                 android:layout_alignParentRight="true"
+                 android:layout_marginTop="120dp"
+                 android:layout_marginRight="@dimen/five_dp"
+                 app:main_circle_color="@color/color_grey_ke"
+                 app:label=""
+                 app:min="3"
+                 app:max="18"
+                 app:progress_primary_circle_size="4"
+                 app:anticlockwise="true"
+                 app:indicator_color="@color/blue"
+                 />
+
+             <ImageView
+                 android:id="@+id/rightVessel"
+                 android:layout_width="20dp"
+                 android:layout_height="20dp"
+                 android:layout_alignParentRight="true"
+                 android:layout_below="@id/rightBurner"
+                 android:layout_marginRight="50dp"
+                 android:src="@drawable/vessel_present"
+                 android:layout_marginTop="@dimen/five_dp"
+                 />
+
+             <TextView
+                 android:id="@+id/rightWhistleCount"
+                 android:layout_width="30dp"
+                 android:layout_height="wrap_content"
+                 android:text="5"
+                 android:gravity="center"
+                 android:layout_below="@id/rightVessel"
+                 android:layout_alignParentRight="true"
+                 android:textColor="@color/white"
+                 android:layout_marginTop="10dp"
+                 android:layout_marginRight="5dp"
+
+                 />
+
+             <ImageView
+                 android:id="@+id/rightWhistle"
+                 android:layout_width="@dimen/twenty_five_dp"
+                 android:layout_height="@dimen/twenty_five_dp"
+                 android:src="@drawable/whistle"
+                 android:layout_below="@id/rightVessel"
+                 android:layout_alignParentRight="true"
+                 android:layout_marginRight="30dp"
+                 android:layout_marginTop="5dp"
+                 />
+
+             <TextView
+                 android:id="@+id/rightTimerCount"
+                 android:layout_width="40dp"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@id/rightVessel"
+                 android:layout_alignParentRight="true"
+                 android:layout_marginRight="65dp"
+                 android:layout_marginTop="5dp"
+                 android:text="5min"
+                 android:textColor="@color/white"
+                 android:layout_alignBaseline="@id/rightWhistleCount"
+                 />
+
+             <ImageView
+                 android:layout_width="@dimen/twenty_five_dp"
+                 android:layout_height="@dimen/twenty_five_dp"
+                 android:src="@drawable/timer"
+                 android:layout_alignParentRight="true"
+                 android:layout_below="@id/rightVessel"
+                 android:layout_marginRight="110dp"
+                 android:layout_marginTop="5dp"
+                 />
+
+
+             <com.sdsmdg.harjot.crollerTest.Croller
+                 android:id="@+id/centerBurner"
+                 android:layout_width="120dp"
+                 android:layout_height="120dp"
+                 android:layout_centerHorizontal="true"
+                 app:label=""
+                 app:min="3"
+                 app:max="18"
+                 app:progress_primary_circle_size="4"
+                 app:anticlockwise="true"
+                 />
+
+             <ImageView
+                 android:id="@+id/centerVessel"
+                 android:layout_width="@dimen/twenty_five_dp"
+                 android:layout_height="@dimen/twenty_five_dp"
+                 android:src="@drawable/vessel_present"
+                 android:layout_centerHorizontal="true"
+                 android:layout_below="@id/centerBurner"
+                 android:layout_marginTop="@dimen/five_dp"
+                 />
+
+             <TextView
+                 android:id="@+id/centerTimerCount"
+                 android:layout_width="40dp"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@id/centerVessel"
+                 android:layout_centerHorizontal="true"
+                 android:text="5min"
+                 android:textColor="@color/white"
+                 android:layout_marginTop="5dp"
+                 />
+
+             <ImageView
+                 android:id="@+id/centerTimer"
+                 android:layout_width="@dimen/twenty_five_dp"
+                 android:layout_height="@dimen/twenty_five_dp"
+                 android:src="@drawable/timer"
+                 android:layout_below="@id/centerVessel"
+                 android:layout_toLeftOf="@id/centerTimerCount"
+                 android:layout_centerHorizontal="true"
+                 android:layout_marginRight="@dimen/five_dp"
+
+                 />
+
+             <ImageView
+                 android:id="@+id/centerWhistle"
+                 android:layout_width="@dimen/twenty_five_dp"
+                 android:layout_height="@dimen/twenty_five_dp"
+                 android:layout_below="@id/centerVessel"
+                 android:layout_toRightOf="@id/centerTimerCount"
+                 android:layout_marginLeft="@dimen/five_dp"
+                 android:src="@drawable/whistle"
+                 />
+
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="5"
+                 android:textColor="@color/white"
+                 android:layout_below="@id/centerVessel"
+                 android:layout_toRightOf="@+id/centerWhistle"
+                 android:layout_alignBaseline="@id/centerTimerCount"
+                 android:layout_marginLeft="@dimen/five_dp"
+                 />
+
+
+
+         </RelativeLayout>
+
+
+     </android.support.v7.widget.CardView>-->
+
+</RelativeLayout>

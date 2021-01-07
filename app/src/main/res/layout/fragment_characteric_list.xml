@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     android:orientation="vertical">
 
 
@@ -19,10 +20,10 @@
 
     <ImageView
         android:id="@+id/selectBluetoothStatus"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginTop="15dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="8dp"
         android:layout_toLeftOf="@id/selectBatteryStatus"
         android:src="@drawable/blue_bluetooth" />
 
@@ -34,7 +35,7 @@
         android:src="@drawable/preethi_logo" />
 
     <ImageView
-        android:id="@+id/selectEStop"
+        android:id="@+id/eStop"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_below="@id/seletedUserProfile"
@@ -223,11 +224,18 @@
                 android:layout_marginRight="@dimen/five_dp"
                 app:main_circle_color="@color/color_grey_ke"
                 app:label=""
+                app:progress_radius="1"
+                app:progress_primary_stroke_width="1"
+                app:progress_primary_color="@color/black"
                 app:min="3"
                 app:max="18"
+                app:is_continuous="false"
+                app:progress_secondary_circle_size="1"
+                app:progress_secondary_color="@color/black"
+                app:progress_secondary_stroke_width="1"
                 app:progress_primary_circle_size="4"
                 app:anticlockwise="true"
-                app:indicator_color="@color/blue"
+                app:indicator_color="@color/yellow"
                 />
 
             <ImageView

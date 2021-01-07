@@ -23,6 +23,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -78,7 +79,7 @@ public class CharacteristicListFragment extends Fragment {
     CircleImageView seletedUserProfile;
     ImageView selectBluetoothStatus;
 
-    TextView  menuIcon;
+    TextView menuIcon;
     ImageView notificationIcon;
     Typeface octinPrisonFont;
 
@@ -90,7 +91,7 @@ public class CharacteristicListFragment extends Fragment {
 
     private SqliteManager sqliteManager;
 
-    Croller leftCroller,rightCroller,centerCroller;
+    Croller leftCroller, rightCroller, centerCroller;
 
     String selectedBurner;
 
@@ -98,6 +99,10 @@ public class CharacteristicListFragment extends Fragment {
     TextView notificationCount;
 
     List<NotificationResponseDTO> nonReadNotiCount;
+
+    int whistleCount = 0;
+
+    ImageView eStop;
 
 
     @Override
@@ -116,8 +121,6 @@ public class CharacteristicListFragment extends Fragment {
 
         return v;
     }
-
-
 
 
     @Override
@@ -178,12 +181,14 @@ public class CharacteristicListFragment extends Fragment {
         sqliteManager = new SqliteManager(getActivity());
 
         seletedUserProfile = (CircleImageView) v.findViewById(R.id.seletedUserProfile);
-        selectBluetoothStatus=(ImageView)v.findViewById(R.id.selectBluetoothStatus);
+        selectBluetoothStatus = (ImageView) v.findViewById(R.id.selectBluetoothStatus);
 
 
-        leftCroller=(Croller)v.findViewById(R.id.leftBurner);
-        rightCroller=(Croller)v.findViewById(R.id.rightBurner);
-        centerCroller=(Croller)v.findViewById(R.id.centerBurner);
+        leftCroller = (Croller) v.findViewById(R.id.leftBurner);
+        rightCroller = (Croller) v.findViewById(R.id.rightBurner);
+        centerCroller = (Croller) v.findViewById(R.id.centerBurner);
+
+        eStop=(ImageView)v.findViewById(R.id.eStop);
 
         selectedLeftWhistle = (ImageView) v.findViewById(R.id.leftWhistle);
         selectedRightWhistle = (ImageView) v.findViewById(R.id.rightWhistle);
@@ -282,12 +287,6 @@ public class CharacteristicListFragment extends Fragment {
         });
 
 
-
-
-
-
-
-
         notificationIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -301,6 +300,45 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 callMenuItems();
+            }
+        });
+
+        eStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setCancelable(false);
+                builder.setTitle("Are you sure want to turn off stove?");
+
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
+
+
+                           callMe(1, null, 0,0,0, 3);
+                        }
+
+                        dialog.cancel();
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
+
+
             }
         });
 
@@ -362,38 +400,57 @@ public class CharacteristicListFragment extends Fragment {
     private void setTimer(String burner) {
     }
 
-    private void setWhistle(final String  burner) {
+    private void setWhistle(final String burner) {
 
-        String burners[] = {"Burner", "Center", "Left", "Right"};
-        String whistleCount[] = {"Whistle", "1", "2", "3", "4", "5","6"};
 
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+        final TextView whistleSub, whistleAdd, setWhistleCount;
+        Button whistleCancel, whistleStart;
+
+
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
         View mView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-        mBuilder.setTitle("Select");
+        mBuilder.setTitle("Set Whistle");
+
+
+        whistleSub = (TextView) mView.findViewById(R.id.whistleSub);
+        whistleAdd = (TextView) mView.findViewById(R.id.whistleAdd);
+        setWhistleCount = (TextView) mView.findViewById(R.id.setWhistleCount);
+
+        whistleCancel = (Button) mView.findViewById(R.id.whistleCancel);
+        whistleStart = (Button) mView.findViewById(R.id.whistleStart);
+
+        whistleAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whistleCount = whistleCount + 1;
+
+                setWhistleCount.setText("" + whistleCount);
+
+            }
+        });
+
+        whistleSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (whistleCount > 0) {
+                    whistleSub.setEnabled(true);
+                    whistleCount = whistleCount - 1;
+                    setWhistleCount.setText("" + whistleCount);
+                } else if (whistleCount == 0) {
+                    whistleSub.setEnabled(false);
+                    setWhistleCount.setText("" + whistleCount);
+                }
+            }
+        });
 
 
 
-        mSpinner = (Spinner) mView.findViewById(R.id.spinnerData);
-        mSpinnerWhistleCount = (Spinner) mView.findViewById(R.id.spinnerWhistleCount);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,
-                burners);
-
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        ArrayAdapter<String> arrayAdapterWhistle = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,
-                whistleCount);
-
-        arrayAdapterWhistle.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        mSpinner.setAdapter(arrayAdapter);
-        mSpinnerWhistleCount.setAdapter(arrayAdapterWhistle);
-
-        mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        mBuilder.setPositiveButton("START", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                if ( mSpinnerWhistleCount.getSelectedItem().toString().equals("Whistle")) {
+                if (mSpinnerWhistleCount.getSelectedItem().toString().equals("Whistle")) {
 
                     Toast.makeText(getActivity(), "Please Select Whistle Count", Toast.LENGTH_LONG).show();
 
@@ -403,12 +460,12 @@ public class CharacteristicListFragment extends Fragment {
 
                         int burnerWhistleCount = Integer.parseInt(mSpinnerWhistleCount.getSelectedItem().toString());
 
-                        callMe(1, burner,0, burnerWhistleCount, 0,1);
+                        callMe(1, burner, 0, burnerWhistleCount, 0, 1);
 
                     }
 
 
-                    }
+                }
 
 
             }
@@ -487,6 +544,15 @@ public class CharacteristicListFragment extends Fragment {
 
 
         }
+
+        //Emergency Off
+        if (propList.size() > 0 && position == 1 && frameFormet == 3) {
+            ((OperationActivity) getActivity()).setCharacteristic(characteristic);
+            ((OperationActivity) getActivity()).setCharaProp(propList.get(0));
+            //((OperationActivity) getActivity()).changePage(2);
+            wrietUserData("ss", 0,0,0, 3);
+        }
+
 
 
     }
@@ -706,7 +772,52 @@ public class CharacteristicListFragment extends Fragment {
                     });
 
 
+        }else if (frameFormet == 3) {
+
+            byte[] eStop = new byte[6];
+            eStop[0] = (byte) ('*');
+            eStop[1] = (byte) (0XD1);
+            eStop[2] = (byte) (0);
+            eStop[3] = (byte) (0);
+            eStop[4] = (byte) (0);
+            eStop[5] = (byte) ('#');
+
+
+            BleDevice bleDevice = ((OperationActivity) getActivity()).getBleDevice();
+            BluetoothGattCharacteristic characteristic = ((OperationActivity) getActivity()).getCharacteristic();
+
+            BleManager.getInstance().write(
+                    bleDevice,
+                    characteristic.getService().getUuid().toString(),
+                    characteristic.getUuid().toString(),
+                    eStop,
+                    new BleWriteCallback() {
+
+                        //Converting byte to String and displaying to user
+                        @Override
+                        public void onWriteSuccess(final int current, final int total, final byte[] justWrite) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onWriteFailure(final BleException exception) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    System.out.println("Exception" + exception.toString());
+                                }
+                            });
+                        }
+                    });
+
+
         }
+
 
 
     }
@@ -990,13 +1101,10 @@ public class CharacteristicListFragment extends Fragment {
         if (rightFlameMode == 1) {
 
 
-
         } else if (rightFlameMode == 2) {
 
 
-
         } else if (rightFlameMode == 3) {
-
 
 
         }
@@ -1011,7 +1119,6 @@ public class CharacteristicListFragment extends Fragment {
         }
 
         if (leftFlameMode == 1) {
-
 
 
         } else if (leftFlameMode == 2) {
