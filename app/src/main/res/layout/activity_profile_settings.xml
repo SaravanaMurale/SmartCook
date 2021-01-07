@@ -12,9 +12,10 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
+        android:layout_marginTop="40dp"
         android:visibility="visible"
         android:src="@drawable/user" />
+
 
 
 
@@ -22,7 +23,9 @@
         android:id="@+id/profileBlock"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/profilePic">
+        android:layout_below="@id/profilePic"
+        android:layout_marginTop="30dp"
+        >
 
         <ImageView
             android:layout_width="25dp"
@@ -41,6 +44,16 @@
             android:text="Saravana Murali" />
 
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_grey_ke"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/profileBlock"
+        android:layout_marginTop="5dp"
+        />
 
     <RelativeLayout
         android:id="@+id/emailBlock"
@@ -67,6 +80,17 @@
 
     </RelativeLayout>
 
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_grey_ke"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/emailBlock"
+        />
+
     <RelativeLayout
         android:id="@+id/mobileBlock"
         android:layout_width="match_parent"
@@ -92,6 +116,16 @@
 
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_grey_ke"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/mobileBlock"
+        />
+
     <RelativeLayout
         android:id="@+id/changePasswordBlock"
         android:layout_width="match_parent"
@@ -116,6 +150,16 @@
             android:text="********" />
 
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_grey_ke"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/changePasswordBlock"
+        />
 
 
 

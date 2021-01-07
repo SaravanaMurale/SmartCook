@@ -89,7 +89,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         mobileBlock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialog("Enter Your Name", 3);
+                openDialog("Mobile Number", 3);
             }
         });
 
@@ -187,7 +187,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_DENIED) {
                     pickImageFromGallery();
                 } else {
-                    Toast.makeText(ProfileSettingsActivity.this, "Permission Denied", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(ProfileSettingsActivity.this, "Permission Denied", Toast.LENGTH_LONG).show();
                 }
             }
         }

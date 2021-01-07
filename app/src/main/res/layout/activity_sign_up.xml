@@ -60,7 +60,8 @@
                     android:background="@drawable/bg_ui"
                     android:text="Sign up"
                     android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                    android:fontFamily="sans-serif-condensed"
+                    android:textColor="@color/red" />
             </RelativeLayout>
 
             <android.support.v7.widget.CardView
@@ -81,8 +82,9 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="UserName"
-                        android:textColor="@color/colorPurple"
+                        android:textColor="@color/red"
                         android:textSize="14sp"
+                        android:fontFamily="sans-serif-condensed"
                         android:textStyle="bold" />
 
                     <EditText
@@ -102,7 +104,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="Email"
-                        android:textColor="@color/colorPurple"
+                        android:textColor="@color/red"
+                        android:fontFamily="sans-serif-condensed"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -123,8 +126,9 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="Mobile Number"
-                        android:textColor="@color/colorPurple"
+                        android:textColor="@color/red"
                         android:textSize="14sp"
+                        android:fontFamily="sans-serif-condensed"
                         android:textStyle="bold" />
 
 
@@ -145,8 +149,9 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="Password"
-                        android:textColor="@color/colorPurple"
+                        android:textColor="@color/red"
                         android:textSize="14sp"
+                        android:fontFamily="sans-serif-condensed"
                         android:textStyle="bold" />
 
 
@@ -168,8 +173,9 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="Retype Password"
-                        android:textColor="@color/colorPurple"
+                        android:textColor="@color/red"
                         android:textSize="14sp"
+                        android:fontFamily="sans-serif-condensed"
                         android:textStyle="bold" />
 
 
@@ -200,11 +206,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:elevation="10dp"
-        android:text="Create Account"
+        android:text="Create An Account"
         android:textColor="@color/red"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:fontFamily="sans-serif"
+        android:fontFamily="sans-serif-condensed"
         android:transitionName="tvLogin" />
 
 
