@@ -365,6 +365,40 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     }
 
+    public List<GasConsumptionPatternDTO> allBurnerDataByDate(String burner, String startDate, String endDate) {
+
+        List<GasConsumptionPatternDTO> gasConsumptionPatternDTOList = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+
+            Cursor cursor = sqLiteDatabase.rawQuery("select id,gcp_burner,gcp_usage_value,gcp_usage_date from " + GCP_TABLE + " where " + GCP_USAGE_DATE + ">=? and " + GCP_USAGE_DATE + "<=? and " + GCP_BURNER + "=?",
+                    new String[]{startDate, endDate, burner});
+
+            if (cursor.moveToFirst()) {
+
+                do {
+
+
+                    System.out.println("RrangeID " + cursor.getInt(0));
+                    System.out.println("RrangeBURNER " + cursor.getString(1));
+                    System.out.println("RrangeUSAGE " + cursor.getInt(2));
+                    System.out.println("DATE " + cursor.getString(3));
+
+
+
+
+                    GasConsumptionPatternDTO gasConsumptionPatternDTO = new GasConsumptionPatternDTO(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getString(3));
+                    gasConsumptionPatternDTOList.add(gasConsumptionPatternDTO);
+
+                } while (cursor.moveToNext());
+
+
+            }
+
+        return gasConsumptionPatternDTOList;
+
+    }
+
     public List<GasConsumptionPatternDTO> searchByBurner(String burner) {
 
         List<GasConsumptionPatternDTO> gasConsumptionPatternDTOList = new ArrayList<>();

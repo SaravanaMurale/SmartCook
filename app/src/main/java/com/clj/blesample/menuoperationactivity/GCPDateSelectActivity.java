@@ -35,7 +35,7 @@ public class  GCPDateSelectActivity extends AppCompatActivity implements Adapter
     GraphView graphView;
 
 
-    String[] burners = {"Select Burner", "Center", "Left", "Right"};
+    String[] burners = {"Select Burner", "Center", "Left", "Right","All Burner"};
     Spinner spinner;
 
     DatePickerDialog.OnDateSetListener setListenerFromDate, setListenerToDate;
@@ -169,6 +169,8 @@ public class  GCPDateSelectActivity extends AppCompatActivity implements Adapter
             selectedBurner = "10";
         } else if (burner.equals("Right")) {
             selectedBurner = "00";
+        }else if(burner.equals("All Burner")){
+            selectedBurner="11";
         }
 
         //selectedBurner = burner;

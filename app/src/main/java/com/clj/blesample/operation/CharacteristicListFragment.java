@@ -1190,7 +1190,7 @@ public class CharacteristicListFragment extends Fragment {
                 int date = data[2];
                 int month = data[3];
 
-                String dateFormation = date + "/" + month + "/" + "2020";
+                String dateFormation = date + "/" + month + "/" + "2021";
 
                 Date dateFormet = null;
                 try {
@@ -1204,16 +1204,16 @@ public class CharacteristicListFragment extends Fragment {
                 int leftBurner = (data[8] & 0x0FF) << 0 | (data[9] & 0x0FF) << 8 | (data[10] & 0x0FF) << 16 | (data[11] & 0x0FF) << 24;
                 int centerBurner = (data[12] & 0x0FF) << 0 | (data[13] & 0x0FF) << 8 | (data[14] & 0x0FF) << 16 | (data[15] & 0x0FF) << 24;
 
-                float rightBurGasUsage = rightBurner / 4096;
+                float rightBurGasUsage = rightBurner;// / 4096;
 
                 System.out.println("DateFormet " + dateFormet + " " + rightBurGasUsage);
 
                 sqliteManager.addGasConsumptionPattern(dateFormet, rightBurGasUsage, "00");
 
-                float leftBurGasUsage = leftBurner / 4096;
+                float leftBurGasUsage = leftBurner;// / 4096;
                 sqliteManager.addGasConsumptionPattern(dateFormet, leftBurGasUsage, "01");
 
-                float centerBurGasUsage = centerBurner / 4096;
+                float centerBurGasUsage = centerBurner;// / 4096;
                 sqliteManager.addGasConsumptionPattern(dateFormet, centerBurGasUsage, "10");
 
 

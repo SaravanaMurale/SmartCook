@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.clj.blesample.R;
 import com.clj.blesample.databasemanager.SqliteManager;
@@ -45,7 +46,36 @@ public class GraphViewActivity extends AppCompatActivity {
 
         System.out.println("SelectedData " + selectedFromDate + " " + selectedToDate + " " + selectedBurner);
 
-        List<GasConsumptionPatternDTO> gasConsumptionPatternDTOList = sqliteManager.searchByDates(selectedBurner, selectedFromDate, selectedToDate);
+        List<GasConsumptionPatternDTO> gasConsumptionPatternDTOList=new ArrayList<>();
+
+        if(selectedBurner.equals("11")){
+            System.out.println("AllBurnerIsSelected");
+            List<GasConsumptionPatternDTO> rightBurnerList=  sqliteManager.allBurnerDataByDate("00",selectedFromDate,selectedToDate);
+            List<GasConsumptionPatternDTO> leftBurnerList=sqliteManager.allBurnerDataByDate("01",selectedFromDate,selectedToDate);
+            List<GasConsumptionPatternDTO> centerBurnerList=sqliteManager.allBurnerDataByDate("10",selectedFromDate,selectedToDate);
+
+
+            for (int i = 0; i <rightBurnerList.size() ; i++) {
+
+                int k=rightBurnerList.get(i).getGasUsage()+leftBurnerList.get(i).getGasUsage()+centerBurnerList.get(i).getGasUsage();
+
+                GasConsumptionPatternDTO gasConsumptionPatternDTO=new GasConsumptionPatternDTO(k,rightBurnerList.get(i).getGasUsageDate());
+
+                gasConsumptionPatternDTOList.add(gasConsumptionPatternDTO);
+
+                /*gasConsumptionPatternDTOList.get(i).setGasUsage(k);
+                gasConsumptionPatternDTOList.get(i).setGasUsageDate(rightBurnerList.get(i).getGasUsageDate());
+*/
+
+            }
+
+
+        }else {
+            gasConsumptionPatternDTOList = sqliteManager.searchByDates(selectedBurner, selectedFromDate, selectedToDate);
+        }
+
+
+
 
         System.out.println("RangeSizeOfGasConsumptionPatters " + gasConsumptionPatternDTOList.size());
 
@@ -103,7 +133,7 @@ public class GraphViewActivity extends AppCompatActivity {
         yAxis.setTextColor(Color.parseColor("#03A9F4"));
         yAxis.setTextSize(16);
 
-        yAxis.setName("GasUsage in KG");
+        yAxis.setName("GasUsage in Grams");
 
         Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
         viewport.top = 10;
