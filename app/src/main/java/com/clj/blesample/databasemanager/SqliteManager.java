@@ -137,7 +137,7 @@ public class SqliteManager extends SQLiteOpenHelper {
         String gasConPatTable = "CREATE TABLE IF NOT EXISTS " + GCP_TABLE + "(\n" +
                 "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
                 "    " + GCP_BURNER + " varchar(200) NOT NULL,\n" +
-                "    " + GCP_USAGE_VALUE + " INTEGER NOT NULL,\n" +
+                "    " + GCP_USAGE_VALUE + " DOUBLE NOT NULL,\n" +
                 "    " + GCP_USAGE_DATE + " text NOT NULL\n" +
                 ");";
 
