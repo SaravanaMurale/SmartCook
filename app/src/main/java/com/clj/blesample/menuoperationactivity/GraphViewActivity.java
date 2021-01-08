@@ -11,6 +11,7 @@ import com.clj.blesample.databasemanager.SqliteManager;
 import com.clj.blesample.model.GasConsumptionPatternDTO;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import lecho.lib.hellocharts.model.Axis;
@@ -103,8 +104,11 @@ public class GraphViewActivity extends AppCompatActivity {
             yAxisValues.add(new PointValue(i, yAxisValue[i]));
         }*/
 
+        List<Integer> findMaxValue=new ArrayList<>();
         for (int i = 0; i < gasConsumptionPatternDTOList.size(); i++) {
             yAxisValues.add(new PointValue(i, gasConsumptionPatternDTOList.get(i).getGasUsage()));
+
+            findMaxValue.add(gasConsumptionPatternDTOList.get(i).getGasUsage());
         }
 
         List lines = new ArrayList();
@@ -136,7 +140,9 @@ public class GraphViewActivity extends AppCompatActivity {
         yAxis.setName("GasUsage in Grams");
 
         Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
-        viewport.top = 10;
+        int max= Collections.max(findMaxValue);
+        viewport.top = max+10;
+        //viewport.top = 50;
         lineChartView.setMaximumViewport(viewport);
         lineChartView.setCurrentViewport(viewport);
     }
