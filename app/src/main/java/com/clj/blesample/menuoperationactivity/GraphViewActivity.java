@@ -55,16 +55,22 @@ public class GraphViewActivity extends AppCompatActivity {
             List<GasConsumptionPatternDTO> leftBurnerList=sqliteManager.allBurnerDataByDate("01",selectedFromDate,selectedToDate);
             List<GasConsumptionPatternDTO> centerBurnerList=sqliteManager.allBurnerDataByDate("10",selectedFromDate,selectedToDate);
 
-
-            for (int i = 0; i <rightBurnerList.size() ; i++) {
-
-                int k=rightBurnerList.get(i).getGasUsage()+leftBurnerList.get(i).getGasUsage()+centerBurnerList.get(i).getGasUsage();
-
-                GasConsumptionPatternDTO gasConsumptionPatternDTO=new GasConsumptionPatternDTO(k,rightBurnerList.get(i).getGasUsageDate());
-
-                gasConsumptionPatternDTOList.add(gasConsumptionPatternDTO);
+            if(rightBurnerList.size()!=0 && leftBurnerList.size()!=0&& centerBurnerList.size()!=0 ) {
 
 
+                for (int i = 0; i < rightBurnerList.size(); i++) {
+
+                    int k = rightBurnerList.get(i).getGasUsage() + leftBurnerList.get(i).getGasUsage() + centerBurnerList.get(i).getGasUsage();
+
+                    GasConsumptionPatternDTO gasConsumptionPatternDTO = new GasConsumptionPatternDTO(k, rightBurnerList.get(i).getGasUsageDate());
+
+                    gasConsumptionPatternDTOList.add(gasConsumptionPatternDTO);
+
+
+                }
+            }else {
+                Toast.makeText(GraphViewActivity.this,"There is no data for the selected Date",Toast.LENGTH_LONG).show();
+                return;
             }
 
 
@@ -73,7 +79,8 @@ public class GraphViewActivity extends AppCompatActivity {
         }
 
 
-        if(gasConsumptionPatternDTOList.size()==0 && gasConsumptionPatternDTOList==null){
+        if(gasConsumptionPatternDTOList.size()==0 ){
+            Toast.makeText(GraphViewActivity.this,"There is no data for the selected Date",Toast.LENGTH_LONG).show();
 
             return;
         }
