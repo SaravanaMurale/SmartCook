@@ -64,15 +64,31 @@ public class  GCPDateSelectActivity extends AppCompatActivity implements Adapter
             @Override
             public void onClick(View v) {
 
-                if (selectedFromDate != null && selectedToDate != null && selectedBurner != null) {
-                    Intent intent = new Intent(GCPDateSelectActivity.this, GraphViewActivity.class);
-                    intent.putExtra("FROMDATE", selectedFromDate);
-                    intent.putExtra("TODATE", selectedToDate);
-                    intent.putExtra("BURNER", selectedBurner);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(GCPDateSelectActivity.this, "Please Select", Toast.LENGTH_LONG).show();
+                Date d1=MathUtil.stringToDateConversion(selectedFromDate);
+                Date d2=MathUtil.stringToDateConversion(selectedToDate);
+
+                int diffInDays = (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+
+                System.out.println("DifferentDays"+diffInDays);
+
+                if(diffInDays>=60){
+                    Toast.makeText(GCPDateSelectActivity.this,"Please select less than 60 days",Toast.LENGTH_LONG).show();
+                }else {
+
+                    if (selectedFromDate != null && selectedToDate != null && selectedBurner != null) {
+                        Intent intent = new Intent(GCPDateSelectActivity.this, GraphViewActivity.class);
+                        intent.putExtra("FROMDATE", selectedFromDate);
+                        intent.putExtra("TODATE", selectedToDate);
+                        intent.putExtra("BURNER", selectedBurner);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(GCPDateSelectActivity.this, "Please Select", Toast.LENGTH_LONG).show();
+                    }
+
                 }
+
+
+
 
 
             }
