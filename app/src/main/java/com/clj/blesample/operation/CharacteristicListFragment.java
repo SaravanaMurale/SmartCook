@@ -1190,6 +1190,10 @@ public class CharacteristicListFragment extends Fragment {
                 int date = data[2];
                 int month = data[3];
 
+                Date d=new Date();
+                int year=d.getYear();
+                String yearString=String.valueOf(year);
+
                 String dateFormation = date + "/" + month + "/" + "2021";
 
                 Date dateFormet = null;

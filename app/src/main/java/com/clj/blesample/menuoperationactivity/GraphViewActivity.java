@@ -64,9 +64,6 @@ public class GraphViewActivity extends AppCompatActivity {
 
                 gasConsumptionPatternDTOList.add(gasConsumptionPatternDTO);
 
-                /*gasConsumptionPatternDTOList.get(i).setGasUsage(k);
-                gasConsumptionPatternDTOList.get(i).setGasUsageDate(rightBurnerList.get(i).getGasUsageDate());
-*/
 
             }
 
@@ -76,6 +73,10 @@ public class GraphViewActivity extends AppCompatActivity {
         }
 
 
+        if(gasConsumptionPatternDTOList.size()==0 && gasConsumptionPatternDTOList==null){
+
+            return;
+        }
 
 
         System.out.println("RangeSizeOfGasConsumptionPatters " + gasConsumptionPatternDTOList.size());
@@ -128,7 +129,7 @@ public class GraphViewActivity extends AppCompatActivity {
         Axis yAxis = new Axis();
         data.setAxisYLeft(yAxis);
 
-        line.setColor(Color.parseColor("#9C27B0"));
+        line.setColor(Color.parseColor("#d32f2f"));
 
         axis.setTextSize(16);
 
