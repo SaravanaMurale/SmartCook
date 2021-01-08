@@ -101,6 +101,7 @@ public class CharacteristicListFragment extends Fragment {
     List<NotificationResponseDTO> nonReadNotiCount;
 
     int whistleCount = 0;
+    int timerCount=0;
 
     ImageView eStop;
 
@@ -258,7 +259,10 @@ public class CharacteristicListFragment extends Fragment {
                     public void run() {
                         leftOff.setTextColor(Color.WHITE);
                     }
-                },1000);
+                },500);
+
+                callMe(1, MathUtil.LEFT_BURNER, 0, 0, MathUtil.OFF, 1);
+
 
             }
         });
@@ -269,6 +273,7 @@ public class CharacteristicListFragment extends Fragment {
                 leftHigh.setTextColor(Color.RED);
                 leftSim.setTextColor(Color.WHITE);
                 leftOff.setTextColor(Color.WHITE);
+                callMe(1, MathUtil.LEFT_BURNER, 0, 0, MathUtil.HIGH, 1);
             }
         });
 
@@ -278,6 +283,7 @@ public class CharacteristicListFragment extends Fragment {
                 leftSim.setTextColor(Color.RED);
                 leftHigh.setTextColor(Color.WHITE);
                 leftOff.setTextColor(Color.WHITE);
+                callMe(1, MathUtil.LEFT_BURNER, 0, 0, MathUtil.SIM, 1);
             }
         });
 
@@ -287,7 +293,17 @@ public class CharacteristicListFragment extends Fragment {
                 rightOff.setTextColor(Color.RED);
                 rightHigh.setTextColor(Color.WHITE);
                 rightSim.setTextColor(Color.WHITE);
-                rightOff.setTextColor(Color.WHITE);
+
+                callMe(1, MathUtil.RIGHT_BURNER, 0, 0, MathUtil.OFF, 1);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        rightOff.setTextColor(Color.WHITE);
+                    }
+                },500);
+
+
 
             }
         });
@@ -298,6 +314,7 @@ public class CharacteristicListFragment extends Fragment {
                 rightOff.setTextColor(Color.WHITE);
                 rightHigh.setTextColor(Color.RED);
                 rightSim.setTextColor(Color.WHITE);
+                callMe(1, MathUtil.RIGHT_BURNER, 0, 0, MathUtil.HIGH, 1);
             }
         });
         rightSim.setOnClickListener(new View.OnClickListener() {
@@ -306,6 +323,7 @@ public class CharacteristicListFragment extends Fragment {
                 rightOff.setTextColor(Color.WHITE);
                 rightHigh.setTextColor(Color.WHITE);
                 rightSim.setTextColor(Color.RED);
+                callMe(1, MathUtil.RIGHT_BURNER, 0, 0, MathUtil.SIM, 1);
             }
         });
 
@@ -316,7 +334,17 @@ public class CharacteristicListFragment extends Fragment {
                 centerOff.setTextColor(Color.RED);
                 centerHigh.setTextColor(Color.WHITE);
                 centerSim.setTextColor(Color.WHITE);
-                centerOff.setTextColor(Color.WHITE);
+
+                callMe(1, MathUtil.CENTER_BURNER, 0, 0, MathUtil.OFF, 1);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        centerOff.setTextColor(Color.WHITE);
+                    }
+                },500);
+
+
             }
         });
 
@@ -326,6 +354,8 @@ public class CharacteristicListFragment extends Fragment {
                 centerOff.setTextColor(Color.WHITE);
                 centerHigh.setTextColor(Color.RED);
                 centerSim.setTextColor(Color.WHITE);
+
+                callMe(1, MathUtil.CENTER_BURNER, 0, 0, MathUtil.HIGH, 1);
             }
         });
 
@@ -335,6 +365,8 @@ public class CharacteristicListFragment extends Fragment {
                 centerOff.setTextColor(Color.WHITE);
                 centerHigh.setTextColor(Color.WHITE);
                 centerSim.setTextColor(Color.RED);
+
+                callMe(1, MathUtil.CENTER_BURNER, 0, 0, MathUtil.SIM, 1);
             }
         });
 
@@ -506,7 +538,79 @@ public class CharacteristicListFragment extends Fragment {
         });
     }
 
-    private void setTimer(String burner) {
+    private void setTimer(final String burner) {
+
+        final TextView timerSub,timerAdd,setTimerCount;
+
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+        View mView = getLayoutInflater().inflate(R.layout.dialog_set_timer, null);
+        mBuilder.setTitle("Set Timer");
+
+        timerSub = (TextView) mView.findViewById(R.id.timerSub);
+        timerAdd = (TextView) mView.findViewById(R.id.timerAdd);
+        setTimerCount = (TextView) mView.findViewById(R.id.setTimerCount);
+
+        timerAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timerCount=timerCount+1;
+
+                setTimerCount.setText(""+timerCount);
+            }
+        });
+
+        timerSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (timerCount > 0) {
+                    timerSub.setEnabled(true);
+                    timerCount = timerCount - 1;
+                    setTimerCount.setText("" + timerCount);
+                } else if (timerCount == 0) {
+                    timerSub.setEnabled(false);
+                    setTimerCount.setText("" + timerCount);
+                }
+            }
+        });
+
+        mBuilder.setPositiveButton("START", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                int burnerTimerCount = Integer.parseInt(setTimerCount.getText().toString());
+
+                if (burnerTimerCount==0) {
+
+                    Toast.makeText(getActivity(), "Please Set Timer", Toast.LENGTH_LONG).show();
+
+                }else {
+
+                    if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
+
+
+
+                        callMe(1, burner, burnerTimerCount, 0, 0, 2);
+
+                    }
+
+                }
+
+
+            }
+        }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.cancel();
+
+            }
+        });
+
+        mBuilder.setView(mView);
+        AlertDialog alertDialog = mBuilder.create();
+        alertDialog.show();
+
+
     }
 
     private void setWhistle(final String burner) {
@@ -563,7 +667,7 @@ public class CharacteristicListFragment extends Fragment {
 
                 if (burnerWhistleCount==0) {
 
-                    Toast.makeText(getActivity(), "Please Select Whistle Count", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Please Set Whistle Count", Toast.LENGTH_LONG).show();
 
                 } else {
 
@@ -571,7 +675,7 @@ public class CharacteristicListFragment extends Fragment {
 
 
 
-                        callMe(1, burner, 0, burnerWhistleCount, 0, 1);
+                        callMe(1, burner, 0, burnerWhistleCount, 0, 2);
 
                     }
 
