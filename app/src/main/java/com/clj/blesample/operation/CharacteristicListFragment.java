@@ -108,6 +108,8 @@ public class CharacteristicListFragment extends Fragment {
 
     int leftBurnerStatus, rightBurnerStatus, centerBurnerStatus = 0;
 
+    ImageView selectBatteryStatus;
+
 
 
     @Override
@@ -189,6 +191,8 @@ public class CharacteristicListFragment extends Fragment {
         selectdUserName=(TextView)v.findViewById(R.id.selectdUserName);
         seletedUserProfile = (CircleImageView) v.findViewById(R.id.seletedUserProfile);
         selectBluetoothStatus = (ImageView) v.findViewById(R.id.selectBluetoothStatus);
+
+        selectBatteryStatus=(ImageView)v.findViewById(R.id.selectBatteryStatus);
 
 
         leftBurner = (ImageView) v.findViewById(R.id.leftBurner);
@@ -1446,9 +1450,7 @@ public class CharacteristicListFragment extends Fragment {
 
                 System.out.println("BatteryPercentage" + batteryPercentage);
 
-                if (batteryPercentage <= 30) {
-                    sqliteManager.setNotification("Your Battery is Criticaly Low");
-                }
+                setBatteryStatus(batteryPercentage);
 
 
                 System.out.println("VesselAndFlameMode" + rightVessel + " " + rightFlameMode + " " + leftVessel + " " + leftFlameMode + " " + centerVessel + " " + centerFlameMode + " " + batteryPercentage);
@@ -1511,6 +1513,31 @@ public class CharacteristicListFragment extends Fragment {
 
         }
 
+
+    }
+
+    private void setBatteryStatus(int batteryPercentage) {
+
+
+        if(batteryPercentage>=80){
+            selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_full));
+        }else if(batteryPercentage>=60){
+            selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_9));
+        }else if(batteryPercentage>=40){
+            selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_7));
+        }else if(batteryPercentage>=30)
+        {
+            selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_30));
+        }else if(batteryPercentage>=20) {
+            selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_low_10));
+        }else if(batteryPercentage<=15){
+            selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_criticaly_low));
+        }
+
+
+        if (batteryPercentage <= 30) {
+            sqliteManager.setNotification("Your Battery is Criticaly Low");
+        }
 
     }
 
