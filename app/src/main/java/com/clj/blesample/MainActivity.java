@@ -2,6 +2,7 @@ package com.clj.blesample;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothGatt;
@@ -42,6 +43,7 @@ import com.clj.blesample.adapter.DeviceAdapter;
 import com.clj.blesample.comm.ObserverManager;
 import com.clj.blesample.operation.OperationActivity;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
+import com.clj.blesample.utils.MathUtil;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleGattCallback;
 import com.clj.fastble.callback.BleMtuChangedCallback;
@@ -77,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Switch switchShow;
     private TextView switchStatus,bleConnectStatus;
+
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,6 +205,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        dialog = new Dialog(getApplicationContext());
 
         btn_scan = (Button) findViewById(R.id.btn_scan);
         btn_scan.setText(getString(R.string.start_scan));
@@ -333,6 +339,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 img_loading.setVisibility(View.VISIBLE);
                 btn_scan.setText(getString(R.string.stop_scan));
 
+                dialog=MathUtil.showProgressBar(MainActivity.this);
+
                 switchShow.setChecked(true);
                 switchStatus.setText("ON");
                 bleConnectStatus.setText("Bluetooth On...");
@@ -360,6 +368,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 btn_scan.setText(getString(R.string.start_scan));
                 bleConnectStatus.setTextColor(Color.BLACK);
                 bleConnectStatus.setText("Please Connect");
+                MathUtil.dismisProgressBar(MainActivity.this,dialog);
 
                 System.out.println("CalledOnScanFinished");
 
@@ -395,6 +404,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onStartConnect() {
                 progressDialog.show();
+               // dialog=MathUtil.showProgressBar(MainActivity.this);
                 progressDialog.setMessage("Connecting Please Wait");
             }
 
@@ -403,6 +413,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 img_loading.clearAnimation();
                 img_loading.setVisibility(View.INVISIBLE);
                 btn_scan.setText(getString(R.string.start_scan));
+                MathUtil.dismisProgressBar(MainActivity.this,dialog);
                 progressDialog.dismiss();
                 Toast.makeText(MainActivity.this, getString(R.string.connect_fail), Toast.LENGTH_LONG).show();
             }
@@ -415,6 +426,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mDeviceAdapter.notifyDataSetChanged();
                 bleConnectStatus.setText("Connected");
 
+                progressDialog.dismiss();
+                MathUtil.dismisProgressBar(MainActivity.this,dialog);
                 //Mycode
                 if (BleManager.getInstance().isConnected(bleDevice)) {
 
@@ -422,7 +435,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     Intent intent = new Intent(MainActivity.this, OperationActivity.class);
                     intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
-                    progressDialog.dismiss();
+
                     startActivity(intent);
 
                 } else {
@@ -435,6 +448,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onDisConnected(boolean isActiveDisConnected, BleDevice bleDevice, BluetoothGatt gatt, int status) {
                 progressDialog.dismiss();
+                MathUtil.dismisProgressBar(MainActivity.this,dialog);
 
                 mDeviceAdapter.removeDevice(bleDevice);
                 mDeviceAdapter.notifyDataSetChanged();

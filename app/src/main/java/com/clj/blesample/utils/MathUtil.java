@@ -1,7 +1,11 @@
 package com.clj.blesample.utils;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+
+import com.clj.blesample.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -167,6 +171,26 @@ public class MathUtil {
         String dateAndTime = sdf.format(d);
 
         return dateAndTime;
+    }
+
+    public static Dialog showProgressBar(Context context) {
+
+        Dialog csprogress;
+        csprogress = new Dialog(context, R.style.MyAlertDialogStyle);
+        csprogress.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        csprogress.setCancelable(false);
+        csprogress.setContentView(R.layout.layout_progressbar);
+        csprogress.setCanceledOnTouchOutside(true);
+        csprogress.show();
+        return csprogress;
+    }
+
+    public static void dismisProgressBar(Context context,Dialog dialog) {
+
+        if (dialog.isShowing()) {
+            dialog.dismiss();
+        }
+
     }
 
 

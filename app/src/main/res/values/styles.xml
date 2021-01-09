@@ -34,5 +34,10 @@
         <item name="colorControlActivated">@android:color/black</item>-->
     </style>
 
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/blue</item>
+    </style>
+
+
 
 </resources>
