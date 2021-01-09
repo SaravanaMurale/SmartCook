@@ -737,6 +737,7 @@ public class CharacteristicListFragment extends Fragment {
             //((OperationActivity) getActivity()).changePage(2);
             wrietUserData(burner, timerInMin, whistleInCount, flameMode, frameFormet);
         }
+        //whistle
         if (propList.size() > 0 && position == 1 && frameFormet == 2) {
             ((OperationActivity) getActivity()).setCharacteristic(characteristic);
             ((OperationActivity) getActivity()).setCharaProp(propList.get(0));
@@ -752,8 +753,24 @@ public class CharacteristicListFragment extends Fragment {
 
         }
 
-        //Emergency Off
+        //Timer
         if (propList.size() > 0 && position == 1 && frameFormet == 3) {
+            ((OperationActivity) getActivity()).setCharacteristic(characteristic);
+            ((OperationActivity) getActivity()).setCharaProp(propList.get(0));
+            //((OperationActivity) getActivity()).changePage(2);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    wrietUserData(burner, timerInMin, whistleInCount, flameMode, frameFormet);
+                }
+            }, 2000);
+
+
+        }
+
+        //Emergency Off
+        if (propList.size() > 0 && position == 1 && frameFormet == 4) {
             ((OperationActivity) getActivity()).setCharacteristic(characteristic);
             ((OperationActivity) getActivity()).setCharaProp(propList.get(0));
             //((OperationActivity) getActivity()).changePage(2);
@@ -838,62 +855,61 @@ public class CharacteristicListFragment extends Fragment {
 
         } else if (frameFormet == 2) {
 
-            //Whhistle and Timer
+            //Whistle
 
-            String selectedBurner = PreferencesUtil.getValueString(getActivity(), PreferencesUtil.BURNER);
+            /*String selectedBurner = PreferencesUtil.getValueString(getActivity(), PreferencesUtil.BURNER);
             int selectedTimer = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.TIMER_IN_MINUTE);
-            int selectedWhistle = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.WHISTLE_IN_COUNT);
+            int selectedWhistle = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.WHISTLE_IN_COUNT);*/
 
-            if (selectedBurner.equals("00")) {
-                if (selectedWhistle > 0) {
+            if (burner.equals("00")) {
+                if (whistleInCount > 0) {
 
-                    sqliteManager.setNotification(selectedWhistle + " Whistle is set for Right Burner");
+                    sqliteManager.setNotification(whistleInCount + " Whistle is set for Right Burner");
                     //sqliteManager.getNonReadNotifications();
                 }
-                if (selectedTimer > 0) {
+                /*if (selectedTimer > 0) {
                     sqliteManager.setNotification(selectedTimer + " Min Timer is set for Right Burner");
                     //sqliteManager.getNonReadNotifications();
-                }
-            } else if (selectedBurner.equals("01")) {
+                }*/
+            } else if (burner.equals("01")) {
 
-                if (selectedWhistle > 0) {
-                    sqliteManager.setNotification(selectedWhistle + " Whistle is set for Left Burner");
+                if (whistleInCount > 0) {
+                    sqliteManager.setNotification(whistleInCount + " Whistle is set for Left Burner");
                     //sqliteManager.getNonReadNotifications();
                 }
-                if (selectedTimer > 0) {
+                /*if (selectedTimer > 0) {
                     sqliteManager.setNotification(selectedTimer + " Min Timer is set for Left Burner");
                     //sqliteManager.getNonReadNotifications();
-                }
+                }*/
 
-            } else if (selectedBurner.equals("10")) {
-                if (selectedWhistle > 0) {
-                    sqliteManager.setNotification(selectedWhistle + " Whistle is set for Center Burner");
+            } else if (burner.equals("10")) {
+                if (whistleInCount > 0) {
+                    sqliteManager.setNotification(whistleInCount + " Whistle is set for Center Burner");
                     //sqliteManager.getNonReadNotifications();
                 }
-                if (selectedTimer > 0) {
+                /*if (selectedTimer > 0) {
                     sqliteManager.setNotification(selectedTimer + " Min Timer is set for Center Burner");
                     //sqliteManager.getNonReadNotifications();
-                }
+                }*/
             }
 
             setNonReadNotificationCount();
 
 
-            //Whistle and Timer
+            //Whistle
 
-            byte[] timerOrWhistle = new byte[9];
+            byte[] whistle = new byte[9];
 
-            int rightTimer = 0, rightWhistle = 0;
-            int leftTimer = 0, leftWhistle = 0;
-            int centerTimer = 0, centerWhistle = 0;
+            int rightTimer =  0, rightWhistle =  0;
+            int leftTimer =  0, leftWhistle =  0;
+            int centerTimer =  0, centerWhistle =  0;
 
 
             if (burner.equals(MathUtil.RIGHT_BURNER)) {
 
-                rightTimer = timerInMin;
                 rightWhistle = whistleInCount;
 
-
+                rightTimer = 0xff;
                 leftTimer = 0xff;
                 leftWhistle = 0xff;
                 centerTimer = 0xff;
@@ -902,10 +918,10 @@ public class CharacteristicListFragment extends Fragment {
 
             } else if (burner.equals(MathUtil.LEFT_BURNER)) {
 
-                leftTimer = timerInMin;
+
                 leftWhistle = whistleInCount;
 
-
+                leftTimer = 0xff;
                 rightTimer = 0xff;
                 rightWhistle = 0xff;
                 centerTimer = 0xff;
@@ -914,9 +930,9 @@ public class CharacteristicListFragment extends Fragment {
 
             } else if (burner.equals(MathUtil.CENTER_BURNER)) {
 
-                centerTimer = timerInMin;
                 centerWhistle = whistleInCount;
 
+                centerTimer = 0xff;
                 rightTimer = 0xff;
                 rightWhistle = 0xff;
                 leftTimer = 0xff;
@@ -926,15 +942,15 @@ public class CharacteristicListFragment extends Fragment {
             }
 
 
-            timerOrWhistle[0] = (byte) ('*');
-            timerOrWhistle[1] = (byte) (0xC0);
-            timerOrWhistle[2] = (byte) (rightWhistle);
-            timerOrWhistle[3] = (byte) (rightTimer);
-            timerOrWhistle[4] = (byte) (leftWhistle);
-            timerOrWhistle[5] = (byte) (leftTimer);
-            timerOrWhistle[6] = (byte) (centerWhistle);
-            timerOrWhistle[7] = (byte) (centerTimer);
-            timerOrWhistle[8] = (byte) ('#');
+            whistle[0] = (byte) ('*');
+            whistle[1] = (byte) (0xC0);
+            whistle[2] = (byte) (rightWhistle);
+            whistle[3] = (byte) (rightTimer);
+            whistle[4] = (byte) (leftWhistle);
+            whistle[5] = (byte) (leftTimer);
+            whistle[6] = (byte) (centerWhistle);
+            whistle[7] = (byte) (centerTimer);
+            whistle[8] = (byte) ('#');
 
 
             BleDevice bleDevice = ((OperationActivity) getActivity()).getBleDevice();
@@ -947,7 +963,7 @@ public class CharacteristicListFragment extends Fragment {
                     bleDevice,
                     characteristic.getService().getUuid().toString(),
                     characteristic.getUuid().toString(),
-                    timerOrWhistle,
+                    whistle,
                     new BleWriteCallback() {
 
                         //Converting byte to String and displaying to user
@@ -957,7 +973,7 @@ public class CharacteristicListFragment extends Fragment {
                                 @Override
                                 public void run() {
 
-                                    Toast.makeText(getActivity(), "Whistle and Timer Is Set", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), "Whistle Is Set", Toast.LENGTH_LONG).show();
 
                                 }
                             });
@@ -969,7 +985,7 @@ public class CharacteristicListFragment extends Fragment {
                                 @Override
                                 public void run() {
 
-                                    Toast.makeText(getActivity(), "Whistle and Timer Is Not Set", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity(), "Whistle  Is Not Set", Toast.LENGTH_LONG).show();
 
                                     System.out.println("TimerException" + exception.toString());
                                 }
@@ -978,7 +994,147 @@ public class CharacteristicListFragment extends Fragment {
                     });
 
 
-        } else if (frameFormet == 3) {
+        }else if (frameFormet == 3) {
+
+            //Timer
+
+            /*String selectedBurner = PreferencesUtil.getValueString(getActivity(), PreferencesUtil.BURNER);
+            int selectedTimer = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.TIMER_IN_MINUTE);
+            int selectedWhistle = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.WHISTLE_IN_COUNT);*/
+
+            if (burner.equals("00")) {
+               /* if (whistleInCount > 0) {
+
+                    sqliteManager.setNotification(whistleInCount + " Whistle is set for Right Burner");
+                    //sqliteManager.getNonReadNotifications();
+                }*/
+                if (timerInMin > 0) {
+                    sqliteManager.setNotification(timerInMin + " Min Timer is set for Right Burner");
+                    //sqliteManager.getNonReadNotifications();
+                }
+            } else if (burner.equals("01")) {
+
+                /*if (whistleInCount > 0) {
+                    sqliteManager.setNotification(whistleInCount + " Whistle is set for Left Burner");
+                    //sqliteManager.getNonReadNotifications();
+                }*/
+                if (timerInMin > 0) {
+                    sqliteManager.setNotification(timerInMin + " Min Timer is set for Left Burner");
+                    //sqliteManager.getNonReadNotifications();
+                }
+
+            } else if (burner.equals("10")) {
+                /*if (whistleInCount > 0) {
+                    sqliteManager.setNotification(whistleInCount + " Whistle is set for Center Burner");
+                    //sqliteManager.getNonReadNotifications();
+                }*/
+                if (timerInMin > 0) {
+                    sqliteManager.setNotification(timerInMin + " Min Timer is set for Center Burner");
+                    //sqliteManager.getNonReadNotifications();
+                }
+            }
+
+            setNonReadNotificationCount();
+
+
+            //Whistle and Timer
+
+            byte[] timer = new byte[9];
+
+            int rightTimer =  0, rightWhistle =  0;
+            int leftTimer =  0, leftWhistle =  0;
+            int centerTimer =  0, centerWhistle =  0;
+
+
+            if (burner.equals(MathUtil.RIGHT_BURNER)) {
+
+                rightTimer = timerInMin;
+
+                rightWhistle = 0xff;
+                leftTimer = 0xff;
+                leftWhistle = 0xff;
+                centerTimer = 0xff;
+                centerWhistle = 0xff;
+
+
+            } else if (burner.equals(MathUtil.LEFT_BURNER)) {
+
+                leftTimer = timerInMin;
+
+                leftWhistle = 0xff;
+                rightTimer = 0xff;
+                rightWhistle = 0xff;
+                centerTimer = 0xff;
+                centerWhistle = 0xff;
+
+
+            } else if (burner.equals(MathUtil.CENTER_BURNER)) {
+
+                centerTimer = timerInMin;
+
+                centerWhistle = 0xff;
+                rightTimer = 0xff;
+                rightWhistle = 0xff;
+                leftTimer = 0xff;
+                leftWhistle = 0xff;
+
+
+            }
+
+
+            timer[0] = (byte) ('*');
+            timer[1] = (byte) (0xC0);
+            timer[2] = (byte) (rightWhistle);
+            timer[3] = (byte) (rightTimer);
+            timer[4] = (byte) (leftWhistle);
+            timer[5] = (byte) (leftTimer);
+            timer[6] = (byte) (centerWhistle);
+            timer[7] = (byte) (centerTimer);
+            timer[8] = (byte) ('#');
+
+
+            BleDevice bleDevice = ((OperationActivity) getActivity()).getBleDevice();
+            BluetoothGattCharacteristic characteristic = ((OperationActivity) getActivity()).getCharacteristic();
+
+
+            Toast.makeText(getActivity(), "New Data Write", Toast.LENGTH_LONG).show();
+
+            BleManager.getInstance().write(
+                    bleDevice,
+                    characteristic.getService().getUuid().toString(),
+                    characteristic.getUuid().toString(),
+                    timer,
+                    new BleWriteCallback() {
+
+                        //Converting byte to String and displaying to user
+                        @Override
+                        public void onWriteSuccess(final int current, final int total, final byte[] justWrite) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    Toast.makeText(getActivity(), "Timer Is Set", Toast.LENGTH_LONG).show();
+
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onWriteFailure(final BleException exception) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    Toast.makeText(getActivity(), "Is Not Set", Toast.LENGTH_LONG).show();
+
+                                    System.out.println("TimerException" + exception.toString());
+                                }
+                            });
+                        }
+                    });
+
+
+        } else if (frameFormet == 4) {
 
             byte[] eStop = new byte[6];
             eStop[0] = (byte) ('*');
@@ -1358,6 +1514,10 @@ public class CharacteristicListFragment extends Fragment {
             rightOff.setTextColor(Color.WHITE);
         }
 
+        rightOff.setTypeface(octinPrisonFont);
+        rightHigh.setTypeface(octinPrisonFont);
+        rightSim.setTypeface(octinPrisonFont);
+
         //Left
         if (leftVessel == 0) {
             selectedLeftVessel.setVisibility(View.INVISIBLE);
@@ -1382,6 +1542,10 @@ public class CharacteristicListFragment extends Fragment {
             leftOff.setTextColor(Color.WHITE);
             leftSim.setTextColor(Color.RED);
         }
+
+        leftOff.setTypeface(octinPrisonFont);
+        leftSim.setTypeface(octinPrisonFont);
+        leftHigh.setTypeface(octinPrisonFont);
 
         //Center
         //Left
@@ -1409,6 +1573,10 @@ public class CharacteristicListFragment extends Fragment {
             centerSim.setTextColor(Color.RED);
 
         }
+
+        centerOff.setTypeface(octinPrisonFont);
+        centerSim.setTypeface(octinPrisonFont);
+        centerHigh.setTypeface(octinPrisonFont);
 
 
     }
