@@ -406,6 +406,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 progressDialog.show();
                // dialog=MathUtil.showProgressBar(MainActivity.this);
                 progressDialog.setMessage("Connecting Please Wait");
+
             }
 
             @Override

@@ -350,7 +350,8 @@
         android:id="@+id/menuToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/red"
+        app:titleTextColor="@color/white"
         app:title="Menu Operations"></android.support.v7.widget.Toolbar>
 
 

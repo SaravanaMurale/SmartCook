@@ -177,7 +177,7 @@ public class MathUtil {
 
         Dialog csprogress;
         csprogress = new Dialog(context, R.style.MyAlertDialogStyle);
-        csprogress.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        csprogress.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.red(R.color.red)));
         csprogress.setCancelable(false);
         csprogress.setContentView(R.layout.layout_progressbar);
         csprogress.setCanceledOnTouchOutside(true);

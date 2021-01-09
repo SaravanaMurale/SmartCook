@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:outlineAmbientShadowColor="@color/black"
-        android:outlineSpotShadowColor="@color/colorPrimaryDark" />
+        android:outlineAmbientShadowColor="@color/red"
+        android:outlineSpotShadowColor="@color/red" />
 
 </RelativeLayout>
