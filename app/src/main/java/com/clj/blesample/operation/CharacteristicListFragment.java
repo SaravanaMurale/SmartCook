@@ -456,7 +456,7 @@ public class CharacteristicListFragment extends Fragment {
                         if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
 
 
-                            callMe(1, null, 0, 0, 0, 3);
+                            callMe(1, null, 0, 0, 0, 4);
                         }
 
                         dialog.cancel();
@@ -584,7 +584,7 @@ public class CharacteristicListFragment extends Fragment {
                     if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
 
 
-                        callMe(1, burner, burnerTimerCount, 0, 0, 2);
+                        callMe(1, burner, burnerTimerCount, 0, 0, 3);
 
                     }
 
