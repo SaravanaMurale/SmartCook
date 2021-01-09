@@ -14,6 +14,7 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -104,6 +105,8 @@ public class CharacteristicListFragment extends Fragment {
     int timerCount = 0;
 
     ImageView eStop;
+
+    int leftBurnerStatus, rightBurnerStatus, centerBurnerStatus = 0;
 
 
     @Override
@@ -233,8 +236,6 @@ public class CharacteristicListFragment extends Fragment {
         notificationIcon = (ImageView) v.findViewById(R.id.notificationIcon);
 
 
-
-
         leftOff = (TextView) v.findViewById(R.id.leftOff);
         leftHigh = (TextView) v.findViewById(R.id.leftHigh);
         leftSim = (TextView) v.findViewById(R.id.leftSim);
@@ -251,17 +252,24 @@ public class CharacteristicListFragment extends Fragment {
         leftOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                leftOff.setTextColor(Color.RED);
-                leftHigh.setTextColor(Color.WHITE);
-                leftSim.setTextColor(Color.WHITE);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        leftOff.setTextColor(Color.WHITE);
-                    }
-                }, 500);
 
-                callMe(1, MathUtil.LEFT_BURNER, 0, 0, MathUtil.OFF, 1);
+                if(leftBurnerStatus>0){
+                    leftOff.setTextColor(Color.RED);
+                    leftHigh.setTextColor(Color.WHITE);
+                    leftSim.setTextColor(Color.WHITE);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            leftOff.setTextColor(Color.WHITE);
+                        }
+                    }, 500);
+
+                    callMe(1, MathUtil.LEFT_BURNER, 0, 0, MathUtil.OFF, 1);
+                }else {
+                    callSnackBar(MathUtil.LBISA,v);
+                }
+
+
 
 
             }
@@ -270,38 +278,59 @@ public class CharacteristicListFragment extends Fragment {
         leftHigh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                leftHigh.setTextColor(Color.RED);
-                leftSim.setTextColor(Color.WHITE);
-                leftOff.setTextColor(Color.WHITE);
-                callMe(1, MathUtil.LEFT_BURNER, 0, 0, MathUtil.HIGH, 1);
+
+                if(leftBurnerStatus>0){
+                    leftHigh.setTextColor(Color.RED);
+                    leftSim.setTextColor(Color.WHITE);
+                    leftOff.setTextColor(Color.WHITE);
+                    callMe(1, MathUtil.LEFT_BURNER, 0, 0, MathUtil.HIGH, 1);
+                }else {
+                    callSnackBar(MathUtil.LBISA,v);
+                }
+
+
             }
         });
 
         leftSim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                leftSim.setTextColor(Color.RED);
-                leftHigh.setTextColor(Color.WHITE);
-                leftOff.setTextColor(Color.WHITE);
-                callMe(1, MathUtil.LEFT_BURNER, 0, 0, MathUtil.SIM, 1);
+
+                if(leftBurnerStatus>0){
+                    leftSim.setTextColor(Color.RED);
+                    leftHigh.setTextColor(Color.WHITE);
+                    leftOff.setTextColor(Color.WHITE);
+                    callMe(1, MathUtil.LEFT_BURNER, 0, 0, MathUtil.SIM, 1);
+                }else {
+                    callSnackBar(MathUtil.LBISA,v);
+                }
+
+
             }
         });
 
         rightOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rightOff.setTextColor(Color.RED);
-                rightHigh.setTextColor(Color.WHITE);
-                rightSim.setTextColor(Color.WHITE);
 
-                callMe(1, MathUtil.RIGHT_BURNER, 0, 0, MathUtil.OFF, 1);
+                if(rightBurnerStatus>0){
+                    rightOff.setTextColor(Color.RED);
+                    rightHigh.setTextColor(Color.WHITE);
+                    rightSim.setTextColor(Color.WHITE);
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        rightOff.setTextColor(Color.WHITE);
-                    }
-                }, 500);
+                    callMe(1, MathUtil.RIGHT_BURNER, 0, 0, MathUtil.OFF, 1);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            rightOff.setTextColor(Color.WHITE);
+                        }
+                    }, 500);
+                }else {
+                    callSnackBar(MathUtil.RBINA,v);
+                }
+
+
 
 
             }
@@ -310,19 +339,35 @@ public class CharacteristicListFragment extends Fragment {
         rightHigh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rightOff.setTextColor(Color.WHITE);
-                rightHigh.setTextColor(Color.RED);
-                rightSim.setTextColor(Color.WHITE);
-                callMe(1, MathUtil.RIGHT_BURNER, 0, 0, MathUtil.HIGH, 1);
+
+                if(rightBurnerStatus>0){
+                    rightOff.setTextColor(Color.WHITE);
+                    rightHigh.setTextColor(Color.RED);
+                    rightSim.setTextColor(Color.WHITE);
+                    callMe(1, MathUtil.RIGHT_BURNER, 0, 0, MathUtil.HIGH, 1);
+                }else {
+                    callSnackBar(MathUtil.RBINA,v);
+                }
+
+
             }
         });
         rightSim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rightOff.setTextColor(Color.WHITE);
-                rightHigh.setTextColor(Color.WHITE);
-                rightSim.setTextColor(Color.RED);
-                callMe(1, MathUtil.RIGHT_BURNER, 0, 0, MathUtil.SIM, 1);
+
+                if(rightBurnerStatus>0){
+                    rightOff.setTextColor(Color.WHITE);
+                    rightHigh.setTextColor(Color.WHITE);
+                    rightSim.setTextColor(Color.RED);
+                    callMe(1, MathUtil.RIGHT_BURNER, 0, 0, MathUtil.SIM, 1);
+                }else {
+
+                    callSnackBar(MathUtil.RBINA,v);
+
+                }
+
+
             }
         });
 
@@ -330,18 +375,25 @@ public class CharacteristicListFragment extends Fragment {
         centerOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                centerOff.setTextColor(Color.RED);
-                centerHigh.setTextColor(Color.WHITE);
-                centerSim.setTextColor(Color.WHITE);
 
-                callMe(1, MathUtil.CENTER_BURNER, 0, 0, MathUtil.OFF, 1);
+                if(centerBurnerStatus>0){
+                    centerOff.setTextColor(Color.RED);
+                    centerHigh.setTextColor(Color.WHITE);
+                    centerSim.setTextColor(Color.WHITE);
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        centerOff.setTextColor(Color.WHITE);
-                    }
-                }, 500);
+                    callMe(1, MathUtil.CENTER_BURNER, 0, 0, MathUtil.OFF, 1);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            centerOff.setTextColor(Color.WHITE);
+                        }
+                    }, 500);
+                }else {
+                    callSnackBar(MathUtil.CBISA,v);
+                }
+
+
 
 
             }
@@ -350,22 +402,36 @@ public class CharacteristicListFragment extends Fragment {
         centerHigh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                centerOff.setTextColor(Color.WHITE);
-                centerHigh.setTextColor(Color.RED);
-                centerSim.setTextColor(Color.WHITE);
 
-                callMe(1, MathUtil.CENTER_BURNER, 0, 0, MathUtil.HIGH, 1);
+                if(centerBurnerStatus>0){
+                    centerOff.setTextColor(Color.WHITE);
+                    centerHigh.setTextColor(Color.RED);
+                    centerSim.setTextColor(Color.WHITE);
+
+                    callMe(1, MathUtil.CENTER_BURNER, 0, 0, MathUtil.HIGH, 1);
+                }else {
+                    callSnackBar(MathUtil.CBISA,v);
+                }
+
+
             }
         });
 
         centerSim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                centerOff.setTextColor(Color.WHITE);
-                centerHigh.setTextColor(Color.WHITE);
-                centerSim.setTextColor(Color.RED);
 
-                callMe(1, MathUtil.CENTER_BURNER, 0, 0, MathUtil.SIM, 1);
+                if(centerBurnerStatus>0){
+                    centerOff.setTextColor(Color.WHITE);
+                    centerHigh.setTextColor(Color.WHITE);
+                    centerSim.setTextColor(Color.RED);
+
+                    callMe(1, MathUtil.CENTER_BURNER, 0, 0, MathUtil.SIM, 1);
+                }else {
+                    callSnackBar(MathUtil.CBISA,v);
+                }
+
+
             }
         });
 
@@ -383,7 +449,15 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                setWhistle(MathUtil.LEFT_BURNER);
+                if (leftBurnerStatus > 0) {
+                    setWhistle(MathUtil.LEFT_BURNER);
+                } else {
+
+                    callSnackBar(MathUtil.LBISA,v);
+                    System.out.println("LeftBurnerIsNotActivated");
+
+                }
+
 
             }
         });
@@ -391,7 +465,13 @@ public class CharacteristicListFragment extends Fragment {
         selectedLeftTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setTimer(MathUtil.LEFT_BURNER);
+                if (leftBurnerStatus > 0) {
+                    setTimer(MathUtil.LEFT_BURNER);
+                } else {
+                    System.out.println("LeftBurnerIsNotActivated");
+                    callSnackBar(MathUtil.LBISA,v);
+                }
+
             }
         });
 
@@ -399,21 +479,45 @@ public class CharacteristicListFragment extends Fragment {
         selectedRightWhistle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setWhistle(MathUtil.RIGHT_BURNER);
+                if (rightBurnerStatus > 0) {
+                    setWhistle(MathUtil.RIGHT_BURNER);
+                } else {
+                    System.out.println("RightBurnerIsNotActivated");
+
+                    callSnackBar(MathUtil.RBINA,v);
+
+                }
+
             }
         });
 
         selectedRightTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setTimer(MathUtil.RIGHT_BURNER);
+
+                if (rightBurnerStatus > 0) {
+                    setTimer(MathUtil.RIGHT_BURNER);
+                } else {
+                    System.out.println("RightBurnerIsNotActivated");
+                    callSnackBar(MathUtil.RBINA,v);
+
+                }
+
             }
         });
 
         selectedCenterWhistle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setWhistle(MathUtil.CENTER_BURNER);
+
+                if (centerBurnerStatus > 0) {
+                    setWhistle(MathUtil.CENTER_BURNER);
+                } else {
+                    System.out.println("CenterBurnerIsNotActivated");
+                    callSnackBar(MathUtil.CBISA,v);
+                }
+
+
             }
         });
 
@@ -421,7 +525,15 @@ public class CharacteristicListFragment extends Fragment {
         selectedCenterTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setTimer(MathUtil.CENTER_BURNER);
+
+                if (centerBurnerStatus > 0) {
+                    setTimer(MathUtil.CENTER_BURNER);
+                } else {
+                    System.out.println("CenterBurnerIsNotActivated");
+                    callSnackBar(MathUtil.CBISA,v);
+                }
+
+
             }
         });
 
@@ -535,6 +647,16 @@ public class CharacteristicListFragment extends Fragment {
         });
     }
 
+    private void callSnackBar(String burnerStatus,View v) {
+
+        Snackbar snack = Snackbar.make(v, burnerStatus, Snackbar.LENGTH_SHORT);
+        View view = snack.getView();
+        TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        tv.setTypeface(octinPrisonFont);
+        tv.setTextColor(Color.RED);
+        snack.show();
+    }
+
     private void setTimer(final String burner) {
 
         final TextView timerSub, timerAdd, setTimerCount;
@@ -586,7 +708,7 @@ public class CharacteristicListFragment extends Fragment {
 
 
                         callMe(1, burner, burnerTimerCount, 0, 0, 3);
-                        timerCount=0;
+                        timerCount = 0;
 
                     }
 
@@ -669,7 +791,7 @@ public class CharacteristicListFragment extends Fragment {
 
 
                         callMe(1, burner, 0, burnerWhistleCount, 0, 2);
-                        whistleCount=0;
+                        whistleCount = 0;
 
                     }
 
@@ -906,9 +1028,9 @@ public class CharacteristicListFragment extends Fragment {
 
             byte[] whistle = new byte[9];
 
-            int rightTimer =  0, rightWhistle =  0;
-            int leftTimer =  0, leftWhistle =  0;
-            int centerTimer =  0, centerWhistle =  0;
+            int rightTimer = 0, rightWhistle = 0;
+            int leftTimer = 0, leftWhistle = 0;
+            int centerTimer = 0, centerWhistle = 0;
 
 
             if (burner.equals(MathUtil.RIGHT_BURNER)) {
@@ -1000,7 +1122,7 @@ public class CharacteristicListFragment extends Fragment {
                     });
 
 
-        }else if (frameFormet == 3) {
+        } else if (frameFormet == 3) {
 
             //Timer
 
@@ -1047,9 +1169,9 @@ public class CharacteristicListFragment extends Fragment {
 
             byte[] timer = new byte[9];
 
-            int rightTimer =  0, rightWhistle =  0;
-            int leftTimer =  0, leftWhistle =  0;
-            int centerTimer =  0, centerWhistle =  0;
+            int rightTimer = 0, rightWhistle = 0;
+            int leftTimer = 0, leftWhistle = 0;
+            int centerTimer = 0, centerWhistle = 0;
 
 
             if (burner.equals(MathUtil.RIGHT_BURNER)) {
@@ -1438,61 +1560,57 @@ public class CharacteristicListFragment extends Fragment {
     private void setWhistleAndTimerValueInUI(int rightWhistle, int rightTimer, int leftWhistle, int leftTimer, int centerWhistle, int centerTimer) {
 
 
-        if(rightWhistle<0){
+        if (rightWhistle < 0) {
             selectedRightWhistleCount.setText("");
 
 
-        }else {
+        } else {
 
             selectedRightWhistleCount.setText("" + rightWhistle);
             selectedRightWhistleCount.setTypeface(octinPrisonFont);
         }
 
-        if(rightTimer<=0){
+        if (rightTimer <= 0) {
             stopBlinking(selectedRightTimer);
             selectedRightTimerCount.setText("");
-        }else {
+        } else {
             startBlinking(selectedRightTimer);
             selectedRightTimerCount.setText("" + rightTimer + "min");
             selectedRightTimerCount.setTypeface(octinPrisonFont);
         }
 
-        if(leftWhistle<0){
+        if (leftWhistle < 0) {
             selectedLeftWhistleCount.setText("");
-        }else {
+        } else {
             selectedLeftWhistleCount.setText("" + leftWhistle);
             selectedLeftWhistleCount.setTypeface(octinPrisonFont);
         }
 
-        if(leftTimer<=0){
+        if (leftTimer <= 0) {
             stopBlinking(selectedLeftTimer);
             selectedLeftTimerCount.setText("");
-        }else {
+        } else {
             startBlinking(selectedLeftTimer);
             selectedLeftTimerCount.setText("" + leftTimer + "min");
             selectedLeftTimerCount.setTypeface(octinPrisonFont);
         }
 
 
-        if(centerWhistle<0){
+        if (centerWhistle < 0) {
             selectedCenterWhistleCount.setText("");
-        }else {
+        } else {
             selectedCenterWhistleCount.setText("" + centerWhistle);
             selectedCenterWhistleCount.setTypeface(octinPrisonFont);
         }
 
-        if(centerTimer<=0){
+        if (centerTimer <= 0) {
             stopBlinking(selectedCenterTimer);
             selectedCenterTimerCount.setText("");
-        }else {
+        } else {
             startBlinking(selectedCenterTimer);
             selectedCenterTimerCount.setText("" + centerTimer + "min");
             selectedCenterTimerCount.setTypeface(octinPrisonFont);
         }
-
-
-
-
 
 
     }
@@ -1511,6 +1629,10 @@ public class CharacteristicListFragment extends Fragment {
 
 
         }
+
+        rightBurnerStatus = rightFlameMode;
+        leftBurnerStatus = leftFlameMode;
+        centerBurnerStatus = centerFlameMode;
 
         if (rightFlameMode == 0) {
             rightOff.setTextColor(Color.RED);

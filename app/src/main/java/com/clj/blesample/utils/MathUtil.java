@@ -26,6 +26,10 @@ public class MathUtil {
     public static final int IMAGE_PICK_CODE = 1000;
     public static final int PERMISSION_CODE = 1001;
 
+    public static final String RBINA="Right Burner Is Not Activated";
+    public static final String LBISA="Left Burner Is Not Activated";
+    public static final String CBISA="Center Burner Is Not Activated";
+
     //0- non read
     //1-read
 
