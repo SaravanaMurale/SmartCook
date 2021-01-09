@@ -585,6 +585,7 @@ public class CharacteristicListFragment extends Fragment {
 
 
                         callMe(1, burner, burnerTimerCount, 0, 0, 3);
+                        timerCount=0;
 
                     }
 
@@ -612,7 +613,6 @@ public class CharacteristicListFragment extends Fragment {
 
 
         final TextView whistleSub, whistleAdd, setWhistleCount;
-        Button whistleCancel, whistleStart;
 
 
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
@@ -668,6 +668,7 @@ public class CharacteristicListFragment extends Fragment {
 
 
                         callMe(1, burner, 0, burnerWhistleCount, 0, 2);
+                        whistleCount=0;
 
                     }
 
@@ -694,7 +695,7 @@ public class CharacteristicListFragment extends Fragment {
 
     }
 
-    private void callMe(int position, final String burner, final int timerInMin, final int whistleInCount, final int flameMode, final int frameFormet) {
+    private void callMe(int position, String burner, int timerInMin, int whistleInCount, int flameMode, int frameFormet) {
 
         //Position 0 -->Notify
         //Position 1 -->Write
@@ -743,12 +744,14 @@ public class CharacteristicListFragment extends Fragment {
             ((OperationActivity) getActivity()).setCharaProp(propList.get(0));
             //((OperationActivity) getActivity()).changePage(2);
 
-            new Handler().postDelayed(new Runnable() {
+            wrietUserData(burner, timerInMin, whistleInCount, flameMode, frameFormet);
+
+            /*new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    wrietUserData(burner, timerInMin, whistleInCount, flameMode, frameFormet);
+
                 }
-            }, 2000);
+            }, 2000);*/
 
 
         }
@@ -759,12 +762,14 @@ public class CharacteristicListFragment extends Fragment {
             ((OperationActivity) getActivity()).setCharaProp(propList.get(0));
             //((OperationActivity) getActivity()).changePage(2);
 
-            new Handler().postDelayed(new Runnable() {
+            wrietUserData(burner, timerInMin, whistleInCount, flameMode, frameFormet);
+
+            /*new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    wrietUserData(burner, timerInMin, whistleInCount, flameMode, frameFormet);
+
                 }
-            }, 2000);
+            }, 2000);*/
 
 
         }
