@@ -21,6 +21,8 @@ public class PreferencesUtil {
     public static final String WHISTLE_IN_COUNT = "whistle_in_count";
     public static final String FLAME_MODE = "flame_mode";
 
+    public static final String USER_NAME="user_name";
+
     public static void setValueString(Context context, String key, String value) {
 
         if (context == null) return;

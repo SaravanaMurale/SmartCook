@@ -94,7 +94,7 @@ public class CharacteristicListFragment extends Fragment {
 
     TextView leftOff, leftHigh, leftSim, rightOff, rightHigh, rightSim, centerOff, centerHigh, centerSim;
 
-    String selectedBurner;
+    TextView selectdUserName;
 
     int setNotification = 0;
     TextView notificationCount;
@@ -107,6 +107,7 @@ public class CharacteristicListFragment extends Fragment {
     ImageView eStop;
 
     int leftBurnerStatus, rightBurnerStatus, centerBurnerStatus = 0;
+
 
 
     @Override
@@ -184,6 +185,8 @@ public class CharacteristicListFragment extends Fragment {
 
         sqliteManager = new SqliteManager(getActivity());
 
+
+        selectdUserName=(TextView)v.findViewById(R.id.selectdUserName);
         seletedUserProfile = (CircleImageView) v.findViewById(R.id.seletedUserProfile);
         selectBluetoothStatus = (ImageView) v.findViewById(R.id.selectBluetoothStatus);
 
@@ -247,6 +250,8 @@ public class CharacteristicListFragment extends Fragment {
         centerOff = (TextView) v.findViewById(R.id.centerOff);
         centerHigh = (TextView) v.findViewById(R.id.centerHigh);
         centerSim = (TextView) v.findViewById(R.id.centerSim);
+
+        selectdUserName.setText(PreferencesUtil.getValueString(getActivity(),PreferencesUtil.USER_NAME));
 
 
         leftOff.setOnClickListener(new View.OnClickListener() {

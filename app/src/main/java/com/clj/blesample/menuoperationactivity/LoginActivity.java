@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.clj.blesample.MainActivity;
 import com.clj.blesample.R;
 import com.clj.blesample.databasemanager.SqliteManager;
+import com.clj.blesample.sessionmanager.PreferencesUtil;
 
 import static com.clj.blesample.utils.MathUtil.validateEmail;
 import static com.clj.blesample.utils.MathUtil.validatePassword;
@@ -91,6 +92,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (validateEmail(email) && validateEmail(password)) {
                     //Email or Mobile
                     String userName = sqliteManager.validateLoginUser(email, password);
+
+                    PreferencesUtil.setValueString(LoginActivity.this,PreferencesUtil.USER_NAME,userName);
 
                     if (!userName.equals("empty")) {
                         Toast.makeText(LoginActivity.this, "Received UserName" + userName, Toast.LENGTH_LONG).show();
