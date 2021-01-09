@@ -52,7 +52,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="15dp"
         android:layout_marginRight="20dp"
-        android:src="@drawable/notification" />
+        android:src="@drawable/notification_1" />
 
     <ListView
         android:id="@+id/list_service"

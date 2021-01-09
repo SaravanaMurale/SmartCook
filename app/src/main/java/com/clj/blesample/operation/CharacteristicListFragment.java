@@ -229,9 +229,10 @@ public class CharacteristicListFragment extends Fragment {
         //End of Whistle and Timer
 
         menuIcon = (TextView) v.findViewById(R.id.menuIcon);
+        menuIcon.setTypeface(octinPrisonFont);
         notificationIcon = (ImageView) v.findViewById(R.id.notificationIcon);
 
-        menuIcon.setTypeface(octinPrisonFont);
+
 
 
         leftOff = (TextView) v.findViewById(R.id.leftOff);
@@ -1439,14 +1440,19 @@ public class CharacteristicListFragment extends Fragment {
 
         if(rightWhistle<0){
             selectedRightWhistleCount.setText("");
+
+
         }else {
+
             selectedRightWhistleCount.setText("" + rightWhistle);
             selectedRightWhistleCount.setTypeface(octinPrisonFont);
         }
 
-        if(rightTimer<0){
+        if(rightTimer<=0){
+            stopBlinking(selectedRightTimer);
             selectedRightTimerCount.setText("");
         }else {
+            startBlinking(selectedRightTimer);
             selectedRightTimerCount.setText("" + rightTimer + "min");
             selectedRightTimerCount.setTypeface(octinPrisonFont);
         }
@@ -1458,9 +1464,11 @@ public class CharacteristicListFragment extends Fragment {
             selectedLeftWhistleCount.setTypeface(octinPrisonFont);
         }
 
-        if(leftTimer<0){
+        if(leftTimer<=0){
+            stopBlinking(selectedLeftTimer);
             selectedLeftTimerCount.setText("");
         }else {
+            startBlinking(selectedLeftTimer);
             selectedLeftTimerCount.setText("" + leftTimer + "min");
             selectedLeftTimerCount.setTypeface(octinPrisonFont);
         }
@@ -1473,9 +1481,11 @@ public class CharacteristicListFragment extends Fragment {
             selectedCenterWhistleCount.setTypeface(octinPrisonFont);
         }
 
-        if(centerTimer<0){
+        if(centerTimer<=0){
+            stopBlinking(selectedCenterTimer);
             selectedCenterTimerCount.setText("");
         }else {
+            startBlinking(selectedCenterTimer);
             selectedCenterTimerCount.setText("" + centerTimer + "min");
             selectedCenterTimerCount.setTypeface(octinPrisonFont);
         }
