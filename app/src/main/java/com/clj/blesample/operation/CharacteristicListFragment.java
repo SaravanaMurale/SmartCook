@@ -89,9 +89,9 @@ public class CharacteristicListFragment extends Fragment {
 
     private SqliteManager sqliteManager;
 
-    ImageView leftBurner,rightBurner,centerBurner;
+    ImageView leftBurner, rightBurner, centerBurner;
 
-    TextView leftOff,leftHigh,leftSim,rightOff,rightHigh,rightSim,centerOff,centerHigh,centerSim;
+    TextView leftOff, leftHigh, leftSim, rightOff, rightHigh, rightSim, centerOff, centerHigh, centerSim;
 
     String selectedBurner;
 
@@ -101,7 +101,7 @@ public class CharacteristicListFragment extends Fragment {
     List<NotificationResponseDTO> nonReadNotiCount;
 
     int whistleCount = 0;
-    int timerCount=0;
+    int timerCount = 0;
 
     ImageView eStop;
 
@@ -190,8 +190,7 @@ public class CharacteristicListFragment extends Fragment {
         centerBurner = (ImageView) v.findViewById(R.id.centerBurner);
 
 
-
-        eStop=(ImageView)v.findViewById(R.id.eStop);
+        eStop = (ImageView) v.findViewById(R.id.eStop);
 
         selectedLeftWhistle = (ImageView) v.findViewById(R.id.leftWhistle);
         selectedRightWhistle = (ImageView) v.findViewById(R.id.rightWhistle);
@@ -235,17 +234,17 @@ public class CharacteristicListFragment extends Fragment {
         menuIcon.setTypeface(octinPrisonFont);
 
 
-        leftOff=(TextView)v.findViewById(R.id.leftOff);
-        leftHigh=(TextView)v.findViewById(R.id.leftHigh);
-        leftSim=(TextView)v.findViewById(R.id.leftSim);
+        leftOff = (TextView) v.findViewById(R.id.leftOff);
+        leftHigh = (TextView) v.findViewById(R.id.leftHigh);
+        leftSim = (TextView) v.findViewById(R.id.leftSim);
 
-        rightOff=(TextView)v.findViewById(R.id.rightOff);
-        rightHigh=(TextView)v.findViewById(R.id.rightHigh);
-        rightSim=(TextView)v.findViewById(R.id.rightSim);
+        rightOff = (TextView) v.findViewById(R.id.rightOff);
+        rightHigh = (TextView) v.findViewById(R.id.rightHigh);
+        rightSim = (TextView) v.findViewById(R.id.rightSim);
 
-        centerOff=(TextView)v.findViewById(R.id.centerOff);
-        centerHigh=(TextView)v.findViewById(R.id.centerHigh);
-        centerSim=(TextView)v.findViewById(R.id.centerSim);
+        centerOff = (TextView) v.findViewById(R.id.centerOff);
+        centerHigh = (TextView) v.findViewById(R.id.centerHigh);
+        centerSim = (TextView) v.findViewById(R.id.centerSim);
 
 
         leftOff.setOnClickListener(new View.OnClickListener() {
@@ -259,7 +258,7 @@ public class CharacteristicListFragment extends Fragment {
                     public void run() {
                         leftOff.setTextColor(Color.WHITE);
                     }
-                },500);
+                }, 500);
 
                 callMe(1, MathUtil.LEFT_BURNER, 0, 0, MathUtil.OFF, 1);
 
@@ -301,8 +300,7 @@ public class CharacteristicListFragment extends Fragment {
                     public void run() {
                         rightOff.setTextColor(Color.WHITE);
                     }
-                },500);
-
+                }, 500);
 
 
             }
@@ -342,7 +340,7 @@ public class CharacteristicListFragment extends Fragment {
                     public void run() {
                         centerOff.setTextColor(Color.WHITE);
                     }
-                },500);
+                }, 500);
 
 
             }
@@ -369,7 +367,6 @@ public class CharacteristicListFragment extends Fragment {
                 callMe(1, MathUtil.CENTER_BURNER, 0, 0, MathUtil.SIM, 1);
             }
         });
-
 
 
         seletedUserProfile.setOnClickListener(new View.OnClickListener() {
@@ -459,7 +456,7 @@ public class CharacteristicListFragment extends Fragment {
                         if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
 
 
-                           callMe(1, null, 0,0,0, 3);
+                            callMe(1, null, 0, 0, 0, 3);
                         }
 
                         dialog.cancel();
@@ -477,7 +474,6 @@ public class CharacteristicListFragment extends Fragment {
 
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
-
 
 
             }
@@ -540,7 +536,7 @@ public class CharacteristicListFragment extends Fragment {
 
     private void setTimer(final String burner) {
 
-        final TextView timerSub,timerAdd,setTimerCount;
+        final TextView timerSub, timerAdd, setTimerCount;
 
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
         View mView = getLayoutInflater().inflate(R.layout.dialog_set_timer, null);
@@ -553,9 +549,9 @@ public class CharacteristicListFragment extends Fragment {
         timerAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timerCount=timerCount+1;
+                timerCount = timerCount + 1;
 
-                setTimerCount.setText(""+timerCount);
+                setTimerCount.setText("" + timerCount);
             }
         });
 
@@ -579,14 +575,13 @@ public class CharacteristicListFragment extends Fragment {
 
                 int burnerTimerCount = Integer.parseInt(setTimerCount.getText().toString());
 
-                if (burnerTimerCount==0) {
+                if (burnerTimerCount == 0) {
 
                     Toast.makeText(getActivity(), "Please Set Timer", Toast.LENGTH_LONG).show();
 
-                }else {
+                } else {
 
                     if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
-
 
 
                         callMe(1, burner, burnerTimerCount, 0, 0, 2);
@@ -629,8 +624,8 @@ public class CharacteristicListFragment extends Fragment {
         whistleAdd = (TextView) mView.findViewById(R.id.whistleAdd);
         setWhistleCount = (TextView) mView.findViewById(R.id.setWhistleCount);
 
-        whistleCancel = (Button) mView.findViewById(R.id.whistleCancel);
-        whistleStart = (Button) mView.findViewById(R.id.whistleStart);
+        /*whistleCancel = (Button) mView.findViewById(R.id.whistleCancel);
+        whistleStart = (Button) mView.findViewById(R.id.whistleStart);*/
 
         whistleAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -657,22 +652,19 @@ public class CharacteristicListFragment extends Fragment {
         });
 
 
-
-
         mBuilder.setPositiveButton("START", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
                 int burnerWhistleCount = Integer.parseInt(setWhistleCount.getText().toString());
 
-                if (burnerWhistleCount==0) {
+                if (burnerWhistleCount == 0) {
 
                     Toast.makeText(getActivity(), "Please Set Whistle Count", Toast.LENGTH_LONG).show();
 
                 } else {
 
                     if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
-
 
 
                         callMe(1, burner, 0, burnerWhistleCount, 0, 2);
@@ -765,9 +757,8 @@ public class CharacteristicListFragment extends Fragment {
             ((OperationActivity) getActivity()).setCharacteristic(characteristic);
             ((OperationActivity) getActivity()).setCharaProp(propList.get(0));
             //((OperationActivity) getActivity()).changePage(2);
-            wrietUserData("ss", 0,0,0, 3);
+            wrietUserData("ss", 0, 0, 0, 3);
         }
-
 
 
     }
@@ -987,7 +978,7 @@ public class CharacteristicListFragment extends Fragment {
                     });
 
 
-        }else if (frameFormet == 3) {
+        } else if (frameFormet == 3) {
 
             byte[] eStop = new byte[6];
             eStop[0] = (byte) ('*');
@@ -1032,7 +1023,6 @@ public class CharacteristicListFragment extends Fragment {
 
 
         }
-
 
 
     }
@@ -1165,6 +1155,8 @@ public class CharacteristicListFragment extends Fragment {
 
                 int batteryPercentage = data[5];
 
+                System.out.println("BatteryPercentage" + batteryPercentage);
+
                 if (batteryPercentage <= 30) {
                     sqliteManager.setNotification("Your Battery is Criticaly Low");
                 }
@@ -1190,9 +1182,9 @@ public class CharacteristicListFragment extends Fragment {
                 int date = data[2];
                 int month = data[3];
 
-                Date d=new Date();
-                int year=d.getYear();
-                String yearString=String.valueOf(year);
+                Date d = new Date();
+                int year = d.getYear();
+                String yearString = String.valueOf(year);
 
                 String dateFormation = date + "/" + month + "/" + "2021";
 
@@ -1283,21 +1275,53 @@ public class CharacteristicListFragment extends Fragment {
 
     private void setWhistleAndTimerValueInUI(int rightWhistle, int rightTimer, int leftWhistle, int leftTimer, int centerWhistle, int centerTimer) {
 
-        selectedRightWhistleCount.setText("" + rightWhistle);
-        selectedRightWhistleCount.setTypeface(octinPrisonFont);
-        selectedRightTimerCount.setText("" + rightTimer + "min");
-        selectedRightTimerCount.setTypeface(octinPrisonFont);
 
-        selectedLeftWhistleCount.setText("" + leftWhistle);
-        selectedLeftWhistleCount.setTypeface(octinPrisonFont);
-        selectedLeftTimerCount.setText("" + leftTimer + "min");
-        selectedLeftTimerCount.setTypeface(octinPrisonFont);
+        if(rightWhistle<0){
+            selectedRightWhistleCount.setText("");
+        }else {
+            selectedRightWhistleCount.setText("" + rightWhistle);
+            selectedRightWhistleCount.setTypeface(octinPrisonFont);
+        }
+
+        if(rightTimer<0){
+            selectedRightTimerCount.setText("");
+        }else {
+            selectedRightTimerCount.setText("" + rightTimer + "min");
+            selectedRightTimerCount.setTypeface(octinPrisonFont);
+        }
+
+        if(leftWhistle<0){
+            selectedLeftWhistleCount.setText("");
+        }else {
+            selectedLeftWhistleCount.setText("" + leftWhistle);
+            selectedLeftWhistleCount.setTypeface(octinPrisonFont);
+        }
+
+        if(leftTimer<0){
+            selectedLeftTimerCount.setText("");
+        }else {
+            selectedLeftTimerCount.setText("" + leftTimer + "min");
+            selectedLeftTimerCount.setTypeface(octinPrisonFont);
+        }
 
 
-        selectedCenterWhistleCount.setText("" + centerWhistle);
-        selectedCenterWhistleCount.setTypeface(octinPrisonFont);
-        selectedCenterTimerCount.setText("" + centerTimer + "min");
-        selectedCenterTimerCount.setTypeface(octinPrisonFont);
+        if(centerWhistle<0){
+            selectedCenterWhistleCount.setText("");
+        }else {
+            selectedCenterWhistleCount.setText("" + centerWhistle);
+            selectedCenterWhistleCount.setTypeface(octinPrisonFont);
+        }
+
+        if(centerTimer<0){
+            selectedCenterTimerCount.setText("");
+        }else {
+            selectedCenterTimerCount.setText("" + centerTimer + "min");
+            selectedCenterTimerCount.setTypeface(octinPrisonFont);
+        }
+
+
+
+
 
 
     }
@@ -1317,15 +1341,21 @@ public class CharacteristicListFragment extends Fragment {
 
         }
 
-        if (rightFlameMode == 1) {
+        if (rightFlameMode == 0) {
+            rightOff.setTextColor(Color.RED);
+            rightHigh.setTextColor(Color.WHITE);
+            rightSim.setTextColor(Color.WHITE);
 
+        } else if (rightFlameMode == 1) {
+            rightHigh.setTextColor(Color.RED);
+            rightOff.setTextColor(Color.WHITE);
+            rightSim.setTextColor(Color.WHITE);
 
         } else if (rightFlameMode == 2) {
 
-
-        } else if (rightFlameMode == 3) {
-
-
+            rightSim.setTextColor(Color.RED);
+            rightHigh.setTextColor(Color.WHITE);
+            rightOff.setTextColor(Color.WHITE);
         }
 
         //Left
@@ -1337,14 +1367,20 @@ public class CharacteristicListFragment extends Fragment {
 
         }
 
-        if (leftFlameMode == 1) {
+        if (leftFlameMode == 0) {
+            leftHigh.setTextColor(Color.WHITE);
+            leftOff.setTextColor(Color.RED);
+            leftSim.setTextColor(Color.WHITE);
 
+        } else if (leftFlameMode == 1) {
+            leftHigh.setTextColor(Color.RED);
+            leftOff.setTextColor(Color.WHITE);
+            leftSim.setTextColor(Color.WHITE);
 
         } else if (leftFlameMode == 2) {
-
-
-        } else if (leftFlameMode == 3) {
-
+            leftHigh.setTextColor(Color.WHITE);
+            leftOff.setTextColor(Color.WHITE);
+            leftSim.setTextColor(Color.RED);
         }
 
         //Center
@@ -1357,14 +1393,20 @@ public class CharacteristicListFragment extends Fragment {
 
         }
 
-        if (centerFlameMode == 1) {
+        if (centerFlameMode == 0) {
+            centerOff.setTextColor(Color.RED);
+            centerHigh.setTextColor(Color.WHITE);
+            centerSim.setTextColor(Color.WHITE);
 
+        } else if (centerFlameMode == 1) {
+            centerOff.setTextColor(Color.WHITE);
+            centerHigh.setTextColor(Color.RED);
+            centerSim.setTextColor(Color.WHITE);
 
         } else if (centerFlameMode == 2) {
-
-
-        } else if (centerFlameMode == 3) {
-
+            centerOff.setTextColor(Color.WHITE);
+            centerHigh.setTextColor(Color.WHITE);
+            centerSim.setTextColor(Color.RED);
 
         }
 

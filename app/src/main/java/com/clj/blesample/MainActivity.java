@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -349,6 +350,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 img_loading.clearAnimation();
                 img_loading.setVisibility(View.INVISIBLE);
                 btn_scan.setText(getString(R.string.start_scan));
+                bleConnectStatus.setTextColor(Color.BLACK);
                 bleConnectStatus.setText("Please Connect");
 
                 System.out.println("CalledOnScanFinished");

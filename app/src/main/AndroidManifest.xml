@@ -27,10 +27,10 @@
         <activity
             android:name=".menuoperationactivity.GraphViewActivity"
             android:screenOrientation="landscape" />
-        <!--<activity android:name=".menuoperationactivity.GCPDateSelectActivity" />-->
+        <activity android:name=".menuoperationactivity.GCPDateSelectActivity" />
         <activity android:name=".menuoperationactivity.MenuActivity" />
         <activity android:name=".MainActivity" /> <!-- <activity android:name=".DummyActivity"></activity> -->
-        <activity android:name=".menuoperationactivity.GCPDateSelectActivity">
+        <activity android:name=".menuoperationactivity.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

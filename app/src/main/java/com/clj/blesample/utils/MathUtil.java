@@ -14,9 +14,9 @@ public class MathUtil {
     public static final String LEFT_BURNER = "01";
     public static final String CENTER_BURNER = "10";
 
-    public static final int SIM = 1;
-    public static final int HIGH = 2;
-    public static final int OFF = 3;
+    public static final int OFF = 0;
+    public static final int HIGH = 1;
+    public static final int SIM = 2;
 
     //sets sim,high,off
     public static final int BURNER_FORMET = 1;

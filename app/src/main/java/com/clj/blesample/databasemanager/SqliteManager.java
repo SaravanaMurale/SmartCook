@@ -785,6 +785,8 @@ public class SqliteManager extends SQLiteOpenHelper {
     public boolean deleteNotiById(int id) {
         SQLiteDatabase deleteSqLiteDatabase = getWritableDatabase();
 
+
+
         return deleteSqLiteDatabase.delete(NOTIFI_ALERT, COLUMN_ID + "=?", new String[]{String.valueOf(id)}) > 0;
 
     }
