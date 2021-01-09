@@ -90,9 +90,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BleManager.getInstance().init(getApplication());
         BleManager.getInstance()
                 .enableLog(true)
+                .setReConnectCount(1, 2000)
+                .setConnectOverTime(10000)
+                .setOperateTimeout(3000);
+
+        /*BleManager.getInstance().init(getApplication());
+        BleManager.getInstance()
+                .enableLog(true)
                 .setReConnectCount(1, 5000)
                 .setConnectOverTime(20000)
-                .setOperateTimeout(5000);
+                .setOperateTimeout(5000);*/
 
         //startScan();
         checkPermissions();
@@ -309,7 +316,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setDeviceName(true, names)   // 只扫描指定广播名的设备，可选
                 .setDeviceMac(mac)                  // 只扫描指定mac的设备，可选
                 .setAutoConnect(isAutoConnect)      // 连接时的autoConnect参数，可选，默认false
-                .setScanTimeOut(10000)              // 扫描超时时间，可选，默认10秒
+                //.setScanTimeOut(10000)              // 扫描超时时间，可选，默认10秒
+                .setScanTimeOut(2000)              // 扫描超时时间，可选，默认10秒
                 .build();
         BleManager.getInstance().initScanRule(scanRuleConfig);
     }
