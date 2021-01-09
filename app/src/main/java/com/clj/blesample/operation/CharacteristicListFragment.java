@@ -111,7 +111,6 @@ public class CharacteristicListFragment extends Fragment {
     ImageView selectBatteryStatus;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -188,11 +187,11 @@ public class CharacteristicListFragment extends Fragment {
         sqliteManager = new SqliteManager(getActivity());
 
 
-        selectdUserName=(TextView)v.findViewById(R.id.selectdUserName);
+        selectdUserName = (TextView) v.findViewById(R.id.selectdUserName);
         seletedUserProfile = (CircleImageView) v.findViewById(R.id.seletedUserProfile);
         selectBluetoothStatus = (ImageView) v.findViewById(R.id.selectBluetoothStatus);
 
-        selectBatteryStatus=(ImageView)v.findViewById(R.id.selectBatteryStatus);
+        selectBatteryStatus = (ImageView) v.findViewById(R.id.selectBatteryStatus);
 
 
         leftBurner = (ImageView) v.findViewById(R.id.leftBurner);
@@ -255,14 +254,14 @@ public class CharacteristicListFragment extends Fragment {
         centerHigh = (TextView) v.findViewById(R.id.centerHigh);
         centerSim = (TextView) v.findViewById(R.id.centerSim);
 
-        selectdUserName.setText(PreferencesUtil.getValueString(getActivity(),PreferencesUtil.USER_NAME));
+        selectdUserName.setText(PreferencesUtil.getValueString(getActivity(), PreferencesUtil.USER_NAME));
 
 
         leftOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(leftBurnerStatus>0){
+                if (leftBurnerStatus > 0) {
                     leftOff.setTextColor(Color.RED);
                     leftHigh.setTextColor(Color.WHITE);
                     leftSim.setTextColor(Color.WHITE);
@@ -274,11 +273,9 @@ public class CharacteristicListFragment extends Fragment {
                     }, 500);
 
                     callMe(1, MathUtil.LEFT_BURNER, 0, 0, MathUtil.OFF, 1);
-                }else {
-                    callSnackBar(MathUtil.LBISA,v);
+                } else {
+                    callSnackBar(MathUtil.LBISA, v);
                 }
-
-
 
 
             }
@@ -288,13 +285,13 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(leftBurnerStatus>0){
+                if (leftBurnerStatus > 0) {
                     leftHigh.setTextColor(Color.RED);
                     leftSim.setTextColor(Color.WHITE);
                     leftOff.setTextColor(Color.WHITE);
                     callMe(1, MathUtil.LEFT_BURNER, 0, 0, MathUtil.HIGH, 1);
-                }else {
-                    callSnackBar(MathUtil.LBISA,v);
+                } else {
+                    callSnackBar(MathUtil.LBISA, v);
                 }
 
 
@@ -305,13 +302,13 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(leftBurnerStatus>0){
+                if (leftBurnerStatus > 0) {
                     leftSim.setTextColor(Color.RED);
                     leftHigh.setTextColor(Color.WHITE);
                     leftOff.setTextColor(Color.WHITE);
                     callMe(1, MathUtil.LEFT_BURNER, 0, 0, MathUtil.SIM, 1);
-                }else {
-                    callSnackBar(MathUtil.LBISA,v);
+                } else {
+                    callSnackBar(MathUtil.LBISA, v);
                 }
 
 
@@ -322,7 +319,7 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(rightBurnerStatus>0){
+                if (rightBurnerStatus > 0) {
                     rightOff.setTextColor(Color.RED);
                     rightHigh.setTextColor(Color.WHITE);
                     rightSim.setTextColor(Color.WHITE);
@@ -335,11 +332,9 @@ public class CharacteristicListFragment extends Fragment {
                             rightOff.setTextColor(Color.WHITE);
                         }
                     }, 500);
-                }else {
-                    callSnackBar(MathUtil.RBINA,v);
+                } else {
+                    callSnackBar(MathUtil.RBINA, v);
                 }
-
-
 
 
             }
@@ -349,13 +344,13 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(rightBurnerStatus>0){
+                if (rightBurnerStatus > 0) {
                     rightOff.setTextColor(Color.WHITE);
                     rightHigh.setTextColor(Color.RED);
                     rightSim.setTextColor(Color.WHITE);
                     callMe(1, MathUtil.RIGHT_BURNER, 0, 0, MathUtil.HIGH, 1);
-                }else {
-                    callSnackBar(MathUtil.RBINA,v);
+                } else {
+                    callSnackBar(MathUtil.RBINA, v);
                 }
 
 
@@ -365,14 +360,14 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(rightBurnerStatus>0){
+                if (rightBurnerStatus > 0) {
                     rightOff.setTextColor(Color.WHITE);
                     rightHigh.setTextColor(Color.WHITE);
                     rightSim.setTextColor(Color.RED);
                     callMe(1, MathUtil.RIGHT_BURNER, 0, 0, MathUtil.SIM, 1);
-                }else {
+                } else {
 
-                    callSnackBar(MathUtil.RBINA,v);
+                    callSnackBar(MathUtil.RBINA, v);
 
                 }
 
@@ -385,7 +380,7 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(centerBurnerStatus>0){
+                if (centerBurnerStatus > 0) {
                     centerOff.setTextColor(Color.RED);
                     centerHigh.setTextColor(Color.WHITE);
                     centerSim.setTextColor(Color.WHITE);
@@ -398,11 +393,9 @@ public class CharacteristicListFragment extends Fragment {
                             centerOff.setTextColor(Color.WHITE);
                         }
                     }, 500);
-                }else {
-                    callSnackBar(MathUtil.CBISA,v);
+                } else {
+                    callSnackBar(MathUtil.CBISA, v);
                 }
-
-
 
 
             }
@@ -412,14 +405,14 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(centerBurnerStatus>0){
+                if (centerBurnerStatus > 0) {
                     centerOff.setTextColor(Color.WHITE);
                     centerHigh.setTextColor(Color.RED);
                     centerSim.setTextColor(Color.WHITE);
 
                     callMe(1, MathUtil.CENTER_BURNER, 0, 0, MathUtil.HIGH, 1);
-                }else {
-                    callSnackBar(MathUtil.CBISA,v);
+                } else {
+                    callSnackBar(MathUtil.CBISA, v);
                 }
 
 
@@ -430,14 +423,14 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(centerBurnerStatus>0){
+                if (centerBurnerStatus > 0) {
                     centerOff.setTextColor(Color.WHITE);
                     centerHigh.setTextColor(Color.WHITE);
                     centerSim.setTextColor(Color.RED);
 
                     callMe(1, MathUtil.CENTER_BURNER, 0, 0, MathUtil.SIM, 1);
-                }else {
-                    callSnackBar(MathUtil.CBISA,v);
+                } else {
+                    callSnackBar(MathUtil.CBISA, v);
                 }
 
 
@@ -462,7 +455,7 @@ public class CharacteristicListFragment extends Fragment {
                     setWhistle(MathUtil.LEFT_BURNER);
                 } else {
 
-                    callSnackBar(MathUtil.LBISA,v);
+                    callSnackBar(MathUtil.LBISA, v);
                     System.out.println("LeftBurnerIsNotActivated");
 
                 }
@@ -478,7 +471,7 @@ public class CharacteristicListFragment extends Fragment {
                     setTimer(MathUtil.LEFT_BURNER);
                 } else {
                     System.out.println("LeftBurnerIsNotActivated");
-                    callSnackBar(MathUtil.LBISA,v);
+                    callSnackBar(MathUtil.LBISA, v);
                 }
 
             }
@@ -493,7 +486,7 @@ public class CharacteristicListFragment extends Fragment {
                 } else {
                     System.out.println("RightBurnerIsNotActivated");
 
-                    callSnackBar(MathUtil.RBINA,v);
+                    callSnackBar(MathUtil.RBINA, v);
 
                 }
 
@@ -508,7 +501,7 @@ public class CharacteristicListFragment extends Fragment {
                     setTimer(MathUtil.RIGHT_BURNER);
                 } else {
                     System.out.println("RightBurnerIsNotActivated");
-                    callSnackBar(MathUtil.RBINA,v);
+                    callSnackBar(MathUtil.RBINA, v);
 
                 }
 
@@ -523,7 +516,7 @@ public class CharacteristicListFragment extends Fragment {
                     setWhistle(MathUtil.CENTER_BURNER);
                 } else {
                     System.out.println("CenterBurnerIsNotActivated");
-                    callSnackBar(MathUtil.CBISA,v);
+                    callSnackBar(MathUtil.CBISA, v);
                 }
 
 
@@ -539,7 +532,7 @@ public class CharacteristicListFragment extends Fragment {
                     setTimer(MathUtil.CENTER_BURNER);
                 } else {
                     System.out.println("CenterBurnerIsNotActivated");
-                    callSnackBar(MathUtil.CBISA,v);
+                    callSnackBar(MathUtil.CBISA, v);
                 }
 
 
@@ -656,7 +649,7 @@ public class CharacteristicListFragment extends Fragment {
         });
     }
 
-    private void callSnackBar(String burnerStatus,View v) {
+    private void callSnackBar(String burnerStatus, View v) {
 
         Snackbar snack = Snackbar.make(v, burnerStatus, Snackbar.LENGTH_SHORT);
         View view = snack.getView();
@@ -1519,18 +1512,17 @@ public class CharacteristicListFragment extends Fragment {
     private void setBatteryStatus(int batteryPercentage) {
 
 
-        if(batteryPercentage>=80){
+        if (batteryPercentage >= 80) {
             selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_full));
-        }else if(batteryPercentage>=60){
+        } else if (batteryPercentage >= 60) {
             selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_9));
-        }else if(batteryPercentage>=40){
+        } else if (batteryPercentage >= 40) {
             selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_7));
-        }else if(batteryPercentage>=30)
-        {
+        } else if (batteryPercentage >= 30) {
             selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_30));
-        }else if(batteryPercentage>=20) {
+        } else if (batteryPercentage >= 20) {
             selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_low_10));
-        }else if(batteryPercentage<=15){
+        } else if (batteryPercentage <= 15) {
             selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_criticaly_low));
         }
 
