@@ -29,6 +29,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -113,6 +114,8 @@ public class CharacteristicListFragment extends Fragment {
 
     Dialog eStopDialog;
 
+    RelativeLayout profileSelectBlock;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -189,6 +192,8 @@ public class CharacteristicListFragment extends Fragment {
 
         sqliteManager = new SqliteManager(getActivity());
 
+
+        profileSelectBlock=(RelativeLayout)v.findViewById(R.id.profileSelectBlock);
 
         selectdUserName = (TextView) v.findViewById(R.id.selectdUserName);
         seletedUserProfile = (CircleImageView) v.findViewById(R.id.seletedUserProfile);
@@ -442,7 +447,7 @@ public class CharacteristicListFragment extends Fragment {
         });
 
 
-        seletedUserProfile.setOnClickListener(new View.OnClickListener() {
+        profileSelectBlock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ProfileSettingsActivity.class);
