@@ -41,9 +41,12 @@ import android.widget.Toast;
 
 import com.clj.blesample.adapter.DeviceAdapter;
 import com.clj.blesample.comm.ObserverManager;
+import com.clj.blesample.menuoperationactivity.LoginActivity;
 import com.clj.blesample.operation.OperationActivity;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
+import com.clj.blesample.utils.LogFile;
 import com.clj.blesample.utils.MathUtil;
+import com.clj.blesample.utils.PermissionUtils;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleGattCallback;
 import com.clj.fastble.callback.BleMtuChangedCallback;
@@ -56,6 +59,8 @@ import com.clj.fastble.scan.BleScanRuleConfig;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static com.clj.blesample.utils.MathUtil.LOCATION_PERMISSION_REQUEST_CODE;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -108,6 +113,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //startScan();
         checkPermissions();
 
+
+
         switchShow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -137,6 +144,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
+
 
 
     private void removeSessionValue() {
@@ -329,6 +338,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void startScan() {
+
+
         BleManager.getInstance().scan(new BleScanCallback() {
             @Override
             public void onScanStarted(boolean success) {
@@ -339,7 +350,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 img_loading.setVisibility(View.VISIBLE);
                 btn_scan.setText(getString(R.string.stop_scan));
 
-                dialog=MathUtil.showProgressBar(MainActivity.this);
 
                 switchShow.setChecked(true);
                 switchStatus.setText("ON");

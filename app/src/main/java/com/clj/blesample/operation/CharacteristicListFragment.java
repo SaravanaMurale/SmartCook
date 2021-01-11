@@ -1560,16 +1560,22 @@ public class CharacteristicListFragment extends Fragment {
 
         if (batteryPercentage >= 80) {
             selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_full));
+            stopBlinking(selectBatteryStatus);
         } else if (batteryPercentage >= 60) {
             selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_9));
+            stopBlinking(selectBatteryStatus);
         } else if (batteryPercentage >= 40) {
             selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_7));
+            stopBlinking(selectBatteryStatus);
         } else if (batteryPercentage >= 30) {
             selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_30));
+            stopBlinking(selectBatteryStatus);
         } else if (batteryPercentage >= 20) {
             selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_low_10));
+            stopBlinking(selectBatteryStatus);
         } else if (batteryPercentage <= 15) {
             selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_criticaly_low));
+            startBlinking(selectBatteryStatus);
         }
 
 

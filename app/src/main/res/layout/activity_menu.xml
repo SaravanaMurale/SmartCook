@@ -59,7 +59,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/profileSettingImage"
             android:fontFamily="sans-serif-condensed"
-            android:text="Profile Setting"
+            android:text="User Profile"
             android:textColor="@color/black"
             android:textSize="15sp"
              />

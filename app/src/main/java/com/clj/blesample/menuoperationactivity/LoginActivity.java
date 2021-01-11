@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -97,20 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                     //Email or Mobile
                     String userName = sqliteManager.validateLoginUser(email, password);
 
-                    if (!PermissionUtils.hasPermission(LoginActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-                        PermissionUtils.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, LOCATION_PERMISSION_REQUEST_CODE);
-
-
-                    } else {
-
-                        if (PermissionUtils.hasPermission(LoginActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                            LogFile.addLogInFile("LoginActivity " + userName);
-                            System.out.println("Logfilecreatedsuccessfully");
-                        }
-                    }
-
-
+                    checkWriteStoreAgePermission();
 
                     PreferencesUtil.setValueString(LoginActivity.this, PreferencesUtil.USER_NAME, userName);
 
@@ -181,6 +169,24 @@ public class LoginActivity extends AppCompatActivity {
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    private void checkWriteStoreAgePermission() {
+
+        if (!PermissionUtils.hasPermission(LoginActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+            PermissionUtils.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, LOCATION_PERMISSION_REQUEST_CODE);
+
+
+        } else {
+
+            if (PermissionUtils.hasPermission(LoginActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                LogFile.addLogInFile("MainActivity ");
+                System.out.println("Logfilecreatedsuccessfully");
+            }
+        }
+
+
     }
 
 
