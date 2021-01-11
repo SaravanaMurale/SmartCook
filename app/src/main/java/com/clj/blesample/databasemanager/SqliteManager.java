@@ -574,7 +574,9 @@ public class SqliteManager extends SQLiteOpenHelper {
 
         updateContentValues.put(USER_PASSWORD, password);
 
-        return updateSqLiteDatabase.update(SIGNUP_TABLE, updateContentValues, USER_EMAIL + "=?", new String[]{userEmail}) > 0;
+       // return updateSqLiteDatabase.update(SIGNUP_TABLE, updateContentValues, USER_EMAIL + "=?", new String[]{userEmail}) > 0;
+
+        return updateSqLiteDatabase.update(SIGNUP_TABLE, updateContentValues, USER_EMAIL + "=?" +"or "+USER_MOBILE+"=?" , new String[]{userEmail,userEmail}) > 0;
 
     }
 
