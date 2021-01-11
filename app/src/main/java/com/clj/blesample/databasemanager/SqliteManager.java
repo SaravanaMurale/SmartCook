@@ -711,7 +711,8 @@ public class SqliteManager extends SQLiteOpenHelper {
 
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
-        Cursor cursorNoti = sqLiteDatabase.rawQuery("select * from notificationalerttable where read_status=? ORDER BY id DESC LIMIT 5", new String[]{"0"});
+        //Cursor cursorNoti = sqLiteDatabase.rawQuery("select * from notificationalerttable where read_status=? ORDER BY id DESC LIMIT 5", new String[]{"0"});
+        Cursor cursorNoti = sqLiteDatabase.rawQuery("select * from notificationalerttable where read_status=? ORDER BY id ", new String[]{"0"});
 
         if (cursorNoti.moveToFirst()) {
 

@@ -1583,6 +1583,8 @@ public class CharacteristicListFragment extends Fragment {
             sqliteManager.setNotification("Your Battery is Criticaly Low");
         }
 
+        setNonReadNotificationCount();
+
     }
 
     private void setWhistleAndTimerNotification(int rightWhistle, int rightTimer, int leftWhistle, int leftTimer, int centerWhistle, int centerTimer) {
