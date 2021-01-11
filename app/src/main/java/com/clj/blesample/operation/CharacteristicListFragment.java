@@ -4,6 +4,7 @@ package com.clj.blesample.operation;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.Context;
@@ -110,6 +111,8 @@ public class CharacteristicListFragment extends Fragment {
 
     ImageView selectBatteryStatus;
 
+    Dialog eStopDialog;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -200,6 +203,7 @@ public class CharacteristicListFragment extends Fragment {
 
 
         eStop = (ImageView) v.findViewById(R.id.eStop);
+        eStopDialog=new Dialog(getActivity());
 
         selectedLeftWhistle = (ImageView) v.findViewById(R.id.leftWhistle);
         selectedRightWhistle = (ImageView) v.findViewById(R.id.rightWhistle);
@@ -560,7 +564,42 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                TextView eStopYes,eStopNo,eStopText;
+
+                eStopDialog.setContentView(R.layout.layout_estop);
+
+                eStopYes=eStopDialog.findViewById(R.id.eStopYes);
+                eStopNo=eStopDialog.findViewById(R.id.eStopNo);
+                eStopText=eStopDialog.findViewById(R.id.e1);
+
+                eStopText.setTypeface(octinPrisonFont);
+                eStopYes.setTypeface(octinPrisonFont);
+                eStopNo.setTypeface(octinPrisonFont);
+
+                eStopYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
+
+
+                            callMe(1, null, 0, 0, 0, 4);
+                            eStopDialog.dismiss();
+                        }
+
+                    }
+                });
+
+                eStopNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        eStopDialog.dismiss();
+                    }
+                });
+
+                eStopDialog.show();
+
+                /*AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setCancelable(false);
                 builder.setTitle("Are you sure want to turn off stove?");
 
@@ -589,7 +628,7 @@ public class CharacteristicListFragment extends Fragment {
 
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
-
+*/
 
             }
         });
@@ -649,19 +688,11 @@ public class CharacteristicListFragment extends Fragment {
         });
     }
 
-    private void callSnackBar(String burnerStatus, View v) {
 
-        Snackbar snack = Snackbar.make(v, burnerStatus, Snackbar.LENGTH_SHORT);
-        View view = snack.getView();
-        TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
-        tv.setTypeface(octinPrisonFont);
-        tv.setTextColor(Color.RED);
-        snack.show();
-    }
 
     private void setTimer(final String burner) {
 
-        final TextView timerSub, timerAdd, setTimerCount;
+        final TextView timerSub, timerAdd, setTimerCount,timerFont;
 
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
         View mView = getLayoutInflater().inflate(R.layout.dialog_set_timer, null);
@@ -670,6 +701,9 @@ public class CharacteristicListFragment extends Fragment {
         timerSub = (TextView) mView.findViewById(R.id.timerSub);
         timerAdd = (TextView) mView.findViewById(R.id.timerAdd);
         setTimerCount = (TextView) mView.findViewById(R.id.setTimerCount);
+        timerFont=(TextView)mView.findViewById(R.id.minuteFont);
+        setTimerCount.setTypeface(octinPrisonFont);
+        timerFont.setTypeface(octinPrisonFont);
 
         timerAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -737,7 +771,7 @@ public class CharacteristicListFragment extends Fragment {
     private void setWhistle(final String burner) {
 
 
-        final TextView whistleSub, whistleAdd, setWhistleCount;
+        final TextView whistleSub, whistleAdd, setWhistleCount,whistleFont;
 
 
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
@@ -748,6 +782,9 @@ public class CharacteristicListFragment extends Fragment {
         whistleSub = (TextView) mView.findViewById(R.id.whistleSub);
         whistleAdd = (TextView) mView.findViewById(R.id.whistleAdd);
         setWhistleCount = (TextView) mView.findViewById(R.id.setWhistleCount);
+        whistleFont=(TextView)mView.findViewById(R.id.whistleFont);
+        whistleFont.setTypeface(octinPrisonFont);
+        setWhistleCount.setTypeface(octinPrisonFont);
 
         /*whistleCancel = (Button) mView.findViewById(R.id.whistleCancel);
         whistleStart = (Button) mView.findViewById(R.id.whistleStart);*/
@@ -818,6 +855,15 @@ public class CharacteristicListFragment extends Fragment {
         alertDialog.show();
 
 
+    }
+    private void callSnackBar(String burnerStatus, View v) {
+
+        Snackbar snack = Snackbar.make(v, burnerStatus, Snackbar.LENGTH_SHORT);
+        View view = snack.getView();
+        TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        tv.setTypeface(octinPrisonFont);
+        tv.setTextColor(Color.RED);
+        snack.show();
     }
 
     private void callMe(int position, String burner, int timerInMin, int whistleInCount, int flameMode, int frameFormet) {
@@ -904,7 +950,7 @@ public class CharacteristicListFragment extends Fragment {
             ((OperationActivity) getActivity()).setCharacteristic(characteristic);
             ((OperationActivity) getActivity()).setCharaProp(propList.get(0));
             //((OperationActivity) getActivity()).changePage(2);
-            wrietUserData("ss", 0, 0, 0, 3);
+            wrietUserData("ss", 0, 0, 0, 4);
         }
 
 
