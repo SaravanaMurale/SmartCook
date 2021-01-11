@@ -602,6 +602,7 @@ public class CharacteristicListFragment extends Fragment {
                     }
                 });
 
+                eStopDialog.setCanceledOnTouchOutside(false);
                 eStopDialog.show();
 
                 /*AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
