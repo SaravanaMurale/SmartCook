@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import com.clj.blesample.MainActivity;
 import com.clj.blesample.R;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
+import com.clj.blesample.utils.LogFile;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -48,6 +49,8 @@ public class SplashScreenActivity extends AppCompatActivity {
             Intent intent;
 
             userId = PreferencesUtil.getValueInt(SplashScreenActivity.this, PreferencesUtil.USER_ID);
+
+
 
             if (userId > 0) {
                 intent = new Intent(SplashScreenActivity.this, MainActivity.class);

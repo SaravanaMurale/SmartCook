@@ -17,6 +17,7 @@ import com.clj.blesample.MainActivity;
 import com.clj.blesample.R;
 import com.clj.blesample.databasemanager.SqliteManager;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
+import com.clj.blesample.utils.LogFile;
 
 import static com.clj.blesample.utils.MathUtil.validateEmail;
 import static com.clj.blesample.utils.MathUtil.validatePassword;
@@ -92,6 +93,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (validateEmail(email) && validateEmail(password)) {
                     //Email or Mobile
                     String userName = sqliteManager.validateLoginUser(email, password);
+
+                    LogFile.addLogInFile("USERADDEDSUCCESSFULLY"+userName);
+                    System.out.println("Logfilecreatedsuccessfully");
 
                     PreferencesUtil.setValueString(LoginActivity.this,PreferencesUtil.USER_NAME,userName);
 
