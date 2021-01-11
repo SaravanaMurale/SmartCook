@@ -119,11 +119,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                System.out.println("SwitchClicked");
+                System.out.println("SwitchClickedStatus"+isChecked);
 
                 if (isChecked) {
 
                     checkPermissions();
+
 
                     Toast.makeText(MainActivity.this, "Switch On", Toast.LENGTH_LONG).show();
                     switchStatus.setText("ON");
@@ -132,11 +133,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                 } else {
+
+                    BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+                    if (mBluetoothAdapter.isEnabled()) {
+                        mBluetoothAdapter.disable();
+                    }
+
                     Toast.makeText(MainActivity.this, "Switch Off", Toast.LENGTH_LONG).show();
                     switchStatus.setText("OFF");
                     bleConnectStatus.setText("Please turn on to connect nearby device");
 
                     BleManager.getInstance().cancelScan();
+
+
+
+
                 }
 
             }
@@ -339,6 +350,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void startScan() {
 
+        System.out.println("StartScanStarted");
 
         BleManager.getInstance().scan(new BleScanCallback() {
             @Override
