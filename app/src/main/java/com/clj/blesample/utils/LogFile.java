@@ -9,7 +9,7 @@ public class LogFile {
 
     public static void addLogInFile(String text)
     {
-        File logFile = new File("sdcard/scsklog.file");
+        File logFile = new File("sdcard/scsklog.txt");
         if (!logFile.exists())
         {
             try

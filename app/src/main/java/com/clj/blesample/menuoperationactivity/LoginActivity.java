@@ -1,5 +1,6 @@
 package com.clj.blesample.menuoperationactivity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
@@ -18,7 +19,9 @@ import com.clj.blesample.R;
 import com.clj.blesample.databasemanager.SqliteManager;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
 import com.clj.blesample.utils.LogFile;
+import com.clj.blesample.utils.PermissionUtils;
 
+import static com.clj.blesample.utils.MathUtil.LOCATION_PERMISSION_REQUEST_CODE;
 import static com.clj.blesample.utils.MathUtil.validateEmail;
 import static com.clj.blesample.utils.MathUtil.validatePassword;
 
@@ -94,10 +97,22 @@ public class LoginActivity extends AppCompatActivity {
                     //Email or Mobile
                     String userName = sqliteManager.validateLoginUser(email, password);
 
-                    LogFile.addLogInFile("USERADDEDSUCCESSFULLY"+userName);
-                    System.out.println("Logfilecreatedsuccessfully");
+                    if (!PermissionUtils.hasPermission(LoginActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 
-                    PreferencesUtil.setValueString(LoginActivity.this,PreferencesUtil.USER_NAME,userName);
+                        PermissionUtils.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, LOCATION_PERMISSION_REQUEST_CODE);
+
+
+                    } else {
+
+                        if (PermissionUtils.hasPermission(LoginActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                            LogFile.addLogInFile("LoginActivity " + userName);
+                            System.out.println("Logfilecreatedsuccessfully");
+                        }
+                    }
+
+
+
+                    PreferencesUtil.setValueString(LoginActivity.this, PreferencesUtil.USER_NAME, userName);
 
                     if (!userName.equals("empty")) {
                         Toast.makeText(LoginActivity.this, "Received UserName" + userName, Toast.LENGTH_LONG).show();

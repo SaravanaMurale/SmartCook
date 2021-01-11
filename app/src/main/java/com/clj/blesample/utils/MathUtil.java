@@ -18,6 +18,8 @@ public class MathUtil {
     public static final String LEFT_BURNER = "01";
     public static final String CENTER_BURNER = "10";
 
+    public static final int LOCATION_PERMISSION_REQUEST_CODE = 1256;
+
     public static final int OFF = 0;
     public static final int HIGH = 1;
     public static final int SIM = 2;
