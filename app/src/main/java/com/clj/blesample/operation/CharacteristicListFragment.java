@@ -760,14 +760,17 @@ public class CharacteristicListFragment extends Fragment {
         }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                whistleCount=0;
+                timerCount = 0;
                 dialog.cancel();
+
 
             }
         });
 
         mBuilder.setView(mView);
         AlertDialog alertDialog = mBuilder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
 
 
@@ -849,7 +852,8 @@ public class CharacteristicListFragment extends Fragment {
         mBuilder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                whistleCount=0;
+                timerCount = 0;
                 dialog.cancel();
             }
         });
@@ -857,6 +861,7 @@ public class CharacteristicListFragment extends Fragment {
 
         mBuilder.setView(mView);
         AlertDialog alertDialog = mBuilder.create();
+        alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
 
 
