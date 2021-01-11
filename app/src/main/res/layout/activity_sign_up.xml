@@ -3,12 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_margin="20dp"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    >
 
+ <!--   <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/five_dp"
 
+        >-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        >
 
     <TextView
         android:id="@+id/signUpText"
@@ -16,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="Signup"
+        android:fontFamily="sans-serif-condensed"
         android:textColor="@color/red"
         android:textSize="20sp" />
 
@@ -28,7 +43,6 @@
         android:gravity="left|center_vertical"
         android:hint="Name"
         android:inputType="text"
-        android:theme="@style/EditTextHintColor"
         android:singleLine="true" />
 
     <EditText
@@ -39,7 +53,6 @@
         android:fontFamily="sans-serif-condensed"
         android:gravity="left|center_vertical"
         android:hint="Email"
-        android:theme="@style/EditTextHintColor"
         android:inputType="textEmailAddress"
         android:singleLine="true" />
 
@@ -52,7 +65,6 @@
         android:gravity="left|center_vertical"
         android:hint="Mobile Number"
         android:inputType="phone"
-        android:theme="@style/EditTextHintColor"
         android:singleLine="true" />
 
     <EditText
@@ -65,7 +77,6 @@
         android:hint="Password"
         android:inputType="textPassword"
         android:longClickable="false"
-        android:theme="@style/EditTextHintColor"
         android:singleLine="true" />
 
     <EditText
@@ -78,7 +89,6 @@
         android:hint="Confirm Password"
         android:inputType="textPassword"
         android:longClickable="false"
-        android:theme="@style/EditTextHintColor"
         android:singleLine="true" />
 
 
@@ -107,6 +117,10 @@
         android:text="Signup"
 
         />
+
+    </LinearLayout>
+
+  <!--  </android.support.v7.widget.CardView>-->
 
 
 
