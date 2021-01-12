@@ -1642,7 +1642,12 @@ public class CharacteristicListFragment extends Fragment {
         int count = nonReadNotiCount.size();
 
         if (count > 0) {
-            notificationCount.setText("" + count);
+            if(count<100){
+                notificationCount.setText("" + count);
+            }else {
+                notificationCount.setText("99");
+            }
+
         } else {
 
         }
