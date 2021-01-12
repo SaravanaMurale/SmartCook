@@ -139,6 +139,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         mBluetoothAdapter.disable();
                     }
 
+                    PreferencesUtil.remove(MainActivity.this,PreferencesUtil.BLE_MAC_ADDRESS);
+
                     Toast.makeText(MainActivity.this, "Switch Off", Toast.LENGTH_LONG).show();
                     switchStatus.setText("OFF");
                     bleConnectStatus.setText("Please turn on to connect nearby device");

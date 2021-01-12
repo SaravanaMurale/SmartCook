@@ -1,6 +1,7 @@
 package com.clj.blesample.menuoperationactivity;
 
 import android.app.Dialog;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import com.clj.blesample.R;
 import com.clj.blesample.adapter.NotificationAdapter;
 import com.clj.blesample.databasemanager.SqliteManager;
+import com.clj.blesample.model.NotificationId;
 import com.clj.blesample.model.NotificationResponseDTO;
 import com.clj.blesample.notificationpackage.NotificationAct;
 import com.clj.blesample.utils.MathUtil;
@@ -49,9 +51,54 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
 
         System.out.println("NotificationCalled");
 
-        getAllNotifications();
 
-        updateReadStatus();
+
+        deleteRecordsMoreThanHundred();
+
+
+       /* new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        },1000);
+*/
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getAllNotifications();
+            }
+        },1000);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateReadStatus();
+            }
+        },500);
+
+
+
+
+    }
+
+    private void deleteRecordsMoreThanHundred() {
+
+        Dialog dialog=new Dialog(NotificationActivity.this);
+
+        dialog=MathUtil.showProgressBar(NotificationActivity.this);
+
+        List<NotificationId> deleteRecord = sqliteManager.getAllNotificationsToDelte();
+
+        System.out.println("DeleteRecordSize"+deleteRecord.size());
+
+
+         if(deleteRecord.size()>=120 ){
+            sqliteManager.deleteMoreThanHundred(50,deleteRecord);
+        }
+
+        MathUtil.dismisProgressBar(NotificationActivity.this,dialog);
 
 
     }

@@ -6,6 +6,10 @@ public class NotificationResponseDTO {
     private String notiText;
     private String notiReadStatus;
 
+    public NotificationResponseDTO(int notiColumnID) {
+        this.notiColumnID = notiColumnID;
+    }
+
     public NotificationResponseDTO(int notiColumnID, String notiText, String notiReadStatus) {
         this.notiColumnID = notiColumnID;
         this.notiText = notiText;

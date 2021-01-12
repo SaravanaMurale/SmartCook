@@ -14,6 +14,7 @@ import com.clj.blesample.menuoperationactivity.SplashScreenActivity;
 import com.clj.blesample.model.GasConsumptionPatternDTO;
 import com.clj.blesample.model.MaintenaceServiceDTO;
 import com.clj.blesample.model.NotificationDTO;
+import com.clj.blesample.model.NotificationId;
 import com.clj.blesample.model.NotificationResponseDTO;
 import com.clj.blesample.model.StatisticsDTO;
 import com.clj.blesample.model.StoreImageDTO;
@@ -704,8 +705,6 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     public List<NotificationResponseDTO> getNonReadNotifications() {
 
-        //deleteRecordsMoreThanHundred();
-
 
         List<NotificationResponseDTO> notificationResponseDTOList = new ArrayList<>();
 
@@ -738,10 +737,37 @@ public class SqliteManager extends SQLiteOpenHelper {
         return notificationResponseDTOList;
     }
 
+    public List<NotificationId> getAllNotificationsToDelte() {
+
+        List<NotificationId> notificationIdList = new ArrayList<>();
+
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+
+        Cursor cursorNoti = sqLiteDatabase.rawQuery("select id from notificationalerttable", null);
+
+        if (cursorNoti.moveToFirst()) {
+
+            do {
+
+
+
+
+                NotificationId notificationId = new NotificationId(cursorNoti.getInt(0));
+
+                notificationIdList.add(notificationId);
+
+
+            } while (cursorNoti.moveToNext());
+
+
+        }
+
+        return notificationIdList;
+
+
+    }
+
     public List<NotificationResponseDTO> getAllNotifications() {
-
-        //deleteRecordsMoreThanHundred();
-
 
         List<NotificationResponseDTO> notificationResponseDTOList = new ArrayList<>();
 
@@ -773,6 +799,8 @@ public class SqliteManager extends SQLiteOpenHelper {
         return notificationResponseDTOList;
     }
 
+
+
     public boolean updateReadStatus() {
 
         SQLiteDatabase updateSqLiteDatabase = getWritableDatabase();
@@ -792,6 +820,26 @@ public class SqliteManager extends SQLiteOpenHelper {
 
         return deleteSqLiteDatabase.delete(NOTIFI_ALERT, COLUMN_ID + "=?", new String[]{String.valueOf(id)}) > 0;
 
+    }
+
+    public void deleteMoreThanHundred(int deleteTopRecordCount,List<NotificationId> deleteRecord) {
+
+        SQLiteDatabase deleteSqLiteDatabase = getWritableDatabase();
+
+        //delete from notificationalerttable where id in (SELECT id FROM notificationalerttable LIMIT deleteTopRecordCount)
+
+
+        for (int i = 0; i <deleteTopRecordCount ; i++) {
+
+
+            deleteSqLiteDatabase.delete(NOTIFI_ALERT, COLUMN_ID + "=?", new String[]{String.valueOf(deleteRecord.get(i).getId())});
+        }
+
+        /*SELECT * FROM notificationalerttable LIMIT 5;
+
+DELETE FROM notificationalerttable WHERE id='3';
+
+delete from notificationalerttable where id in (SELECT id FROM notificationalerttable LIMIT 5)*/
     }
 
 
