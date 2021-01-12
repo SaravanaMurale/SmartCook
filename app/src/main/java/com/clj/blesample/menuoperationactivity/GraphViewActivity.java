@@ -86,7 +86,7 @@ public class GraphViewActivity extends AppCompatActivity {
         }
 
 
-        System.out.println("RangeSizeOfGasConsumptionPatters " + gasConsumptionPatternDTOList.size());
+        //System.out.println("RangeSizeOfGasConsumptionPatters " + gasConsumptionPatternDTOList.size());
 
         for (int i = 0; i < gasConsumptionPatternDTOList.size(); i++) {
 

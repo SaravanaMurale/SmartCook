@@ -114,11 +114,11 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
 
 
         if (notificationResponseDTOList == null) {
-            Toast.makeText(NotificationActivity.this, "Notification List Is Empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(NotificationActivity.this, "There is no notification to show", Toast.LENGTH_LONG).show();
         } else {
             notificationAdapter.dataSet(notificationResponseDTOList);
 
-            Toast.makeText(NotificationActivity.this, "Notification List Has Data", Toast.LENGTH_LONG).show();
+            //Toast.makeText(NotificationActivity.this, "Notification List Has Data", Toast.LENGTH_LONG).show();
         }
 
         MathUtil.dismisProgressBar(NotificationActivity.this,dialog);

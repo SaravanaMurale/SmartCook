@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     listView_device.setVisibility(View.VISIBLE);
 
 
-                    Toast.makeText(MainActivity.this, "Switch On", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(MainActivity.this, "Switch On", Toast.LENGTH_LONG).show();
                     switchStatus.setText("ON");
 
 
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     mDeviceAdapter.notifyDataSetChanged();
 
 
-                    Toast.makeText(MainActivity.this, "Switch Off", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(MainActivity.this, "Switch Off", Toast.LENGTH_LONG).show();
                     switchStatus.setText("OFF");
                     bleConnectStatus.setText("Please turn on to connect nearby device");
 

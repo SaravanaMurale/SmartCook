@@ -144,7 +144,7 @@ public class CharacteristicListFragment extends Fragment {
         //Calls Notify
         if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
 
-            Toast.makeText(getActivity(), "NotifyCalled", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity(), "NotifyCalled", Toast.LENGTH_LONG).show();
 
             callMe(0, null, 0, 0, 0, 0);
 
@@ -160,12 +160,12 @@ public class CharacteristicListFragment extends Fragment {
         //int selectedFlameModde = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.FLAME_MODE);
 
         if (selectedBurner.equals("no_value") && selectedTimer <= 0 && selectedWhistle <= 0) {
-            Toast.makeText(getActivity(), "Empty Write Data", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity(), "Empty Write Data", Toast.LENGTH_LONG).show();
         } else {
 
-            Toast.makeText(getActivity(), "WriteCalled", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity(), "WriteCalled", Toast.LENGTH_LONG).show();
 
-            System.out.println("ReceivedStoredPreferenceValue" + selectedBurner + " " + selectedTimer + " " + selectedWhistle);
+            //System.out.println("ReceivedStoredPreferenceValue" + selectedBurner + " " + selectedTimer + " " + selectedWhistle);
 
             //Calls Write
             if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
@@ -1020,7 +1020,7 @@ public class CharacteristicListFragment extends Fragment {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(getActivity(), "Write Success", Toast.LENGTH_LONG).show();
+                                   // Toast.makeText(getActivity(), "Write Success", Toast.LENGTH_LONG).show();
                                 }
                             });
                         }
@@ -1031,7 +1031,7 @@ public class CharacteristicListFragment extends Fragment {
                                 @Override
                                 public void run() {
 
-                                    Toast.makeText(getActivity(), "Write Failed", Toast.LENGTH_LONG).show();
+                                   //Toast.makeText(getActivity(), "Write Failed", Toast.LENGTH_LONG).show();
 
                                     System.out.println("Exception" + exception.toString());
                                 }
@@ -1144,7 +1144,7 @@ public class CharacteristicListFragment extends Fragment {
             BluetoothGattCharacteristic characteristic = ((OperationActivity) getActivity()).getCharacteristic();
 
 
-            Toast.makeText(getActivity(), "New Data Write", Toast.LENGTH_LONG).show();
+           // Toast.makeText(getActivity(), "New Data Write", Toast.LENGTH_LONG).show();
 
             BleManager.getInstance().write(
                     bleDevice,
@@ -1160,7 +1160,7 @@ public class CharacteristicListFragment extends Fragment {
                                 @Override
                                 public void run() {
 
-                                    Toast.makeText(getActivity(), "Whistle Is Set", Toast.LENGTH_LONG).show();
+                                   // Toast.makeText(getActivity(), "Whistle Is Set", Toast.LENGTH_LONG).show();
 
                                 }
                             });
@@ -1172,7 +1172,7 @@ public class CharacteristicListFragment extends Fragment {
                                 @Override
                                 public void run() {
 
-                                    Toast.makeText(getActivity(), "Whistle  Is Not Set", Toast.LENGTH_LONG).show();
+                                   // Toast.makeText(getActivity(), "Whistle  Is Not Set", Toast.LENGTH_LONG).show();
 
                                     System.out.println("TimerException" + exception.toString());
                                 }
@@ -1284,7 +1284,7 @@ public class CharacteristicListFragment extends Fragment {
             BluetoothGattCharacteristic characteristic = ((OperationActivity) getActivity()).getCharacteristic();
 
 
-            Toast.makeText(getActivity(), "New Data Write", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getActivity(), "New Data Write", Toast.LENGTH_LONG).show();
 
             BleManager.getInstance().write(
                     bleDevice,
@@ -1300,7 +1300,7 @@ public class CharacteristicListFragment extends Fragment {
                                 @Override
                                 public void run() {
 
-                                    Toast.makeText(getActivity(), "Timer Is Set", Toast.LENGTH_LONG).show();
+                                   // Toast.makeText(getActivity(), "Timer Is Set", Toast.LENGTH_LONG).show();
 
                                 }
                             });
@@ -1312,7 +1312,7 @@ public class CharacteristicListFragment extends Fragment {
                                 @Override
                                 public void run() {
 
-                                    Toast.makeText(getActivity(), "Is Not Set", Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(getActivity(), "Is Not Set", Toast.LENGTH_LONG).show();
 
                                     System.out.println("TimerException" + exception.toString());
                                 }
