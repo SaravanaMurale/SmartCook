@@ -331,10 +331,10 @@ public class SqliteManager extends SQLiteOpenHelper {
         long checkIfImageQueryRuns = objectSqliteDatabase.insert(IMAGE_TABLE, null, contentValues);
 
         if (checkIfImageQueryRuns != -1) {
-            Toast.makeText(mCtx, "Image added into table", Toast.LENGTH_LONG).show();
+            Toast.makeText(mCtx, "Profile Added", Toast.LENGTH_LONG).show();
             objectSqliteDatabase.close();
         } else {
-            Toast.makeText(mCtx, "Image is not added", Toast.LENGTH_LONG).show();
+            Toast.makeText(mCtx, "Profile is not added", Toast.LENGTH_LONG).show();
         }
 
     }

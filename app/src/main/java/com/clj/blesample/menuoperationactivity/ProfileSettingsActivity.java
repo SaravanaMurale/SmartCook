@@ -72,7 +72,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                openDialog("Enter Your Name", 1);
+                openDialog("Update Name", 1);
 
             }
         });
@@ -81,7 +81,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                openDialog("Enter Email", 2);
+                openDialog("Update Email", 2);
 
             }
         });
@@ -89,7 +89,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         mobileBlock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialog("Mobile Number", 3);
+                openDialog("Update Mobile Number", 3);
             }
         });
 
@@ -97,7 +97,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                openDialog("Enter Password", 4);
+                openDialog("Update Password", 4);
 
             }
         });
