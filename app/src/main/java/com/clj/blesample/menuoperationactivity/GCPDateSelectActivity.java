@@ -82,7 +82,18 @@ public class  GCPDateSelectActivity extends AppCompatActivity implements Adapter
                         intent.putExtra("BURNER", selectedBurner);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(GCPDateSelectActivity.this, "Please Select", Toast.LENGTH_LONG).show();
+
+                        if(selectedFromDate==null){
+                            Toast.makeText(GCPDateSelectActivity.this, "Please Select From Date", Toast.LENGTH_LONG).show();
+                        }else if(selectedToDate==null){
+                            Toast.makeText(GCPDateSelectActivity.this, "Please Select To Date", Toast.LENGTH_LONG).show();
+                        }else if(selectedBurner==null){
+                            Toast.makeText(GCPDateSelectActivity.this, "Please Select Burner", Toast.LENGTH_LONG).show();
+                        }else if(selectedFromDate==null &&selectedToDate==null&&selectedBurner==null){
+                            Toast.makeText(GCPDateSelectActivity.this, "Please Select From Date and To Date and Burner", Toast.LENGTH_LONG).show();
+                        }
+
+
                     }
 
                 }
