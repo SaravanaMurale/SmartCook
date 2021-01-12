@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.clj.blesample.R;
 
-public class ProductServiceActivity extends AppCompatActivity {
+public class GetInTouchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

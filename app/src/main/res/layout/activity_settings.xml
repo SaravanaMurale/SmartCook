@@ -58,30 +58,7 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/supportBlock"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/addDeviceBlock"
-        android:layout_marginTop="10dp">
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/arrow" />
-
-        <TextView
-            android:id="@+id/supportSettings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:text="Support" />
-
-    </RelativeLayout>
 
 
 </RelativeLayout>

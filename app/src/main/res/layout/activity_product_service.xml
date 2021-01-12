@@ -5,131 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".menuoperationactivity.ProductServiceActivity">
+    tools:context=".menuoperationactivity.GetInTouchActivity">
 
-    <RelativeLayout
-        android:id="@+id/newServiceRequestBlock"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp">
+        android:layout_height="match_parent"
+        android:src="@drawable/get_in_touch"
+        android:layout_margin="10dp"
+        />
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/arrow" />
-
-        <TextView
-            android:id="@+id/newServiceRequest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:text="New Service Request" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/serviceHistoryBlock"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/newServiceRequestBlock"
-        android:layout_marginTop="10dp">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/arrow" />
-
-        <TextView
-            android:id="@+id/serviceHistory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:text="Service History" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/warrantyDetailsBlock"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/serviceHistoryBlock"
-        android:layout_marginTop="10dp">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/arrow" />
-
-        <TextView
-            android:id="@+id/warrantyDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:text="Warranty Details" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/productDetailsBlock"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/warrantyDetailsBlock"
-        android:layout_marginTop="10dp">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/arrow" />
-
-        <TextView
-            android:id="@+id/productDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:text="Product Details" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/nearByServiceDelersBlock"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_below="@id/productDetailsBlock"
-        android:layout_marginTop="10dp">
-
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/arrow" />
-
-        <TextView
-            android:id="@+id/nearByServiceDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:text="Near By Service Delers" />
-
-    </RelativeLayout>
 
 
 </RelativeLayout>

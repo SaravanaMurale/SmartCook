@@ -19,7 +19,7 @@ import com.clj.blesample.sessionmanager.PreferencesUtil;
 
 public class MenuActivity extends AppCompatActivity {
 
-    RelativeLayout profileSettingBlock, gasConsumptionBlock, recipeMenuBlock, productServiceBlock, settingsBlock, contactUsBlock, signOutBlock, preSetMenuBlock;
+    RelativeLayout profileSettingBlock, gasConsumptionBlock, recipeMenuBlock, productServiceBlock, settingsBlock, contactUsBlock, signOutBlock, preSetMenuBlock,getInTocuBlock;
 
     public static final int REQUEST_PHONE_CALL = 121;
 
@@ -56,21 +56,53 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MenuActivity.this, ProductServiceActivity.class);
+                Intent intent = new Intent(MenuActivity.this, GetInTouchActivity.class);
                 startActivity(intent);
 
             }
         });
 
+        getInTocuBlock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(MenuActivity.this,GetInTouchActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
+
         signOutBlock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                PreferencesUtil.clearAll(MenuActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MenuActivity.this);
 
-                Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                builder.setTitle("Signout");
+
+                builder.setMessage("Are you sure want to signout?");
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        signoutFromDevice();
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                    }
+                });
+
+
+
+
 
             }
         });
@@ -103,7 +135,7 @@ public class MenuActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        String phone = "9445903393";
+                        String phone = "9940000005";
                         Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
                         if (ContextCompat.checkSelfPermission(MenuActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                             ActivityCompat.requestPermissions(MenuActivity.this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
@@ -122,7 +154,7 @@ public class MenuActivity extends AppCompatActivity {
                         smsIntent.setType("vnd.android-dir/mms-sms");
                         //Key both address and sms_body should not change
 
-                        smsIntent.putExtra("address", "9123521374");
+                        smsIntent.putExtra("address", "9940000005");
                         smsIntent.putExtra("sms_body", "");
                         startActivity(smsIntent);
                     }
@@ -157,6 +189,16 @@ public class MenuActivity extends AppCompatActivity {
 
     }
 
+    private void signoutFromDevice() {
+
+        PreferencesUtil.clearAll(MenuActivity.this);
+
+        Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+
+    }
+
     private void callPreSetMenuDialog() {
 
 
@@ -170,6 +212,7 @@ public class MenuActivity extends AppCompatActivity {
         productServiceBlock = (RelativeLayout) findViewById(R.id.productServiceBlock);
         settingsBlock = (RelativeLayout) findViewById(R.id.settingsBlock);
         contactUsBlock = (RelativeLayout) findViewById(R.id.contactUsBlock);
+        getInTocuBlock=(RelativeLayout)findViewById(R.id.aboutUsBlock);
         signOutBlock = (RelativeLayout) findViewById(R.id.signOutBlock);
 
 
