@@ -87,25 +87,43 @@ public class SignUpActivity extends AppCompatActivity {
 
                 if (validateName(userName) && validateEmail(userEmail) && validateMobile(userMobile) && validatePassword(userPassword) && validatePassword(userCPassword) && userPassword.equals(userCPassword)) {
 
-                    boolean status = sqliteManager.addUser(userName, userEmail, userMobile, userPassword);
-                    if (status) {
+                    int registerUserEmailStatus=sqliteManager.checkUserEmailStatus(userEmail);
+                    int registerUserMobileStatus=sqliteManager.checkUserMobileStatus(userMobile);
 
-                        signUpName.getText().clear();
-                        signUpEmail.getText().clear();
-                        signUpMobile.getText().clear();
-                        signUpPassword.getText().clear();
-                        signUpCPassword.getText().clear();
-                        //signUpAddress.getText().clear();
-
-                        Toast.makeText(SignUpActivity.this, "User Added Successfully", Toast.LENGTH_LONG).show();
-
-                        Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish();
-
-                    } else {
-                        Toast.makeText(SignUpActivity.this, "User Is Not Added ", Toast.LENGTH_LONG).show();
+                    if(registerUserEmailStatus>0){
+                        Toast.makeText(SignUpActivity.this, "Email Id is already registered", Toast.LENGTH_LONG).show();
+                        return;
                     }
+
+                    if(registerUserMobileStatus>0){
+                        Toast.makeText(SignUpActivity.this, "Mobile Number is already registered", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+                    if(registerUserEmailStatus==0 && registerUserMobileStatus==0){
+
+                        boolean status = sqliteManager.addUser(userName, userEmail, userMobile, userPassword);
+                        if (status) {
+
+                            signUpName.getText().clear();
+                            signUpEmail.getText().clear();
+                            signUpMobile.getText().clear();
+                            signUpPassword.getText().clear();
+                            signUpCPassword.getText().clear();
+                            //signUpAddress.getText().clear();
+
+                            Toast.makeText(SignUpActivity.this, "User Added Successfully", Toast.LENGTH_LONG).show();
+
+                            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+
+                        } else {
+                            Toast.makeText(SignUpActivity.this, "User Is Not Added ", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+
 
                 }else {
                     Toast.makeText(SignUpActivity.this, "Please enter valid formet", Toast.LENGTH_LONG).show();

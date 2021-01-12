@@ -60,7 +60,6 @@
             android:layout_margin="20dp"
             android:fontFamily="sans-serif-condensed"
             android:gravity="left"
-            android:maxLength="10"
             android:hint="Email/mobile"
             android:inputType="textEmailAddress"
             android:singleLine="true" />

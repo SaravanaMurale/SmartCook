@@ -234,9 +234,56 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     }
 
-    public void checkUserRegisterStatus(){
+    public int checkUserEmailStatus(String email){
+
+        int userId=0;
+
+        SQLiteDatabase selectAllData = getReadableDatabase();
+
+        Cursor cursor = selectAllData.rawQuery("select id from signuptable where user_email=?", new String[]{email});
+
+        if (cursor.moveToFirst()) {
+
+            do {
+
+                userId=cursor.getInt(0);
+
+
+            }
+            while (cursor.moveToNext());
+
+        }
+
+        return userId;
+
 
     }
+
+    public int checkUserMobileStatus(String mobile){
+
+        int userId=0;
+
+        SQLiteDatabase selectAllData = getReadableDatabase();
+
+        Cursor cursor = selectAllData.rawQuery("select id from signuptable where user_mobile=?", new String[]{mobile});
+
+        if (cursor.moveToFirst()) {
+
+            do {
+
+                userId=cursor.getInt(0);
+
+
+            }
+            while (cursor.moveToNext());
+
+        }
+
+        return userId;
+
+
+    }
+
 
 
     public List<UserDTO> getUserDetails() {
