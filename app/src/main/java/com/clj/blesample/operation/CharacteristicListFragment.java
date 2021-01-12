@@ -1427,6 +1427,11 @@ public class CharacteristicListFragment extends Fragment {
     @SuppressLint("NewApi")
     private void splitEachBurnerDataFromReceivedByte(byte[] data) {
 
+        //Validation Block
+        if(data[0]!=42){
+            getActivity().finish();
+        }//End of Validation Block
+
 
         //Timer and Whistle
         if (data.length == 9) {
