@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/myAccountBlock"
         android:layout_margin="8dp"
-        android:padding="8dp">
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/profileSettingImage"
@@ -49,7 +49,9 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
-            android:src="@drawable/arrow" />
+            android:src="@drawable/arrow"
+            android:layout_marginTop="4dp"
+            />
 
         <TextView
             android:id="@+id/profileSettingText"
@@ -66,6 +68,14 @@
 
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_grey_ke"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/profileSettingBlock"
+        />
 
 
     <RelativeLayout
@@ -74,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/profileSettingBlock"
         android:layout_margin="8dp"
-        android:padding="8dp">
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/gasConsuptionImage"
@@ -86,7 +96,9 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
-            android:src="@drawable/arrow" />
+            android:src="@drawable/arrow"
+            android:layout_marginTop="4dp"
+            />
 
         <TextView
             android:id="@+id/gasConsumptionText"
@@ -102,6 +114,15 @@
 
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_grey_ke"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/gasConsumptionBlock"
+        />
+
     <RelativeLayout
         android:id="@+id/recipeMenuBlock"
         android:layout_width="match_parent"
@@ -109,7 +130,7 @@
         android:layout_below="@id/gasConsumptionBlock"
         android:layout_margin="8dp"
         android:visibility="gone"
-        android:padding="8dp">
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/recipeMenuImage"
@@ -136,6 +157,16 @@
             android:textSize="20sp" />
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_grey_ke"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/recipeMenuBlock"
+        />
+
+
     <RelativeLayout
         android:id="@+id/productServiceBlock"
         android:layout_width="match_parent"
@@ -143,7 +174,7 @@
         android:layout_below="@id/recipeMenuBlock"
         android:layout_margin="8dp"
         android:visibility="gone"
-        android:padding="8dp">
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/productServiceImage"
@@ -171,6 +202,15 @@
 
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_grey_ke"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/productServiceBlock"
+        />
+
 
     <RelativeLayout
         android:id="@+id/settingsBlock"
@@ -178,7 +218,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/productServiceBlock"
         android:layout_margin="8dp"
-        android:padding="8dp">
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/settingsImage"
@@ -190,7 +230,9 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
-            android:src="@drawable/arrow" />
+            android:src="@drawable/arrow"
+            android:layout_marginTop="4dp"
+            />
 
         <TextView
             android:id="@+id/gasMaintenanceText"
@@ -207,13 +249,22 @@
 
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_grey_ke"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/settingsBlock"
+        />
+
     <RelativeLayout
         android:id="@+id/aboutUsBlock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/settingsBlock"
         android:layout_margin="8dp"
-        android:padding="8dp">
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/aboutUsImage"
@@ -225,7 +276,9 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
-            android:src="@drawable/arrow" />
+            android:src="@drawable/arrow"
+            android:layout_marginTop="4dp"
+            />
 
         <TextView
             android:id="@+id/gasRefillText"
@@ -242,13 +295,22 @@
 
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_grey_ke"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/aboutUsBlock"
+        />
+
     <RelativeLayout
         android:id="@+id/contactUsBlock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/aboutUsBlock"
         android:layout_margin="8dp"
-        android:padding="8dp"
+        android:padding="5dp"
         android:visibility="gone"
         >
 
@@ -285,7 +347,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/contactUsBlock"
         android:layout_margin="8dp"
-        android:padding="8dp">
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/staticsImage"
@@ -297,7 +359,9 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
-            android:src="@drawable/arrow" />
+            android:src="@drawable/arrow"
+            android:layout_marginTop="4dp"
+            />
 
         <TextView
             android:id="@+id/signOutText"
@@ -313,6 +377,15 @@
 
 
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_grey_ke"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/signOutBlock"
+        />
 
 
     <RelativeLayout

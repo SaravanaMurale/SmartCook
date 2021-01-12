@@ -100,9 +100,8 @@ public class MenuActivity extends AppCompatActivity {
                     }
                 });
 
-
-
-
+                AlertDialog diag = builder.create();
+                diag.show();
 
             }
         });
