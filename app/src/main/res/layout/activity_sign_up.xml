@@ -65,6 +65,7 @@
         android:gravity="left|center_vertical"
         android:hint="Mobile Number"
         android:inputType="phone"
+        android:maxLength="10"
         android:singleLine="true" />
 
     <EditText
@@ -77,6 +78,7 @@
         android:hint="Password"
         android:inputType="textPassword"
         android:longClickable="false"
+        android:maxLength="15"
         android:singleLine="true" />
 
     <EditText
@@ -89,6 +91,7 @@
         android:hint="Confirm Password"
         android:inputType="textPassword"
         android:longClickable="false"
+        android:maxLength="15"
         android:singleLine="true" />
 
 

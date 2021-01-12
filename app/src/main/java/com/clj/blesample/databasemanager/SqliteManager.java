@@ -211,6 +211,8 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     }
 
+
+
     public boolean addUser(String userName, String userEmail, String mobileNumber, String userPassword) {
 
         String userAddress = "address";
@@ -229,6 +231,10 @@ public class SqliteManager extends SQLiteOpenHelper {
         contentValues.put(USER_CREATION_DATE, MathUtil.dateAndTime());
 
         return sqLiteDatabase.insert(SIGNUP_TABLE, null, contentValues) != -1;
+
+    }
+
+    public void checkUserRegisterStatus(){
 
     }
 
