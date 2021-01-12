@@ -83,9 +83,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ProgressDialog progressDialog;
 
     private Switch switchShow;
-    private TextView switchStatus,bleConnectStatus;
+    private TextView switchStatus, bleConnectStatus;
 
     Dialog dialog;
+
+    ListView listView_device;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,22 +117,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         checkPermissions();
 
 
-
         switchShow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                System.out.println("SwitchClickedStatus"+isChecked);
+                System.out.println("SwitchClickedStatus" + isChecked);
 
                 if (isChecked) {
 
                     checkPermissions();
 
+                    listView_device.setVisibility(View.VISIBLE);
+
 
                     Toast.makeText(MainActivity.this, "Switch On", Toast.LENGTH_LONG).show();
                     switchStatus.setText("ON");
-
-
 
 
                 } else {
@@ -139,15 +141,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         mBluetoothAdapter.disable();
                     }
 
-                    PreferencesUtil.remove(MainActivity.this,PreferencesUtil.BLE_MAC_ADDRESS);
+                    PreferencesUtil.remove(MainActivity.this, PreferencesUtil.BLE_MAC_ADDRESS);
+
+                    listView_device.setVisibility(View.INVISIBLE);
+
+                    mDeviceAdapter.clear();
+
+                    mDeviceAdapter.notifyDataSetChanged();
+
 
                     Toast.makeText(MainActivity.this, "Switch Off", Toast.LENGTH_LONG).show();
                     switchStatus.setText("OFF");
                     bleConnectStatus.setText("Please turn on to connect nearby device");
 
                     BleManager.getInstance().cancelScan();
-
-
 
 
                 }
@@ -157,8 +164,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
-
-
 
 
     private void removeSessionValue() {
@@ -235,8 +240,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_scan.setOnClickListener(this);
 
         switchShow = (Switch) findViewById(R.id.switchShow);
-        switchStatus=(TextView)findViewById(R.id.switchStatus);
-        bleConnectStatus=(TextView)findViewById(R.id.bleConnectStatus);
+        switchStatus = (TextView) findViewById(R.id.switchStatus);
+        bleConnectStatus = (TextView) findViewById(R.id.bleConnectStatus);
 
         et_name = (EditText) findViewById(R.id.et_name);
         et_mac = (EditText) findViewById(R.id.et_mac);
@@ -292,12 +297,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-        ListView listView_device = (ListView) findViewById(R.id.list_device);
+        //ListView listView_device = (ListView) findViewById(R.id.list_device);
+        listView_device = (ListView) findViewById(R.id.list_device);
         listView_device.setAdapter(mDeviceAdapter);
     }
 
     private void showConnectedDevice() {
         List<BleDevice> deviceList = BleManager.getInstance().getAllConnectedDevice();
+        // deviceList = BleManager.getInstance().getAllConnectedDevice();
         mDeviceAdapter.clearConnectedDevice();
         for (BleDevice bleDevice : deviceList) {
             mDeviceAdapter.addDevice(bleDevice);
@@ -392,7 +399,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 btn_scan.setText(getString(R.string.start_scan));
                 bleConnectStatus.setTextColor(Color.BLACK);
                 bleConnectStatus.setText("Please Connect");
-                MathUtil.dismisProgressBar(MainActivity.this,dialog);
+                MathUtil.dismisProgressBar(MainActivity.this, dialog);
 
                 System.out.println("CalledOnScanFinished");
 
@@ -428,7 +435,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onStartConnect() {
                 progressDialog.show();
-               // dialog=MathUtil.showProgressBar(MainActivity.this);
+                // dialog=MathUtil.showProgressBar(MainActivity.this);
                 progressDialog.setMessage("Connecting Please Wait");
 
             }
@@ -438,7 +445,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 img_loading.clearAnimation();
                 img_loading.setVisibility(View.INVISIBLE);
                 btn_scan.setText(getString(R.string.start_scan));
-                MathUtil.dismisProgressBar(MainActivity.this,dialog);
+                MathUtil.dismisProgressBar(MainActivity.this, dialog);
                 progressDialog.dismiss();
                 Toast.makeText(MainActivity.this, getString(R.string.connect_fail), Toast.LENGTH_LONG).show();
             }
@@ -452,7 +459,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 bleConnectStatus.setText("Connected");
 
                 progressDialog.dismiss();
-                MathUtil.dismisProgressBar(MainActivity.this,dialog);
+                MathUtil.dismisProgressBar(MainActivity.this, dialog);
                 //Mycode
                 if (BleManager.getInstance().isConnected(bleDevice)) {
 
@@ -473,7 +480,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onDisConnected(boolean isActiveDisConnected, BleDevice bleDevice, BluetoothGatt gatt, int status) {
                 progressDialog.dismiss();
-                MathUtil.dismisProgressBar(MainActivity.this,dialog);
+                MathUtil.dismisProgressBar(MainActivity.this, dialog);
 
                 mDeviceAdapter.removeDevice(bleDevice);
                 mDeviceAdapter.notifyDataSetChanged();
