@@ -42,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
         sqliteManager = new SqliteManager(LoginActivity.this);
 
         initView();
+
+        loginUserName.findFocus();
     }
 
     private void initView() {
@@ -84,31 +86,45 @@ public class LoginActivity extends AppCompatActivity {
                 String email = loginUserName.getText().toString().trim();
                 String password = loginPassword.getText().toString().trim();
 
-                if (password.isEmpty() || password.equals("") || password.equals(null)) {
-                    Toast.makeText(LoginActivity.this, "Please enter valid password", Toast.LENGTH_LONG).show();
-                    loginPassword.findFocus();
-                }
-
-                if (email.isEmpty() || email.equals("") || email.equals(null)) {
-                    Toast.makeText(LoginActivity.this, "Please enter valid email", Toast.LENGTH_LONG).show();
+                if (email.isEmpty() || email.equals("") || email.equals(null) ) {
+                    Toast.makeText(LoginActivity.this, "Email field can't be empty", Toast.LENGTH_LONG).show();
                     loginUserName.findFocus();
+                    return;
                 }
 
-                if (validateEmail(email) && validateEmail(password)) {
+                if (password.isEmpty() || password.equals("") || password.equals(null) ) {
+                    Toast.makeText(LoginActivity.this, "Password field can't be empty", Toast.LENGTH_LONG).show();
+                    loginPassword.findFocus();
+                    return;
+                }
+                if(!validateEmail(email)){
+                    Toast.makeText(LoginActivity.this, "Please enter valid email formet", Toast.LENGTH_LONG).show();
+                    loginUserName.findFocus();
+                    return;
+                }
+
+                if(!validatePassword(password)){
+                    Toast.makeText(LoginActivity.this, "Password length is too short", Toast.LENGTH_LONG).show();
+                    loginPassword.findFocus();
+                    return;
+                }
+
+
+
+                if (validateEmail(email) && validatePassword(password)) {
                     //Email or Mobile
                     String userName = sqliteManager.validateLoginUser(email, password);
 
-                    checkWriteStoreAgePermission();
+                    //checkWriteStoreAgePermission();
 
                     PreferencesUtil.setValueString(LoginActivity.this, PreferencesUtil.USER_NAME, userName);
 
                     if (!userName.equals("empty")) {
-                        Toast.makeText(LoginActivity.this, "Received UserName" + userName, Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(LoginActivity.this, "You have entered wrong username or password" + userName, Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "You have entered wrong username or password,Please Signup", Toast.LENGTH_LONG).show();
                     }
 
                 }

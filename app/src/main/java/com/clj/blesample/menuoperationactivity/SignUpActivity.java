@@ -36,6 +36,8 @@ public class SignUpActivity extends AppCompatActivity {
 
         initView();
 
+        signUpName.findFocus();
+
         sqliteManager = new SqliteManager(SignUpActivity.this);
 
         //signUpName.addTextChangedListener(new MyTextWatcher(signUpName));

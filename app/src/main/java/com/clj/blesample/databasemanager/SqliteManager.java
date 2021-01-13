@@ -593,6 +593,9 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     }
 
+
+
+
     public String validateLoginUser(String userEmail, String password) {
 
         String username = "empty";

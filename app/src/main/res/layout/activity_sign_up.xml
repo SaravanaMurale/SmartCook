@@ -43,7 +43,7 @@
         android:gravity="left|center_vertical"
         android:hint="Name"
         android:inputType="text"
-        android:singleLine="true" />
+        android:singleLine="true" ><requestFocus/></EditText>
 
     <EditText
         android:id="@+id/signup_email"

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Patterns;
 
 import com.clj.blesample.R;
 
@@ -117,11 +118,16 @@ public class MathUtil {
     public static boolean validateEmail(String email) {
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-        if (email.length() < 5) {
+        /*if (email.length() < 5) {
             return false;
+        }*/
+
+        if (email.matches(emailPattern) && email.length() > 0){
+            return true;
         }
 
-        return true;
+
+        return false ;
     }
 
 

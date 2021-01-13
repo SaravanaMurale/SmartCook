@@ -42,6 +42,7 @@ import com.clj.blesample.menuoperationactivity.NotificationActivity;
 import com.clj.blesample.menuoperationactivity.ProfileSettingsActivity;
 import com.clj.blesample.model.NotificationResponseDTO;
 import com.clj.blesample.model.StoreImageDTO;
+import com.clj.blesample.model.UserDTO;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
 import com.clj.blesample.utils.FontUtil;
 import com.clj.blesample.utils.MathUtil;
@@ -138,6 +139,10 @@ public class CharacteristicListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        List<UserDTO> userDTOList= sqliteManager.getUserDetails();
+
+        selectdUserName.setText(userDTOList.get(0).getUserName());
 
         getImageFromSqliteDB();
 
@@ -263,7 +268,7 @@ public class CharacteristicListFragment extends Fragment {
         centerHigh = (TextView) v.findViewById(R.id.centerHigh);
         centerSim = (TextView) v.findViewById(R.id.centerSim);
 
-        selectdUserName.setText(PreferencesUtil.getValueString(getActivity(), PreferencesUtil.USER_NAME));
+
 
 
         leftOff.setOnClickListener(new View.OnClickListener() {
