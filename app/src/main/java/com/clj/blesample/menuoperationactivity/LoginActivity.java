@@ -24,6 +24,7 @@ import com.clj.blesample.utils.PermissionUtils;
 
 import static com.clj.blesample.utils.MathUtil.LOCATION_PERMISSION_REQUEST_CODE;
 import static com.clj.blesample.utils.MathUtil.validateEmail;
+import static com.clj.blesample.utils.MathUtil.validateMobile;
 import static com.clj.blesample.utils.MathUtil.validatePassword;
 
 public class LoginActivity extends AppCompatActivity {
@@ -97,8 +98,8 @@ public class LoginActivity extends AppCompatActivity {
                     loginPassword.findFocus();
                     return;
                 }
-                if(!validateEmail(email)){
-                    Toast.makeText(LoginActivity.this, "Please enter valid email formet", Toast.LENGTH_LONG).show();
+                if(!validateEmail(email) || !validateMobile(email) ){
+                    Toast.makeText(LoginActivity.this, "Please enter valid email format", Toast.LENGTH_LONG).show();
                     loginUserName.findFocus();
                     return;
                 }
@@ -124,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(LoginActivity.this, "You have entered wrong username or password,Please Signup", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "You have entered wrong username or password", Toast.LENGTH_LONG).show();
                     }
 
                 }

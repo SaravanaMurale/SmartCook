@@ -59,33 +59,66 @@ public class SignUpActivity extends AppCompatActivity {
 
 
                 if (userName.isEmpty() || userName.equals("") || userName.equals(null)) {
-                    Toast.makeText(SignUpActivity.this, "Please enter valid Name", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "Name can't be empty", Toast.LENGTH_LONG).show();
                     return;
 
                 }
 
                 if (userEmail.isEmpty() || userEmail.equals("") || userEmail.equals(null)) {
-                    Toast.makeText(SignUpActivity.this, "Please enter valid email", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "Email can't be empty", Toast.LENGTH_LONG).show();
                     return;
 
                 }
 
                 if (userMobile.isEmpty() || userMobile.equals("") || userMobile.equals(null)) {
-                    Toast.makeText(SignUpActivity.this, "Please enter valid mobile number", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "Mobile number can't be empty", Toast.LENGTH_LONG).show();
                     return;
 
                 }
 
                 if (userPassword.isEmpty() || userPassword.equals("") || userPassword.equals(null)) {
-                    Toast.makeText(SignUpActivity.this, "Please enter valid password", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "Password can't be empty", Toast.LENGTH_LONG).show();
                     return;
 
+                }
+
+
+
+                if(!validateName(userName)){
+                    Toast.makeText(SignUpActivity.this, "Your name is too short", Toast.LENGTH_LONG).show();
+                    signUpName.findFocus();
+                    return;
+                }
+
+                if(!validateEmail(userEmail)){
+                    Toast.makeText(SignUpActivity.this, "Please enter valid email formet", Toast.LENGTH_LONG).show();
+                    signUpEmail.findFocus();
+                    return;
+                }
+
+                if(!validateMobile(userMobile)){
+                    Toast.makeText(SignUpActivity.this, "Please enter valid mobile number", Toast.LENGTH_LONG).show();
+                    signUpMobile.findFocus();
+                    return;
+                }
+
+                if(!validatePassword(userPassword)){
+                    Toast.makeText(SignUpActivity.this, "Your password is too short", Toast.LENGTH_LONG).show();
+                    signUpPassword.findFocus();
+                    return;
+                }
+
+                if(!validatePassword(userCPassword)){
+                    Toast.makeText(SignUpActivity.this, "Your confirm password is too short", Toast.LENGTH_LONG).show();
+                    signUpCPassword.findFocus();
+                    return;
                 }
 
                 if(!userCPassword.equals(userCPassword)){
-                    Toast.makeText(SignUpActivity.this, "Both Password and Confirm Password Should Match", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "Both Password and Confirm Password should match", Toast.LENGTH_LONG).show();
                     return;
                 }
+
 
                 if (validateName(userName) && validateEmail(userEmail) && validateMobile(userMobile) && validatePassword(userPassword) && validatePassword(userCPassword) && userPassword.equals(userCPassword)) {
 
