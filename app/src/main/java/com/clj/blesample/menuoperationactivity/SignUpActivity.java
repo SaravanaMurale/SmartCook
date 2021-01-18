@@ -84,7 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
                 if(!ValidateNameWithoutSplChar(userName)){
-                    Toast.makeText(SignUpActivity.this, "Splecial character is not allowed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "Splecial character is not allowed in name", Toast.LENGTH_LONG).show();
                     signUpName.findFocus();
                     return;
                 }
@@ -103,7 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
                 if(!validateMobileNumber(userMobile)){
-                    Toast.makeText(SignUpActivity.this, "Please enter valid mobile number", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "Special character is not allowed in mobile number", Toast.LENGTH_LONG).show();
                     signUpMobile.findFocus();
                     return;
                 }
