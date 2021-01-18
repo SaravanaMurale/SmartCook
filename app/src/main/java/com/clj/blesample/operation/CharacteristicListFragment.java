@@ -125,6 +125,9 @@ public class CharacteristicListFragment extends Fragment {
     Button timerStart,timerCancel,whistleStart,whistleCancel;
     int rightTimerToSet,rightWhistleToSet,leftTimerToSet,leftWhistleToSet,centerTimerToSet,centerWhistleToSet=0;
 
+    Runnable mRunnable;
+    Handler mHandler;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -138,6 +141,18 @@ public class CharacteristicListFragment extends Fragment {
         getFont();
 
         startBlinking(selectBluetoothStatus);
+
+
+        mHandler=new Handler();
+        mRunnable=new Runnable() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                setTimerBlock.setVisibility(View.INVISIBLE);
+                setWhistleBlock.setVisibility(View.INVISIBLE);
+            }
+        };
 
 
         return v;
@@ -755,6 +770,8 @@ public class CharacteristicListFragment extends Fragment {
 
     private void setTimer(final String burner) {
 
+
+
         if(burner.equals("00")){
 
             if(rightTimerToSet>=0){
@@ -775,6 +792,8 @@ public class CharacteristicListFragment extends Fragment {
             }
 
         }
+
+        mHandler.postDelayed(mRunnable,50000);
 
         timerAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -948,6 +967,8 @@ public class CharacteristicListFragment extends Fragment {
 
             }
         });
+
+        mHandler.postDelayed(mRunnable,50000);
 
         whistleSub.setOnClickListener(new View.OnClickListener() {
             @Override
