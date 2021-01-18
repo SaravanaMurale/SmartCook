@@ -3,8 +3,8 @@ package com.clj.blesample.menuoperationactivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -15,9 +15,9 @@ import android.widget.Toast;
 import com.clj.blesample.R;
 import com.clj.blesample.databasemanager.SqliteManager;
 
-import static com.clj.blesample.utils.MathUtil.validateAddress;
+import static com.clj.blesample.utils.MathUtil.ValidateNameWithoutSplChar;
 import static com.clj.blesample.utils.MathUtil.validateEmail;
-import static com.clj.blesample.utils.MathUtil.validateMobile;
+import static com.clj.blesample.utils.MathUtil.validateMobileNumber;
 import static com.clj.blesample.utils.MathUtil.validateName;
 import static com.clj.blesample.utils.MathUtil.validatePassword;
 
@@ -83,6 +83,12 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
 
+                if(!ValidateNameWithoutSplChar(userName)){
+                    Toast.makeText(SignUpActivity.this, "Splecial character is not allowed", Toast.LENGTH_LONG).show();
+                    signUpName.findFocus();
+                    return;
+                }
+
 
                 if(!validateName(userName)){
                     Toast.makeText(SignUpActivity.this, "Your name is too short", Toast.LENGTH_LONG).show();
@@ -96,7 +102,7 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
 
-                if(!validateMobile(userMobile)){
+                if(!validateMobileNumber(userMobile)){
                     Toast.makeText(SignUpActivity.this, "Please enter valid mobile number", Toast.LENGTH_LONG).show();
                     signUpMobile.findFocus();
                     return;
@@ -120,7 +126,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
 
-                if (validateName(userName) && validateEmail(userEmail) && validateMobile(userMobile) && validatePassword(userPassword) && validatePassword(userCPassword) && userPassword.equals(userCPassword)) {
+                if (validateName(userName) && validateEmail(userEmail) && validateMobileNumber(userMobile) && validatePassword(userPassword) && validatePassword(userCPassword) && userPassword.equals(userCPassword)) {
 
                     int registerUserEmailStatus=sqliteManager.checkUserEmailStatus(userEmail);
                     int registerUserMobileStatus=sqliteManager.checkUserMobileStatus(userMobile);
@@ -207,7 +213,7 @@ public class SignUpActivity extends AppCompatActivity {
             String password = signUpPassword.getText().toString().trim();
             // String address = signUpAddress.getText().toString().trim();
 
-            btnSignUp.setEnabled(validateName(name) && validateEmail(email) && validateMobile(mobileNum) && validatePassword(password));
+            btnSignUp.setEnabled(validateName(name) && validateEmail(email) && validateMobileNumber(mobileNum) && validatePassword(password));
 
             if (btnSignUp.isEnabled()) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

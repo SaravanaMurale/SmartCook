@@ -13,6 +13,7 @@ import com.clj.blesample.R;
 import com.clj.blesample.databasemanager.SqliteManager;
 
 import static com.clj.blesample.utils.MathUtil.validateEmail;
+import static com.clj.blesample.utils.MathUtil.validateLoginEmailOrPassword;
 import static com.clj.blesample.utils.MathUtil.validatePassword;
 
 public class ResetPasswordActivity extends AppCompatActivity {
@@ -48,13 +49,24 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 String resetConfirmPassword=reset_confirm_password.getText().toString().trim();
 
                 if (resetEmail.isEmpty() || resetEmail.equals("") || resetEmail.equals(null)) {
-                    Toast.makeText(ResetPasswordActivity.this, "Please enter valid email", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ResetPasswordActivity.this, "Email Or Mobile field can't be empty", Toast.LENGTH_LONG).show();
                     resetUserName.findFocus();
                 }
 
                 if (setPassword.isEmpty() || setPassword.equals("") || setPassword.equals(null)) {
-                    Toast.makeText(ResetPasswordActivity.this, "Please enter valid Password", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ResetPasswordActivity.this, "Password field can't be empty", Toast.LENGTH_LONG).show();
                     resetPassword.findFocus();
+                }
+
+                if (!validatePassword(setPassword)) {
+                    Toast.makeText(ResetPasswordActivity.this, "Password length is too short", Toast.LENGTH_LONG).show();
+                    resetPassword.findFocus();
+                }
+
+                if(!validateLoginEmailOrPassword(resetEmail) ){
+                    Toast.makeText(ResetPasswordActivity.this, "Please enter valid email or mobile number", Toast.LENGTH_LONG).show();
+                    resetUserName.findFocus();
+                    return;
                 }
 
                 if(!setPassword.equals(resetConfirmPassword)){
@@ -62,7 +74,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (validateEmail(resetEmail) && validatePassword(setPassword) &&validatePassword(resetConfirmPassword) && setPassword.equals(resetConfirmPassword)  ) {
+                if (validateLoginEmailOrPassword(resetEmail) && validatePassword(setPassword) &&validatePassword(resetConfirmPassword) && setPassword.equals(resetConfirmPassword)  ) {
 
                     boolean status = sqliteManager.resetPassword(resetEmail, setPassword);
 

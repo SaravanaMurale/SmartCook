@@ -79,9 +79,19 @@ public class MathUtil {
 
     }
 
-    public static boolean validateMobile(String mobile) {
+    public static boolean validateLoginEmailOrPassword(String mobile) {
 
-        if (mobile.length() < 10) {
+        if (mobile.length() < 5) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean validateMobileNumber(String mobile) {
+
+        String regex = "(0/91)?[7-9][0-9]{9}";
+
+        if (!mobile.matches(regex)) {
             return false;
         }
         return true;
@@ -97,6 +107,14 @@ public class MathUtil {
         return true;
 
     }
+
+    public static boolean ValidateNameWithoutSplChar(String name){
+        if(!name.matches("^[A-Za-z]+$") ){
+            return false;
+        }
+        return true;
+    }
+
 
     public static boolean validateAmount(String amount) {
 

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,8 +22,7 @@ import com.clj.blesample.utils.LogFile;
 import com.clj.blesample.utils.PermissionUtils;
 
 import static com.clj.blesample.utils.MathUtil.LOCATION_PERMISSION_REQUEST_CODE;
-import static com.clj.blesample.utils.MathUtil.validateEmail;
-import static com.clj.blesample.utils.MathUtil.validateMobile;
+import static com.clj.blesample.utils.MathUtil.validateLoginEmailOrPassword;
 import static com.clj.blesample.utils.MathUtil.validatePassword;
 
 public class LoginActivity extends AppCompatActivity {
@@ -98,8 +96,8 @@ public class LoginActivity extends AppCompatActivity {
                     loginPassword.findFocus();
                     return;
                 }
-                if(!validateEmail(email) || !validateMobile(email) ){
-                    Toast.makeText(LoginActivity.this, "Please enter valid email format", Toast.LENGTH_LONG).show();
+                if(!validateLoginEmailOrPassword(email) ){
+                    Toast.makeText(LoginActivity.this, "Please enter valid email or mobile number", Toast.LENGTH_LONG).show();
                     loginUserName.findFocus();
                     return;
                 }
@@ -112,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-                if (validateEmail(email) && validatePassword(password)) {
+                if (validateLoginEmailOrPassword(email) && validatePassword(password)) {
                     //Email or Mobile
                     String userName = sqliteManager.validateLoginUser(email, password);
 
