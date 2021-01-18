@@ -757,29 +757,23 @@ public class CharacteristicListFragment extends Fragment {
 
         if(burner.equals("00")){
 
-            if(rightTimerToSet>0){
+            if(rightTimerToSet>=0){
                 setTimerCount.setText(""+rightTimerToSet);
             }
-            if(rightWhistleToSet>0){
-                setTimerCount.setText(""+rightWhistleToSet);
-            }
+
 
         }else if(burner.equals("01")){
 
-            if(leftTimerToSet>0){
+            if(leftTimerToSet>=0){
                 setTimerCount.setText(""+leftTimerToSet);
             }
-            if(leftWhistleToSet>0){
-                setTimerCount.setText(""+leftWhistleToSet);
-            }
+
 
         }else if(burner.equals("10")){
-            if(centerTimerToSet>0){
+            if(centerTimerToSet>=0){
                 setTimerCount.setText(""+centerTimerToSet);
             }
-            if(centerWhistleToSet>0){
-                setTimerCount.setText(""+centerWhistleToSet);
-            }
+
         }
 
         timerAdd.setOnClickListener(new View.OnClickListener() {
@@ -838,6 +832,7 @@ public class CharacteristicListFragment extends Fragment {
             public void onClick(View v) {
                 timerCount=0;
                 setTimerCount.setText("0");
+                setTimerBlock.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -922,6 +917,28 @@ public class CharacteristicListFragment extends Fragment {
 
     private void setWhistle(final String burner) {
 
+        if(burner.equals("00")){
+
+
+            if(rightWhistleToSet>=0){
+                setWhistleCount.setText(""+rightWhistleToSet);
+            }
+
+        }else if(burner.equals("01")){
+
+
+            if(leftWhistleToSet>=0){
+                setWhistleCount.setText(""+leftWhistleToSet);
+            }
+
+        }else if(burner.equals("10")){
+
+            if(centerWhistleToSet>=0){
+                setWhistleCount.setText(""+centerWhistleToSet);
+            }
+        }
+
+
         whistleAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -979,6 +996,7 @@ public class CharacteristicListFragment extends Fragment {
             public void onClick(View v) {
                 whistleCount=0;
                 setWhistleCount.setText("0");
+                setWhistleBlock.setVisibility(View.INVISIBLE);
             }
         });
 
