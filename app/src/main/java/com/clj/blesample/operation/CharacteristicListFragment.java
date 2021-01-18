@@ -104,8 +104,7 @@ public class CharacteristicListFragment extends Fragment {
 
     List<NotificationResponseDTO> nonReadNotiCount;
 
-    int whistleCount = 0;
-    int timerCount = 0;
+
 
     ImageView eStop;
 
@@ -119,9 +118,12 @@ public class CharacteristicListFragment extends Fragment {
 
     RelativeLayout setTimerBlock,setWhistleBlock;
 
+    int whistleCount = 0;
+    int timerCount = 0;
     TextView whistleSub, whistleAdd, setWhistleCount,whistleFont;
     TextView timerSub, timerAdd, setTimerCount,timerFont;
     Button timerStart,timerCancel,whistleStart,whistleCancel;
+    int rightTimerToSet,rightWhistleToSet,leftTimerToSet,leftWhistleToSet,centerTimerToSet,centerWhistleToSet=0;
 
 
     @Override
@@ -753,6 +755,33 @@ public class CharacteristicListFragment extends Fragment {
 
     private void setTimer(final String burner) {
 
+        if(burner.equals("00")){
+
+            if(rightTimerToSet>0){
+                setTimerCount.setText(""+rightTimerToSet);
+            }
+            if(rightWhistleToSet>0){
+                setTimerCount.setText(""+rightWhistleToSet);
+            }
+
+        }else if(burner.equals("01")){
+
+            if(leftTimerToSet>0){
+                setTimerCount.setText(""+leftTimerToSet);
+            }
+            if(leftWhistleToSet>0){
+                setTimerCount.setText(""+leftWhistleToSet);
+            }
+
+        }else if(burner.equals("10")){
+            if(centerTimerToSet>0){
+                setTimerCount.setText(""+centerTimerToSet);
+            }
+            if(centerWhistleToSet>0){
+                setTimerCount.setText(""+centerWhistleToSet);
+            }
+        }
+
         timerAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1334,6 +1363,8 @@ public class CharacteristicListFragment extends Fragment {
                                 @Override
                                 public void run() {
 
+                                    setWhistleBlock.setVisibility(View.INVISIBLE);
+
                                    // Toast.makeText(getActivity(), "Whistle Is Set", Toast.LENGTH_LONG).show();
 
                                 }
@@ -1473,6 +1504,8 @@ public class CharacteristicListFragment extends Fragment {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+
+                                    setTimerBlock.setVisibility(View.INVISIBLE);
 
                                    // Toast.makeText(getActivity(), "Timer Is Set", Toast.LENGTH_LONG).show();
 
@@ -1841,6 +1874,8 @@ public class CharacteristicListFragment extends Fragment {
 
             selectedRightWhistleCount.setText("" + rightWhistle);
             selectedRightWhistleCount.setTypeface(octinPrisonFont);
+            rightWhistleToSet=rightWhistle;
+
         }
 
         if (rightTimer <= 0) {
@@ -1850,6 +1885,7 @@ public class CharacteristicListFragment extends Fragment {
             startBlinking(selectedRightTimer);
             selectedRightTimerCount.setText("" + rightTimer + "min");
             selectedRightTimerCount.setTypeface(octinPrisonFont);
+            rightTimerToSet=rightTimer;
         }
 
         if (leftWhistle < 0) {
@@ -1857,6 +1893,8 @@ public class CharacteristicListFragment extends Fragment {
         } else {
             selectedLeftWhistleCount.setText("" + leftWhistle);
             selectedLeftWhistleCount.setTypeface(octinPrisonFont);
+            leftWhistleToSet=leftWhistle;
+
         }
 
         if (leftTimer <= 0) {
@@ -1866,6 +1904,8 @@ public class CharacteristicListFragment extends Fragment {
             startBlinking(selectedLeftTimer);
             selectedLeftTimerCount.setText("" + leftTimer + "min");
             selectedLeftTimerCount.setTypeface(octinPrisonFont);
+            leftTimerToSet=leftTimer;
+
         }
 
 
@@ -1874,6 +1914,7 @@ public class CharacteristicListFragment extends Fragment {
         } else {
             selectedCenterWhistleCount.setText("" + centerWhistle);
             selectedCenterWhistleCount.setTypeface(octinPrisonFont);
+            centerWhistleToSet=centerWhistle;
         }
 
         if (centerTimer <= 0) {
@@ -1883,6 +1924,7 @@ public class CharacteristicListFragment extends Fragment {
             startBlinking(selectedCenterTimer);
             selectedCenterTimerCount.setText("" + centerTimer + "min");
             selectedCenterTimerCount.setTypeface(octinPrisonFont);
+            centerTimerToSet=centerTimer;
         }
 
 
