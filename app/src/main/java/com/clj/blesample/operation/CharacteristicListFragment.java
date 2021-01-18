@@ -793,16 +793,34 @@ public class CharacteristicListFragment extends Fragment {
 
         }
 
-        mHandler.postDelayed(mRunnable,50000);
+        //mHandler.postDelayed(mRunnable,50000);
 
         timerAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(rightTimerToSet>0){
+               /* if(burner.equals("00")){
+
+                    if(rightTimerToSet>0){
+                        callAlertDialogToResetTimer();
+
+                    }
+
+
+                }else if(burner.equals("01")){
+
+                    if(leftTimerToSet>0){
+                        callAlertDialogToResetTimer();
+                    }
+
+
+                }else if(burner.equals("10")){
+                    if(centerTimerToSet>0){
+                        callAlertDialogToResetTimer();
+                    }
 
                 }
-
+*/
 
                 timerCount = timerCount + 1;
                 setTimerCount.setText("" + timerCount);
@@ -939,6 +957,35 @@ public class CharacteristicListFragment extends Fragment {
 
     }
 
+    private void callAlertDialogToResetTimer() {
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        // alert.setTitle("Vessel is not detected");
+        alert.setMessage("Already Timer Is Running...Do you want to Reset???");
+        alert.setIcon(R.drawable.preethi_logo);
+
+        alert.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
+
+//Send
+
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        alert.show();
+
+    }
+
     private void setWhistle(final String burner) {
 
         if(burner.equals("00")){
@@ -973,7 +1020,7 @@ public class CharacteristicListFragment extends Fragment {
             }
         });
 
-        mHandler.postDelayed(mRunnable,50000);
+       // mHandler.postDelayed(mRunnable,50000);
 
         whistleSub.setOnClickListener(new View.OnClickListener() {
             @Override
