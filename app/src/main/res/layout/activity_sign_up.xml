@@ -108,8 +108,6 @@
         android:visibility="gone" />
 
 
-
-
     <Button
         android:id="@+id/btnSignup"
         android:layout_width="match_parent"

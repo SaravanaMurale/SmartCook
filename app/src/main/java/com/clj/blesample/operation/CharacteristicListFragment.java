@@ -798,8 +798,13 @@ public class CharacteristicListFragment extends Fragment {
         timerAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                timerCount = timerCount + 1;
 
+                if(rightTimerToSet>0){
+
+                }
+
+
+                timerCount = timerCount + 1;
                 setTimerCount.setText("" + timerCount);
             }
         });
