@@ -117,6 +117,12 @@ public class CharacteristicListFragment extends Fragment {
 
     RelativeLayout profileSelectBlock;
 
+    RelativeLayout setTimerBlock,setWhistleBlock;
+
+    TextView whistleSub, whistleAdd, setWhistleCount,whistleFont;
+    TextView timerSub, timerAdd, setTimerCount,timerFont;
+    Button timerStart,timerCancel,whistleStart,whistleCancel;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -197,9 +203,30 @@ public class CharacteristicListFragment extends Fragment {
 
         sqliteManager = new SqliteManager(getActivity());
 
+        setTimerBlock=(RelativeLayout)v.findViewById(R.id.setTimerBlock);
+        setWhistleBlock=(RelativeLayout)v.findViewById(R.id.setWhistleCountBlock);
+
+        whistleSub = (TextView) v.findViewById(R.id.whistleSub);
+        whistleAdd = (TextView) v.findViewById(R.id.whistleAdd);
+        setWhistleCount = (TextView) v.findViewById(R.id.setWhistleCount);
+        whistleFont=(TextView)v.findViewById(R.id.whistleFont);
+        whistleFont.setTypeface(octinPrisonFont);
+        setWhistleCount.setTypeface(octinPrisonFont);
+
+        timerSub = (TextView) v.findViewById(R.id.timerSub);
+        timerAdd = (TextView) v.findViewById(R.id.timerAdd);
+        setTimerCount = (TextView) v.findViewById(R.id.setTimerCount);
+        timerFont=(TextView)v.findViewById(R.id.minuteFont);
+        setTimerCount.setTypeface(octinPrisonFont);
+        timerFont.setTypeface(octinPrisonFont);
+
+        timerStart=(Button)v.findViewById(R.id.timerStart);
+        timerCancel=(Button)v.findViewById(R.id.timerCancel);
+        whistleStart=(Button)v.findViewById(R.id.whistleStart);
+        whistleCancel=(Button)v.findViewById(R.id.whistleCancel);
+
 
         profileSelectBlock=(RelativeLayout)v.findViewById(R.id.profileSelectBlock);
-
         selectdUserName = (TextView) v.findViewById(R.id.selectdUserName);
         seletedUserProfile = (CircleImageView) v.findViewById(R.id.seletedUserProfile);
         selectBluetoothStatus = (ImageView) v.findViewById(R.id.selectBluetoothStatus);
@@ -467,8 +494,11 @@ public class CharacteristicListFragment extends Fragment {
 
                 if (leftBurnerStatus > 0) {
                     setWhistle(MathUtil.LEFT_BURNER);
+                    setWhistleBlock.setVisibility(View.VISIBLE);
+                    setTimerBlock.setVisibility(View.INVISIBLE);
                 } else {
-
+                    setTimerBlock.setVisibility(View.INVISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);
                     callSnackBar(MathUtil.LBISA, v);
                     System.out.println("LeftBurnerIsNotActivated");
 
@@ -482,9 +512,13 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (leftBurnerStatus > 0) {
+                    setTimerBlock.setVisibility(View.VISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);
                     setTimer(MathUtil.LEFT_BURNER);
                 } else {
                     System.out.println("LeftBurnerIsNotActivated");
+                    setTimerBlock.setVisibility(View.INVISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);
                     callSnackBar(MathUtil.LBISA, v);
                 }
 
@@ -496,10 +530,14 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (rightBurnerStatus > 0) {
+                    setWhistleBlock.setVisibility(View.VISIBLE);
+                    setTimerBlock.setVisibility(View.INVISIBLE);
                     setWhistle(MathUtil.RIGHT_BURNER);
+
                 } else {
                     System.out.println("RightBurnerIsNotActivated");
-
+                    setTimerBlock.setVisibility(View.INVISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);
                     callSnackBar(MathUtil.RBINA, v);
 
                 }
@@ -512,9 +550,13 @@ public class CharacteristicListFragment extends Fragment {
             public void onClick(View v) {
 
                 if (rightBurnerStatus > 0) {
+                    setTimerBlock.setVisibility(View.VISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);
                     setTimer(MathUtil.RIGHT_BURNER);
                 } else {
                     System.out.println("RightBurnerIsNotActivated");
+                    setTimerBlock.setVisibility(View.INVISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);
                     callSnackBar(MathUtil.RBINA, v);
 
                 }
@@ -527,9 +569,13 @@ public class CharacteristicListFragment extends Fragment {
             public void onClick(View v) {
 
                 if (centerBurnerStatus > 0) {
+                    setWhistleBlock.setVisibility(View.VISIBLE);
+                    setTimerBlock.setVisibility(View.INVISIBLE);
                     setWhistle(MathUtil.CENTER_BURNER);
                 } else {
                     System.out.println("CenterBurnerIsNotActivated");
+                    setTimerBlock.setVisibility(View.INVISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);
                     callSnackBar(MathUtil.CBISA, v);
                 }
 
@@ -543,9 +589,13 @@ public class CharacteristicListFragment extends Fragment {
             public void onClick(View v) {
 
                 if (centerBurnerStatus > 0) {
+                    setTimerBlock.setVisibility(View.VISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);
                     setTimer(MathUtil.CENTER_BURNER);
                 } else {
                     System.out.println("CenterBurnerIsNotActivated");
+                    setTimerBlock.setVisibility(View.INVISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);
                     callSnackBar(MathUtil.CBISA, v);
                 }
 
@@ -703,7 +753,66 @@ public class CharacteristicListFragment extends Fragment {
 
     private void setTimer(final String burner) {
 
-        final TextView timerSub, timerAdd, setTimerCount,timerFont;
+        timerAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timerCount = timerCount + 1;
+
+                setTimerCount.setText("" + timerCount);
+            }
+        });
+
+        timerSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (timerCount > 0) {
+                    timerSub.setEnabled(true);
+                    timerCount = timerCount - 1;
+                    setTimerCount.setText("" + timerCount);
+                } else if (timerCount == 0) {
+                    timerSub.setEnabled(false);
+                    setTimerCount.setText("" + timerCount);
+                }
+            }
+        });
+
+
+        timerStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int burnerTimerCount = Integer.parseInt(setTimerCount.getText().toString());
+
+                if (burnerTimerCount == 0) {
+
+                    Toast.makeText(getActivity(), "Please Set Timer", Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
+
+
+                        callMe(1, burner, burnerTimerCount, 0, 0, 3);
+                        timerCount = 0;
+
+                    }
+
+                }
+
+
+
+            }
+        });
+
+
+        timerCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timerCount=0;
+                setTimerCount.setText("0");
+            }
+        });
+
+        /*final TextView timerSub, timerAdd, setTimerCount,timerFont;
 
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
         View mView = getLayoutInflater().inflate(R.layout.dialog_set_timer, null);
@@ -778,14 +887,74 @@ public class CharacteristicListFragment extends Fragment {
         AlertDialog alertDialog = mBuilder.create();
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
-
+*/
 
     }
 
     private void setWhistle(final String burner) {
 
+        whistleAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whistleCount = whistleCount + 1;
 
-        final TextView whistleSub, whistleAdd, setWhistleCount,whistleFont;
+                setWhistleCount.setText("" + whistleCount);
+
+            }
+        });
+
+        whistleSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (whistleCount > 0) {
+                    whistleSub.setEnabled(true);
+                    whistleCount = whistleCount - 1;
+                    setWhistleCount.setText("" + whistleCount);
+                } else if (whistleCount == 0) {
+                    whistleSub.setEnabled(false);
+                    setWhistleCount.setText("" + whistleCount);
+                }
+            }
+        });
+
+        whistleStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int burnerWhistleCount = Integer.parseInt(setWhistleCount.getText().toString());
+
+                if (burnerWhistleCount == 0) {
+
+                    Toast.makeText(getActivity(), "Please Set Whistle Count", Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
+
+
+                        callMe(1, burner, 0, burnerWhistleCount, 0, 2);
+                        whistleCount = 0;
+
+                    }
+
+                }
+
+
+
+
+            }
+        });
+
+        whistleCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whistleCount=0;
+                setWhistleCount.setText("0");
+            }
+        });
+
+
+      /*  final TextView whistleSub, whistleAdd, setWhistleCount,whistleFont;
 
 
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
@@ -800,8 +969,8 @@ public class CharacteristicListFragment extends Fragment {
         whistleFont.setTypeface(octinPrisonFont);
         setWhistleCount.setTypeface(octinPrisonFont);
 
-        /*whistleCancel = (Button) mView.findViewById(R.id.whistleCancel);
-        whistleStart = (Button) mView.findViewById(R.id.whistleStart);*/
+        *//*whistleCancel = (Button) mView.findViewById(R.id.whistleCancel);
+        whistleStart = (Button) mView.findViewById(R.id.whistleStart);*//*
 
         whistleAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -869,7 +1038,7 @@ public class CharacteristicListFragment extends Fragment {
         AlertDialog alertDialog = mBuilder.create();
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
-
+*/
 
     }
     private void callSnackBar(String burnerStatus, View v) {
