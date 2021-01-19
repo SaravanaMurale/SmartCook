@@ -64,37 +64,47 @@ public class  GCPDateSelectActivity extends AppCompatActivity implements Adapter
             @Override
             public void onClick(View v) {
 
-                Date d1=MathUtil.stringToDateConversion(selectedFromDate);
-                Date d2=MathUtil.stringToDateConversion(selectedToDate);
+                int diffInDays=0;
 
-                int diffInDays = (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+                if(selectedBurner.equals("NOVAL")){
+                    Toast.makeText(GCPDateSelectActivity.this,"Please select Burner",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(selectedFromDate==null){
+                    Toast.makeText(GCPDateSelectActivity.this,"Please select From date",Toast.LENGTH_SHORT).show();
+                    return;
+                }if(selectedToDate==null){
+                    Toast.makeText(GCPDateSelectActivity.this,"Please select To date",Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                System.out.println("DifferentDays"+diffInDays);
+                if(selectedFromDate!=null && selectedToDate!=null){
+                    Date d1=MathUtil.stringToDateConversion(selectedFromDate);
+                    Date d2=MathUtil.stringToDateConversion(selectedToDate);
 
-                if(diffInDays>=60){
+                     diffInDays = (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+
+                    System.out.println("DifferentDays"+diffInDays);
+                }else {
+                    Toast.makeText(GCPDateSelectActivity.this,"Please select From and To date",Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+
+                if(diffInDays>60){
                     Toast.makeText(GCPDateSelectActivity.this,"Please select less than 60 days",Toast.LENGTH_LONG).show();
                 }else {
 
-                    if (selectedFromDate != null && selectedToDate != null && selectedBurner != null) {
+                    if(selectedFromDate != null && selectedToDate != null && selectedBurner != null){
                         Intent intent = new Intent(GCPDateSelectActivity.this, GraphViewActivity.class);
                         intent.putExtra("FROMDATE", selectedFromDate);
                         intent.putExtra("TODATE", selectedToDate);
                         intent.putExtra("BURNER", selectedBurner);
                         startActivity(intent);
-                    } else {
-
-                        if(selectedFromDate==null){
-                            Toast.makeText(GCPDateSelectActivity.this, "Please Select From Date", Toast.LENGTH_LONG).show();
-                        }else if(selectedToDate==null){
-                            Toast.makeText(GCPDateSelectActivity.this, "Please Select To Date", Toast.LENGTH_LONG).show();
-                        }else if(selectedBurner==null){
-                            Toast.makeText(GCPDateSelectActivity.this, "Please Select Burner", Toast.LENGTH_LONG).show();
-                        }else if(selectedFromDate==null &&selectedToDate==null&&selectedBurner==null){
-                            Toast.makeText(GCPDateSelectActivity.this, "Please Select From Date and To Date and Burner", Toast.LENGTH_LONG).show();
-                        }
-
-
                     }
+
+
 
                 }
 
@@ -198,6 +208,8 @@ public class  GCPDateSelectActivity extends AppCompatActivity implements Adapter
             selectedBurner = "00";
         }else if(burner.equals("All Burner")){
             selectedBurner="11";
+        }else if(burner.equals("Select Burner")){
+            selectedBurner="NOVAL";
         }
 
         //selectedBurner = burner;

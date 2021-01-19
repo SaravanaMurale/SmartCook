@@ -70,7 +70,8 @@ public class GraphViewActivity extends AppCompatActivity {
                 }
             }else {
                 Toast.makeText(GraphViewActivity.this,"There is no data for the selected Date",Toast.LENGTH_LONG).show();
-                return;
+                finish();
+
             }
 
 
