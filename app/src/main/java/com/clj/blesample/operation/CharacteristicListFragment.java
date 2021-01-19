@@ -124,6 +124,7 @@ public class CharacteristicListFragment extends Fragment {
     TextView timerSub, timerAdd, setTimerCount,timerFont;
     Button timerStart,timerCancel,whistleStart,whistleCancel;
     int rightTimerToSet,rightWhistleToSet,leftTimerToSet,leftWhistleToSet,centerTimerToSet,centerWhistleToSet=0;
+    Button timerTitle,whistleTitle;
 
     Runnable mRunnable;
     Handler mHandler;
@@ -227,20 +228,19 @@ public class CharacteristicListFragment extends Fragment {
         whistleAdd = (TextView) v.findViewById(R.id.whistleAdd);
         setWhistleCount = (TextView) v.findViewById(R.id.setWhistleCount);
         whistleFont=(TextView)v.findViewById(R.id.whistleFont);
-        whistleFont.setTypeface(octinPrisonFont);
-        setWhistleCount.setTypeface(octinPrisonFont);
+
 
         timerSub = (TextView) v.findViewById(R.id.timerSub);
         timerAdd = (TextView) v.findViewById(R.id.timerAdd);
         setTimerCount = (TextView) v.findViewById(R.id.setTimerCount);
         timerFont=(TextView)v.findViewById(R.id.minuteFont);
-        setTimerCount.setTypeface(octinPrisonFont);
-        timerFont.setTypeface(octinPrisonFont);
+        timerTitle=(Button)v.findViewById(R.id.timerTitle);
 
         timerStart=(Button)v.findViewById(R.id.timerStart);
         timerCancel=(Button)v.findViewById(R.id.timerCancel);
         whistleStart=(Button)v.findViewById(R.id.whistleStart);
         whistleCancel=(Button)v.findViewById(R.id.whistleCancel);
+        whistleTitle=(Button)v.findViewById(R.id.whistleTitle);
 
 
         profileSelectBlock=(RelativeLayout)v.findViewById(R.id.profileSelectBlock);
@@ -776,6 +776,7 @@ public class CharacteristicListFragment extends Fragment {
 
             if(rightTimerToSet>=0){
                 setTimerCount.setText(""+rightTimerToSet);
+                timerCount=rightTimerToSet;
             }
 
 
@@ -783,44 +784,31 @@ public class CharacteristicListFragment extends Fragment {
 
             if(leftTimerToSet>=0){
                 setTimerCount.setText(""+leftTimerToSet);
+                timerCount=leftTimerToSet;
             }
 
 
         }else if(burner.equals("10")){
             if(centerTimerToSet>=0){
                 setTimerCount.setText(""+centerTimerToSet);
+                timerCount=centerTimerToSet;
             }
 
         }
+
+        setTimerCount.setTypeface(octinPrisonFont);
+        timerFont.setTypeface(octinPrisonFont);
+        timerStart.setTypeface(octinPrisonFont);
+        timerCancel.setTypeface(octinPrisonFont);
+        timerTitle.setTypeface(octinPrisonFont);
+
+
 
         //mHandler.postDelayed(mRunnable,50000);
 
         timerAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-               /* if(burner.equals("00")){
-
-                    if(rightTimerToSet>0){
-                        callAlertDialogToResetTimer();
-
-                    }
-
-
-                }else if(burner.equals("01")){
-
-                    if(leftTimerToSet>0){
-                        callAlertDialogToResetTimer();
-                    }
-
-
-                }else if(burner.equals("10")){
-                    if(centerTimerToSet>0){
-                        callAlertDialogToResetTimer();
-                    }
-
-                }
-*/
 
                 timerCount = timerCount + 1;
                 setTimerCount.setText("" + timerCount);
@@ -993,6 +981,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
 
             if(rightWhistleToSet>=0){
                 setWhistleCount.setText(""+rightWhistleToSet);
+                whistleCount=rightWhistleToSet;
             }
 
         }else if(burner.equals("01")){
@@ -1000,15 +989,22 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
 
             if(leftWhistleToSet>=0){
                 setWhistleCount.setText(""+leftWhistleToSet);
+                whistleCount=leftWhistleToSet;
             }
 
         }else if(burner.equals("10")){
 
             if(centerWhistleToSet>=0){
                 setWhistleCount.setText(""+centerWhistleToSet);
+                whistleCount=centerWhistleToSet;
             }
         }
 
+        whistleFont.setTypeface(octinPrisonFont);
+        setWhistleCount.setTypeface(octinPrisonFont);
+        whistleStart.setTypeface(octinPrisonFont);
+        whistleCancel.setTypeface(octinPrisonFont);
+        whistleTitle.setTypeface(octinPrisonFont);
 
         whistleAdd.setOnClickListener(new View.OnClickListener() {
             @Override
