@@ -1,9 +1,11 @@
 package com.clj.blesample.utils;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.util.DisplayMetrics;
 import android.util.Patterns;
 
 import com.clj.blesample.R;
@@ -218,6 +220,18 @@ public class MathUtil {
         }
 
     }
+
+public static double getScreenInches(Activity activity){
+    DisplayMetrics dm = new DisplayMetrics();
+    activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+    double x = Math.pow(dm.widthPixels / dm.xdpi, 2);
+    double y = Math.pow(dm.heightPixels / dm.ydpi, 2);
+    double screenInches = Math.sqrt(x + y);
+
+    System.out.println("ScreenInches"+screenInches);
+
+    return screenInches;
+}
 
 
 }

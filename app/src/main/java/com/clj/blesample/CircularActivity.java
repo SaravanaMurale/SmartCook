@@ -3,6 +3,7 @@ package com.clj.blesample;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 
 import com.sdsmdg.harjot.crollerTest.Croller;
@@ -87,6 +88,10 @@ public class CircularActivity extends AppCompatActivity {
         viewport.top = 2;
         lineChartView.setMaximumViewport(viewport);
         lineChartView.setCurrentViewport(viewport);
+
+
+
+
 
 
 
