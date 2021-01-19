@@ -46,7 +46,7 @@
         <activity android:name=".MainActivity"
             android:screenOrientation="portrait"
             /> <!-- <activity android:name=".DummyActivity"></activity> -->
-        <activity android:name=".CircularActivity"
+        <activity android:name=".menuoperationactivity.SplashScreenActivity"
             android:screenOrientation="portrait"
             >
             <intent-filter>
