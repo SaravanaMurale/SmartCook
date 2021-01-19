@@ -5,14 +5,299 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/red"
     tools:context=".menuoperationactivity.GetInTouchActivity">
 
-    <ImageView
+    <RelativeLayout
+        android:id="@+id/addressBlock"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/get_in_touch"
-        android:layout_margin="10dp"
-        />
+        android:layout_height="100dp"
+        android:layout_margin="5dp"
+        >
+
+        <ImageView
+            android:id="@+id/locationIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/get_in_touch"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/locationIcon"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            android:text="Preethi Kitchen Appliances Pvt Ltd
+Futura Tech Park, Q4 , 4th Floor, Block B
+#334, Rajiv Gandhi Salai (OMR),
+Sholinganallur,
+Chennai - 600119"
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/corporateBlock"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/addressBlock"
+        >
+
+        <ImageView
+            android:id="@+id/locationIco"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/get_in_touch"
+            android:layout_centerVertical="true"
+
+            />
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/locationIco"
+            android:textColor="@color/white"
+            android:text="Corporate Office "
+            />
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/locationIco"
+            android:textColor="@color/white"
+            android:layout_below="@id/text1"
+            android:text="+91 - 44 - 2450 1042 "
+            />
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/locationIco"
+            android:textColor="@color/white"
+            android:layout_below="@id/text2"
+            android:text="+91 - 44 - 2450 1042 "
+            />
+
+        <TextView
+            android:id="@+id/text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/locationIco"
+            android:textColor="@color/white"
+            android:layout_below="@id/text3"
+            android:text=" "
+            />
+
+        <TextView
+            android:id="@+id/text5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/locationIco"
+            android:textColor="@color/white"
+            android:layout_below="@id/text4"
+            android:text="Customer Care Centre"
+            />
+
+        <TextView
+            android:id="@+id/text6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/locationIco"
+            android:textColor="@color/white"
+            android:layout_below="@id/text5"
+            android:text="+91 - 99400 00005"
+            />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/hoursBlock"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/corporateBlock"
+        >
+
+        <ImageView
+            android:id="@+id/locationIc"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/get_in_touch"
+            android:layout_centerVertical="true"
+
+            />
+
+        <TextView
+            android:id="@+id/t1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/locationIc"
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"
+            android:text="Hours of Operation"
+            />
+        <TextView
+            android:id="@+id/t2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/locationIc"
+            android:textColor="@color/white"
+            android:layout_below="@id/t1"
+            android:text="Mon-Sat:09:30am – 05:30 pm"
+            />
+        <TextView
+            android:id="@+id/t3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/locationIc"
+            android:textColor="@color/white"
+            android:layout_below="@id/t2"
+            android:text="Sun: Closed"
+            />
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/emailBlock"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/hoursBlock"
+        >
+
+        <ImageView
+            android:id="@+id/locationI"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/get_in_touch"
+            android:layout_centerVertical="true"
+
+            />
+
+        <TextView
+            android:id="@+id/tt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/locationI"
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"
+            android:text="Service Queries: care@preethi.in"
+            />
+        <TextView
+            android:id="@+id/tt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/locationI"
+            android:textColor="@color/white"
+            android:layout_below="@id/tt1"
+            android:text="Other Queries: info@preethi.in"
+            android:layout_marginTop="10dp"
+            />
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/twitterBlock"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/emailBlock"
+        >
+
+        <ImageView
+            android:id="@+id/location"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/get_in_touch"
+            android:layout_centerVertical="true"
+
+            />
+
+        <TextView
+            android:id="@+id/ttt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/location"
+            android:textColor="@color/white"
+            android:text="PreethiIndia"
+            android:layout_centerVertical="true"
+            />
+
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fbBlock"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/twitterBlock"
+        >
+
+        <ImageView
+            android:id="@+id/locatio"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/get_in_touch"
+            android:layout_centerVertical="true"
+
+            />
+
+        <TextView
+            android:id="@+id/tttt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/locatio"
+            android:textColor="@color/white"
+            android:text="Facebook.com/PreethiKitchenAppliances"
+            android:layout_centerVertical="true"
+            />
+
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/instaBlock"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/fbBlock"
+        >
+
+        <ImageView
+            android:id="@+id/locati"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/get_in_touch"
+            android:layout_centerVertical="true"
+
+            />
+
+        <TextView
+            android:id="@+id/ttttt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/locati"
+            android:textColor="@color/white"
+            android:layout_centerVertical="true"
+            android:text="instagram.com/preethikitchenappliances"
+            />
+
+
+
+
+    </RelativeLayout>
+
+
 
 
 
