@@ -124,7 +124,7 @@ public class CharacteristicListFragment extends Fragment {
     TextView timerSub, timerAdd, setTimerCount,timerFont;
     Button timerStart,timerCancel,whistleStart,whistleCancel;
     int rightTimerToSet,rightWhistleToSet,leftTimerToSet,leftWhistleToSet,centerTimerToSet,centerWhistleToSet=0;
-    Button timerTitle,whistleTitle;
+    Button timerTitle,whistleTitle,timerReset;
 
     Runnable mRunnable;
     Handler mHandler;
@@ -165,9 +165,7 @@ public class CharacteristicListFragment extends Fragment {
         super.onResume();
 
         List<UserDTO> userDTOList= sqliteManager.getUserDetails();
-
         selectdUserName.setText(userDTOList.get(0).getUserName());
-
         getImageFromSqliteDB();
 
         //Calls Notify
@@ -241,6 +239,8 @@ public class CharacteristicListFragment extends Fragment {
         whistleStart=(Button)v.findViewById(R.id.whistleStart);
         whistleCancel=(Button)v.findViewById(R.id.whistleCancel);
         whistleTitle=(Button)v.findViewById(R.id.whistleTitle);
+
+        timerReset=(Button)v.findViewById(R.id.timerReset);
 
 
         profileSelectBlock=(RelativeLayout)v.findViewById(R.id.profileSelectBlock);
@@ -770,6 +770,7 @@ public class CharacteristicListFragment extends Fragment {
 
     private void setTimer(final String burner) {
 
+      int resetStatus=0;
 
 
         if(burner.equals("00")){
@@ -777,6 +778,18 @@ public class CharacteristicListFragment extends Fragment {
             if(rightTimerToSet>=0){
                 setTimerCount.setText(""+rightTimerToSet);
                 timerCount=rightTimerToSet;
+                if(rightTimerToSet>0){
+                    timerCancel.setVisibility(View.INVISIBLE);
+                    timerReset.setVisibility(View.VISIBLE);
+                    resetStatus=1;
+                }else {
+                    timerCancel.setVisibility(View.VISIBLE);
+                    timerReset.setVisibility(View.INVISIBLE);
+                }
+            }else if(rightTimerToSet<0) {
+                timerCancel.setVisibility(View.VISIBLE);
+                timerReset.setVisibility(View.INVISIBLE);
+                setTimerCount.setText(""+rightTimerToSet);
             }
 
 
@@ -785,6 +798,18 @@ public class CharacteristicListFragment extends Fragment {
             if(leftTimerToSet>=0){
                 setTimerCount.setText(""+leftTimerToSet);
                 timerCount=leftTimerToSet;
+                if(leftTimerToSet>0){
+                    timerCancel.setVisibility(View.INVISIBLE);
+                    timerReset.setVisibility(View.VISIBLE);
+                    resetStatus=2;
+                }else {
+                    timerCancel.setVisibility(View.VISIBLE);
+                    timerReset.setVisibility(View.INVISIBLE);
+                }
+            }else  if(leftTimerToSet<0) {
+                timerCancel.setVisibility(View.VISIBLE);
+                timerReset.setVisibility(View.INVISIBLE);
+                setTimerCount.setText(""+leftTimerToSet);
             }
 
 
@@ -792,6 +817,19 @@ public class CharacteristicListFragment extends Fragment {
             if(centerTimerToSet>=0){
                 setTimerCount.setText(""+centerTimerToSet);
                 timerCount=centerTimerToSet;
+                if(centerTimerToSet>0){
+                    timerCancel.setVisibility(View.INVISIBLE);
+                    timerReset.setVisibility(View.VISIBLE);
+                    resetStatus=3;
+                }else {
+                    timerCancel.setVisibility(View.VISIBLE);
+                    timerReset.setVisibility(View.INVISIBLE);
+                }
+
+            }else  if(centerTimerToSet<0){
+                timerCancel.setVisibility(View.VISIBLE);
+                timerReset.setVisibility(View.INVISIBLE);
+                setTimerCount.setText(""+centerTimerToSet);
             }
 
         }
@@ -801,6 +839,7 @@ public class CharacteristicListFragment extends Fragment {
         timerStart.setTypeface(octinPrisonFont);
         timerCancel.setTypeface(octinPrisonFont);
         timerTitle.setTypeface(octinPrisonFont);
+        timerReset.setTypeface(octinPrisonFont);
 
 
 
@@ -860,9 +899,80 @@ public class CharacteristicListFragment extends Fragment {
         timerCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 timerCount=0;
                 setTimerCount.setText("0");
                 setTimerBlock.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        final int finalResetStatus = resetStatus;
+        timerReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                timerCount=0;
+                setTimerCount.setText("0");
+
+                if(finalResetStatus ==1){
+                    System.out.println("RightBurnerTimerIsReset");
+                    if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
+
+
+                        callMe(1, "00", 0, 0, 0, 3);
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                timerCount = 0;
+                                rightTimerToSet=0;
+                            }
+                        },500);
+
+
+
+                    }
+
+                }else if(finalResetStatus==2){
+                    System.out.println("LeftBurnerTimerIsReset");
+
+                    if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
+
+
+                        callMe(1, "01", 0, 0, 0, 3);
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                timerCount = 0;
+                                leftTimerToSet=0;
+                            }
+                        },500);
+
+                    }
+
+                }else if(finalResetStatus==3){
+                    System.out.println("CenterBurnerTimerIsReset");
+                    if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
+
+
+                        callMe(1, "10", 0, 0, 0, 3);
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                timerCount = 0;
+                                centerTimerToSet=0;
+                            }
+                        },500);
+
+
+
+                    }
+                }
+
+
             }
         });
 
@@ -1939,7 +2049,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
             if(count<100){
                 notificationCount.setText("" + count);
             }else {
-                notificationCount.setText("99");
+                notificationCount.setText("99+");
             }
 
         } else {

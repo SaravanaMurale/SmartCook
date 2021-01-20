@@ -576,6 +576,18 @@
                     android:layout_marginLeft="30dp"
                     />
 
+                <Button
+                    android:id="@+id/timerReset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reset"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/edit_button_border_on"
+                    android:layout_below="@+id/timerSub"
+                    android:layout_marginLeft="30dp"
+                    android:visibility="invisible"
+                    />
+
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 
