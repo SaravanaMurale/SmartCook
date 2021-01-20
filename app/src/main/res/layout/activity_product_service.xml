@@ -17,9 +17,10 @@
 
         <ImageView
             android:id="@+id/locationIcon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/get_in_touch"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="@dimen/five_dp"
+            android:src="@drawable/location_white"
             android:layout_centerVertical="true"
             />
 
@@ -29,6 +30,7 @@
             android:layout_toRightOf="@id/locationIcon"
             android:layout_centerVertical="true"
             android:textColor="@color/white"
+            android:layout_marginLeft="10dp"
             android:text="Preethi Kitchen Appliances Pvt Ltd
 Futura Tech Park, Q4 , 4th Floor, Block B
 #334, Rajiv Gandhi Salai (OMR),
@@ -48,10 +50,11 @@ Chennai - 600119"
 
         <ImageView
             android:id="@+id/locationIco"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/get_in_touch"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/phone_white"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/five_dp"
 
             />
 
@@ -62,6 +65,7 @@ Chennai - 600119"
             android:layout_toRightOf="@id/locationIco"
             android:textColor="@color/white"
             android:text="Corporate Office "
+            android:layout_marginLeft="10dp"
             />
         <TextView
             android:id="@+id/text2"
@@ -71,6 +75,7 @@ Chennai - 600119"
             android:textColor="@color/white"
             android:layout_below="@id/text1"
             android:text="+91 - 44 - 2450 1042 "
+            android:layout_marginLeft="10dp"
             />
         <TextView
             android:id="@+id/text3"
@@ -80,6 +85,7 @@ Chennai - 600119"
             android:textColor="@color/white"
             android:layout_below="@id/text2"
             android:text="+91 - 44 - 2450 1042 "
+            android:layout_marginLeft="10dp"
             />
 
         <TextView
@@ -90,6 +96,7 @@ Chennai - 600119"
             android:textColor="@color/white"
             android:layout_below="@id/text3"
             android:text=" "
+            android:layout_marginLeft="10dp"
             />
 
         <TextView
@@ -100,6 +107,7 @@ Chennai - 600119"
             android:textColor="@color/white"
             android:layout_below="@id/text4"
             android:text="Customer Care Centre"
+            android:layout_marginLeft="10dp"
             />
 
         <TextView
@@ -110,6 +118,7 @@ Chennai - 600119"
             android:textColor="@color/white"
             android:layout_below="@id/text5"
             android:text="+91 - 99400 00005"
+            android:layout_marginLeft="10dp"
             />
 
 
@@ -125,10 +134,11 @@ Chennai - 600119"
 
         <ImageView
             android:id="@+id/locationIc"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/get_in_touch"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/clock_white"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/five_dp"
 
             />
 
@@ -140,6 +150,7 @@ Chennai - 600119"
             android:textColor="@color/white"
             android:layout_marginTop="20dp"
             android:text="Hours of Operation"
+            android:layout_marginLeft="10dp"
             />
         <TextView
             android:id="@+id/t2"
@@ -149,6 +160,7 @@ Chennai - 600119"
             android:textColor="@color/white"
             android:layout_below="@id/t1"
             android:text="Mon-Sat:09:30am – 05:30 pm"
+            android:layout_marginLeft="10dp"
             />
         <TextView
             android:id="@+id/t3"
@@ -158,6 +170,7 @@ Chennai - 600119"
             android:textColor="@color/white"
             android:layout_below="@id/t2"
             android:text="Sun: Closed"
+            android:layout_marginLeft="10dp"
             />
 
 
@@ -173,10 +186,11 @@ Chennai - 600119"
 
         <ImageView
             android:id="@+id/locationI"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/get_in_touch"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/mail_white"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/five_dp"
 
             />
 
@@ -188,6 +202,7 @@ Chennai - 600119"
             android:textColor="@color/white"
             android:layout_marginTop="20dp"
             android:text="Service Queries: care@preethi.in"
+            android:layout_marginLeft="10dp"
             />
         <TextView
             android:id="@+id/tt2"
@@ -198,6 +213,7 @@ Chennai - 600119"
             android:layout_below="@id/tt1"
             android:text="Other Queries: info@preethi.in"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             />
 
 
@@ -213,10 +229,11 @@ Chennai - 600119"
 
         <ImageView
             android:id="@+id/location"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/get_in_touch"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/twitter_white"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
 
             />
 
@@ -228,6 +245,7 @@ Chennai - 600119"
             android:textColor="@color/white"
             android:text="PreethiIndia"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             />
 
 
@@ -244,9 +262,10 @@ Chennai - 600119"
 
         <ImageView
             android:id="@+id/locatio"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/get_in_touch"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/fb_white"
+            android:layout_marginLeft="5dp"
             android:layout_centerVertical="true"
 
             />
@@ -259,6 +278,7 @@ Chennai - 600119"
             android:textColor="@color/white"
             android:text="Facebook.com/PreethiKitchenAppliances"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             />
 
 
@@ -275,10 +295,11 @@ Chennai - 600119"
 
         <ImageView
             android:id="@+id/locati"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/get_in_touch"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/insta_white"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
 
             />
 
@@ -290,6 +311,7 @@ Chennai - 600119"
             android:textColor="@color/white"
             android:layout_centerVertical="true"
             android:text="instagram.com/preethikitchenappliances"
+            android:layout_marginLeft="10dp"
             />
 
 
