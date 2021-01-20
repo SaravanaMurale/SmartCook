@@ -33,6 +33,15 @@
 
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/connectivityBlock"
+        android:background="@color/color_grey_ke"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        />
+
     <RelativeLayout
         android:id="@+id/addDeviceBlock"
         android:layout_width="match_parent"
@@ -54,7 +63,75 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_margin="10dp"
-            android:text="Add Device" />
+            android:text="Device" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/addDeviceBlock"
+        android:background="@color/color_grey_ke"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        />
+
+
+
+    <RelativeLayout
+        android:id="@+id/deviceDetailsBlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addDeviceBlock"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="5dp"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/setDeviceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Device Name"
+            android:layout_margin="5dp"
+            />
+
+        <TextView
+            android:id="@+id/setDeviceMacAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mac address"
+            android:layout_below="@+id/setDeviceName"
+            android:layout_margin="5dp"
+            />
+        <TextView
+            android:id="@+id/setRssi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="rssi"
+            android:layout_below="@id/setDeviceMacAddress"
+            />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/statusBlock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addDeviceBlock"
+        android:layout_marginTop="25dp"
+        android:visibility="gone"
+        android:layout_marginLeft="5dp"
+        >
+
+        <TextView
+            android:id="@+id/connected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Connected"
+            />
 
     </RelativeLayout>
 

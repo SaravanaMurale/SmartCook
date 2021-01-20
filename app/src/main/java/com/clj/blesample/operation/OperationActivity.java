@@ -14,6 +14,7 @@ import android.view.View;
 import com.clj.blesample.R;
 import com.clj.blesample.comm.Observer;
 import com.clj.blesample.comm.ObserverManager;
+import com.clj.blesample.sessionmanager.PreferencesUtil;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.data.BleDevice;
 
@@ -97,6 +98,16 @@ public class OperationActivity extends AppCompatActivity implements Observer {
     private void initData() {
         //Getting Ble Device data
         bleDevice = getIntent().getParcelableExtra(KEY_DATA);
+
+        if(bleDevice==null){
+            finish();
+        }else if(bleDevice!=null){
+            PreferencesUtil.setValueString(OperationActivity.this,PreferencesUtil.BLE_NAME,bleDevice.getName());
+            PreferencesUtil.setValueString(OperationActivity.this,PreferencesUtil.BLE_MAC,bleDevice.getMac());
+            PreferencesUtil.setValueSInt(OperationActivity.this,PreferencesUtil.BLE_RSSI,bleDevice.getRssi());
+        }
+
+        System.out.println("DeviceDetails"+bleDevice.getName()+" "+bleDevice.getMac()+" "+bleDevice.getRssi()+" "+bleDevice.getKey()+" "+bleDevice.getDevice()+" "+bleDevice.describeContents()+" "+bleDevice.getScanRecord()+" "+bleDevice.getTimestampNanos());
 
         if (bleDevice == null)
             finish();

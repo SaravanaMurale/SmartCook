@@ -289,6 +289,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onDetail(BleDevice bleDevice) {
                 if (BleManager.getInstance().isConnected(bleDevice)) {
+
+
+
                     Intent intent = new Intent(MainActivity.this, OperationActivity.class);
                     intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
                     startActivity(intent);

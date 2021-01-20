@@ -23,6 +23,12 @@ public class PreferencesUtil {
 
     public static final String USER_NAME="user_name";
 
+
+    //BLE Device Details
+    public static final String BLE_NAME="ble_name";
+    public static final String BLE_MAC="ble_mac";
+    public static final String BLE_RSSI="ble_rssi";
+
     public static void setValueString(Context context, String key, String value) {
 
         if (context == null) return;
