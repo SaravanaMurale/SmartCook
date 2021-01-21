@@ -1184,7 +1184,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
             public void onClick(View v) {
 
                 whistleCount=0;
-                setWhistleCount.setText("0");
+                //setWhistleCount.setText("0");
 
                 if(finalResetWhistleStatus==1){
                     if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
@@ -2153,7 +2153,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
     private void setWhistleAndTimerValueInUI(int rightWhistle, int rightTimer, int leftWhistle, int leftTimer, int centerWhistle, int centerTimer) {
 
 
-        if (rightWhistle < 0) {
+        if (rightWhistle <= 0) {
             selectedRightWhistleCount.setText("");
 
 
@@ -2175,7 +2175,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
             rightTimerToSet=rightTimer;
         }
 
-        if (leftWhistle < 0) {
+        if (leftWhistle <= 0) {
             selectedLeftWhistleCount.setText("");
         } else {
             selectedLeftWhistleCount.setText("" + leftWhistle);
@@ -2196,7 +2196,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
         }
 
 
-        if (centerWhistle < 0) {
+        if (centerWhistle <= 0) {
             selectedCenterWhistleCount.setText("");
         } else {
             selectedCenterWhistleCount.setText("" + centerWhistle);
