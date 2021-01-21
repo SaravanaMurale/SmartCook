@@ -124,7 +124,7 @@ public class CharacteristicListFragment extends Fragment {
     TextView timerSub, timerAdd, setTimerCount,timerFont;
     Button timerStart,timerCancel,whistleStart,whistleCancel;
     int rightTimerToSet,rightWhistleToSet,leftTimerToSet,leftWhistleToSet,centerTimerToSet,centerWhistleToSet=0;
-    Button timerTitle,whistleTitle,timerReset;
+    Button timerTitle,whistleTitle,timerReset,whistleReset;
 
     Runnable mRunnable;
     Handler mHandler;
@@ -241,6 +241,7 @@ public class CharacteristicListFragment extends Fragment {
         whistleTitle=(Button)v.findViewById(R.id.whistleTitle);
 
         timerReset=(Button)v.findViewById(R.id.timerReset);
+        whistleReset=(Button)v.findViewById(R.id.whistleReset);
 
 
         profileSelectBlock=(RelativeLayout)v.findViewById(R.id.profileSelectBlock);
@@ -1086,12 +1087,24 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
 
     private void setWhistle(final String burner) {
 
+        int resetWhistleStatus=0;
+
         if(burner.equals("00")){
 
 
             if(rightWhistleToSet>=0){
                 setWhistleCount.setText(""+rightWhistleToSet);
                 whistleCount=rightWhistleToSet;
+
+                if(rightWhistleToSet>0){
+                    whistleCancel.setVisibility(View.INVISIBLE);
+                    whistleReset.setVisibility(View.VISIBLE);
+                    resetWhistleStatus=1;
+                }else {
+                    whistleCancel.setVisibility(View.VISIBLE);
+                    whistleReset.setVisibility(View.INVISIBLE);
+                }
+
             }
 
         }else if(burner.equals("01")){
@@ -1100,6 +1113,16 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
             if(leftWhistleToSet>=0){
                 setWhistleCount.setText(""+leftWhistleToSet);
                 whistleCount=leftWhistleToSet;
+
+                if(leftWhistleToSet>0){
+                    whistleCancel.setVisibility(View.INVISIBLE);
+                    whistleReset.setVisibility(View.VISIBLE);
+                    resetWhistleStatus=2;
+                }else {
+                    whistleCancel.setVisibility(View.VISIBLE);
+                    whistleReset.setVisibility(View.INVISIBLE);
+                }
+
             }
 
         }else if(burner.equals("10")){
@@ -1107,6 +1130,16 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
             if(centerWhistleToSet>=0){
                 setWhistleCount.setText(""+centerWhistleToSet);
                 whistleCount=centerWhistleToSet;
+
+                if(centerWhistleToSet>0){
+                    whistleCancel.setVisibility(View.INVISIBLE);
+                    whistleReset.setVisibility(View.VISIBLE);
+                    resetWhistleStatus=3;
+                }else {
+                    whistleCancel.setVisibility(View.VISIBLE);
+                    whistleReset.setVisibility(View.INVISIBLE);
+                }
+
             }
         }
 
@@ -1115,6 +1148,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
         whistleStart.setTypeface(octinPrisonFont);
         whistleCancel.setTypeface(octinPrisonFont);
         whistleTitle.setTypeface(octinPrisonFont);
+        whistleReset.setTypeface(octinPrisonFont);
 
         whistleAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1141,6 +1175,61 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
                 }
             }
         });
+
+
+        final int finalResetWhistleStatus = resetWhistleStatus;
+
+        whistleReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                whistleCount=0;
+                setWhistleCount.setText("0");
+
+                if(finalResetWhistleStatus==1){
+                    if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
+                        callMe(1, "00", 0, 0, 0, 2);
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                whistleCount = 0;
+                                rightWhistleToSet=0;
+                            }
+                        },500);
+                    }
+                }else if(finalResetWhistleStatus==2){
+
+                    if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
+                        callMe(1, "01", 0, 0, 0, 2);
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                whistleCount = 0;
+                                leftWhistleToSet=0;
+                            }
+                        },500);
+                    }
+
+
+                }else if(finalResetWhistleStatus==3){
+                    if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
+                        callMe(1, "10", 0, 0, 0, 2);
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                whistleCount = 0;
+                                centerWhistleToSet=0;
+                            }
+                        },500);
+                    }
+                }
+
+            }
+        });
+
 
         whistleStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1726,7 +1815,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
 
 
         } else if (frameFormet == 4) {
-
+//Estop
             byte[] eStop = new byte[6];
             eStop[0] = (byte) ('*');
             eStop[1] = (byte) (0XD1);
@@ -1856,6 +1945,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
                 setWhistleAndTimerValueInUI(rightWhistle, rightTimer, leftWhistle, leftTimer, centerWhistle, centerTimer);
 
                 // setNotificationForWhistleAndTimer(rightVesselForNoti,  rightWhistle, rightTimer,leftVesselForNoti ,leftWhistle, leftTimer, centerVesselForNoti,centerWhistle, centerTimer);
+
 
                 System.out.println("WhistleAndTimerData" + rightWhistle + " " + rightTimer + " " + leftWhistle + " " + leftTimer + " " + centerWhistle + " " + centerTimer);
 

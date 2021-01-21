@@ -702,6 +702,16 @@
                     android:text="Cancel"
                     android:layout_marginLeft="30dp"
                     />
+                <Button
+                    android:id="@+id/whistleReset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/whistleSub"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/edit_button_border_on"
+                    android:text="Reset"
+                    android:layout_marginLeft="30dp"
+                    />
 
 
             </RelativeLayout>
