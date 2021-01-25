@@ -199,14 +199,14 @@ public class OperationActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Toast.makeText(OperationActivity.this,"Bluetooth Connection Terminated",Toast.LENGTH_LONG).show();
+        Toast.makeText(OperationActivity.this,"Bluetooth Connection Terminated",Toast.LENGTH_SHORT).show();
         BleManager.getInstance().clearCharacterCallback(bleDevice);
         ObserverManager.getInstance().deleteObserver(this);
     }
 
     @Override
     public void disConnected(BleDevice device) {
-        Toast.makeText(OperationActivity.this,"Bluetooth Connection Terminated",Toast.LENGTH_LONG).show();
+        Toast.makeText(OperationActivity.this,"Bluetooth Connection Terminated",Toast.LENGTH_SHORT).show();
         if (device != null && bleDevice != null && device.getKey().equals(bleDevice.getKey())) {
             finish();
         }
