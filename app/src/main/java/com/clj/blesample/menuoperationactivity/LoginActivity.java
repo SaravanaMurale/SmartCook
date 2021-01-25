@@ -22,7 +22,9 @@ import com.clj.blesample.utils.LogFile;
 import com.clj.blesample.utils.PermissionUtils;
 
 import static com.clj.blesample.utils.MathUtil.LOCATION_PERMISSION_REQUEST_CODE;
+import static com.clj.blesample.utils.MathUtil.validateEmail;
 import static com.clj.blesample.utils.MathUtil.validateLoginEmailOrPassword;
+import static com.clj.blesample.utils.MathUtil.validateMobileNumber;
 import static com.clj.blesample.utils.MathUtil.validatePassword;
 
 public class LoginActivity extends AppCompatActivity {
@@ -86,27 +88,41 @@ public class LoginActivity extends AppCompatActivity {
                 String password = loginPassword.getText().toString().trim();
 
                 if (email.isEmpty() || email.equals("") || email.equals(null) ) {
-                    Toast.makeText(LoginActivity.this, "Email field can't be empty", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Please Enter Email/Mobile", Toast.LENGTH_LONG).show();
                     loginUserName.findFocus();
                     return;
                 }
 
                 if (password.isEmpty() || password.equals("") || password.equals(null) ) {
-                    Toast.makeText(LoginActivity.this, "Password field can't be empty", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Please Enter Password", Toast.LENGTH_LONG).show();
                     loginPassword.findFocus();
-                    return;
-                }
-                if(!validateLoginEmailOrPassword(email) ){
-                    Toast.makeText(LoginActivity.this, "Please enter valid email or mobile number", Toast.LENGTH_LONG).show();
-                    loginUserName.findFocus();
                     return;
                 }
 
                 if(!validatePassword(password)){
-                    Toast.makeText(LoginActivity.this, "Password length is too short", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Password should have minimum 6 characters", Toast.LENGTH_LONG).show();
                     loginPassword.findFocus();
                     return;
                 }
+
+                /*if(!validateMobileNumber(email)){
+                    Toast.makeText(LoginActivity.this, "Invalid Mobile Number", Toast.LENGTH_LONG).show();
+                    loginUserName.findFocus();
+                    return;
+
+                }else if(!validateEmail(email)){
+                    Toast.makeText(LoginActivity.this, "Invalid Email", Toast.LENGTH_LONG).show();
+                    loginUserName.findFocus();
+                    return;
+                }*/
+
+               /* if(!validateLoginEmailOrPassword(email) ){
+                    Toast.makeText(LoginActivity.this, "Please enter valid email or mobile number", Toast.LENGTH_LONG).show();
+                    loginUserName.findFocus();
+                    return;
+                }*/
+
+
 
 
 

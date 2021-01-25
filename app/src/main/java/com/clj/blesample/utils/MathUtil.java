@@ -166,7 +166,6 @@ public class MathUtil {
             return true;
         }
 
-
         return false ;
     }
 

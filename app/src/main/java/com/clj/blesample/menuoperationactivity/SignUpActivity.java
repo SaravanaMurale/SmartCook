@@ -61,25 +61,31 @@ public class SignUpActivity extends AppCompatActivity {
 
 
                 if (userName.isEmpty() || userName.equals("") || userName.equals(null)) {
-                    Toast.makeText(SignUpActivity.this, "Name can't be empty", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "Please Enter Name", Toast.LENGTH_LONG).show();
                     return;
 
                 }
 
                 if (userEmail.isEmpty() || userEmail.equals("") || userEmail.equals(null)) {
-                    Toast.makeText(SignUpActivity.this, "Email can't be empty", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "Please Enter Email", Toast.LENGTH_LONG).show();
                     return;
 
                 }
 
                 if (userMobile.isEmpty() || userMobile.equals("") || userMobile.equals(null)) {
-                    Toast.makeText(SignUpActivity.this, "Mobile number can't be empty", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "Please Enter Mobile Number", Toast.LENGTH_LONG).show();
                     return;
 
                 }
 
                 if (userPassword.isEmpty() || userPassword.equals("") || userPassword.equals(null)) {
-                    Toast.makeText(SignUpActivity.this, "Password can't be empty", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "Please Enter Password", Toast.LENGTH_LONG).show();
+                    return;
+
+                }
+
+                if (userCPassword.isEmpty() || userCPassword.equals("") || userCPassword.equals(null)) {
+                    Toast.makeText(SignUpActivity.this, "Please Enter Confirm Password", Toast.LENGTH_LONG).show();
                     return;
 
                 }
@@ -165,7 +171,7 @@ public class SignUpActivity extends AppCompatActivity {
                     int registerUserMobileStatus=sqliteManager.checkUserMobileStatus(userMobile);
 
                     if(registerUserEmailStatus>0){
-                        Toast.makeText(SignUpActivity.this, "Email already registered", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignUpActivity.this, "Email ID already registered", Toast.LENGTH_LONG).show();
                         return;
                     }
 

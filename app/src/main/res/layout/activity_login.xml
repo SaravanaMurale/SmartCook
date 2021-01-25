@@ -64,7 +64,7 @@
             android:layout_margin="20dp"
             android:fontFamily="sans-serif-condensed"
             android:gravity="left"
-            android:hint="Email/mobile"
+            android:hint="Email/Mobile"
             android:inputType="textEmailAddress"
             android:singleLine="true"
 
