@@ -89,15 +89,30 @@ public class MathUtil {
         return true;
     }
 
+    public static boolean validateMobileNumberLength(String mobile){
+
+        if(mobile.length()<10){
+            return false;
+        }
+        return true;
+
+    }
+
+
     public static boolean validateMobileNumber(String mobile) {
 
         String regex = "(0/91)?[7-9][0-9]{9}";
 
-        if (!mobile.matches(regex)) {
+       if(Patterns.PHONE.matcher(mobile).matches()){
+           return true;
+       }
+
+       /* if (!mobile.matches(regex)) {
             return false;
-        }
-        return true;
+        }*/
+        return false;
     }
+
 
 
     public static boolean validateName(String name) {
@@ -114,6 +129,15 @@ public class MathUtil {
         if(!name.matches("^[A-Za-z]+$") ){
             return false;
         }
+        return true;
+    }
+
+    public static boolean validateSpaceInName(String name){
+
+        if(name.contains(" ")){
+            return false;
+        }
+
         return true;
     }
 
@@ -137,10 +161,6 @@ public class MathUtil {
 
     public static boolean validateEmail(String email) {
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
-        /*if (email.length() < 5) {
-            return false;
-        }*/
 
         if (email.matches(emailPattern) && email.length() > 0){
             return true;

@@ -18,8 +18,10 @@ import com.clj.blesample.databasemanager.SqliteManager;
 import static com.clj.blesample.utils.MathUtil.ValidateNameWithoutSplChar;
 import static com.clj.blesample.utils.MathUtil.validateEmail;
 import static com.clj.blesample.utils.MathUtil.validateMobileNumber;
+import static com.clj.blesample.utils.MathUtil.validateMobileNumberLength;
 import static com.clj.blesample.utils.MathUtil.validateName;
 import static com.clj.blesample.utils.MathUtil.validatePassword;
+import static com.clj.blesample.utils.MathUtil.validateSpaceInName;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -51,11 +53,11 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //save data in SqliteDatabase
 
-                String userName = signUpName.getText().toString();
-                String userEmail = signUpEmail.getText().toString();
-                String userMobile = signUpMobile.getText().toString();
-                String userPassword = signUpPassword.getText().toString();
-                String userCPassword=signUpCPassword.getText().toString();
+                String userName = signUpName.getText().toString().trim();
+                String userEmail = signUpEmail.getText().toString().trim();
+                String userMobile = signUpMobile.getText().toString().trim();
+                String userPassword = signUpPassword.getText().toString().trim();
+                String userCPassword=signUpCPassword.getText().toString().trim();
 
 
                 if (userName.isEmpty() || userName.equals("") || userName.equals(null)) {
@@ -82,28 +84,46 @@ public class SignUpActivity extends AppCompatActivity {
 
                 }
 
+                if(!validateSpaceInName(userName)){
+                    Toast.makeText(SignUpActivity.this, "No space is allowed in Name", Toast.LENGTH_LONG).show();
+                    signUpName.findFocus();
+                    return;
+                }
+
 
                 if(!ValidateNameWithoutSplChar(userName)){
-                    Toast.makeText(SignUpActivity.this, "Splecial character is not allowed in name", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "No special characters in Name", Toast.LENGTH_LONG).show();
                     signUpName.findFocus();
                     return;
                 }
 
 
                 if(!validateName(userName)){
-                    Toast.makeText(SignUpActivity.this, "Your name is too short", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "Your Name is too short", Toast.LENGTH_LONG).show();
                     signUpName.findFocus();
                     return;
                 }
 
                 if(!validateEmail(userEmail)){
-                    Toast.makeText(SignUpActivity.this, "Please enter valid email formet", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "Invalid Email", Toast.LENGTH_LONG).show();
                     signUpEmail.findFocus();
                     return;
                 }
 
+                if(!validateMobileNumberLength(userMobile)){
+                    Toast.makeText(SignUpActivity.this, "Mobile number should be in 10 digits", Toast.LENGTH_LONG).show();
+                    signUpMobile.findFocus();
+                    return;
+                }
+
                 if(!validateMobileNumber(userMobile)){
-                    Toast.makeText(SignUpActivity.this, "Special character is not allowed in mobile number", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "Invalid Mobile Number", Toast.LENGTH_LONG).show();
+                    signUpMobile.findFocus();
+                    return;
+                }
+
+                if(userMobile.equals("0000000000")){
+                    Toast.makeText(SignUpActivity.this, "Enter Valid Mobile Number", Toast.LENGTH_LONG).show();
                     signUpMobile.findFocus();
                     return;
                 }
