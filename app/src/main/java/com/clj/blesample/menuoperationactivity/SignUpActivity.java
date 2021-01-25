@@ -129,19 +129,32 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
                 if(!validatePassword(userPassword)){
-                    Toast.makeText(SignUpActivity.this, "Your password is too short", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "Password should have minimum 6 characters", Toast.LENGTH_LONG).show();
                     signUpPassword.findFocus();
                     return;
                 }
 
-                if(!validatePassword(userCPassword)){
-                    Toast.makeText(SignUpActivity.this, "Your confirm password is too short", Toast.LENGTH_LONG).show();
+                if(userPassword.contains(" ")){
+                    Toast.makeText(SignUpActivity.this, "Password should not have space", Toast.LENGTH_LONG).show();
+                    signUpPassword.findFocus();
+                    return;
+                }
+
+                if(userCPassword.contains(" ")){
+                    Toast.makeText(SignUpActivity.this, "Confirm Password should not have space", Toast.LENGTH_LONG).show();
                     signUpCPassword.findFocus();
                     return;
                 }
 
-                if(!userCPassword.equals(userCPassword)){
-                    Toast.makeText(SignUpActivity.this, "Both Password and Confirm Password should match", Toast.LENGTH_LONG).show();
+
+                if(!validatePassword(userCPassword)){
+                    Toast.makeText(SignUpActivity.this, "Confirm Password should have minimum 6 characters", Toast.LENGTH_LONG).show();
+                    signUpCPassword.findFocus();
+                    return;
+                }
+
+                if(!userPassword.equals(userCPassword)){
+                    Toast.makeText(SignUpActivity.this, "Password and Confirm Password Mismatch", Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -152,12 +165,12 @@ public class SignUpActivity extends AppCompatActivity {
                     int registerUserMobileStatus=sqliteManager.checkUserMobileStatus(userMobile);
 
                     if(registerUserEmailStatus>0){
-                        Toast.makeText(SignUpActivity.this, "Email Id is already registered", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignUpActivity.this, "Email already registered", Toast.LENGTH_LONG).show();
                         return;
                     }
 
                     if(registerUserMobileStatus>0){
-                        Toast.makeText(SignUpActivity.this, "Mobile Number is already registered", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignUpActivity.this, "Mobile Number already registered", Toast.LENGTH_LONG).show();
                         return;
                     }
 
