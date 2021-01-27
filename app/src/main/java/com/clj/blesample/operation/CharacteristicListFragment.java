@@ -850,6 +850,7 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                timerSub.setEnabled(true);
                 timerCount = timerCount + 1;
                 setTimerCount.setText("" + timerCount);
             }
@@ -1153,8 +1154,8 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
         whistleAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                whistleSub.setEnabled(true);
                 whistleCount = whistleCount + 1;
-
                 setWhistleCount.setText("" + whistleCount);
 
             }
@@ -1195,6 +1196,8 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
                             public void run() {
                                 whistleCount = 0;
                                 rightWhistleToSet=0;
+                                leftWhistleToSet=0;
+                                centerWhistleToSet=0;
                             }
                         },500);
                     }
@@ -1208,6 +1211,8 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
                             public void run() {
                                 whistleCount = 0;
                                 leftWhistleToSet=0;
+                                rightWhistleToSet=0;
+                                centerWhistleToSet=0;
                             }
                         },500);
                     }
@@ -1222,6 +1227,8 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
                             public void run() {
                                 whistleCount = 0;
                                 centerWhistleToSet=0;
+                                leftWhistleToSet=0;
+                                rightWhistleToSet=0;
                             }
                         },500);
                     }
@@ -1245,9 +1252,10 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
 
                     if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
 
-
-                        callMe(1, burner, 0, burnerWhistleCount, 0, 2);
                         whistleCount = 0;
+                        setWhistleCount.setText("0");
+                        callMe(1, burner, 0, burnerWhistleCount, 0, 2);
+
 
                     }
 
@@ -2155,6 +2163,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
 
         if (rightWhistle <= 0) {
             selectedRightWhistleCount.setText("");
+            rightWhistleToSet=0;
 
 
         } else {
@@ -2177,6 +2186,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
 
         if (leftWhistle <= 0) {
             selectedLeftWhistleCount.setText("");
+            leftWhistleToSet=0;
         } else {
             selectedLeftWhistleCount.setText("" + leftWhistle);
             selectedLeftWhistleCount.setTypeface(octinPrisonFont);
@@ -2198,6 +2208,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
 
         if (centerWhistle <= 0) {
             selectedCenterWhistleCount.setText("");
+            centerWhistleToSet=0;
         } else {
             selectedCenterWhistleCount.setText("" + centerWhistle);
             selectedCenterWhistleCount.setTypeface(octinPrisonFont);
