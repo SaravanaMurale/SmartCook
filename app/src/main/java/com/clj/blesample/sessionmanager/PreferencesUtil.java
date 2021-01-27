@@ -80,6 +80,7 @@ public class PreferencesUtil {
         SharedPreferences.Editor editor = removeRewardID.edit();
         editor.clear();
         editor.commit();
+        //editor.apply();
 
 
     }

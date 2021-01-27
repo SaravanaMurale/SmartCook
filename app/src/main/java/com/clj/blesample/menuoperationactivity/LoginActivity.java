@@ -130,7 +130,9 @@ public class LoginActivity extends AppCompatActivity {
                     if (!userName.equals("empty")) {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
-                        finish();
+                        killActivity();
+
+
                     } else {
                         Toast.makeText(LoginActivity.this, "Incorrect Password", Toast.LENGTH_LONG).show();
                     }
@@ -140,6 +142,41 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private void killActivity() {
+
+        finish();
+    }
+
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void checkWriteStoreAgePermission() {
+
+        if (!PermissionUtils.hasPermission(LoginActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+            PermissionUtils.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, LOCATION_PERMISSION_REQUEST_CODE);
+
+
+        } else {
+
+            if (PermissionUtils.hasPermission(LoginActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                LogFile.addLogInFile("MainActivity ");
+                System.out.println("Logfilecreatedsuccessfully");
+            }
+        }
+
 
     }
 
@@ -183,34 +220,6 @@ public class LoginActivity extends AppCompatActivity {
         public void afterTextChanged(Editable s) {
 
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-
-    private void checkWriteStoreAgePermission() {
-
-        if (!PermissionUtils.hasPermission(LoginActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-            PermissionUtils.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, LOCATION_PERMISSION_REQUEST_CODE);
-
-
-        } else {
-
-            if (PermissionUtils.hasPermission(LoginActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                LogFile.addLogInFile("MainActivity ");
-                System.out.println("Logfilecreatedsuccessfully");
-            }
-        }
-
-
     }
 
 

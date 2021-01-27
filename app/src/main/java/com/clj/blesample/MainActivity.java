@@ -412,7 +412,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (PreferencesUtil.getValueString(MainActivity.this, PreferencesUtil.BLE_MAC_ADDRESS).equals(scanResultList.get(i).getMac())) {
 
                         BleDevice bleDevice = scanResultList.get(i);
-                        Toast.makeText(MainActivity.this, "This device is already connected ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Device already connected ", Toast.LENGTH_LONG).show();
                         if (bleDevice != null) {
                             connect(bleDevice);
                         } else {
@@ -421,7 +421,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
 
                     } else {
-                        Toast.makeText(MainActivity.this, "Please connect with stove ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Please Connect", Toast.LENGTH_LONG).show();
                     }
 
                 }
@@ -471,6 +471,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Intent intent = new Intent(MainActivity.this, OperationActivity.class);
                     intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
                     startActivity(intent);
+                    KillActivity();
 
                 } else {
 
@@ -496,6 +497,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+    }
+
+    private void KillActivity() {
+        finish();
+
     }
 
     private void readRssi(BleDevice bleDevice) {
@@ -583,6 +589,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivityForResult(actionToReqEnableBluetooth, REQ_CODE_TO_ENABLE);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_OPEN_GPS) {
+            if (checkGPSIsOpen()) {
+                setScanRule();
+                startScan();
+            }
+        } else if (requestCode == REQ_CODE_TO_ENABLE) {
+
+            if (resultCode == RESULT_OK) {
+
+                Toast.makeText(MainActivity.this, "Your Bluetooth is  on", Toast.LENGTH_LONG).show();
+
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(MainActivity.this, "Your Bluetooth Enabling  is cancelled", Toast.LENGTH_LONG).show();
+            }
+
+        }
+    }
+
 
     private void onPermissionGranted(String permission) {
         switch (permission) {
@@ -624,25 +651,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return locationManager.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER);
     }
 
+
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_OPEN_GPS) {
-            if (checkGPSIsOpen()) {
-                setScanRule();
-                startScan();
-            }
-        } else if (requestCode == REQ_CODE_TO_ENABLE) {
+    public void onBackPressed() {
+        super.onBackPressed();
 
-            if (resultCode == RESULT_OK) {
+        System.out.println("OnBackPressedInMainActivity");
+        finish();
 
-                Toast.makeText(MainActivity.this, "Your Bluetooth is  on", Toast.LENGTH_LONG).show();
 
-            } else if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(MainActivity.this, "Your Bluetooth Enabling  is cancelled", Toast.LENGTH_LONG).show();
-            }
-
-        }
     }
-
 }

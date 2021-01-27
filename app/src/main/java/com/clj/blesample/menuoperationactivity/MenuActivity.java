@@ -1,10 +1,12 @@
 package com.clj.blesample.menuoperationactivity;
 
 import android.Manifest;
+import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -190,7 +192,18 @@ public class MenuActivity extends AppCompatActivity {
 
     private void signoutFromDevice() {
 
-        PreferencesUtil.clearAll(MenuActivity.this);
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        if (adapter.isEnabled()){
+            adapter.disable();
+        }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                PreferencesUtil.clearAll(MenuActivity.this);
+            }
+        },500);
+
 
         Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
         startActivity(intent);
