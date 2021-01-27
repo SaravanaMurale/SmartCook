@@ -105,28 +105,21 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                /*if(!validateMobileNumber(email)){
-                    Toast.makeText(LoginActivity.this, "Invalid Mobile Number", Toast.LENGTH_LONG).show();
-                    loginUserName.findFocus();
-                    return;
+                String mobileNumberFromDB=sqliteManager.checkMobileNumber(email);
+                String emailFromDB=sqliteManager.checkEmail(email);
 
-                }else if(!validateEmail(email)){
-                    Toast.makeText(LoginActivity.this, "Invalid Email", Toast.LENGTH_LONG).show();
-                    loginUserName.findFocus();
+                if(mobileNumberFromDB.equals("NULL") &&emailFromDB.equals("NULL")){
+                   Toast.makeText(LoginActivity.this,"You are not registered,  Please Signup",Toast.LENGTH_LONG).show();
                     return;
-                }*/
+                }
 
-               /* if(!validateLoginEmailOrPassword(email) ){
-                    Toast.makeText(LoginActivity.this, "Please enter valid email or mobile number", Toast.LENGTH_LONG).show();
-                    loginUserName.findFocus();
+                /*if(!mobileNumberFromDB.equals("NULL") || !emailFromDB.equals("NULL")){
+                    System.out.println("CheckInDB");
                     return;
                 }*/
 
 
-
-
-
-                if (validateLoginEmailOrPassword(email) && validatePassword(password)) {
+                if (!mobileNumberFromDB.equals("NULL") || !emailFromDB.equals("NULL")) {
                     //Email or Mobile
                     String userName = sqliteManager.validateLoginUser(email, password);
 
@@ -139,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        Toast.makeText(LoginActivity.this, "You have entered wrong username or password", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "Incorrect Password", Toast.LENGTH_LONG).show();
                     }
 
                 }

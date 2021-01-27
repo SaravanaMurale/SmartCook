@@ -594,6 +594,53 @@ public class SqliteManager extends SQLiteOpenHelper {
     }
 
 
+    public String checkMobileNumber(String mobile){
+
+        String mobileNumberFromDB="NULL";
+
+        SQLiteDatabase selectAllData = getReadableDatabase();
+
+        Cursor userData = selectAllData.rawQuery("select user_mobile from signuptable where user_mobile=?", new String[]{mobile});
+
+        if (userData.moveToFirst()) {
+            do {
+
+                mobileNumberFromDB = userData.getString(0);
+                System.out.println("ReceivedUserId" + mobileNumberFromDB);
+
+
+
+            }
+            while (userData.moveToNext());
+        }
+
+        return mobileNumberFromDB;
+
+    }
+
+    public String checkEmail(String email){
+
+        String emailFromDB="NULL";
+
+        SQLiteDatabase selectAllData = getReadableDatabase();
+
+        Cursor userData = selectAllData.rawQuery("select user_email from signuptable where user_email=?", new String[]{email});
+
+        if (userData.moveToFirst()) {
+            do {
+
+                emailFromDB = userData.getString(0);
+                System.out.println("ReceivedUserId" + emailFromDB);
+
+
+
+            }
+            while (userData.moveToNext());
+        }
+
+        return emailFromDB;
+
+    }
 
 
     public String validateLoginUser(String userEmail, String password) {

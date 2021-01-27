@@ -917,6 +917,7 @@ public class CharacteristicListFragment extends Fragment {
                 timerCount=0;
                 setTimerCount.setText("0");
 
+
                 if(finalResetStatus ==1){
                     System.out.println("RightBurnerTimerIsReset");
                     if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
