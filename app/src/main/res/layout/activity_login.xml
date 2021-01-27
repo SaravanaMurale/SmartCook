@@ -8,6 +8,14 @@
     android:background="@drawable/bg"
     tools:context=".menuoperationactivity.LoginActivity">
 
+    <ImageView
+        android:id="@+id/preethiLogoLogin"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/preethi_logo" />
+
  <!--   <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

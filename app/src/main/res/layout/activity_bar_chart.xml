@@ -5,14 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="30dp"
     tools:context=".menuoperationactivity.GCPDateSelectActivity">
+
+    <ImageView
+        android:id="@+id/preethiLogoGSP"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/preethi_logo" />
 
     <Spinner
         android:id="@+id/burnerSpinner"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/preethiLogoGSP"
         android:background="@drawable/rounded_border"
         android:padding="15dp" />
 

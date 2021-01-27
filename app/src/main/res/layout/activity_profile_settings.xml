@@ -7,12 +7,20 @@
     android:orientation="vertical"
     tools:context=".menuoperationactivity.ProfileSettingsActivity">
 
+    <ImageView
+        android:id="@+id/preethiLogo"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/preethi_logo" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profilePic"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
+        android:layout_below="@+id/preethiLogo"
         android:visibility="visible"
         android:src="@drawable/user" />
 

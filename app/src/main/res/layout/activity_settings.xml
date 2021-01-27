@@ -7,13 +7,24 @@
     android:orientation="vertical"
     tools:context=".menuoperationactivity.SettingsActivity">
 
+    <ImageView
+        android:id="@+id/preethiLogoSet"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/preethi_logo" />
+
 
 
     <RelativeLayout
         android:id="@+id/connectivityBlock"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/preethiLogoSet"
+        >
+
 
         <ImageView
             android:layout_width="25dp"
