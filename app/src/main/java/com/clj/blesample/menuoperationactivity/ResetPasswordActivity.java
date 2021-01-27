@@ -49,32 +49,44 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 String resetConfirmPassword=reset_confirm_password.getText().toString().trim();
 
                 if (resetEmail.isEmpty() || resetEmail.equals("") || resetEmail.equals(null)) {
-                    Toast.makeText(ResetPasswordActivity.this, "Email Or Mobile field can't be empty", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ResetPasswordActivity.this, "Please Enter Email/Mobile Number", Toast.LENGTH_LONG).show();
                     resetUserName.findFocus();
+                    return;
                 }
 
                 if (setPassword.isEmpty() || setPassword.equals("") || setPassword.equals(null)) {
-                    Toast.makeText(ResetPasswordActivity.this, "Password field can't be empty", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ResetPasswordActivity.this, "Please Enter Password", Toast.LENGTH_LONG).show();
                     resetPassword.findFocus();
+                    return;
+                }
+
+                if (resetConfirmPassword.isEmpty() || resetConfirmPassword.equals("") || resetConfirmPassword.equals(null)) {
+                    Toast.makeText(ResetPasswordActivity.this, "Please Enter Confirm Password", Toast.LENGTH_LONG).show();
+                    resetPassword.findFocus();
+                    return;
                 }
 
                 if (!validatePassword(setPassword)) {
-                    Toast.makeText(ResetPasswordActivity.this, "Password length is too short", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ResetPasswordActivity.this, "Password should have minimum 6 characters", Toast.LENGTH_LONG).show();
                     resetPassword.findFocus();
-                }
-
-                if(!validateLoginEmailOrPassword(resetEmail) ){
-                    Toast.makeText(ResetPasswordActivity.this, "Please enter valid email or mobile number", Toast.LENGTH_LONG).show();
-                    resetUserName.findFocus();
                     return;
                 }
 
                 if(!setPassword.equals(resetConfirmPassword)){
-                    Toast.makeText(ResetPasswordActivity.this, "Both Password and Confirm Password Should Match", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ResetPasswordActivity.this, "Password and Confirm Password Mismatch", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                if (validateLoginEmailOrPassword(resetEmail) && validatePassword(setPassword) &&validatePassword(resetConfirmPassword) && setPassword.equals(resetConfirmPassword)  ) {
+
+                String mobileNumberFromDB=sqliteManager.checkMobileNumber(resetEmail);
+                String emailFromDB=sqliteManager.checkEmail(resetEmail);
+
+                if(mobileNumberFromDB.equals("NULL") &&emailFromDB.equals("NULL")){
+                    Toast.makeText(ResetPasswordActivity.this,"You are not registered,  Please Signup",Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (!mobileNumberFromDB.equals("NULL") || !emailFromDB.equals("NULL") && setPassword.equals(resetConfirmPassword)  ) {
 
                     boolean status = sqliteManager.resetPassword(resetEmail, setPassword);
 
@@ -86,7 +98,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
                         finish();
 
                     } else {
-                        Toast.makeText(ResetPasswordActivity.this, "Entered email is not avaliable in our database", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ResetPasswordActivity.this, "You are not registered,  Please Signup", Toast.LENGTH_LONG).show();
                     }
 
                 }

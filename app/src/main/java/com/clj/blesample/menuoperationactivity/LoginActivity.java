@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password = loginPassword.getText().toString().trim();
 
                 if (email.isEmpty() || email.equals("") || email.equals(null) ) {
-                    Toast.makeText(LoginActivity.this, "Please Enter Email/Mobile", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Please Enter Email/Mobile Number", Toast.LENGTH_LONG).show();
                     loginUserName.findFocus();
                     return;
                 }
