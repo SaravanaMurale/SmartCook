@@ -494,16 +494,6 @@ public class CharacteristicListFragment extends Fragment {
             }
         });
 
-
-        profileSelectBlock.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ProfileSettingsActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
         selectedLeftWhistle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -515,7 +505,7 @@ public class CharacteristicListFragment extends Fragment {
                     if (leftVesselStatus > 0) {
 
                         //Other Burner Whistle Status
-                        if (centerWhistleToSet <= 0 || rightWhistleToSet <= 0) {
+                        if (centerWhistleToSet <= 0 && rightWhistleToSet <= 0) {
 
                             setWhistleVisible();
                             setWhistle(MathUtil.LEFT_BURNER);
@@ -580,7 +570,7 @@ public class CharacteristicListFragment extends Fragment {
 
                     if (rightVesselStatus > 0) {
 
-                        if (leftWhistleToSet <= 0 || centerWhistleToSet <= 0) {
+                        if (leftWhistleToSet <= 0 && centerWhistleToSet <= 0) {
                             setWhistleVisible();
                             setWhistle(MathUtil.RIGHT_BURNER);
                         } else {
@@ -643,9 +633,11 @@ public class CharacteristicListFragment extends Fragment {
 
                 if (centerBurnerStatus > 0) {
 
+                    System.out.println("WhistleSetToCheck"+centerBurnerStatus+" "+centerVesselStatus+" "+leftWhistleToSet+" "+rightWhistleToSet);
+
                     if(centerVesselStatus>0) {
 
-                        if(leftWhistleToSet<=0 || rightWhistleToSet<=0) {
+                        if(leftWhistleToSet<=0 && rightWhistleToSet<=0) {
 
                             setWhistleVisible();
                             setWhistle(MathUtil.CENTER_BURNER);
@@ -701,21 +693,6 @@ public class CharacteristicListFragment extends Fragment {
         });
 
 
-        notificationIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), NotificationActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
-        menuIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callMenuItems();
-            }
-        });
 
         eStop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -844,22 +821,33 @@ public class CharacteristicListFragment extends Fragment {
 
             }
         });
+
+        profileSelectBlock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ProfileSettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        notificationIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NotificationActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        menuIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callMenuItems();
+            }
+        });
     }
 
-    private void setTimerVisible() {
-        setTimerBlock.setVisibility(View.VISIBLE);
-        setWhistleBlock.setVisibility(View.INVISIBLE);
-    }
 
-    private void setWhistleVisible() {
-        setWhistleBlock.setVisibility(View.VISIBLE);
-        setTimerBlock.setVisibility(View.INVISIBLE);
-    }
-
-    private void setInvisibleTimerAndWhistle() {
-        setTimerBlock.setVisibility(View.INVISIBLE);
-        setWhistleBlock.setVisibility(View.INVISIBLE);
-    }
 
 
     private void setTimer(final String burner) {
@@ -1147,34 +1135,7 @@ public class CharacteristicListFragment extends Fragment {
 
     }
 
-    private void callAlertDialogToResetTimer() {
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        // alert.setTitle("Vessel is not detected");
-        alert.setMessage("Already Timer Is Running...Do you want to Reset???");
-        alert.setIcon(R.drawable.preethi_logo);
-
-        alert.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                Toast.makeText(getActivity(), "Timer is reset", Toast.LENGTH_LONG).show();
-
-//Send
-
-            }
-        });
-
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        alert.show();
-
-    }
 
     private void setWhistle(final String burner) {
 
@@ -1453,15 +1414,7 @@ public class CharacteristicListFragment extends Fragment {
 
     }
 
-    private void callSnackBar(String burnerStatus, View v) {
 
-        Snackbar snack = Snackbar.make(v, burnerStatus, Snackbar.LENGTH_SHORT);
-        View view = snack.getView();
-        TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
-        tv.setTypeface(octinPrisonFont);
-        tv.setTextColor(Color.RED);
-        snack.show();
-    }
 
     private void callMe(int position, String burner, int timerInMin, int whistleInCount, int flameMode, int frameFormet) {
 
@@ -2226,26 +2179,6 @@ public class CharacteristicListFragment extends Fragment {
 
     }
 
-    private void setNonReadNotificationCount() {
-
-        nonReadNotiCount = sqliteManager.getNonReadNotifications();
-
-        int count = nonReadNotiCount.size();
-
-        if (count > 0) {
-            if (count < 100) {
-                notificationCount.setText("" + count);
-            } else {
-                notificationCount.setText("99+");
-            }
-
-        } else {
-
-        }
-
-
-    }
-
 
     private void setWhistleAndTimerValueInUI(int rightWhistle, int rightTimer, int leftWhistle, int leftTimer, int centerWhistle, int centerTimer) {
 
@@ -2478,24 +2411,7 @@ public class CharacteristicListFragment extends Fragment {
         mResultAdapter.notifyDataSetChanged();
     }
 
-    private void callAlertDialog() {
 
-        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        // alert.setTitle("Vessel is not detected");
-        alert.setMessage("Please Place Vessel");
-        alert.setIcon(R.drawable.preethi_logo);
-
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-
-            }
-        });
-
-        alert.show();
-
-    }
 
     private class ResultAdapter extends BaseAdapter {
 
@@ -2599,13 +2515,6 @@ public class CharacteristicListFragment extends Fragment {
 
     }
 
-    private String intToString(int data) {
-        String val = String.valueOf(data);
-
-        return val;
-
-    }
-
 
     private void callMenuItems() {
 
@@ -2641,14 +2550,6 @@ public class CharacteristicListFragment extends Fragment {
 
     }
 
-
-    private void callEditActivity(String burner) {
-
-        Intent intent = new Intent(getActivity(), EditActivity.class);
-        intent.putExtra("BURNER", burner);
-        startActivity(intent);
-
-    }
 
     private void getImageFromSqliteDB() {
 
@@ -2686,5 +2587,96 @@ public class CharacteristicListFragment extends Fragment {
 
     }
 
+    private void callSnackBar(String burnerStatus, View v) {
 
+        Snackbar snack = Snackbar.make(v, burnerStatus, Snackbar.LENGTH_SHORT);
+        View view = snack.getView();
+        TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        tv.setTypeface(octinPrisonFont);
+        tv.setTextColor(Color.RED);
+        snack.show();
+    }
+
+    private void setTimerVisible() {
+        setTimerBlock.setVisibility(View.VISIBLE);
+        setWhistleBlock.setVisibility(View.INVISIBLE);
+    }
+
+    private void setWhistleVisible() {
+        setWhistleBlock.setVisibility(View.VISIBLE);
+        setTimerBlock.setVisibility(View.INVISIBLE);
+    }
+
+    private void setInvisibleTimerAndWhistle() {
+        setTimerBlock.setVisibility(View.INVISIBLE);
+        setWhistleBlock.setVisibility(View.INVISIBLE);
+    }
+
+    private void setNonReadNotificationCount() {
+
+        nonReadNotiCount = sqliteManager.getNonReadNotifications();
+
+        int count = nonReadNotiCount.size();
+
+        if (count > 0) {
+            if (count < 100) {
+                notificationCount.setText("" + count);
+            } else {
+                notificationCount.setText("99+");
+            }
+
+        } else {
+
+        }
+
+
+    }
+
+    private void callAlertDialogToResetTimer() {
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        // alert.setTitle("Vessel is not detected");
+        alert.setMessage("Already Timer Is Running...Do you want to Reset???");
+        alert.setIcon(R.drawable.preethi_logo);
+
+        alert.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Toast.makeText(getActivity(), "Timer is reset", Toast.LENGTH_LONG).show();
+
+//Send
+
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        alert.show();
+
+    }
+
+    private void callAlertDialog() {
+
+        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        // alert.setTitle("Vessel is not detected");
+        alert.setMessage("Please Place Vessel");
+        alert.setIcon(R.drawable.preethi_logo);
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+
+            }
+        });
+
+        alert.show();
+
+    }
 }
