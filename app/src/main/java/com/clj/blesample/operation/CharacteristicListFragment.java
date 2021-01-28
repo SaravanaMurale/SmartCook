@@ -519,9 +519,6 @@ public class CharacteristicListFragment extends Fragment {
 
                             setWhistleVisible();
                             setWhistle(MathUtil.LEFT_BURNER);
-
-                            /*setWhistleBlock.setVisibility(View.VISIBLE);
-                            setTimerBlock.setVisibility(View.INVISIBLE);*/
                         } else {
 
                             if (centerWhistleToSet > 0) {
@@ -529,28 +526,21 @@ public class CharacteristicListFragment extends Fragment {
                             } else if (rightWhistleToSet > 0) {
                                 callSnackBar("Whistle Is Already Set For Right Burner",v);
                             }
-
-                            //Toast.makeText(getActivity(), "WhistleIsAlreadySetToAnotherBurnerPleaseResetToSetLeftBurner", Toast.LENGTH_SHORT).show();
                             System.out.println("WhistleIsAlreadySetToAnotherBurnerPleaseResetToSetLeftBurner");
                         }
 
 
                     } else {
-
-                        setInvisibleTimerAndWhistle();
-
-                        //Toast.makeText(getActivity(),"VesselIsNotPlacedOnLeftBurnerToSetWhistle",Toast.LENGTH_SHORT).show();
-                        /*setTimerBlock.setVisibility(View.INVISIBLE);
-                        setWhistleBlock.setVisibility(View.INVISIBLE);*/
-                        callSnackBar(MathUtil.VNPL, v);
                         System.out.println("VesselIsNotPlacedOnLeftBurnerToSetWhistle");
+                        setInvisibleTimerAndWhistle();
+                        callSnackBar(MathUtil.VNPL, v);
+
                     }
                 } else {
-                    setInvisibleTimerAndWhistle();
-                    /*setTimerBlock.setVisibility(View.INVISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
-                    callSnackBar(MathUtil.LBISA, v);
                     System.out.println("LeftBurnerIsNotActivated");
+                    setInvisibleTimerAndWhistle();
+                    callSnackBar(MathUtil.LBISA, v);
+
 
                 }
 
@@ -562,16 +552,20 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (leftBurnerStatus > 0) {
-                    setTimerVisible();
-                    /*setTimerBlock.setVisibility(View.VISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
-                    setTimer(MathUtil.LEFT_BURNER);
+
+                    if(leftVesselStatus>0) {
+
+                        setTimerVisible();
+                        setTimer(MathUtil.LEFT_BURNER);
+                    }else {
+                        setInvisibleTimerAndWhistle();
+                        callSnackBar(MathUtil.VNPLT, v);
+                        System.out.println("VesselIsNotPlacedOnLeftBurnerToSetTimer");
+                    }
                 } else {
                     System.out.println("LeftBurnerIsNotActivated");
 
                     setInvisibleTimerAndWhistle();
-                    /*setTimerBlock.setVisibility(View.INVISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
                     callSnackBar(MathUtil.LBISA, v);
                 }
 
@@ -588,8 +582,6 @@ public class CharacteristicListFragment extends Fragment {
 
                         if (leftWhistleToSet <= 0 || centerWhistleToSet <= 0) {
                             setWhistleVisible();
-                            /*setWhistleBlock.setVisibility(View.VISIBLE);
-                            setTimerBlock.setVisibility(View.INVISIBLE);*/
                             setWhistle(MathUtil.RIGHT_BURNER);
                         } else {
 
@@ -613,8 +605,6 @@ public class CharacteristicListFragment extends Fragment {
                 } else {
                     System.out.println("RightBurnerIsNotActivated");
                     setInvisibleTimerAndWhistle();
-                    /*setTimerBlock.setVisibility(View.INVISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
                     callSnackBar(MathUtil.RBINA, v);
 
                 }
@@ -627,15 +617,19 @@ public class CharacteristicListFragment extends Fragment {
             public void onClick(View v) {
 
                 if (rightBurnerStatus > 0) {
-                    setTimerVisible();
-                    /*setTimerBlock.setVisibility(View.VISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
-                    setTimer(MathUtil.RIGHT_BURNER);
+
+                    if(rightVesselStatus>0) {
+
+                        setTimerVisible();
+                        setTimer(MathUtil.RIGHT_BURNER);
+                    }else {
+                        setInvisibleTimerAndWhistle();
+                        callSnackBar(MathUtil.VNPRT, v);
+                        System.out.println("VesselIsNotPlacedOnRightBurnerToSetTimer");
+                    }
                 } else {
                     System.out.println("RightBurnerIsNotActivated");
                     setInvisibleTimerAndWhistle();
-                    /*setTimerBlock.setVisibility(View.INVISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
                     callSnackBar(MathUtil.RBINA, v);
 
                 }
@@ -653,10 +647,7 @@ public class CharacteristicListFragment extends Fragment {
 
                         if(leftWhistleToSet<=0 || rightWhistleToSet<=0) {
 
-
                             setWhistleVisible();
-                    /*setWhistleBlock.setVisibility(View.VISIBLE);
-                    setTimerBlock.setVisibility(View.INVISIBLE);*/
                             setWhistle(MathUtil.CENTER_BURNER);
                         }else {
 
@@ -676,8 +667,6 @@ public class CharacteristicListFragment extends Fragment {
                 } else {
                     System.out.println("CenterBurnerIsNotActivated");
                     setInvisibleTimerAndWhistle();
-                    /*setTimerBlock.setVisibility(View.INVISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
                     callSnackBar(MathUtil.CBISA, v);
                 }
 
@@ -691,15 +680,19 @@ public class CharacteristicListFragment extends Fragment {
             public void onClick(View v) {
 
                 if (centerBurnerStatus > 0) {
-                    setTimerVisible();
-                    /*setTimerBlock.setVisibility(View.VISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
-                    setTimer(MathUtil.CENTER_BURNER);
+
+                    if(centerVesselStatus>0) {
+
+                        setTimerVisible();
+                        setTimer(MathUtil.CENTER_BURNER);
+                    }else {
+                        setInvisibleTimerAndWhistle();
+                        callSnackBar(MathUtil.VNPCT, v);
+                        System.out.println("VesselIsNotPlacedOnCenterBurnerToSetTimer");
+                    }
                 } else {
                     System.out.println("CenterBurnerIsNotActivated");
                     setInvisibleTimerAndWhistle();
-                    /*setTimerBlock.setVisibility(View.INVISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
                     callSnackBar(MathUtil.CBISA, v);
                 }
 
