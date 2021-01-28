@@ -13,6 +13,7 @@ import com.triggertrap.seekarc.SeekArc;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.TimerTask;
 
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.AxisValue;
@@ -100,5 +101,19 @@ public class CircularActivity extends AppCompatActivity {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
+    }
+
+    class UpdateTimeTask extends TimerTask {
+        public void run() {
+
+            //hide your layout
+
+        }
+
     }
 }
