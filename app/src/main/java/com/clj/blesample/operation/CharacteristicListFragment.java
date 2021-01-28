@@ -105,11 +105,10 @@ public class CharacteristicListFragment extends Fragment {
     List<NotificationResponseDTO> nonReadNotiCount;
 
 
-
     ImageView eStop;
 
     int leftBurnerStatus, rightBurnerStatus, centerBurnerStatus = 0;
-    int leftVesselStatus, rightVesselStatus,centerVesselStatus=0;
+    int leftVesselStatus, rightVesselStatus, centerVesselStatus = 0;
 
     ImageView selectBatteryStatus;
 
@@ -117,15 +116,15 @@ public class CharacteristicListFragment extends Fragment {
 
     RelativeLayout profileSelectBlock;
 
-    RelativeLayout setTimerBlock,setWhistleBlock;
+    RelativeLayout setTimerBlock, setWhistleBlock;
 
     int whistleCount = 0;
     int timerCount = 0;
-    TextView whistleSub, whistleAdd, setWhistleCount,whistleFont;
-    TextView timerSub, timerAdd, setTimerCount,timerFont;
-    Button timerStart,timerCancel,whistleStart,whistleCancel;
-    int rightTimerToSet,rightWhistleToSet,leftTimerToSet,leftWhistleToSet,centerTimerToSet,centerWhistleToSet=0;
-    Button timerTitle,whistleTitle,timerReset,whistleReset;
+    TextView whistleSub, whistleAdd, setWhistleCount, whistleFont;
+    TextView timerSub, timerAdd, setTimerCount, timerFont;
+    Button timerStart, timerCancel, whistleStart, whistleCancel;
+    int rightTimerToSet, rightWhistleToSet, leftTimerToSet, leftWhistleToSet, centerTimerToSet, centerWhistleToSet = 0;
+    Button timerTitle, whistleTitle, timerReset, whistleReset;
 
     Runnable mRunnable;
     Handler mHandler;
@@ -145,8 +144,8 @@ public class CharacteristicListFragment extends Fragment {
         startBlinking(selectBluetoothStatus);
 
 
-        mHandler=new Handler();
-        mRunnable=new Runnable() {
+        mHandler = new Handler();
+        mRunnable = new Runnable() {
 
             @Override
             public void run() {
@@ -165,7 +164,7 @@ public class CharacteristicListFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        List<UserDTO> userDTOList= sqliteManager.getUserDetails();
+        List<UserDTO> userDTOList = sqliteManager.getUserDetails();
         selectdUserName.setText(userDTOList.get(0).getUserName());
         getImageFromSqliteDB();
 
@@ -220,32 +219,32 @@ public class CharacteristicListFragment extends Fragment {
 
         sqliteManager = new SqliteManager(getActivity());
 
-        setTimerBlock=(RelativeLayout)v.findViewById(R.id.setTimerBlock);
-        setWhistleBlock=(RelativeLayout)v.findViewById(R.id.setWhistleCountBlock);
+        setTimerBlock = (RelativeLayout) v.findViewById(R.id.setTimerBlock);
+        setWhistleBlock = (RelativeLayout) v.findViewById(R.id.setWhistleCountBlock);
 
         whistleSub = (TextView) v.findViewById(R.id.whistleSub);
         whistleAdd = (TextView) v.findViewById(R.id.whistleAdd);
         setWhistleCount = (TextView) v.findViewById(R.id.setWhistleCount);
-        whistleFont=(TextView)v.findViewById(R.id.whistleFont);
+        whistleFont = (TextView) v.findViewById(R.id.whistleFont);
 
 
         timerSub = (TextView) v.findViewById(R.id.timerSub);
         timerAdd = (TextView) v.findViewById(R.id.timerAdd);
         setTimerCount = (TextView) v.findViewById(R.id.setTimerCount);
-        timerFont=(TextView)v.findViewById(R.id.minuteFont);
-        timerTitle=(Button)v.findViewById(R.id.timerTitle);
+        timerFont = (TextView) v.findViewById(R.id.minuteFont);
+        timerTitle = (Button) v.findViewById(R.id.timerTitle);
 
-        timerStart=(Button)v.findViewById(R.id.timerStart);
-        timerCancel=(Button)v.findViewById(R.id.timerCancel);
-        whistleStart=(Button)v.findViewById(R.id.whistleStart);
-        whistleCancel=(Button)v.findViewById(R.id.whistleCancel);
-        whistleTitle=(Button)v.findViewById(R.id.whistleTitle);
+        timerStart = (Button) v.findViewById(R.id.timerStart);
+        timerCancel = (Button) v.findViewById(R.id.timerCancel);
+        whistleStart = (Button) v.findViewById(R.id.whistleStart);
+        whistleCancel = (Button) v.findViewById(R.id.whistleCancel);
+        whistleTitle = (Button) v.findViewById(R.id.whistleTitle);
 
-        timerReset=(Button)v.findViewById(R.id.timerReset);
-        whistleReset=(Button)v.findViewById(R.id.whistleReset);
+        timerReset = (Button) v.findViewById(R.id.timerReset);
+        whistleReset = (Button) v.findViewById(R.id.whistleReset);
 
 
-        profileSelectBlock=(RelativeLayout)v.findViewById(R.id.profileSelectBlock);
+        profileSelectBlock = (RelativeLayout) v.findViewById(R.id.profileSelectBlock);
         selectdUserName = (TextView) v.findViewById(R.id.selectdUserName);
         seletedUserProfile = (CircleImageView) v.findViewById(R.id.seletedUserProfile);
         selectBluetoothStatus = (ImageView) v.findViewById(R.id.selectBluetoothStatus);
@@ -259,7 +258,7 @@ public class CharacteristicListFragment extends Fragment {
 
 
         eStop = (ImageView) v.findViewById(R.id.eStop);
-        eStopDialog=new Dialog(getActivity());
+        eStopDialog = new Dialog(getActivity());
 
         selectedLeftWhistle = (ImageView) v.findViewById(R.id.leftWhistle);
         selectedRightWhistle = (ImageView) v.findViewById(R.id.rightWhistle);
@@ -313,8 +312,6 @@ public class CharacteristicListFragment extends Fragment {
         centerOff = (TextView) v.findViewById(R.id.centerOff);
         centerHigh = (TextView) v.findViewById(R.id.centerHigh);
         centerSim = (TextView) v.findViewById(R.id.centerSim);
-
-
 
 
         leftOff.setOnClickListener(new View.OnClickListener() {
@@ -515,28 +512,43 @@ public class CharacteristicListFragment extends Fragment {
                 if (leftBurnerStatus > 0) {
 
                     //Vessel Status
-                    if(leftVesselStatus>0) {
+                    if (leftVesselStatus > 0) {
 
                         //Other Burner Whistle Status
-                        if(centerWhistleToSet<=0 || rightTimerToSet<=0) {
+                        if (centerWhistleToSet <= 0 || rightWhistleToSet <= 0) {
 
+                            setWhistleVisible();
                             setWhistle(MathUtil.LEFT_BURNER);
-                            setWhistleBlock.setVisibility(View.VISIBLE);
-                            setTimerBlock.setVisibility(View.INVISIBLE);
-                        }else {
-                            Toast.makeText(getActivity(),"WhistleIsAlreadySetToAnotherBurnerPleaseResetToSetLeftBurner",Toast.LENGTH_SHORT).show();
+
+                            /*setWhistleBlock.setVisibility(View.VISIBLE);
+                            setTimerBlock.setVisibility(View.INVISIBLE);*/
+                        } else {
+
+                            if (centerWhistleToSet > 0) {
+                                callSnackBar("Whistle Is Already Set For Center Burner",v);
+                            } else if (rightWhistleToSet > 0) {
+                                callSnackBar("Whistle Is Already Set For Right Burner",v);
+                            }
+
+                            //Toast.makeText(getActivity(), "WhistleIsAlreadySetToAnotherBurnerPleaseResetToSetLeftBurner", Toast.LENGTH_SHORT).show();
                             System.out.println("WhistleIsAlreadySetToAnotherBurnerPleaseResetToSetLeftBurner");
                         }
 
 
-                    }else {
+                    } else {
+
+                        setInvisibleTimerAndWhistle();
+
                         //Toast.makeText(getActivity(),"VesselIsNotPlacedOnLeftBurnerToSetWhistle",Toast.LENGTH_SHORT).show();
+                        /*setTimerBlock.setVisibility(View.INVISIBLE);
+                        setWhistleBlock.setVisibility(View.INVISIBLE);*/
                         callSnackBar(MathUtil.VNPL, v);
                         System.out.println("VesselIsNotPlacedOnLeftBurnerToSetWhistle");
                     }
                 } else {
-                    setTimerBlock.setVisibility(View.INVISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);
+                    setInvisibleTimerAndWhistle();
+                    /*setTimerBlock.setVisibility(View.INVISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
                     callSnackBar(MathUtil.LBISA, v);
                     System.out.println("LeftBurnerIsNotActivated");
 
@@ -550,13 +562,16 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (leftBurnerStatus > 0) {
-                    setTimerBlock.setVisibility(View.VISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);
+                    setTimerVisible();
+                    /*setTimerBlock.setVisibility(View.VISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
                     setTimer(MathUtil.LEFT_BURNER);
                 } else {
                     System.out.println("LeftBurnerIsNotActivated");
-                    setTimerBlock.setVisibility(View.INVISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);
+
+                    setInvisibleTimerAndWhistle();
+                    /*setTimerBlock.setVisibility(View.INVISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
                     callSnackBar(MathUtil.LBISA, v);
                 }
 
@@ -569,26 +584,37 @@ public class CharacteristicListFragment extends Fragment {
             public void onClick(View v) {
                 if (rightBurnerStatus > 0) {
 
-                    if(rightVesselStatus>0){
+                    if (rightVesselStatus > 0) {
 
-                        if(leftWhistleToSet<=0 || centerWhistleToSet<=0 ) {
-
-                            setWhistleBlock.setVisibility(View.VISIBLE);
-                            setTimerBlock.setVisibility(View.INVISIBLE);
+                        if (leftWhistleToSet <= 0 || centerWhistleToSet <= 0) {
+                            setWhistleVisible();
+                            /*setWhistleBlock.setVisibility(View.VISIBLE);
+                            setTimerBlock.setVisibility(View.INVISIBLE);*/
                             setWhistle(MathUtil.RIGHT_BURNER);
-                        }else {
+                        } else {
+
+                            if(leftWhistleToSet>0){
+                                callSnackBar("Whistle Is Already Set For Left Burner",v);
+                            }else if(centerWhistleToSet>0){
+                                callSnackBar("Whistle Is Already Set For Center Burner",v);
+                            }
+
                             System.out.println("WhistleIsAlreadySetPleaseResetToSetRightBurner");
                         }
 
 
-                    }else {
+                    } else {
                         System.out.println("VesselIsNotPlacedOnRightBurnerToSetWhistle");
+                        setInvisibleTimerAndWhistle();
+                        callSnackBar(MathUtil.VNPR, v);
+
                     }
 
                 } else {
                     System.out.println("RightBurnerIsNotActivated");
-                    setTimerBlock.setVisibility(View.INVISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);
+                    setInvisibleTimerAndWhistle();
+                    /*setTimerBlock.setVisibility(View.INVISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
                     callSnackBar(MathUtil.RBINA, v);
 
                 }
@@ -601,13 +627,15 @@ public class CharacteristicListFragment extends Fragment {
             public void onClick(View v) {
 
                 if (rightBurnerStatus > 0) {
-                    setTimerBlock.setVisibility(View.VISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);
+                    setTimerVisible();
+                    /*setTimerBlock.setVisibility(View.VISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
                     setTimer(MathUtil.RIGHT_BURNER);
                 } else {
                     System.out.println("RightBurnerIsNotActivated");
-                    setTimerBlock.setVisibility(View.INVISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);
+                    setInvisibleTimerAndWhistle();
+                    /*setTimerBlock.setVisibility(View.INVISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
                     callSnackBar(MathUtil.RBINA, v);
 
                 }
@@ -620,13 +648,36 @@ public class CharacteristicListFragment extends Fragment {
             public void onClick(View v) {
 
                 if (centerBurnerStatus > 0) {
-                    setWhistleBlock.setVisibility(View.VISIBLE);
-                    setTimerBlock.setVisibility(View.INVISIBLE);
-                    setWhistle(MathUtil.CENTER_BURNER);
+
+                    if(centerVesselStatus>0) {
+
+                        if(leftWhistleToSet<=0 || rightWhistleToSet<=0) {
+
+
+                            setWhistleVisible();
+                    /*setWhistleBlock.setVisibility(View.VISIBLE);
+                    setTimerBlock.setVisibility(View.INVISIBLE);*/
+                            setWhistle(MathUtil.CENTER_BURNER);
+                        }else {
+
+                            if(leftWhistleToSet>0){
+                                callSnackBar("Whistle Is Already Set For Left Burner",v);
+                            }else if(rightWhistleToSet>0){
+                                callSnackBar("Whistle Is Already Set For Right Burner",v);
+                            }
+
+                        }
+
+                    }else {
+                        System.out.println("VesselIsNotPlacedOnCenterBurnerToSetWhistle");
+                        setInvisibleTimerAndWhistle();
+                        callSnackBar(MathUtil.VNPC, v);
+                    }
                 } else {
                     System.out.println("CenterBurnerIsNotActivated");
-                    setTimerBlock.setVisibility(View.INVISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);
+                    setInvisibleTimerAndWhistle();
+                    /*setTimerBlock.setVisibility(View.INVISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
                     callSnackBar(MathUtil.CBISA, v);
                 }
 
@@ -640,13 +691,15 @@ public class CharacteristicListFragment extends Fragment {
             public void onClick(View v) {
 
                 if (centerBurnerStatus > 0) {
-                    setTimerBlock.setVisibility(View.VISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);
+                    setTimerVisible();
+                    /*setTimerBlock.setVisibility(View.VISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
                     setTimer(MathUtil.CENTER_BURNER);
                 } else {
                     System.out.println("CenterBurnerIsNotActivated");
-                    setTimerBlock.setVisibility(View.INVISIBLE);
-                    setWhistleBlock.setVisibility(View.INVISIBLE);
+                    setInvisibleTimerAndWhistle();
+                    /*setTimerBlock.setVisibility(View.INVISIBLE);
+                    setWhistleBlock.setVisibility(View.INVISIBLE);*/
                     callSnackBar(MathUtil.CBISA, v);
                 }
 
@@ -675,13 +728,13 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                TextView eStopYes,eStopNo,eStopText;
+                TextView eStopYes, eStopNo, eStopText;
 
                 eStopDialog.setContentView(R.layout.layout_estop);
 
-                eStopYes=eStopDialog.findViewById(R.id.eStopYes);
-                eStopNo=eStopDialog.findViewById(R.id.eStopNo);
-                eStopText=eStopDialog.findViewById(R.id.e1);
+                eStopYes = eStopDialog.findViewById(R.id.eStopYes);
+                eStopNo = eStopDialog.findViewById(R.id.eStopNo);
+                eStopText = eStopDialog.findViewById(R.id.e1);
 
                 eStopText.setTypeface(octinPrisonFont);
                 eStopYes.setTypeface(octinPrisonFont);
@@ -800,70 +853,84 @@ public class CharacteristicListFragment extends Fragment {
         });
     }
 
+    private void setTimerVisible() {
+        setTimerBlock.setVisibility(View.VISIBLE);
+        setWhistleBlock.setVisibility(View.INVISIBLE);
+    }
+
+    private void setWhistleVisible() {
+        setWhistleBlock.setVisibility(View.VISIBLE);
+        setTimerBlock.setVisibility(View.INVISIBLE);
+    }
+
+    private void setInvisibleTimerAndWhistle() {
+        setTimerBlock.setVisibility(View.INVISIBLE);
+        setWhistleBlock.setVisibility(View.INVISIBLE);
+    }
 
 
     private void setTimer(final String burner) {
 
-      int resetStatus=0;
+        int resetStatus = 0;
 
 
-        if(burner.equals("00")){
+        if (burner.equals("00")) {
 
-            if(rightTimerToSet>=0){
-                setTimerCount.setText(""+rightTimerToSet);
-                timerCount=rightTimerToSet;
-                if(rightTimerToSet>0){
+            if (rightTimerToSet >= 0) {
+                setTimerCount.setText("" + rightTimerToSet);
+                timerCount = rightTimerToSet;
+                if (rightTimerToSet > 0) {
                     timerCancel.setVisibility(View.INVISIBLE);
                     timerReset.setVisibility(View.VISIBLE);
-                    resetStatus=1;
-                }else {
+                    resetStatus = 1;
+                } else {
                     timerCancel.setVisibility(View.VISIBLE);
                     timerReset.setVisibility(View.INVISIBLE);
                 }
-            }else if(rightTimerToSet<0) {
+            } else if (rightTimerToSet < 0) {
                 timerCancel.setVisibility(View.VISIBLE);
                 timerReset.setVisibility(View.INVISIBLE);
-                setTimerCount.setText(""+rightTimerToSet);
+                setTimerCount.setText("" + rightTimerToSet);
             }
 
 
-        }else if(burner.equals("01")){
+        } else if (burner.equals("01")) {
 
-            if(leftTimerToSet>=0){
-                setTimerCount.setText(""+leftTimerToSet);
-                timerCount=leftTimerToSet;
-                if(leftTimerToSet>0){
+            if (leftTimerToSet >= 0) {
+                setTimerCount.setText("" + leftTimerToSet);
+                timerCount = leftTimerToSet;
+                if (leftTimerToSet > 0) {
                     timerCancel.setVisibility(View.INVISIBLE);
                     timerReset.setVisibility(View.VISIBLE);
-                    resetStatus=2;
-                }else {
+                    resetStatus = 2;
+                } else {
                     timerCancel.setVisibility(View.VISIBLE);
                     timerReset.setVisibility(View.INVISIBLE);
                 }
-            }else  if(leftTimerToSet<0) {
+            } else if (leftTimerToSet < 0) {
                 timerCancel.setVisibility(View.VISIBLE);
                 timerReset.setVisibility(View.INVISIBLE);
-                setTimerCount.setText(""+leftTimerToSet);
+                setTimerCount.setText("" + leftTimerToSet);
             }
 
 
-        }else if(burner.equals("10")){
-            if(centerTimerToSet>=0){
-                setTimerCount.setText(""+centerTimerToSet);
-                timerCount=centerTimerToSet;
-                if(centerTimerToSet>0){
+        } else if (burner.equals("10")) {
+            if (centerTimerToSet >= 0) {
+                setTimerCount.setText("" + centerTimerToSet);
+                timerCount = centerTimerToSet;
+                if (centerTimerToSet > 0) {
                     timerCancel.setVisibility(View.INVISIBLE);
                     timerReset.setVisibility(View.VISIBLE);
-                    resetStatus=3;
-                }else {
+                    resetStatus = 3;
+                } else {
                     timerCancel.setVisibility(View.VISIBLE);
                     timerReset.setVisibility(View.INVISIBLE);
                 }
 
-            }else  if(centerTimerToSet<0){
+            } else if (centerTimerToSet < 0) {
                 timerCancel.setVisibility(View.VISIBLE);
                 timerReset.setVisibility(View.INVISIBLE);
-                setTimerCount.setText(""+centerTimerToSet);
+                setTimerCount.setText("" + centerTimerToSet);
             }
 
         }
@@ -874,7 +941,6 @@ public class CharacteristicListFragment extends Fragment {
         timerCancel.setTypeface(octinPrisonFont);
         timerTitle.setTypeface(octinPrisonFont);
         timerReset.setTypeface(octinPrisonFont);
-
 
 
         //mHandler.postDelayed(mRunnable,50000);
@@ -926,7 +992,6 @@ public class CharacteristicListFragment extends Fragment {
                 }
 
 
-
             }
         });
 
@@ -936,7 +1001,7 @@ public class CharacteristicListFragment extends Fragment {
             public void onClick(View v) {
 
 
-                timerCount=0;
+                timerCount = 0;
                 setTimerCount.setText("0");
                 setTimerBlock.setVisibility(View.INVISIBLE);
             }
@@ -947,11 +1012,11 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                timerCount=0;
+                timerCount = 0;
                 setTimerCount.setText("0");
 
 
-                if(finalResetStatus ==1){
+                if (finalResetStatus == 1) {
                     System.out.println("RightBurnerTimerIsReset");
                     if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
 
@@ -962,15 +1027,14 @@ public class CharacteristicListFragment extends Fragment {
                             @Override
                             public void run() {
                                 timerCount = 0;
-                                rightTimerToSet=0;
+                                rightTimerToSet = 0;
                             }
-                        },500);
-
+                        }, 500);
 
 
                     }
 
-                }else if(finalResetStatus==2){
+                } else if (finalResetStatus == 2) {
                     System.out.println("LeftBurnerTimerIsReset");
 
                     if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
@@ -982,13 +1046,13 @@ public class CharacteristicListFragment extends Fragment {
                             @Override
                             public void run() {
                                 timerCount = 0;
-                                leftTimerToSet=0;
+                                leftTimerToSet = 0;
                             }
-                        },500);
+                        }, 500);
 
                     }
 
-                }else if(finalResetStatus==3){
+                } else if (finalResetStatus == 3) {
                     System.out.println("CenterBurnerTimerIsReset");
                     if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
 
@@ -999,10 +1063,9 @@ public class CharacteristicListFragment extends Fragment {
                             @Override
                             public void run() {
                                 timerCount = 0;
-                                centerTimerToSet=0;
+                                centerTimerToSet = 0;
                             }
-                        },500);
-
+                        }, 500);
 
 
                     }
@@ -1102,7 +1165,7 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Timer is reset", Toast.LENGTH_LONG).show();
 
 //Send
 
@@ -1122,55 +1185,55 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
 
     private void setWhistle(final String burner) {
 
-        int resetWhistleStatus=0;
+        int resetWhistleStatus = 0;
 
-        if(burner.equals("00")){
+        if (burner.equals("00")) {
 
 
-            if(rightWhistleToSet>=0){
-                setWhistleCount.setText(""+rightWhistleToSet);
-                whistleCount=rightWhistleToSet;
+            if (rightWhistleToSet >= 0) {
+                setWhistleCount.setText("" + rightWhistleToSet);
+                whistleCount = rightWhistleToSet;
 
-                if(rightWhistleToSet>0){
+                if (rightWhistleToSet > 0) {
                     whistleCancel.setVisibility(View.INVISIBLE);
                     whistleReset.setVisibility(View.VISIBLE);
-                    resetWhistleStatus=1;
-                }else {
+                    resetWhistleStatus = 1;
+                } else {
                     whistleCancel.setVisibility(View.VISIBLE);
                     whistleReset.setVisibility(View.INVISIBLE);
                 }
 
             }
 
-        }else if(burner.equals("01")){
+        } else if (burner.equals("01")) {
 
 
-            if(leftWhistleToSet>=0){
-                setWhistleCount.setText(""+leftWhistleToSet);
-                whistleCount=leftWhistleToSet;
+            if (leftWhistleToSet >= 0) {
+                setWhistleCount.setText("" + leftWhistleToSet);
+                whistleCount = leftWhistleToSet;
 
-                if(leftWhistleToSet>0){
+                if (leftWhistleToSet > 0) {
                     whistleCancel.setVisibility(View.INVISIBLE);
                     whistleReset.setVisibility(View.VISIBLE);
-                    resetWhistleStatus=2;
-                }else {
+                    resetWhistleStatus = 2;
+                } else {
                     whistleCancel.setVisibility(View.VISIBLE);
                     whistleReset.setVisibility(View.INVISIBLE);
                 }
 
             }
 
-        }else if(burner.equals("10")){
+        } else if (burner.equals("10")) {
 
-            if(centerWhistleToSet>=0){
-                setWhistleCount.setText(""+centerWhistleToSet);
-                whistleCount=centerWhistleToSet;
+            if (centerWhistleToSet >= 0) {
+                setWhistleCount.setText("" + centerWhistleToSet);
+                whistleCount = centerWhistleToSet;
 
-                if(centerWhistleToSet>0){
+                if (centerWhistleToSet > 0) {
                     whistleCancel.setVisibility(View.INVISIBLE);
                     whistleReset.setVisibility(View.VISIBLE);
-                    resetWhistleStatus=3;
-                }else {
+                    resetWhistleStatus = 3;
+                } else {
                     whistleCancel.setVisibility(View.VISIBLE);
                     whistleReset.setVisibility(View.INVISIBLE);
                 }
@@ -1195,7 +1258,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
             }
         });
 
-       // mHandler.postDelayed(mRunnable,50000);
+        // mHandler.postDelayed(mRunnable,50000);
 
         whistleSub.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1218,10 +1281,10 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
             @Override
             public void onClick(View v) {
 
-                whistleCount=0;
+                whistleCount = 0;
                 //setWhistleCount.setText("0");
 
-                if(finalResetWhistleStatus==1){
+                if (finalResetWhistleStatus == 1) {
                     if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
                         callMe(1, "00", 0, 0, 0, 2);
 
@@ -1229,13 +1292,13 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
                             @Override
                             public void run() {
                                 whistleCount = 0;
-                                rightWhistleToSet=0;
-                                leftWhistleToSet=0;
-                                centerWhistleToSet=0;
+                                rightWhistleToSet = 0;
+                                leftWhistleToSet = 0;
+                                centerWhistleToSet = 0;
                             }
-                        },500);
+                        }, 500);
                     }
-                }else if(finalResetWhistleStatus==2){
+                } else if (finalResetWhistleStatus == 2) {
 
                     if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
                         callMe(1, "01", 0, 0, 0, 2);
@@ -1244,15 +1307,15 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
                             @Override
                             public void run() {
                                 whistleCount = 0;
-                                leftWhistleToSet=0;
-                                rightWhistleToSet=0;
-                                centerWhistleToSet=0;
+                                leftWhistleToSet = 0;
+                                rightWhistleToSet = 0;
+                                centerWhistleToSet = 0;
                             }
-                        },500);
+                        }, 500);
                     }
 
 
-                }else if(finalResetWhistleStatus==3){
+                } else if (finalResetWhistleStatus == 3) {
                     if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
                         callMe(1, "10", 0, 0, 0, 2);
 
@@ -1260,11 +1323,11 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
                             @Override
                             public void run() {
                                 whistleCount = 0;
-                                centerWhistleToSet=0;
-                                leftWhistleToSet=0;
-                                rightWhistleToSet=0;
+                                centerWhistleToSet = 0;
+                                leftWhistleToSet = 0;
+                                rightWhistleToSet = 0;
                             }
-                        },500);
+                        }, 500);
                     }
                 }
 
@@ -1296,15 +1359,13 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
                 }
 
 
-
-
             }
         });
 
         whistleCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                whistleCount=0;
+                whistleCount = 0;
                 setWhistleCount.setText("0");
                 setWhistleBlock.setVisibility(View.INVISIBLE);
             }
@@ -1398,6 +1459,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
 */
 
     }
+
     private void callSnackBar(String burnerStatus, View v) {
 
         Snackbar snack = Snackbar.make(v, burnerStatus, Snackbar.LENGTH_SHORT);
@@ -1551,7 +1613,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                   // Toast.makeText(getActivity(), "Write Success", Toast.LENGTH_LONG).show();
+                                    // Toast.makeText(getActivity(), "Write Success", Toast.LENGTH_LONG).show();
                                 }
                             });
                         }
@@ -1562,7 +1624,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
                                 @Override
                                 public void run() {
 
-                                   //Toast.makeText(getActivity(), "Write Failed", Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(getActivity(), "Write Failed", Toast.LENGTH_LONG).show();
 
                                     System.out.println("Exception" + exception.toString());
                                 }
@@ -1675,7 +1737,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
             BluetoothGattCharacteristic characteristic = ((OperationActivity) getActivity()).getCharacteristic();
 
 
-           // Toast.makeText(getActivity(), "New Data Write", Toast.LENGTH_LONG).show();
+            // Toast.makeText(getActivity(), "New Data Write", Toast.LENGTH_LONG).show();
 
             BleManager.getInstance().write(
                     bleDevice,
@@ -1693,7 +1755,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
 
                                     setWhistleBlock.setVisibility(View.INVISIBLE);
 
-                                   // Toast.makeText(getActivity(), "Whistle Is Set", Toast.LENGTH_LONG).show();
+                                    // Toast.makeText(getActivity(), "Whistle Is Set", Toast.LENGTH_LONG).show();
 
                                 }
                             });
@@ -1705,7 +1767,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
                                 @Override
                                 public void run() {
 
-                                   // Toast.makeText(getActivity(), "Whistle  Is Not Set", Toast.LENGTH_LONG).show();
+                                    // Toast.makeText(getActivity(), "Whistle  Is Not Set", Toast.LENGTH_LONG).show();
 
                                     System.out.println("TimerException" + exception.toString());
                                 }
@@ -1835,7 +1897,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
 
                                     setTimerBlock.setVisibility(View.INVISIBLE);
 
-                                   // Toast.makeText(getActivity(), "Timer Is Set", Toast.LENGTH_LONG).show();
+                                    // Toast.makeText(getActivity(), "Timer Is Set", Toast.LENGTH_LONG).show();
 
                                 }
                             });
@@ -1963,7 +2025,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
     private void splitEachBurnerDataFromReceivedByte(byte[] data) {
 
         //Validation Block
-        if(data[0]!=42){
+        if (data[0] != 42) {
             getActivity().finish();
         }//End of Validation Block
 
@@ -2178,9 +2240,9 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
         int count = nonReadNotiCount.size();
 
         if (count > 0) {
-            if(count<100){
+            if (count < 100) {
                 notificationCount.setText("" + count);
-            }else {
+            } else {
                 notificationCount.setText("99+");
             }
 
@@ -2197,69 +2259,69 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
 
         if (rightWhistle <= 0) {
             selectedRightWhistleCount.setText("");
-            rightWhistleToSet=0;
+            rightWhistleToSet = 0;
 
 
         } else {
 
             selectedRightWhistleCount.setText("" + rightWhistle);
             selectedRightWhistleCount.setTypeface(octinPrisonFont);
-            rightWhistleToSet=rightWhistle;
+            rightWhistleToSet = rightWhistle;
 
         }
 
         if (rightTimer <= 0) {
-            rightTimerToSet=0;
+            rightTimerToSet = 0;
             stopBlinking(selectedRightTimer);
             selectedRightTimerCount.setText("");
         } else {
             startBlinking(selectedRightTimer);
             selectedRightTimerCount.setText("" + rightTimer + "min");
             selectedRightTimerCount.setTypeface(octinPrisonFont);
-            rightTimerToSet=rightTimer;
+            rightTimerToSet = rightTimer;
         }
 
         if (leftWhistle <= 0) {
             selectedLeftWhistleCount.setText("");
-            leftWhistleToSet=0;
+            leftWhistleToSet = 0;
         } else {
             selectedLeftWhistleCount.setText("" + leftWhistle);
             selectedLeftWhistleCount.setTypeface(octinPrisonFont);
-            leftWhistleToSet=leftWhistle;
+            leftWhistleToSet = leftWhistle;
 
         }
 
         if (leftTimer <= 0) {
-            leftTimerToSet=0;
+            leftTimerToSet = 0;
             stopBlinking(selectedLeftTimer);
             selectedLeftTimerCount.setText("");
         } else {
             startBlinking(selectedLeftTimer);
             selectedLeftTimerCount.setText("" + leftTimer + "min");
             selectedLeftTimerCount.setTypeface(octinPrisonFont);
-            leftTimerToSet=leftTimer;
+            leftTimerToSet = leftTimer;
 
         }
 
 
         if (centerWhistle <= 0) {
             selectedCenterWhistleCount.setText("");
-            centerWhistleToSet=0;
+            centerWhistleToSet = 0;
         } else {
             selectedCenterWhistleCount.setText("" + centerWhistle);
             selectedCenterWhistleCount.setTypeface(octinPrisonFont);
-            centerWhistleToSet=centerWhistle;
+            centerWhistleToSet = centerWhistle;
         }
 
         if (centerTimer <= 0) {
-            centerTimerToSet=0;
+            centerTimerToSet = 0;
             stopBlinking(selectedCenterTimer);
             selectedCenterTimerCount.setText("");
         } else {
             startBlinking(selectedCenterTimer);
             selectedCenterTimerCount.setText("" + centerTimer + "min");
             selectedCenterTimerCount.setTypeface(octinPrisonFont);
-            centerTimerToSet=centerTimer;
+            centerTimerToSet = centerTimer;
         }
 
 
@@ -2284,9 +2346,9 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
         leftBurnerStatus = leftFlameMode;
         centerBurnerStatus = centerFlameMode;
 
-        rightVesselStatus=rightVessel;
-        leftVesselStatus=leftVessel;
-        centerVesselStatus=centerVessel;
+        rightVesselStatus = rightVessel;
+        leftVesselStatus = leftVessel;
+        centerVesselStatus = centerVessel;
 
         if (rightFlameMode == 0) {
             rightOff.setTextColor(Color.RED);
@@ -2630,8 +2692,6 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
         octinPrisonFont = FontUtil.getOctinPrisonFont(getActivity());
 
     }
-
-
 
 
 }

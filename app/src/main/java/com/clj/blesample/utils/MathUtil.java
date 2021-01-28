@@ -43,6 +43,8 @@ public class MathUtil {
     public static final String VNPC="Vessel Is Not Placed On Center Burner";
     public static final String VNPR="Vessel Is Not Placed On Right Burner";
 
+    //public static final String
+
     //0- non read
     //1-read
 
