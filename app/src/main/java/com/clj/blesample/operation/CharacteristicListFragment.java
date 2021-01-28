@@ -512,8 +512,10 @@ public class CharacteristicListFragment extends Fragment {
                         } else {
 
                             if (centerWhistleToSet > 0) {
+                                setInvisibleTimerAndWhistle();
                                 callSnackBar("Whistle Is Already Set For Center Burner",v);
                             } else if (rightWhistleToSet > 0) {
+                                setInvisibleTimerAndWhistle();
                                 callSnackBar("Whistle Is Already Set For Right Burner",v);
                             }
                             System.out.println("WhistleIsAlreadySetToAnotherBurnerPleaseResetToSetLeftBurner");
@@ -554,7 +556,6 @@ public class CharacteristicListFragment extends Fragment {
                     }
                 } else {
                     System.out.println("LeftBurnerIsNotActivated");
-
                     setInvisibleTimerAndWhistle();
                     callSnackBar(MathUtil.LBISA, v);
                 }
@@ -576,8 +577,10 @@ public class CharacteristicListFragment extends Fragment {
                         } else {
 
                             if(leftWhistleToSet>0){
+                                setInvisibleTimerAndWhistle();
                                 callSnackBar("Whistle Is Already Set For Left Burner",v);
                             }else if(centerWhistleToSet>0){
+                                setInvisibleTimerAndWhistle();
                                 callSnackBar("Whistle Is Already Set For Center Burner",v);
                             }
 
@@ -644,8 +647,10 @@ public class CharacteristicListFragment extends Fragment {
                         }else {
 
                             if(leftWhistleToSet>0){
+                                setInvisibleTimerAndWhistle();
                                 callSnackBar("Whistle Is Already Set For Left Burner",v);
                             }else if(rightWhistleToSet>0){
+                                setInvisibleTimerAndWhistle();
                                 callSnackBar("Whistle Is Already Set For Right Burner",v);
                             }
 
@@ -2679,4 +2684,31 @@ public class CharacteristicListFragment extends Fragment {
         alert.show();
 
     }
+
+    /*@Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        Toast.makeText(getActivity(),"OnDestroyCalled",Toast.LENGTH_LONG).show();
+
+        System.out.println("OnDestroyCalled");
+
+        getActivity().finish();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Toast.makeText(getActivity(),"onDestroyViewCalled",Toast.LENGTH_LONG).show();
+        System.out.println("onDestroyViewCalled");
+        getActivity().finish();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Toast.makeText(getActivity(),"onDetachCalled",Toast.LENGTH_LONG).show();
+        System.out.println("onDetachCalled");
+        getActivity().finish();
+    }*/
 }

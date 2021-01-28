@@ -108,7 +108,7 @@ public class OperationActivity extends AppCompatActivity implements Observer {
             PreferencesUtil.setValueSInt(OperationActivity.this,PreferencesUtil.BLE_RSSI,bleDevice.getRssi());
         }
 
-        System.out.println("DeviceDetails"+bleDevice.getName()+" "+bleDevice.getMac()+" "+bleDevice.getRssi()+" "+bleDevice.getKey()+" "+bleDevice.getDevice()+" "+bleDevice.describeContents()+" "+bleDevice.getScanRecord()+" "+bleDevice.getTimestampNanos());
+        //System.out.println("DeviceDetails"+bleDevice.getName()+" "+bleDevice.getMac()+" "+bleDevice.getRssi()+" "+bleDevice.getKey()+" "+bleDevice.getDevice()+" "+bleDevice.describeContents()+" "+bleDevice.getScanRecord()+" "+bleDevice.getTimestampNanos());
 
         if (bleDevice == null)
             finish();
