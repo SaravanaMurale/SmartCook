@@ -109,6 +109,7 @@ public class CharacteristicListFragment extends Fragment {
     ImageView eStop;
 
     int leftBurnerStatus, rightBurnerStatus, centerBurnerStatus = 0;
+    int leftVesselStatus, rightVesselStatus,centerVesselStatus=0;
 
     ImageView selectBatteryStatus;
 
@@ -510,10 +511,29 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                //Burner Status
                 if (leftBurnerStatus > 0) {
-                    setWhistle(MathUtil.LEFT_BURNER);
-                    setWhistleBlock.setVisibility(View.VISIBLE);
-                    setTimerBlock.setVisibility(View.INVISIBLE);
+
+                    //Vessel Status
+                    if(leftVesselStatus>0) {
+
+                        //Other Burner Whistle Status
+                        if(centerWhistleToSet<=0 || rightTimerToSet<=0) {
+
+                            setWhistle(MathUtil.LEFT_BURNER);
+                            setWhistleBlock.setVisibility(View.VISIBLE);
+                            setTimerBlock.setVisibility(View.INVISIBLE);
+                        }else {
+                            Toast.makeText(getActivity(),"WhistleIsAlreadySetToAnotherBurnerPleaseResetToSetLeftBurner",Toast.LENGTH_SHORT).show();
+                            System.out.println("WhistleIsAlreadySetToAnotherBurnerPleaseResetToSetLeftBurner");
+                        }
+
+
+                    }else {
+                        //Toast.makeText(getActivity(),"VesselIsNotPlacedOnLeftBurnerToSetWhistle",Toast.LENGTH_SHORT).show();
+                        callSnackBar(MathUtil.VNPL, v);
+                        System.out.println("VesselIsNotPlacedOnLeftBurnerToSetWhistle");
+                    }
                 } else {
                     setTimerBlock.setVisibility(View.INVISIBLE);
                     setWhistleBlock.setVisibility(View.INVISIBLE);
@@ -548,9 +568,22 @@ public class CharacteristicListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (rightBurnerStatus > 0) {
-                    setWhistleBlock.setVisibility(View.VISIBLE);
-                    setTimerBlock.setVisibility(View.INVISIBLE);
-                    setWhistle(MathUtil.RIGHT_BURNER);
+
+                    if(rightVesselStatus>0){
+
+                        if(leftWhistleToSet<=0 || centerWhistleToSet<=0 ) {
+
+                            setWhistleBlock.setVisibility(View.VISIBLE);
+                            setTimerBlock.setVisibility(View.INVISIBLE);
+                            setWhistle(MathUtil.RIGHT_BURNER);
+                        }else {
+                            System.out.println("WhistleIsAlreadySetPleaseResetToSetRightBurner");
+                        }
+
+
+                    }else {
+                        System.out.println("VesselIsNotPlacedOnRightBurnerToSetWhistle");
+                    }
 
                 } else {
                     System.out.println("RightBurnerIsNotActivated");
@@ -2176,6 +2209,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
         }
 
         if (rightTimer <= 0) {
+            rightTimerToSet=0;
             stopBlinking(selectedRightTimer);
             selectedRightTimerCount.setText("");
         } else {
@@ -2196,6 +2230,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
         }
 
         if (leftTimer <= 0) {
+            leftTimerToSet=0;
             stopBlinking(selectedLeftTimer);
             selectedLeftTimerCount.setText("");
         } else {
@@ -2217,6 +2252,7 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
         }
 
         if (centerTimer <= 0) {
+            centerTimerToSet=0;
             stopBlinking(selectedCenterTimer);
             selectedCenterTimerCount.setText("");
         } else {
@@ -2247,6 +2283,10 @@ Toast.makeText(getActivity(),"Timer is reset",Toast.LENGTH_LONG).show();
         rightBurnerStatus = rightFlameMode;
         leftBurnerStatus = leftFlameMode;
         centerBurnerStatus = centerFlameMode;
+
+        rightVesselStatus=rightVessel;
+        leftVesselStatus=leftVessel;
+        centerVesselStatus=centerVessel;
 
         if (rightFlameMode == 0) {
             rightOff.setTextColor(Color.RED);

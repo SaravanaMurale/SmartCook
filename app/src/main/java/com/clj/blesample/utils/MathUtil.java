@@ -39,6 +39,10 @@ public class MathUtil {
     public static final String LBISA="Left Burner Is Not Activated";
     public static final String CBISA="Center Burner Is Not Activated";
 
+    public static final String VNPL="Vessel Is Not Placed On Left Burner";
+    public static final String VNPC="Vessel Is Not Placed On Center Burner";
+    public static final String VNPR="Vessel Is Not Placed On Right Burner";
+
     //0- non read
     //1-read
 
