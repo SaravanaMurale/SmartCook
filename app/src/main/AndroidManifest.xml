@@ -12,7 +12,6 @@
         tools:replace="android:icon,android:theme">
         <!--<activity android:name=".TimerTaskActivity"></activity>-->
         <!-- <activity android:name=".CircularActivity"></activity> -->
-        <activity android:name=".notificationpackage.NotificationAct" />
         <activity
             android:name=".menuoperationactivity.NotificationActivity"
             android:screenOrientation="portrait" />
@@ -66,7 +65,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
 </manifest>
