@@ -161,37 +161,11 @@ public class SqliteManager extends SQLiteOpenHelper {
                 ");";
 
 
-        String notiRight = "CREATE TABLE IF NOT EXISTS " + RIGHT_TABLE + "(\n" +
-                "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
-                "    " + RI_VESSELL_STATUS + " INTEGER(200) NOT NULL,\n" +
-                "    " + RI_BURNER + " varchar(200) NOT NULL\n" +
-                ");";
-
-        String notiLeft = "CREATE TABLE IF NOT EXISTS " + LEFT_TABLE + "(\n" +
-                "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
-                "    " + LE_VESSELL_STATUS + " INTEGER(200) NOT NULL,\n" +
-                "    " + LE_BURNER + " varchar(200) NOT NULL\n" +
-                ");";
-
-        String notiCenter = "CREATE TABLE IF NOT EXISTS " + CENTER_TABLE + "(\n" +
-                "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
-                "    " + CE_VESSELL_STATUS + " INTEGER(200) NOT NULL,\n" +
-                "    " + CE_BURNER + " varchar(200) NOT NULL\n" +
-                ");";
-
-
-        /*db.execSQL(sql);
-        db.execSQL(statisticsTable);*/
 
         db.execSQL(gasConPatTable);
         db.execSQL(signUpTable);
         db.execSQL(saveImage);
-        //db.execSQL(notificationTable);
         db.execSQL(notificationAlertTable);
-
-        //db.execSQL(notiRight);
-        //db.execSQL(notiLeft);
-        //db.execSQL(notiCenter);
 
 
     }

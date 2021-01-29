@@ -1377,7 +1377,7 @@ public class CharacteristicListFragment extends Fragment {
             int selectedTimer = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.TIMER_IN_MINUTE);
             int selectedWhistle = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.WHISTLE_IN_COUNT);*/
 
-            if (burner.equals("00")) {
+            if (burner.equals(MathUtil.RIGHT_BURNER)) {
                 if (whistleInCount > 0) {
 
                     sqliteManager.setNotification(whistleInCount + " Whistle is set for Right Burner");
@@ -1387,7 +1387,7 @@ public class CharacteristicListFragment extends Fragment {
                     sqliteManager.setNotification(selectedTimer + " Min Timer is set for Right Burner");
                     //sqliteManager.getNonReadNotifications();
                 }*/
-            } else if (burner.equals("01")) {
+            } else if (burner.equals(MathUtil.LEFT_BURNER)) {
 
                 if (whistleInCount > 0) {
                     sqliteManager.setNotification(whistleInCount + " Whistle is set for Left Burner");
@@ -1398,7 +1398,7 @@ public class CharacteristicListFragment extends Fragment {
                     //sqliteManager.getNonReadNotifications();
                 }*/
 
-            } else if (burner.equals("10")) {
+            } else if (burner.equals(MathUtil.CENTER_BURNER)) {
                 if (whistleInCount > 0) {
                     sqliteManager.setNotification(whistleInCount + " Whistle is set for Center Burner");
                     //sqliteManager.getNonReadNotifications();
@@ -2375,7 +2375,8 @@ public class CharacteristicListFragment extends Fragment {
             if (count < 100) {
                 notificationCount.setText("" + count);
             } else {
-                notificationCount.setText("99+");
+                notificationCount.setText("99");
+                notificationCount.setTypeface(octinPrisonFont);
             }
 
         } else {
