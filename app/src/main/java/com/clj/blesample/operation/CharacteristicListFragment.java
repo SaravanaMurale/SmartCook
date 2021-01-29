@@ -24,19 +24,16 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.clj.blesample.R;
 import com.clj.blesample.databasemanager.SqliteManager;
-import com.clj.blesample.menuoperationactivity.EditActivity;
 import com.clj.blesample.menuoperationactivity.MenuActivity;
 import com.clj.blesample.menuoperationactivity.NotificationActivity;
 import com.clj.blesample.menuoperationactivity.ProfileSettingsActivity;
@@ -51,13 +48,14 @@ import com.clj.fastble.callback.BleNotifyCallback;
 import com.clj.fastble.callback.BleWriteCallback;
 import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.exception.BleException;
-import com.sdsmdg.harjot.crollerTest.Croller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -84,6 +82,8 @@ public class CharacteristicListFragment extends Fragment {
     TextView menuIcon;
     ImageView notificationIcon;
     Typeface octinPrisonFont;
+
+    Snackbar snack;
 
     ImageView selectedLeftWhistle, selectedRightWhistle, selectedCenterWhistle, selectedLeftTimer, selectedRightTimer, selectedCenterTimer;
 
@@ -129,6 +129,9 @@ public class CharacteristicListFragment extends Fragment {
     Runnable mRunnable;
     Handler mHandler;
 
+    Timer timer;
+    TimerTask timerTask;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -142,7 +145,6 @@ public class CharacteristicListFragment extends Fragment {
         getFont();
 
         startBlinking(selectBluetoothStatus);
-
 
         mHandler = new Handler();
         mRunnable = new Runnable() {
@@ -507,29 +509,37 @@ public class CharacteristicListFragment extends Fragment {
                         //Other Burner Whistle Status
                         if (centerWhistleToSet <= 0 && rightWhistleToSet <= 0) {
 
-                            setWhistleVisible();
+                            /*if(snack!=null){
+
+                                snack.dismiss();
+                            }*/
+                            stopBGTimerTask(2);
+                            startBGTimerTast(2);
+
+                            //setWhistleVisible();
                             setWhistle(MathUtil.LEFT_BURNER);
+
                         } else {
 
                             if (centerWhistleToSet > 0) {
                                 setInvisibleTimerAndWhistle();
-                                callSnackBar("Whistle Is Already Set For Center Burner",v);
+                                callSnackBar("Whistle Is Already Set For Center Burner", v);
                             } else if (rightWhistleToSet > 0) {
                                 setInvisibleTimerAndWhistle();
-                                callSnackBar("Whistle Is Already Set For Right Burner",v);
+                                callSnackBar("Whistle Is Already Set For Right Burner", v);
                             }
-                            System.out.println("WhistleIsAlreadySetToAnotherBurnerPleaseResetToSetLeftBurner");
+                            //System.out.println("WhistleIsAlreadySetToAnotherBurnerPleaseResetToSetLeftBurner");
                         }
 
 
                     } else {
-                        System.out.println("VesselIsNotPlacedOnLeftBurnerToSetWhistle");
+                        //System.out.println("VesselIsNotPlacedOnLeftBurnerToSetWhistle");
                         setInvisibleTimerAndWhistle();
                         callSnackBar(MathUtil.VNPL, v);
 
                     }
                 } else {
-                    System.out.println("LeftBurnerIsNotActivated");
+                    //System.out.println("LeftBurnerIsNotActivated");
                     setInvisibleTimerAndWhistle();
                     callSnackBar(MathUtil.LBISA, v);
 
@@ -545,17 +555,20 @@ public class CharacteristicListFragment extends Fragment {
             public void onClick(View v) {
                 if (leftBurnerStatus > 0) {
 
-                    if(leftVesselStatus>0) {
+                    if (leftVesselStatus > 0) {
 
-                        setTimerVisible();
+                        //snack.dismiss();
+                        stopBGTimerTask(1);
+                        startBGTimerTast(1);
+                        //setTimerVisible();
                         setTimer(MathUtil.LEFT_BURNER);
-                    }else {
+                    } else {
                         setInvisibleTimerAndWhistle();
                         callSnackBar(MathUtil.VNPLT, v);
-                        System.out.println("VesselIsNotPlacedOnLeftBurnerToSetTimer");
+                        //System.out.println("VesselIsNotPlacedOnLeftBurnerToSetTimer");
                     }
                 } else {
-                    System.out.println("LeftBurnerIsNotActivated");
+                    //System.out.println("LeftBurnerIsNotActivated");
                     setInvisibleTimerAndWhistle();
                     callSnackBar(MathUtil.LBISA, v);
                 }
@@ -572,31 +585,35 @@ public class CharacteristicListFragment extends Fragment {
                     if (rightVesselStatus > 0) {
 
                         if (leftWhistleToSet <= 0 && centerWhistleToSet <= 0) {
-                            setWhistleVisible();
+
+                           // snack.dismiss();
+                            stopBGTimerTask(2);
+                            startBGTimerTast(2);
+                            //setWhistleVisible();
                             setWhistle(MathUtil.RIGHT_BURNER);
                         } else {
 
-                            if(leftWhistleToSet>0){
+                            if (leftWhistleToSet > 0) {
                                 setInvisibleTimerAndWhistle();
-                                callSnackBar("Whistle Is Already Set For Left Burner",v);
-                            }else if(centerWhistleToSet>0){
+                                callSnackBar("Whistle Is Already Set For Left Burner", v);
+                            } else if (centerWhistleToSet > 0) {
                                 setInvisibleTimerAndWhistle();
-                                callSnackBar("Whistle Is Already Set For Center Burner",v);
+                                callSnackBar("Whistle Is Already Set For Center Burner", v);
                             }
 
-                            System.out.println("WhistleIsAlreadySetPleaseResetToSetRightBurner");
+                            //System.out.println("WhistleIsAlreadySetPleaseResetToSetRightBurner");
                         }
 
 
                     } else {
-                        System.out.println("VesselIsNotPlacedOnRightBurnerToSetWhistle");
+                        //System.out.println("VesselIsNotPlacedOnRightBurnerToSetWhistle");
                         setInvisibleTimerAndWhistle();
                         callSnackBar(MathUtil.VNPR, v);
 
                     }
 
                 } else {
-                    System.out.println("RightBurnerIsNotActivated");
+                    //System.out.println("RightBurnerIsNotActivated");
                     setInvisibleTimerAndWhistle();
                     callSnackBar(MathUtil.RBINA, v);
 
@@ -611,17 +628,20 @@ public class CharacteristicListFragment extends Fragment {
 
                 if (rightBurnerStatus > 0) {
 
-                    if(rightVesselStatus>0) {
+                    if (rightVesselStatus > 0) {
 
-                        setTimerVisible();
+                        //snack.dismiss();
+                        stopBGTimerTask(1);
+                        startBGTimerTast(1);
+                        //setTimerVisible();
                         setTimer(MathUtil.RIGHT_BURNER);
-                    }else {
+                    } else {
                         setInvisibleTimerAndWhistle();
                         callSnackBar(MathUtil.VNPRT, v);
-                        System.out.println("VesselIsNotPlacedOnRightBurnerToSetTimer");
+                        //System.out.println("VesselIsNotPlacedOnRightBurnerToSetTimer");
                     }
                 } else {
-                    System.out.println("RightBurnerIsNotActivated");
+                    //System.out.println("RightBurnerIsNotActivated");
                     setInvisibleTimerAndWhistle();
                     callSnackBar(MathUtil.RBINA, v);
 
@@ -636,33 +656,36 @@ public class CharacteristicListFragment extends Fragment {
 
                 if (centerBurnerStatus > 0) {
 
-                    System.out.println("WhistleSetToCheck"+centerBurnerStatus+" "+centerVesselStatus+" "+leftWhistleToSet+" "+rightWhistleToSet);
+                    //System.out.println("WhistleSetToCheck" + centerBurnerStatus + " " + centerVesselStatus + " " + leftWhistleToSet + " " + rightWhistleToSet);
 
-                    if(centerVesselStatus>0) {
+                    if (centerVesselStatus > 0) {
 
-                        if(leftWhistleToSet<=0 && rightWhistleToSet<=0) {
+                        if (leftWhistleToSet <= 0 && rightWhistleToSet <= 0) {
 
-                            setWhistleVisible();
+                            //snack.dismiss();
+                            stopBGTimerTask(2);
+                            startBGTimerTast(2);
+                            //setWhistleVisible();
                             setWhistle(MathUtil.CENTER_BURNER);
-                        }else {
+                        } else {
 
-                            if(leftWhistleToSet>0){
+                            if (leftWhistleToSet > 0) {
                                 setInvisibleTimerAndWhistle();
-                                callSnackBar("Whistle Is Already Set For Left Burner",v);
-                            }else if(rightWhistleToSet>0){
+                                callSnackBar("Whistle Is Already Set For Left Burner", v);
+                            } else if (rightWhistleToSet > 0) {
                                 setInvisibleTimerAndWhistle();
-                                callSnackBar("Whistle Is Already Set For Right Burner",v);
+                                callSnackBar("Whistle Is Already Set For Right Burner", v);
                             }
 
                         }
 
-                    }else {
-                        System.out.println("VesselIsNotPlacedOnCenterBurnerToSetWhistle");
+                    } else {
+                       // System.out.println("VesselIsNotPlacedOnCenterBurnerToSetWhistle");
                         setInvisibleTimerAndWhistle();
                         callSnackBar(MathUtil.VNPC, v);
                     }
                 } else {
-                    System.out.println("CenterBurnerIsNotActivated");
+                    //System.out.println("CenterBurnerIsNotActivated");
                     setInvisibleTimerAndWhistle();
                     callSnackBar(MathUtil.CBISA, v);
                 }
@@ -678,17 +701,20 @@ public class CharacteristicListFragment extends Fragment {
 
                 if (centerBurnerStatus > 0) {
 
-                    if(centerVesselStatus>0) {
+                    if (centerVesselStatus > 0) {
 
-                        setTimerVisible();
+                       // snack.dismiss();
+                        stopBGTimerTask(1);
+                        startBGTimerTast(1);
+                        //setTimerVisible();
                         setTimer(MathUtil.CENTER_BURNER);
-                    }else {
+                    } else {
                         setInvisibleTimerAndWhistle();
                         callSnackBar(MathUtil.VNPCT, v);
-                        System.out.println("VesselIsNotPlacedOnCenterBurnerToSetTimer");
+                       // System.out.println("VesselIsNotPlacedOnCenterBurnerToSetTimer");
                     }
                 } else {
-                    System.out.println("CenterBurnerIsNotActivated");
+                   // System.out.println("CenterBurnerIsNotActivated");
                     setInvisibleTimerAndWhistle();
                     callSnackBar(MathUtil.CBISA, v);
                 }
@@ -696,7 +722,6 @@ public class CharacteristicListFragment extends Fragment {
 
             }
         });
-
 
 
         eStop.setOnClickListener(new View.OnClickListener() {
@@ -852,7 +877,48 @@ public class CharacteristicListFragment extends Fragment {
         });
     }
 
+    private void startBGTimerTast(int i) {
+        //viewButton.setVisibility(View.VISIBLE);
+        //set a new Timer
+        timer = new Timer();
 
+        //initialize the TimerTask's job
+        initializeTimerTask();
+
+        //schedule the timer, after the first 5000ms the TimerTask will run every 10000ms
+        timer.schedule(timerTask, 3000);
+        //timer.schedule(timerTask, 1000, 0); //
+    }
+
+    private void initializeTimerTask() {
+        timerTask = new TimerTask() {
+
+            @Override
+            public void run() {
+
+                setInvisibleTimerAndWhistle();
+
+
+            }
+        };
+    }
+
+    private void stopBGTimerTask(int i) {
+
+        //stop the timer, if it's not already null
+        if (timer != null) {
+            timer.cancel();
+            if (i == 1) {
+                setTimerVisible();
+            } else if (i == 2) {
+                setWhistleVisible();
+            }
+
+            timer = null;
+        }
+
+
+    }
 
 
     private void setTimer(final String burner) {
@@ -934,7 +1000,8 @@ public class CharacteristicListFragment extends Fragment {
         timerAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                stopBGTimerTask(1);
+                startBGTimerTast(1);
                 timerSub.setEnabled(true);
                 timerCount = timerCount + 1;
                 setTimerCount.setText("" + timerCount);
@@ -944,6 +1011,8 @@ public class CharacteristicListFragment extends Fragment {
         timerSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                stopBGTimerTask(1);
+                startBGTimerTast(1);
                 if (timerCount > 0) {
                     timerSub.setEnabled(true);
                     timerCount = timerCount - 1;
@@ -1003,7 +1072,7 @@ public class CharacteristicListFragment extends Fragment {
 
 
                 if (finalResetStatus == 1) {
-                    System.out.println("RightBurnerTimerIsReset");
+                    //System.out.println("RightBurnerTimerIsReset");
                     if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
 
 
@@ -1021,7 +1090,7 @@ public class CharacteristicListFragment extends Fragment {
                     }
 
                 } else if (finalResetStatus == 2) {
-                    System.out.println("LeftBurnerTimerIsReset");
+                    //System.out.println("LeftBurnerTimerIsReset");
 
                     if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
 
@@ -1039,7 +1108,7 @@ public class CharacteristicListFragment extends Fragment {
                     }
 
                 } else if (finalResetStatus == 3) {
-                    System.out.println("CenterBurnerTimerIsReset");
+                    //System.out.println("CenterBurnerTimerIsReset");
                     if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
 
 
@@ -1141,7 +1210,6 @@ public class CharacteristicListFragment extends Fragment {
     }
 
 
-
     private void setWhistle(final String burner) {
 
         int resetWhistleStatus = 0;
@@ -1210,6 +1278,8 @@ public class CharacteristicListFragment extends Fragment {
         whistleAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                stopBGTimerTask(2);
+                startBGTimerTast(2);
                 whistleSub.setEnabled(true);
                 whistleCount = whistleCount + 1;
                 setWhistleCount.setText("" + whistleCount);
@@ -1222,6 +1292,8 @@ public class CharacteristicListFragment extends Fragment {
         whistleSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                stopBGTimerTask(2);
+                startBGTimerTast(2);
                 if (whistleCount > 0) {
                     whistleSub.setEnabled(true);
                     whistleCount = whistleCount - 1;
@@ -1418,7 +1490,6 @@ public class CharacteristicListFragment extends Fragment {
 */
 
     }
-
 
 
     private void callMe(int position, String burner, int timerInMin, int whistleInCount, int flameMode, int frameFormet) {
@@ -1983,7 +2054,7 @@ public class CharacteristicListFragment extends Fragment {
 
         //Timer and Whistle
         if (data.length == 9) {
-            System.out.println("Length9Recevied");
+           // System.out.println("Length9Recevied");
             //C1
 
             if (data[0] == 42 && data[1] == -63) {
@@ -2002,7 +2073,7 @@ public class CharacteristicListFragment extends Fragment {
                 // setNotificationForWhistleAndTimer(rightVesselForNoti,  rightWhistle, rightTimer,leftVesselForNoti ,leftWhistle, leftTimer, centerVesselForNoti,centerWhistle, centerTimer);
 
 
-                System.out.println("WhistleAndTimerData" + rightWhistle + " " + rightTimer + " " + leftWhistle + " " + leftTimer + " " + centerWhistle + " " + centerTimer);
+                //System.out.println("WhistleAndTimerData" + rightWhistle + " " + rightTimer + " " + leftWhistle + " " + leftTimer + " " + centerWhistle + " " + centerTimer);
 
                 setWhistleAndTimerNotification(rightWhistle, rightTimer, leftWhistle, leftTimer, centerWhistle, centerTimer);
 
@@ -2013,7 +2084,7 @@ public class CharacteristicListFragment extends Fragment {
 
         //Burner
         if (data.length == 7) {
-            System.out.println("Length7Recevied");
+            //System.out.println("Length7Recevied");
             //D1
 
             if (data[0] == 42 && data[1] == -47) {
@@ -2052,12 +2123,12 @@ public class CharacteristicListFragment extends Fragment {
 
                 int batteryPercentage = data[5];
 
-                System.out.println("BatteryPercentage" + batteryPercentage);
+                //System.out.println("BatteryPercentage" + batteryPercentage);
 
                 setBatteryStatus(batteryPercentage);
 
 
-                System.out.println("VesselAndFlameMode" + rightVessel + " " + rightFlameMode + " " + leftVessel + " " + leftFlameMode + " " + centerVessel + " " + centerFlameMode + " " + batteryPercentage);
+                //System.out.println("VesselAndFlameMode" + rightVessel + " " + rightFlameMode + " " + leftVessel + " " + leftFlameMode + " " + centerVessel + " " + centerFlameMode + " " + batteryPercentage);
 
 
                 setValueInUI(rightVessel, rightFlameMode, leftVessel, leftFlameMode, centerVessel, centerFlameMode);
@@ -2097,7 +2168,7 @@ public class CharacteristicListFragment extends Fragment {
 
                 float rightBurGasUsage = rightBurner;// / 4096;
 
-                System.out.println("DateFormet " + dateFormet + " " + rightBurGasUsage);
+                //System.out.println("DateFormet " + dateFormet + " " + rightBurGasUsage);
 
                 sqliteManager.addGasConsumptionPattern(dateFormet, rightBurGasUsage, "00");
 
@@ -2417,7 +2488,6 @@ public class CharacteristicListFragment extends Fragment {
     }
 
 
-
     private class ResultAdapter extends BaseAdapter {
 
         private Context context;
@@ -2562,7 +2632,7 @@ public class CharacteristicListFragment extends Fragment {
 
         if (storeImageDTO.getImage() == null) {
             seletedUserProfile.setImageDrawable(getResources().getDrawable(R.drawable.person));
-            System.out.println("ImageIsNotAvaliable");
+            //System.out.println("ImageIsNotAvaliable");
         } else if (storeImageDTO.getImage() != null) {
             seletedUserProfile.setImageBitmap(storeImageDTO.getImage());
 
@@ -2594,7 +2664,7 @@ public class CharacteristicListFragment extends Fragment {
 
     private void callSnackBar(String burnerStatus, View v) {
 
-        Snackbar snack = Snackbar.make(v, burnerStatus, Snackbar.LENGTH_SHORT);
+        snack = Snackbar.make(v, burnerStatus, Snackbar.LENGTH_SHORT);
         View view = snack.getView();
         TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
         tv.setTypeface(octinPrisonFont);
@@ -2685,6 +2755,8 @@ public class CharacteristicListFragment extends Fragment {
 
     }
 
+
+
     /*@Override
     public void onDestroy() {
         super.onDestroy();
@@ -2711,4 +2783,6 @@ public class CharacteristicListFragment extends Fragment {
         System.out.println("onDetachCalled");
         getActivity().finish();
     }*/
+
+
 }

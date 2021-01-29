@@ -49,7 +49,7 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
 
         sqliteManager = new SqliteManager(NotificationActivity.this);
 
-        System.out.println("NotificationCalled");
+        //System.out.println("NotificationCalled");
 
 
 
@@ -91,7 +91,7 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
 
         List<NotificationId> deleteRecord = sqliteManager.getAllNotificationsToDelte();
 
-        System.out.println("DeleteRecordSize"+deleteRecord.size());
+        //System.out.println("DeleteRecordSize"+deleteRecord.size());
 
 
          if(deleteRecord.size()>=120 ){
@@ -132,7 +132,7 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
         dialog=MathUtil.showProgressBar(NotificationActivity.this);
 
         boolean status = sqliteManager.updateReadStatus();
-        System.out.println("UpdatedStatus " + status);
+        //System.out.println("UpdatedStatus " + status);
 
         MathUtil.dismisProgressBar(NotificationActivity.this,dialog);
     }

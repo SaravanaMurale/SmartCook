@@ -361,7 +361,7 @@ public class SqliteManager extends SQLiteOpenHelper {
 
     public boolean addGasConsumptionPattern(Date date, float gasValue, String burner) {
 
-        System.out.println("ReceivedValueInSqliteDB" + date + " " + gasValue + " " + burner);
+        //System.out.println("ReceivedValueInSqliteDB" + date + " " + gasValue + " " + burner);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         //Date date1=simpleDateFormat.parse(date);
@@ -381,7 +381,7 @@ public class SqliteManager extends SQLiteOpenHelper {
     public List<GasConsumptionPatternDTO> searchByDates(String burner, String startDate, String endDate) {
 
 
-        System.out.println("StartDate " + startDate + " " + "EndDate" + endDate);
+        //System.out.println("StartDate " + startDate + " " + "EndDate" + endDate);
 
         /*String sDate = "01/11/2020";
         String eDate = "10/11/2020";*/
@@ -402,10 +402,10 @@ public class SqliteManager extends SQLiteOpenHelper {
             do {
 
 
-                System.out.println("RrangeID " + cursor.getInt(0));
-                System.out.println("RrangeBURNER " + cursor.getString(1));
-                System.out.println("RrangeUSAGE " + cursor.getInt(2));
-                System.out.println("DATE " + cursor.getString(3));
+                //System.out.println("RrangeID " + cursor.getInt(0));
+                //System.out.println("RrangeBURNER " + cursor.getString(1));
+                //System.out.println("RrangeUSAGE " + cursor.getInt(2));
+                //System.out.println("DATE " + cursor.getString(3));
 
                 GasConsumptionPatternDTO gasConsumptionPatternDTO = new GasConsumptionPatternDTO(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getString(3));
                 gasConsumptionPatternDTOList.add(gasConsumptionPatternDTO);
@@ -433,10 +433,10 @@ public class SqliteManager extends SQLiteOpenHelper {
                 do {
 
 
-                    System.out.println("RrangeID " + cursor.getInt(0));
-                    System.out.println("RrangeBURNER " + cursor.getString(1));
-                    System.out.println("RrangeUSAGE " + cursor.getInt(2));
-                    System.out.println("DATE " + cursor.getString(3));
+                    //System.out.println("RrangeID " + cursor.getInt(0));
+                    //System.out.println("RrangeBURNER " + cursor.getString(1));
+                    //System.out.println("RrangeUSAGE " + cursor.getInt(2));
+                    //System.out.println("DATE " + cursor.getString(3));
 
 
 
@@ -606,7 +606,7 @@ public class SqliteManager extends SQLiteOpenHelper {
             do {
 
                 mobileNumberFromDB = userData.getString(0);
-                System.out.println("ReceivedUserId" + mobileNumberFromDB);
+               // System.out.println("ReceivedUserId" + mobileNumberFromDB);
 
 
 
@@ -630,7 +630,7 @@ public class SqliteManager extends SQLiteOpenHelper {
             do {
 
                 emailFromDB = userData.getString(0);
-                System.out.println("ReceivedUserId" + emailFromDB);
+               // System.out.println("ReceivedUserId" + emailFromDB);
 
 
 
@@ -656,7 +656,7 @@ public class SqliteManager extends SQLiteOpenHelper {
             do {
 
                 int id = userData.getInt(0);
-                System.out.println("ReceivedUserId" + id);
+                //System.out.println("ReceivedUserId" + id);
 
                 PreferencesUtil.setValueSInt(mCtx, PreferencesUtil.USER_ID, id);
                 username = userData.getString(1);
@@ -821,9 +821,9 @@ public class SqliteManager extends SQLiteOpenHelper {
             do {
 
 
-                System.out.println("COLUMN_ID_DESC " + cursorNoti.getInt(0));
-                System.out.println("NotificationStatus " + cursorNoti.getString(1));
-                System.out.println("NotificationReadStatus " + cursorNoti.getString(2));
+                //System.out.println("COLUMN_ID_DESC " + cursorNoti.getInt(0));
+                //System.out.println("NotificationStatus " + cursorNoti.getString(1));
+                //System.out.println("NotificationReadStatus " + cursorNoti.getString(2));
 
 
                 NotificationResponseDTO notificationResponseDTO = new NotificationResponseDTO(cursorNoti.getInt(0), cursorNoti.getString(1),
@@ -883,9 +883,9 @@ public class SqliteManager extends SQLiteOpenHelper {
             do {
 
 
-                System.out.println("COLUMN_ID_DESC " + cursorNoti.getInt(0));
-                System.out.println("NotificationStatus " + cursorNoti.getString(1));
-                System.out.println("NotificationReadStatus " + cursorNoti.getString(2));
+                //System.out.println("COLUMN_ID_DESC " + cursorNoti.getInt(0));
+                //System.out.println("NotificationStatus " + cursorNoti.getString(1));
+                //System.out.println("NotificationReadStatus " + cursorNoti.getString(2));
 
 
                 NotificationResponseDTO notificationResponseDTO = new NotificationResponseDTO(cursorNoti.getInt(0), cursorNoti.getString(1),
