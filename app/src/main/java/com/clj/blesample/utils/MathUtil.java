@@ -55,6 +55,17 @@ public class MathUtil {
     public static final String WASR="Whistle Is Already Set For Right Burner";
     public static final String WASC="Whistle Is Already Set For Center Burner";
 
+    public static final String CRITICALLY_LOW="Your Battery is Criticaly Low";
+
+    public static final String WCR="Right Burner Whistle Is Completed";
+    public static final String WCL="Left Burner Whistle Is Completed";
+    public static final String WCC="Center Burner Whistle Is Completed";
+
+    public static final String TCR="Right Burner Timer Is Completed";
+    public static final String TCL="Left Burner Timer Is Completed";
+    public static final String TCC="Center Burner Timer Is Completed";
+
+
     //public static final String
 
     //0- non read

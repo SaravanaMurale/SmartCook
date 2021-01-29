@@ -715,36 +715,6 @@ public class CharacteristicListFragment extends Fragment {
                 eStopDialog.setCanceledOnTouchOutside(false);
                 eStopDialog.show();
 
-                /*AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setCancelable(false);
-                builder.setTitle("Are you sure want to turn off stove?");
-
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
-
-
-                            callMe(1, null, 0, 0, 0, 4);
-                        }
-
-                        dialog.cancel();
-                    }
-                });
-
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-
-                        dialog.cancel();
-                    }
-                });
-
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-*/
 
             }
         });
@@ -827,50 +797,6 @@ public class CharacteristicListFragment extends Fragment {
             }
         });
     }
-
-    private void startBGTimerTast(int i) {
-        //viewButton.setVisibility(View.VISIBLE);
-        //set a new Timer
-        timer = new Timer();
-
-        //initialize the TimerTask's job
-        initializeTimerTask();
-
-        //schedule the timer, after the first 5000ms the TimerTask will run every 10000ms
-        timer.schedule(timerTask, 3000);
-        //timer.schedule(timerTask, 1000, 0); //
-    }
-
-    private void initializeTimerTask() {
-        timerTask = new TimerTask() {
-
-            @Override
-            public void run() {
-
-                setInvisibleTimerAndWhistle();
-
-
-            }
-        };
-    }
-
-    private void stopBGTimerTask(int i) {
-
-        //stop the timer, if it's not already null
-        if (timer != null) {
-            timer.cancel();
-            if (i == 1) {
-                setTimerVisible();
-            } else if (i == 2) {
-                setWhistleVisible();
-            }
-
-            timer = null;
-        }
-
-
-    }
-
 
     private void setTimer(final String burner) {
 
@@ -1081,82 +1007,6 @@ public class CharacteristicListFragment extends Fragment {
             }
         });
 
-        /*final TextView timerSub, timerAdd, setTimerCount,timerFont;
-
-        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
-        View mView = getLayoutInflater().inflate(R.layout.dialog_set_timer, null);
-        mBuilder.setTitle("Set Timer");
-
-        timerSub = (TextView) mView.findViewById(R.id.timerSub);
-        timerAdd = (TextView) mView.findViewById(R.id.timerAdd);
-        setTimerCount = (TextView) mView.findViewById(R.id.setTimerCount);
-        timerFont=(TextView)mView.findViewById(R.id.minuteFont);
-        setTimerCount.setTypeface(octinPrisonFont);
-        timerFont.setTypeface(octinPrisonFont);
-
-        timerAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                timerCount = timerCount + 1;
-
-                setTimerCount.setText("" + timerCount);
-            }
-        });
-
-        timerSub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (timerCount > 0) {
-                    timerSub.setEnabled(true);
-                    timerCount = timerCount - 1;
-                    setTimerCount.setText("" + timerCount);
-                } else if (timerCount == 0) {
-                    timerSub.setEnabled(false);
-                    setTimerCount.setText("" + timerCount);
-                }
-            }
-        });
-
-        mBuilder.setPositiveButton("START", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                int burnerTimerCount = Integer.parseInt(setTimerCount.getText().toString());
-
-                if (burnerTimerCount == 0) {
-
-                    Toast.makeText(getActivity(), "Please Set Timer", Toast.LENGTH_LONG).show();
-
-                } else {
-
-                    if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
-
-
-                        callMe(1, burner, burnerTimerCount, 0, 0, 3);
-                        timerCount = 0;
-
-                    }
-
-                }
-
-
-            }
-        }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                whistleCount=0;
-                timerCount = 0;
-                dialog.cancel();
-
-
-            }
-        });
-
-        mBuilder.setView(mView);
-        AlertDialog alertDialog = mBuilder.create();
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.show();
-*/
 
     }
 
@@ -1352,93 +1202,6 @@ public class CharacteristicListFragment extends Fragment {
                 setWhistleBlock.setVisibility(View.INVISIBLE);
             }
         });
-
-
-      /*  final TextView whistleSub, whistleAdd, setWhistleCount,whistleFont;
-
-
-        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
-        View mView = getLayoutInflater().inflate(R.layout.dialog_spinner, null);
-        mBuilder.setTitle("Set Whistle");
-
-
-        whistleSub = (TextView) mView.findViewById(R.id.whistleSub);
-        whistleAdd = (TextView) mView.findViewById(R.id.whistleAdd);
-        setWhistleCount = (TextView) mView.findViewById(R.id.setWhistleCount);
-        whistleFont=(TextView)mView.findViewById(R.id.whistleFont);
-        whistleFont.setTypeface(octinPrisonFont);
-        setWhistleCount.setTypeface(octinPrisonFont);
-
-        *//*whistleCancel = (Button) mView.findViewById(R.id.whistleCancel);
-        whistleStart = (Button) mView.findViewById(R.id.whistleStart);*//*
-
-        whistleAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                whistleCount = whistleCount + 1;
-
-                setWhistleCount.setText("" + whistleCount);
-
-            }
-        });
-
-        whistleSub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (whistleCount > 0) {
-                    whistleSub.setEnabled(true);
-                    whistleCount = whistleCount - 1;
-                    setWhistleCount.setText("" + whistleCount);
-                } else if (whistleCount == 0) {
-                    whistleSub.setEnabled(false);
-                    setWhistleCount.setText("" + whistleCount);
-                }
-            }
-        });
-
-
-        mBuilder.setPositiveButton("START", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                int burnerWhistleCount = Integer.parseInt(setWhistleCount.getText().toString());
-
-                if (burnerWhistleCount == 0) {
-
-                    Toast.makeText(getActivity(), "Please Set Whistle Count", Toast.LENGTH_LONG).show();
-
-                } else {
-
-                    if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
-
-
-                        callMe(1, burner, 0, burnerWhistleCount, 0, 2);
-                        whistleCount = 0;
-
-                    }
-
-
-                }
-
-
-            }
-        });
-
-        mBuilder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                whistleCount=0;
-                timerCount = 0;
-                dialog.cancel();
-            }
-        });
-
-
-        mBuilder.setView(mView);
-        AlertDialog alertDialog = mBuilder.create();
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.show();
-*/
 
     }
 
@@ -2121,13 +1884,13 @@ public class CharacteristicListFragment extends Fragment {
 
                 //System.out.println("DateFormet " + dateFormet + " " + rightBurGasUsage);
 
-                sqliteManager.addGasConsumptionPattern(dateFormet, rightBurGasUsage, "00");
+                sqliteManager.addGasConsumptionPattern(dateFormet, rightBurGasUsage, MathUtil.RIGHT_BURNER);
 
                 float leftBurGasUsage = leftBurner;// / 4096;
-                sqliteManager.addGasConsumptionPattern(dateFormet, leftBurGasUsage, "01");
+                sqliteManager.addGasConsumptionPattern(dateFormet, leftBurGasUsage, MathUtil.LEFT_BURNER);
 
                 float centerBurGasUsage = centerBurner;// / 4096;
-                sqliteManager.addGasConsumptionPattern(dateFormet, centerBurGasUsage, "10");
+                sqliteManager.addGasConsumptionPattern(dateFormet, centerBurGasUsage, MathUtil.CENTER_BURNER);
 
 
                 /*System.out.println("GasUsage" +date+" "+month+" " + right + " " + left + " " + center);
@@ -2167,7 +1930,7 @@ public class CharacteristicListFragment extends Fragment {
 
 
         if (batteryPercentage <= 30) {
-            sqliteManager.setNotification("Your Battery is Criticaly Low");
+            sqliteManager.setNotification(MathUtil.CRITICALLY_LOW);
         }
 
         setNonReadNotificationCount();
@@ -2177,28 +1940,28 @@ public class CharacteristicListFragment extends Fragment {
     private void setWhistleAndTimerNotification(int rightWhistle, int rightTimer, int leftWhistle, int leftTimer, int centerWhistle, int centerTimer) {
 
         if (rightWhistle == 0) {
-            sqliteManager.setNotification("Whistle is completed for Right Burner");
+            sqliteManager.setNotification(MathUtil.WCR);
 
         }
 
         if (rightTimer == 0) {
-            sqliteManager.setNotification("Timer is completed for Right Burner");
+            sqliteManager.setNotification(MathUtil.TCR);
         }
 
         if (leftWhistle == 0) {
-            sqliteManager.setNotification("Whistle is completed for Left Burner");
+            sqliteManager.setNotification(MathUtil.WCL);
         }
 
         if (leftTimer == 0) {
-            sqliteManager.setNotification("Timer is completed for Left Burner");
+            sqliteManager.setNotification(MathUtil.TCL);
         }
 
         if (centerWhistle == 0) {
-            sqliteManager.setNotification("Whistle is completed for Center Burner");
+            sqliteManager.setNotification(MathUtil.WCC);
         }
 
         if (centerTimer == 0) {
-            sqliteManager.setNotification("Timer is completed for Center Burner");
+            sqliteManager.setNotification(MathUtil.TCC);
         }
 
         setNonReadNotificationCount();
@@ -2387,41 +2150,6 @@ public class CharacteristicListFragment extends Fragment {
 
     }
 
-   /* private void CallEditActivity(String burner) {
-        currentByte = new byte[4];
-        currentByte1 = new byte[5];
-
-        currentByte[0] = 0;
-        currentByte[1] = 1;
-        currentByte[2] = 0;
-        currentByte[3] = 1;
-
-        currentByte1[0] = 1;
-        currentByte1[1] = 1;
-        currentByte1[2] = 1;
-        currentByte1[3] = 1;
-        currentByte1[4] = 1;
-
-        System.out.println("MyLength" + currentByte.length);
-
-        ArrayList<byte[]> arrayList = new ArrayList<>();
-        arrayList.add(currentByte);
-        arrayList.add(currentByte1);
-
-        Intent intent = new Intent(getActivity(), EditActivity.class);
-        //intent.putExtra("currentByte_size", arrayList.size());
-        intent.putExtra("BURNER", burner);
-        intent.putExtra("currentByteArrayList", arrayList);
-        *//*for (int i = 0; i < arrayList.size(); i++) {
-            intent.putExtra("currentByte" + i, arrayList.get(i));
-        }
-*//*
-        startActivity(intent);
-
-
-    }*/
-
-
     private void runOnUiThread(Runnable runnable) {
         if (isAdded() && getActivity() != null)
             getActivity().runOnUiThread(runnable);
@@ -2545,7 +2273,6 @@ public class CharacteristicListFragment extends Fragment {
     private void callMenuItems() {
 
         Intent menuIntent = new Intent(this.getActivity(), MenuActivity.class);
-
         startActivity(menuIntent);
 
     }
@@ -2658,82 +2385,48 @@ public class CharacteristicListFragment extends Fragment {
 
     }
 
-    private void callAlertDialogToResetTimer() {
+    private void startBGTimerTast(int i) {
+        //viewButton.setVisibility(View.VISIBLE);
+        //set a new Timer
+        timer = new Timer();
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        // alert.setTitle("Vessel is not detected");
-        alert.setMessage("Already Timer Is Running...Do you want to Reset???");
-        alert.setIcon(R.drawable.preethi_logo);
+        //initialize the TimerTask's job
+        initializeTimerTask();
 
-        alert.setPositiveButton("Reset", new DialogInterface.OnClickListener() {
+        //schedule the timer, after the first 5000ms the TimerTask will run every 10000ms
+        timer.schedule(timerTask, 3000);
+        //timer.schedule(timerTask, 1000, 0); //
+    }
+
+    private void initializeTimerTask() {
+        timerTask = new TimerTask() {
+
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void run() {
 
-                Toast.makeText(getActivity(), "Timer is reset", Toast.LENGTH_LONG).show();
+                setInvisibleTimerAndWhistle();
 
-//Send
 
             }
-        });
+        };
+    }
 
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
+    private void stopBGTimerTask(int i) {
+
+        //stop the timer, if it's not already null
+        if (timer != null) {
+            timer.cancel();
+            if (i == 1) {
+                setTimerVisible();
+            } else if (i == 2) {
+                setWhistleVisible();
             }
-        });
 
-        alert.show();
+            timer = null;
+        }
+
 
     }
-
-    private void callAlertDialog() {
-
-        final AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        // alert.setTitle("Vessel is not detected");
-        alert.setMessage("Please Place Vessel");
-        alert.setIcon(R.drawable.preethi_logo);
-
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-
-            }
-        });
-
-        alert.show();
-
-    }
-
-
-
-    /*@Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        Toast.makeText(getActivity(),"OnDestroyCalled",Toast.LENGTH_LONG).show();
-
-        System.out.println("OnDestroyCalled");
-
-        getActivity().finish();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Toast.makeText(getActivity(),"onDestroyViewCalled",Toast.LENGTH_LONG).show();
-        System.out.println("onDestroyViewCalled");
-        getActivity().finish();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Toast.makeText(getActivity(),"onDetachCalled",Toast.LENGTH_LONG).show();
-        System.out.println("onDetachCalled");
-        getActivity().finish();
-    }*/
 
 
 }
