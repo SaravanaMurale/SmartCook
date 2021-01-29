@@ -173,7 +173,7 @@ public class CharacteristicListFragment extends Fragment {
         //Calls Notify
         if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
 
-            //Toast.makeText(getActivity(), "NotifyCalled", Toast.LENGTH_LONG).show();
+           //Getting Stove Data
 
             callMe(0, null, 0, 0, 0, 0);
 
