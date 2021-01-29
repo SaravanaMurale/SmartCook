@@ -27,6 +27,10 @@ public class MathUtil {
     public static final int HIGH = 1;
     public static final int SIM = 2;
 
+    public static final int SET_TIMER_VISIBLE=1;
+    public static final int SET_WHISTLE_VISIBLE=2;
+
+
     //sets sim,high,off
     public static final int BURNER_FORMET = 1;
     //sets whistle and timer
@@ -46,6 +50,10 @@ public class MathUtil {
     public static final String VNPLT="Vessel Is Not Placed On Left Burner To Set Timer";
     public static final String VNPCT="Vessel Is Not Placed On Center Burner To Set Timer";
     public static final String VNPRT="Vessel Is Not Placed On Right Burner To Set Timer";
+
+    public static final String WASL="Whistle Is Already Set For Left Burner";
+    public static final String WASR="Whistle Is Already Set For Right Burner";
+    public static final String WASC="Whistle Is Already Set For Center Burner";
 
     //public static final String
 

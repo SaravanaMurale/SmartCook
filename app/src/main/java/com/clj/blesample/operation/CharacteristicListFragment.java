@@ -126,9 +126,6 @@ public class CharacteristicListFragment extends Fragment {
     int rightTimerToSet, rightWhistleToSet, leftTimerToSet, leftWhistleToSet, centerTimerToSet, centerWhistleToSet = 0;
     Button timerTitle, whistleTitle, timerReset, whistleReset;
 
-    Runnable mRunnable;
-    Handler mHandler;
-
     Timer timer;
     TimerTask timerTask;
 
@@ -146,18 +143,6 @@ public class CharacteristicListFragment extends Fragment {
 
         startBlinking(selectBluetoothStatus);
 
-        mHandler = new Handler();
-        mRunnable = new Runnable() {
-
-            @Override
-            public void run() {
-                // TODO Auto-generated method stub
-                setTimerBlock.setVisibility(View.INVISIBLE);
-                setWhistleBlock.setVisibility(View.INVISIBLE);
-            }
-        };
-
-
         return v;
     }
 
@@ -172,45 +157,11 @@ public class CharacteristicListFragment extends Fragment {
 
         //Calls Notify
         if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
-
-           //Getting Stove Data
-
+            //Getting Stove Data
             callMe(0, null, 0, 0, 0, 0);
-
         }
-
 
         setNonReadNotificationCount();
-
-
-        String selectedBurner = PreferencesUtil.getValueString(getActivity(), PreferencesUtil.BURNER);
-        int selectedTimer = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.TIMER_IN_MINUTE);
-        int selectedWhistle = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.WHISTLE_IN_COUNT);
-        //int selectedFlameModde = PreferencesUtil.getValueInt(getActivity(), PreferencesUtil.FLAME_MODE);
-
-        if (selectedBurner.equals("no_value") && selectedTimer <= 0 && selectedWhistle <= 0) {
-            //Toast.makeText(getActivity(), "Empty Write Data", Toast.LENGTH_LONG).show();
-        } else {
-
-            //Toast.makeText(getActivity(), "WriteCalled", Toast.LENGTH_LONG).show();
-
-            //System.out.println("ReceivedStoredPreferenceValue" + selectedBurner + " " + selectedTimer + " " + selectedWhistle);
-
-            //Calls Write
-            if (SIZE_OF_CHARACTERISTIC == 2 && mResultAdapter != null) {
-
-                callMe(1, selectedBurner, selectedTimer, selectedWhistle, 0, MathUtil.EDIT_FORMET);
-
-                PreferencesUtil.remove(getActivity(), PreferencesUtil.BURNER);
-                PreferencesUtil.remove(getActivity(), PreferencesUtil.TIMER_IN_MINUTE);
-                PreferencesUtil.remove(getActivity(), PreferencesUtil.WHISTLE_IN_COUNT);
-                PreferencesUtil.remove(getActivity(), PreferencesUtil.FLAME_MODE);
-
-
-            }
-
-        }
-
 
     }
 
@@ -513,8 +464,8 @@ public class CharacteristicListFragment extends Fragment {
 
                                 snack.dismiss();
                             }*/
-                            stopBGTimerTask(2);
-                            startBGTimerTast(2);
+                            stopBGTimerTask(MathUtil.SET_WHISTLE_VISIBLE);
+                            startBGTimerTast(MathUtil.SET_WHISTLE_VISIBLE);
 
                             //setWhistleVisible();
                             setWhistle(MathUtil.LEFT_BURNER);
@@ -523,10 +474,10 @@ public class CharacteristicListFragment extends Fragment {
 
                             if (centerWhistleToSet > 0) {
                                 setInvisibleTimerAndWhistle();
-                                callSnackBar("Whistle Is Already Set For Center Burner", v);
+                                callSnackBar(MathUtil.WASC, v);
                             } else if (rightWhistleToSet > 0) {
                                 setInvisibleTimerAndWhistle();
-                                callSnackBar("Whistle Is Already Set For Right Burner", v);
+                                callSnackBar(MathUtil.WASR, v);
                             }
                             //System.out.println("WhistleIsAlreadySetToAnotherBurnerPleaseResetToSetLeftBurner");
                         }
@@ -558,8 +509,8 @@ public class CharacteristicListFragment extends Fragment {
                     if (leftVesselStatus > 0) {
 
                         //snack.dismiss();
-                        stopBGTimerTask(1);
-                        startBGTimerTast(1);
+                        stopBGTimerTask(MathUtil.SET_TIMER_VISIBLE);
+                        startBGTimerTast(MathUtil.SET_TIMER_VISIBLE);
                         //setTimerVisible();
                         setTimer(MathUtil.LEFT_BURNER);
                     } else {
@@ -586,19 +537,19 @@ public class CharacteristicListFragment extends Fragment {
 
                         if (leftWhistleToSet <= 0 && centerWhistleToSet <= 0) {
 
-                           // snack.dismiss();
-                            stopBGTimerTask(2);
-                            startBGTimerTast(2);
+                            // snack.dismiss();
+                            stopBGTimerTask(MathUtil.SET_WHISTLE_VISIBLE);
+                            startBGTimerTast(MathUtil.SET_WHISTLE_VISIBLE);
                             //setWhistleVisible();
                             setWhistle(MathUtil.RIGHT_BURNER);
                         } else {
 
                             if (leftWhistleToSet > 0) {
                                 setInvisibleTimerAndWhistle();
-                                callSnackBar("Whistle Is Already Set For Left Burner", v);
+                                callSnackBar(MathUtil.WASL, v);
                             } else if (centerWhistleToSet > 0) {
                                 setInvisibleTimerAndWhistle();
-                                callSnackBar("Whistle Is Already Set For Center Burner", v);
+                                callSnackBar(MathUtil.WASC, v);
                             }
 
                             //System.out.println("WhistleIsAlreadySetPleaseResetToSetRightBurner");
@@ -631,8 +582,8 @@ public class CharacteristicListFragment extends Fragment {
                     if (rightVesselStatus > 0) {
 
                         //snack.dismiss();
-                        stopBGTimerTask(1);
-                        startBGTimerTast(1);
+                        stopBGTimerTask(MathUtil.SET_TIMER_VISIBLE);
+                        startBGTimerTast(MathUtil.SET_TIMER_VISIBLE);
                         //setTimerVisible();
                         setTimer(MathUtil.RIGHT_BURNER);
                     } else {
@@ -663,24 +614,24 @@ public class CharacteristicListFragment extends Fragment {
                         if (leftWhistleToSet <= 0 && rightWhistleToSet <= 0) {
 
                             //snack.dismiss();
-                            stopBGTimerTask(2);
-                            startBGTimerTast(2);
+                            stopBGTimerTask(MathUtil.SET_WHISTLE_VISIBLE);
+                            startBGTimerTast(MathUtil.SET_WHISTLE_VISIBLE);
                             //setWhistleVisible();
                             setWhistle(MathUtil.CENTER_BURNER);
                         } else {
 
                             if (leftWhistleToSet > 0) {
                                 setInvisibleTimerAndWhistle();
-                                callSnackBar("Whistle Is Already Set For Left Burner", v);
+                                callSnackBar(MathUtil.WASL, v);
                             } else if (rightWhistleToSet > 0) {
                                 setInvisibleTimerAndWhistle();
-                                callSnackBar("Whistle Is Already Set For Right Burner", v);
+                                callSnackBar(MathUtil.WASR, v);
                             }
 
                         }
 
                     } else {
-                       // System.out.println("VesselIsNotPlacedOnCenterBurnerToSetWhistle");
+                        // System.out.println("VesselIsNotPlacedOnCenterBurnerToSetWhistle");
                         setInvisibleTimerAndWhistle();
                         callSnackBar(MathUtil.VNPC, v);
                     }
@@ -703,18 +654,18 @@ public class CharacteristicListFragment extends Fragment {
 
                     if (centerVesselStatus > 0) {
 
-                       // snack.dismiss();
-                        stopBGTimerTask(1);
-                        startBGTimerTast(1);
+                        // snack.dismiss();
+                        stopBGTimerTask(MathUtil.SET_TIMER_VISIBLE);
+                        startBGTimerTast(MathUtil.SET_TIMER_VISIBLE);
                         //setTimerVisible();
                         setTimer(MathUtil.CENTER_BURNER);
                     } else {
                         setInvisibleTimerAndWhistle();
                         callSnackBar(MathUtil.VNPCT, v);
-                       // System.out.println("VesselIsNotPlacedOnCenterBurnerToSetTimer");
+                        // System.out.println("VesselIsNotPlacedOnCenterBurnerToSetTimer");
                     }
                 } else {
-                   // System.out.println("CenterBurnerIsNotActivated");
+                    // System.out.println("CenterBurnerIsNotActivated");
                     setInvisibleTimerAndWhistle();
                     callSnackBar(MathUtil.CBISA, v);
                 }
@@ -2054,7 +2005,7 @@ public class CharacteristicListFragment extends Fragment {
 
         //Timer and Whistle
         if (data.length == 9) {
-           // System.out.println("Length9Recevied");
+            // System.out.println("Length9Recevied");
             //C1
 
             if (data[0] == 42 && data[1] == -63) {

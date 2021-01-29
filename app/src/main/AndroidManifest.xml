@@ -28,7 +28,6 @@
         <activity
             android:name=".menuoperationactivity.SignUpActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".menuoperationactivity.EditActivity" />
         <activity android:name=".menuoperationactivity.SettingsActivity" />
         <activity
             android:name=".menuoperationactivity.GetInTouchActivity"
