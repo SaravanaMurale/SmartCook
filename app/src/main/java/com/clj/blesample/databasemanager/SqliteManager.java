@@ -7,33 +7,23 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.widget.Toast;
 
-import com.clj.blesample.menuoperationactivity.SplashScreenActivity;
 import com.clj.blesample.model.GasConsumptionPatternDTO;
 import com.clj.blesample.model.MaintenaceServiceDTO;
-import com.clj.blesample.model.NotificationDTO;
 import com.clj.blesample.model.NotificationId;
 import com.clj.blesample.model.NotificationResponseDTO;
 import com.clj.blesample.model.StatisticsDTO;
 import com.clj.blesample.model.StoreImageDTO;
 import com.clj.blesample.model.UserDTO;
-import com.clj.blesample.notificationpackage.CenterNotiDTO;
-import com.clj.blesample.notificationpackage.LeftNotiDTO;
-import com.clj.blesample.notificationpackage.RightNotiDTO;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
 import com.clj.blesample.utils.MathUtil;
 
 import java.io.ByteArrayOutputStream;
-import java.sql.Blob;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static java.sql.Types.BLOB;
 
 public class SqliteManager extends SQLiteOpenHelper {
 

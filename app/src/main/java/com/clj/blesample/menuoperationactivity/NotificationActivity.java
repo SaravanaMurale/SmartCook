@@ -1,9 +1,9 @@
 package com.clj.blesample.menuoperationactivity;
 
 import android.app.Dialog;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
@@ -13,7 +13,6 @@ import com.clj.blesample.adapter.NotificationAdapter;
 import com.clj.blesample.databasemanager.SqliteManager;
 import com.clj.blesample.model.NotificationId;
 import com.clj.blesample.model.NotificationResponseDTO;
-import com.clj.blesample.notificationpackage.NotificationAct;
 import com.clj.blesample.utils.MathUtil;
 
 import java.util.ArrayList;
