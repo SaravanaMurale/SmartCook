@@ -12,10 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.clj.blesample.R;
-import com.clj.blesample.model.NotificationDTO;
 import com.clj.blesample.model.NotificationResponseDTO;
-import com.clj.blesample.utils.MathUtil;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
