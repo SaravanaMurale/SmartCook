@@ -27,16 +27,11 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
     List<NotificationResponseDTO> notificationResponseDTOList;
     SqliteManager sqliteManager;
 
-    Dialog dialog;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
-
-
-
 
         notificationRecyclerView = (RecyclerView) findViewById(R.id.notificationRecyclerView);
         notificationRecyclerView.setLayoutManager(new LinearLayoutManager(NotificationActivity.this));
@@ -84,7 +79,7 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
 
     private void deleteRecordsMoreThanHundred() {
 
-        Dialog dialog=new Dialog(NotificationActivity.this);
+        Dialog dialog;
 
         dialog=MathUtil.showProgressBar(NotificationActivity.this);
 
@@ -105,7 +100,7 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
 
     private void getAllNotifications() {
 
-        Dialog dialog=new Dialog(NotificationActivity.this);
+        Dialog dialog;
 
         dialog=MathUtil.showProgressBar(NotificationActivity.this);
 
@@ -126,7 +121,7 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
 
     private void updateReadStatus() {
 
-        Dialog dialog=new Dialog(NotificationActivity.this);
+        Dialog dialog;
 
         dialog=MathUtil.showProgressBar(NotificationActivity.this);
 
@@ -141,7 +136,7 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
 
 
 
-        Dialog dialog=new Dialog(NotificationActivity.this);
+        Dialog dialog;
 
         dialog=MathUtil.showProgressBar(NotificationActivity.this);
 
@@ -151,6 +146,9 @@ public class NotificationActivity extends AppCompatActivity implements Notificat
        if(deleteStatus){
            getAllNotifications();
        }
+
+       Toast.makeText(NotificationActivity.this,"Deleted",Toast.LENGTH_SHORT).show();
+
 
        MathUtil.dismisProgressBar(NotificationActivity.this,dialog);
 
