@@ -41,6 +41,7 @@ import com.clj.blesample.model.NotificationResponseDTO;
 import com.clj.blesample.model.StoreImageDTO;
 import com.clj.blesample.model.UserDTO;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
+import com.clj.blesample.utils.AnimationUtil;
 import com.clj.blesample.utils.FontUtil;
 import com.clj.blesample.utils.MathUtil;
 import com.clj.fastble.BleManager;
@@ -2320,24 +2321,20 @@ public class CharacteristicListFragment extends Fragment {
     }
 
     private void stopBlinking(ImageView bluetoothIcon) {
-        bluetoothIcon.clearAnimation();
+
+        AnimationUtil.stopBlinking(getActivity(),bluetoothIcon);
+
     }
 
     private void startBlinking(ImageView bluetoothIcon) {
 
-        Animation animation = new AlphaAnimation(1, 0); //to change visibility from visible to invisible
-        animation.setDuration(1000); //1 second duration for each animation cycle
-        animation.setInterpolator(new LinearInterpolator());
-        animation.setRepeatCount(Animation.INFINITE); //repeating indefinitely
-        animation.setRepeatMode(Animation.REVERSE); //animation will start from end point once ended.
-        bluetoothIcon.startAnimation(animation);
+        AnimationUtil.startBlinking(getActivity(),bluetoothIcon);
 
     }
 
     private void getFont() {
 
         octinPrisonFont = FontUtil.getOctinPrisonFont(getActivity());
-
     }
 
     private void callSnackBar(String burnerStatus, View v) {
@@ -2413,8 +2410,7 @@ public class CharacteristicListFragment extends Fragment {
     }
 
     private void stopBGTimerTask(int i) {
-
-        //stop the timer, if it's not already null
+               //stop the timer, if it's not already null
         if (timer != null) {
             timer.cancel();
             if (i == 1) {
