@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,8 +25,6 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
@@ -41,12 +40,10 @@ import android.widget.Toast;
 
 import com.clj.blesample.adapter.DeviceAdapter;
 import com.clj.blesample.comm.ObserverManager;
-import com.clj.blesample.menuoperationactivity.LoginActivity;
 import com.clj.blesample.operation.OperationActivity;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
-import com.clj.blesample.utils.LogFile;
+import com.clj.blesample.utils.FontUtil;
 import com.clj.blesample.utils.MathUtil;
-import com.clj.blesample.utils.PermissionUtils;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.callback.BleGattCallback;
 import com.clj.fastble.callback.BleMtuChangedCallback;
@@ -59,8 +56,6 @@ import com.clj.fastble.scan.BleScanRuleConfig;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import static com.clj.blesample.utils.MathUtil.LOCATION_PERMISSION_REQUEST_CODE;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -89,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     ListView listView_device;
 
+    Typeface  octinPrisonFont;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setContentView(R.layout.activity_main);
 
+        getFont();
 
         initView();
 
@@ -144,16 +142,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     PreferencesUtil.remove(MainActivity.this, PreferencesUtil.BLE_MAC_ADDRESS);
 
                     listView_device.setVisibility(View.INVISIBLE);
-
                     mDeviceAdapter.clear();
-
                     mDeviceAdapter.notifyDataSetChanged();
-
-
-                    //Toast.makeText(MainActivity.this, "Switch Off", Toast.LENGTH_LONG).show();
                     switchStatus.setText("OFF");
-                    bleConnectStatus.setText("Please turn on to connect nearby device");
-
+                    bleConnectStatus.setText("Please Turn On Bluetooth");
                     BleManager.getInstance().cancelScan();
 
 
@@ -166,32 +158,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void removeSessionValue() {
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        }, 1000);
-
-        PreferencesUtil.remove(MainActivity.this, PreferencesUtil.RECEIVED_STATUS);
-
-        String connectedStating = PreferencesUtil.getValueString(MainActivity.this, PreferencesUtil.RECEIVED_STATUS);
-
-        System.out.println("MainActivityConnectedStatus " + connectedStating);
-
-        PreferencesUtil.remove(MainActivity.this, PreferencesUtil.KNOB_ANGLE);
-
-
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
-        showConnectedDevice();
 
-        removeSessionValue();
+        showConnectedDevice();
     }
 
     @Override
@@ -199,7 +170,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onDestroy();
         BleManager.getInstance().disconnectAllDevice();
         BleManager.getInstance().destroy();
-
 
     }
 
@@ -243,6 +213,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switchStatus = (TextView) findViewById(R.id.switchStatus);
         bleConnectStatus = (TextView) findViewById(R.id.bleConnectStatus);
 
+
         et_name = (EditText) findViewById(R.id.et_name);
         et_mac = (EditText) findViewById(R.id.et_mac);
         et_uuid = (EditText) findViewById(R.id.et_uuid);
@@ -259,7 +230,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         operatingAnim.setInterpolator(new LinearInterpolator());
         progressDialog = new ProgressDialog(this);
 
+
+        setFont();
+
+
         mDeviceAdapter = new DeviceAdapter(this);
+
+        mDeviceAdapter.getFont(this);
+
+
         mDeviceAdapter.setOnDeviceClickListener(new DeviceAdapter.OnDeviceClickListener() {
             @Override
             public void onConnect(BleDevice bleDevice) {
@@ -278,10 +257,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onDisConnect(final BleDevice bleDevice) {
                 if (BleManager.getInstance().isConnected(bleDevice)) {
 
-                  /* PreferencesUtil.setValueSInt(MainActivity.this,PreferencesUtil.ZERO_WRITE_STATUS,0);
-                   int s=PreferencesUtil.getValueInt(MainActivity.this,PreferencesUtil.ZERO_WRITE_STATUS);
-                   Toast.makeText(MainActivity.this,"Data Received "+s,Toast.LENGTH_LONG).show();*/
+                    PreferencesUtil.remove(MainActivity.this, PreferencesUtil.BLE_MAC_ADDRESS);
+                    bleConnectStatus.setText("Please Connect");
+                    bleConnectStatus.setTypeface(octinPrisonFont);
                     BleManager.getInstance().disconnect(bleDevice);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            startScan();
+                        }
+                    },500);
+
+
 
                 }
             }
@@ -310,6 +298,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listView_device = (ListView) findViewById(R.id.list_device);
         listView_device.setAdapter(mDeviceAdapter);
     }
+
+
 
     private void showConnectedDevice() {
         List<BleDevice> deviceList = BleManager.getInstance().getAllConnectedDevice();
@@ -385,6 +375,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 switchStatus.setText("ON");
                 bleConnectStatus.setText("Bluetooth On...");
 
+
             }
 
             @Override
@@ -407,6 +398,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 bleConnectStatus.setText("Searching...");
+                //bleConnectStatus.setTypeface(octinPrisonFont);
 
             }
 
@@ -419,7 +411,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 bleConnectStatus.setText("Please Connect");
                 MathUtil.dismisProgressBar(MainActivity.this, dialog);
 
-                System.out.println("CalledOnScanFinished");
+                //System.out.println("CalledOnScanFinished");
 
                 for (int i = 0; i < scanResultList.size(); i++) {
                     System.out.println("ListOFBLE" + scanResultList.get(i).getMac());
@@ -481,7 +473,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //Mycode
                 if (BleManager.getInstance().isConnected(bleDevice)) {
 
-                    System.out.println();
+                    //System.out.println();
 
                     if(bleDevice.getName()==null || bleDevice.getName().isEmpty() || bleDevice.getName().equals("") || bleDevice.getName().length()==0 || !bleDevice.getName().equals("Preethi") ) {
                         Toast.makeText(MainActivity.this,"Please connect with Preethi Stove",Toast.LENGTH_SHORT).show();
@@ -494,6 +486,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Intent intent = new Intent(MainActivity.this, OperationActivity.class);
                         intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
                         startActivity(intent);
+
                     }else {
                         //Connecting with other device
                         Toast.makeText(MainActivity.this,"Please connect with Preethi Stove",Toast.LENGTH_SHORT).show();
@@ -505,7 +498,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 } else {
 
-                    Toast.makeText(MainActivity.this, "Please Connect With Stove", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Please Connect With Preethi Stove", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -679,14 +672,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    protected void onRestart() {
+        super.onRestart();
+        /*System.out.println("OnResetartCalled");
+        Toast.makeText(MainActivity.this,"OnResetartCalled",Toast.LENGTH_LONG).show();
 
-        System.out.println("OnBackPressedInMainActivity");
-        finish();
-
+        finish();*/
+        //Closes the Activity when back button pressed from fragment
 
     }
+
+
+    private void getFont() {
+
+        octinPrisonFont = FontUtil.getOctinPrisonFont(MainActivity.this);
+
+    }
+
+    private void setFont() {
+
+        bleConnectStatus.setTypeface(octinPrisonFont);
+        switchStatus.setTypeface(octinPrisonFont);
+
+    }
+
 }

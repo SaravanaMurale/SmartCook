@@ -199,18 +199,39 @@ public class OperationActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Toast.makeText(OperationActivity.this,"Bluetooth Connection Terminated",Toast.LENGTH_SHORT).show();
+       // Toast.makeText(OperationActivity.this,"Bluetooth Connection Terminated",Toast.LENGTH_SHORT).show();
+        System.out.println("BLEDESTROYCALLED");
         BleManager.getInstance().clearCharacterCallback(bleDevice);
         ObserverManager.getInstance().deleteObserver(this);
     }
 
     @Override
     public void disConnected(BleDevice device) {
+        System.out.println("BLEDISCONNECTEDCALLED");
         Toast.makeText(OperationActivity.this,"Bluetooth Connection Terminated",Toast.LENGTH_SHORT).show();
         if (device != null && bleDevice != null && device.getKey().equals(bleDevice.getKey())) {
             finish();
         }
     }
+
+    /*@Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        System.out.println("OnBackPressedCalled");
+        List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
+        if (fragmentList != null) {
+            //TODO: Perform your logic to pass back press here
+            *//*for(Fragment fragment : fragmentList){
+                if(fragment instanceof OnBackPressedListener){
+                    ((OnBackPressedListener)fragment).onBackPressed();
+                }
+            }*//*
+
+            finish();
+
+        }
+    }*/
 
 
 }

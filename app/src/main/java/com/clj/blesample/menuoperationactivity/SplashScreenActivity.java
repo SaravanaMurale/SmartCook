@@ -24,7 +24,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_splash_screen);
-        new SplashDownCountDown(3000, 1000).start();
+        new SplashDownCountDown(1500, 1000).start();
 
     }
 
@@ -50,8 +50,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             userId = PreferencesUtil.getValueInt(SplashScreenActivity.this, PreferencesUtil.USER_ID);
 
-
-
             if (userId > 0) {
                 intent = new Intent(SplashScreenActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -63,10 +61,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                 finish();
 
             }
-
-
-
-
         }
     }
 

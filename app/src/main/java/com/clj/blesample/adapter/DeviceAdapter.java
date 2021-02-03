@@ -2,6 +2,7 @@ package com.clj.blesample.adapter;
 
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,7 +11,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.clj.blesample.MainActivity;
 import com.clj.blesample.R;
+import com.clj.blesample.utils.FontUtil;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.data.BleDevice;
 
@@ -22,9 +25,16 @@ public class DeviceAdapter extends BaseAdapter {
     private Context context;
     private List<BleDevice> bleDeviceList;
 
-    public DeviceAdapter(Context context) {
+    Typeface octinPrisonFont ;
+
+
+     public DeviceAdapter(Context context) {
         this.context = context;
         bleDeviceList = new ArrayList<>();
+    }
+
+    public void getFont(Context context){
+        octinPrisonFont=FontUtil.getOctinPrisonFont(context);
     }
 
     public void addDevice(BleDevice bleDevice) {
@@ -99,7 +109,10 @@ public class DeviceAdapter extends BaseAdapter {
             holder.btn_disconnect = (Button) convertView.findViewById(R.id.btn_disconnect);
             holder.btn_connect = (Button) convertView.findViewById(R.id.btn_connect);
             holder.btn_detail = (Button) convertView.findViewById(R.id.btn_detail);
+
         }
+
+        setFont(holder);
 
         final BleDevice bleDevice = getItem(position);
         if (bleDevice != null) {
@@ -112,16 +125,18 @@ public class DeviceAdapter extends BaseAdapter {
             holder.txt_rssi.setText(String.valueOf(rssi));
             if (isConnected) {
                 holder.img_blue.setImageResource(R.mipmap.ic_blue_connected);
-                holder.txt_name.setTextColor(0xFF1DE9B6);
-                holder.txt_mac.setTextColor(0xFF1DE9B6);
+                holder.txt_name.setTextColor(context.getResources().getColor(R.color.red));
+                holder.txt_mac.setTextColor(context.getResources().getColor(R.color.red));
                 holder.layout_idle.setVisibility(View.GONE);
                 holder.layout_connected.setVisibility(View.VISIBLE);
+
             } else {
                 holder.img_blue.setImageResource(R.mipmap.ic_blue_remote);
                 holder.txt_name.setTextColor(0xFF000000);
                 holder.txt_mac.setTextColor(0xFF000000);
                 holder.layout_idle.setVisibility(View.VISIBLE);
                 holder.layout_connected.setVisibility(View.GONE);
+
             }
         }
 
@@ -155,6 +170,16 @@ public class DeviceAdapter extends BaseAdapter {
         });
 
         return convertView;
+    }
+
+    private void setFont(ViewHolder holder) {
+
+        holder.btn_detail.setTypeface(octinPrisonFont);
+        holder.btn_disconnect.setTypeface(octinPrisonFont);
+        holder.btn_connect.setTypeface(octinPrisonFont);
+        holder.txt_name.setTypeface(octinPrisonFont);
+        holder.txt_rssi.setTypeface(octinPrisonFont);
+
     }
 
     class ViewHolder {
