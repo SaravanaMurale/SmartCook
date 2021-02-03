@@ -19,21 +19,12 @@ import android.widget.Toast;
 
 import com.clj.blesample.R;
 import com.clj.blesample.utils.MathUtil;
-import com.github.mikephil.charting.charts.LineChart;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class  GCPDateSelectActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
-    LineChart lineChart;
-
-    GraphView graphView;
-
 
     String[] burners = {"Select Burner", "Center", "Left", "Right","All Burner"};
     Spinner spinner;
@@ -43,8 +34,8 @@ public class  GCPDateSelectActivity extends AppCompatActivity implements Adapter
     Button submit;
 
 
-    LineGraphSeries<DataPoint> series;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd:MM:yyyy");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    Date date;
     private String selectedFromDate, selectedToDate, selectedBurner;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -53,12 +44,15 @@ public class  GCPDateSelectActivity extends AppCompatActivity implements Adapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bar_chart);
 
-        lineChart = (LineChart) findViewById(R.id.lineChart);
         spinner = (Spinner) findViewById(R.id.burnerSpinner);
 
         fromDate = (TextView) findViewById(R.id.fromDate);
         toDate = (TextView) findViewById(R.id.toDate);
         submit = (Button) findViewById(R.id.submit);
+
+
+        date=new Date();
+        toDate.setText(sdf.format(date));
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,6 +131,8 @@ public class  GCPDateSelectActivity extends AppCompatActivity implements Adapter
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(GCPDateSelectActivity.this, android.R.style.Theme_Holo_Light_Dialog, setListenerFromDate, year, month, date);
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                //Hides Future Dates
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                 datePickerDialog.show();
 
             }
@@ -148,6 +144,8 @@ public class  GCPDateSelectActivity extends AppCompatActivity implements Adapter
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(GCPDateSelectActivity.this, android.R.style.Theme_Holo_Light_Dialog, setListenerToDate, year, month, date);
                 datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                //Hides Future Dates
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                 datePickerDialog.show();
 
             }

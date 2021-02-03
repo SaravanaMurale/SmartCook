@@ -27,45 +27,23 @@ dependencies {
 
     implementation 'com.clj.fastble:FastBleLib:2.3.4'
 
-    /*implementation 'com.android.support:support-v4:28.1.1'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-*/
-    implementation 'com.sdsmdg.harjot:croller:1.0.7'
-
-
     //RecyclerView
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.android.support:appcompat-v7:28.0.0'
 
-    //BarChart
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-
-    implementation 'com.jjoe64:graphview:4.2.2'
-
+    //GraphView
     implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
 
     //Circular ImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
-    //Ripple
-    implementation 'com.skyfishjy.ripplebackground:library:1.0.1'
-
-    //Material Design
-    //implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
-
-
-    //Batch Notification
-    //implementation 'com.nex3z:notification-badge:1.0.4'
 
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    implementation 'com.sdsmdg.harjot:croller:1.0.7'
 
 
-
-    implementation 'com.github.Triggertrap:SeekArc:v1.1'
 
 
 

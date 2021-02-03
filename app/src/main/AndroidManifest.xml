@@ -19,9 +19,6 @@
             android:name=".menuoperationactivity.ResetPasswordActivity"
             android:screenOrientation="portrait" /> <!-- <activity android:name=".DummyGraphView"></activity> -->
         <activity
-            android:name=".menuoperationactivity.GasConsumptionActivity"
-            android:screenOrientation="landscape" />
-        <activity
             android:name=".menuoperationactivity.LoginActivity"
             android:screenOrientation="portrait" />
         <activity

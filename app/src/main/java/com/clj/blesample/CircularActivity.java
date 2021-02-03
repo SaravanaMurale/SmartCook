@@ -1,17 +1,11 @@
 package com.clj.blesample;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 
-import com.sdsmdg.harjot.crollerTest.Croller;
-import com.sdsmdg.harjot.crollerTest.OnCrollerChangeListener;
-import com.triggertrap.seekarc.SeekArc;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.TimerTask;
 

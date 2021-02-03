@@ -281,5 +281,33 @@ public static double getScreenInches(Activity activity){
     return screenInches;
 }
 
+    private long findDifferenceBetweenDates(String fromDate, String toDate) {
+
+        long difference_In_Days = 0;
+
+        try {
+
+            Date fromDateFormet = new SimpleDateFormat("dd/MM/yyyy").parse(fromDate);
+            Date toDateFormet = new SimpleDateFormat("dd/MM/yyyy").parse(toDate);
+
+
+            System.out.println("StringToDateConversion" + fromDateFormet); // Sat Jan 02 00:00:00 GMT 2010
+            System.out.println("StringToDateConversion" + toDateFormet);
+
+            long difference_In_Time = toDateFormet.getTime() - fromDateFormet.getTime();
+
+            difference_In_Days = (difference_In_Time / (1000 * 60 * 60 * 24)) % 365;
+
+            System.out.println("NumberOfDays" + difference_In_Days);
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return difference_In_Days;
+
+    }
+
 
 }

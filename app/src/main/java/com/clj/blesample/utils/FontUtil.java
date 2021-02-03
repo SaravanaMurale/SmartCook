@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.provider.Settings;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -46,6 +47,7 @@ public class FontUtil {
 
         return formattedDAte;
     }
+
 
 
 

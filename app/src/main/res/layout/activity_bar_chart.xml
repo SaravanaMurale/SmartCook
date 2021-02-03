@@ -21,7 +21,7 @@
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/preethiLogoGSP"
         android:background="@drawable/rounded_border"
         android:padding="15dp" />
@@ -33,6 +33,7 @@
         android:layout_below="@id/burnerSpinner"
         android:layout_margin="10dp"
         android:text="From"
+        android:textSize="18sp"
         android:fontFamily="sans-serif-condensed"
         android:textColor="@color/red"
         />
@@ -45,7 +46,7 @@
         android:layout_marginLeft="10dp"
         android:background="@drawable/rounded_border"
         android:gravity="center_vertical"
-        android:padding="5dp" />
+        android:padding="10dp" />
 
     <TextView
         android:id="@+id/toText"
@@ -55,6 +56,7 @@
         android:layout_alignParentRight="true"
         android:layout_margin="10dp"
         android:text="TO"
+        android:textSize="18sp"
         android:fontFamily="sans-serif-condensed"
         android:textColor="@color/red"
         />
@@ -68,8 +70,7 @@
         android:layout_marginRight="10dp"
         android:background="@drawable/rounded_border"
         android:gravity="center_vertical"
-        android:padding="5dp"
-
+        android:padding="10dp"
         />
 
     <Button
@@ -84,25 +85,11 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/edit_button_border_on"
         android:textColor="@color/red"
+        android:textSize="18sp"
         android:fontFamily="sans-serif-condensed"
 
         />
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/lineChart"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/fromDate"
-        android:layout_margin="50dp"
-        android:visibility="gone"></com.github.mikephil.charting.charts.LineChart>
 
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/graphView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/fromDate"
-        android:layout_margin="50dp"
-        android:visibility="gone"
-        />
 
 </RelativeLayout>
