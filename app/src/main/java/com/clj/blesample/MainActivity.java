@@ -97,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initView();
 
+
+
         BleManager.getInstance().init(getApplication());
         BleManager.getInstance()
                 .enableLog(true)

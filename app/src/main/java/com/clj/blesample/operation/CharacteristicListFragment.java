@@ -1003,8 +1003,6 @@ public class CharacteristicListFragment extends Fragment {
 
                     }
                 }
-
-
             }
         });
 
