@@ -3,9 +3,11 @@ package com.clj.blesample.operation;
 
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 import com.clj.blesample.R;
 import com.clj.blesample.comm.Observer;
 import com.clj.blesample.comm.ObserverManager;
+import com.clj.blesample.menuoperationactivity.MenuActivity;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.data.BleDevice;
@@ -71,12 +74,15 @@ public class OperationActivity extends AppCompatActivity implements Observer {
                 changePage(currentPage);
                 return true;
             } else {
-                finish();
+                callAppExitDialog();
+                //finish();
                 return true;
             }
         }
         return super.onKeyDown(keyCode, event);
     }
+
+
 
     private void initView() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -214,24 +220,35 @@ public class OperationActivity extends AppCompatActivity implements Observer {
         }
     }
 
-    /*@Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    private void callAppExitDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(OperationActivity.this);
 
-        System.out.println("OnBackPressedCalled");
-        List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
-        if (fragmentList != null) {
-            //TODO: Perform your logic to pass back press here
-            *//*for(Fragment fragment : fragmentList){
-                if(fragment instanceof OnBackPressedListener){
-                    ((OnBackPressedListener)fragment).onBackPressed();
-                }
-            }*//*
+        builder.setTitle("Exit");
 
-            finish();
+        builder.setMessage("Are you sure want to Exit?");
 
-        }
-    }*/
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                finishAffinity();
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+
+            }
+        });
+
+        AlertDialog diag = builder.create();
+        diag.show();
+    }
+
+
 
 
 }

@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.clj.blesample.R;
+import com.clj.blesample.comm.ObserverManager;
 import com.clj.blesample.databasemanager.SqliteManager;
 import com.clj.blesample.menuoperationactivity.MenuActivity;
 import com.clj.blesample.menuoperationactivity.NotificationActivity;
@@ -2422,6 +2423,5 @@ public class CharacteristicListFragment extends Fragment {
 
 
     }
-
 
 }

@@ -283,6 +283,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if(bleDevice.getName().equals("Preethi")){
                         Intent intent = new Intent(MainActivity.this, OperationActivity.class);
                         intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }else {
                         //Connecting with other device
@@ -487,6 +488,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         PreferencesUtil.setValueString(MainActivity.this, PreferencesUtil.BLE_MAC_ADDRESS, bleDevice.getMac());
                         Intent intent = new Intent(MainActivity.this, OperationActivity.class);
                         intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
 
                     }else {
