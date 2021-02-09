@@ -43,6 +43,8 @@ dependencies {
     //Biometric access
     //implementation 'androidx.biometric:biometric:1.0.0-rc01'
 
+    //implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
 
 
 }

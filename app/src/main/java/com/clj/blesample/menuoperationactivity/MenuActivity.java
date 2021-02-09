@@ -192,10 +192,10 @@ public class MenuActivity extends AppCompatActivity {
 
     private void signoutFromDevice() {
 
-        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        /*BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         if (adapter.isEnabled()){
             adapter.disable();
-        }
+        }*/
 
         new Handler().postDelayed(new Runnable() {
             @Override

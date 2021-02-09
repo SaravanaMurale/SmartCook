@@ -34,6 +34,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -86,6 +87,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Typeface  octinPrisonFont;
 
+    LinearLayout mainLayout;
+    ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,10 +97,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setContentView(R.layout.activity_main);
 
+
+
         getFont();
 
         initView();
 
+        String connectedDevice=PreferencesUtil.getValueString(MainActivity.this, PreferencesUtil.BLE_MAC_ADDRESS);
+
+        if(connectedDevice.equals("no_value")){
+
+            mainLayout.setVisibility(View.VISIBLE);
+        }else {
+            progressDialog.show();
+            progressDialog.setMessage("Connecting Please Wait");
+            mainLayout.setVisibility(View.INVISIBLE);
+        }
+
+        //System.out.println("ConnectedDeviceDetail"+connectedDevice);
 
 
         BleManager.getInstance().init(getApplication());
@@ -232,6 +250,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         operatingAnim.setInterpolator(new LinearInterpolator());
         progressDialog = new ProgressDialog(this);
 
+        mainLayout=(LinearLayout)findViewById(R.id.mainLayout);
+
+
 
         setFont();
 
@@ -283,11 +304,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if(bleDevice.getName().equals("Preethi")){
                         Intent intent = new Intent(MainActivity.this, OperationActivity.class);
                         intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }else {
                         //Connecting with other device
-                        Toast.makeText(MainActivity.this,"Please connect with Preethi Stove",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,"Please Pair With Preethi Stove",Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -422,7 +442,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (PreferencesUtil.getValueString(MainActivity.this, PreferencesUtil.BLE_MAC_ADDRESS).equals(scanResultList.get(i).getMac())) {
 
                         BleDevice bleDevice = scanResultList.get(i);
-                        Toast.makeText(MainActivity.this, "Device already connected", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "Device already connected", Toast.LENGTH_SHORT).show();
                         if (bleDevice != null) {
                             connect(bleDevice);
                         } else {
@@ -449,7 +469,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onStartConnect() {
                 progressDialog.show();
                 // dialog=MathUtil.showProgressBar(MainActivity.this);
-                progressDialog.setMessage("Connecting Please Wait");
+                //progressDialog.setMessage("Connecting Please Wait");
 
             }
 
@@ -476,10 +496,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //Mycode
                 if (BleManager.getInstance().isConnected(bleDevice)) {
 
-                    //System.out.println();
-
                     if(bleDevice.getName()==null || bleDevice.getName().isEmpty() || bleDevice.getName().equals("") || bleDevice.getName().length()==0 || !bleDevice.getName().equals("Preethi") ) {
-                        Toast.makeText(MainActivity.this,"Please connect with Preethi Stove",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,"Please Pair With Preethi Stove",Toast.LENGTH_SHORT).show();
                         mDeviceAdapter.removeDevice(bleDevice);
                         mDeviceAdapter.clearConnectedDevice();
                         mDeviceAdapter.notifyDataSetChanged();
@@ -488,21 +506,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         PreferencesUtil.setValueString(MainActivity.this, PreferencesUtil.BLE_MAC_ADDRESS, bleDevice.getMac());
                         Intent intent = new Intent(MainActivity.this, OperationActivity.class);
                         intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
 
                     }else {
                         //Connecting with other device
-                        Toast.makeText(MainActivity.this,"Please connect with Preethi Stove",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,"Please Pair with Preethi Stove",Toast.LENGTH_SHORT).show();
                     }
-
-
-
-
 
                 } else {
 
-                    Toast.makeText(MainActivity.this, "Please Connect With Preethi Stove", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Please Pair With Preethi Stove", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -675,17 +688,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return locationManager.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER);
     }
 
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        /*System.out.println("OnResetartCalled");
-        Toast.makeText(MainActivity.this,"OnResetartCalled",Toast.LENGTH_LONG).show();
-
-        finish();*/
-        //Closes the Activity when back button pressed from fragment
-
-    }
 
 
     private void getFont() {
