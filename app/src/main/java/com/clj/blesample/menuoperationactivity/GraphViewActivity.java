@@ -1,5 +1,6 @@
 package com.clj.blesample.menuoperationactivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import com.clj.blesample.R;
 import com.clj.blesample.databasemanager.SqliteManager;
 import com.clj.blesample.model.GasConsumptionPatternDTO;
 
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,6 +34,7 @@ public class GraphViewActivity extends AppCompatActivity {
 
     SqliteManager sqliteManager;
 
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,15 @@ public class GraphViewActivity extends AppCompatActivity {
         String selectedBurner = intent.getStringExtra("BURNER");
 
         System.out.println("SelectedData " + selectedFromDate + " " + selectedToDate + " " + selectedBurner);
+
+        String[] fromDataMonth = selectedFromDate.split("/");
+        String[] toDataMonth = selectedToDate.split("/");
+
+        String from=Month.of(Integer.parseInt(fromDataMonth[1])).name();
+        String to=Month.of(Integer.parseInt(toDataMonth[1])).name();
+
+        System.out.println("FromDateMonth"+from+" "+"ToDateMonth"+to);
+
 
         List<GasConsumptionPatternDTO> gasConsumptionPatternDTOList=new ArrayList<>();
 
@@ -89,13 +101,13 @@ public class GraphViewActivity extends AppCompatActivity {
 
         //System.out.println("RangeSizeOfGasConsumptionPatters " + gasConsumptionPatternDTOList.size());
 
-        for (int i = 0; i < gasConsumptionPatternDTOList.size(); i++) {
+       /* for (int i = 0; i < gasConsumptionPatternDTOList.size(); i++) {
 
             System.out.println("DataGCPData " + gasConsumptionPatternDTOList.get(i).getGasUsageDate());
             System.out.println("DataGCPData " + gasConsumptionPatternDTOList.get(i).getGasUsage());
 
 
-        }
+        }*/
 
         List yAxisValues = new ArrayList();
         List axisValues = new ArrayList();
@@ -106,7 +118,19 @@ public class GraphViewActivity extends AppCompatActivity {
             axisValues.add(i, new AxisValue(i).setLabel(xAxisDate[i]));
         }*/
         for (int i = 0; i < gasConsumptionPatternDTOList.size(); i++) {
-            axisValues.add(i, new AxisValue(i).setLabel(gasConsumptionPatternDTOList.get(i).getGasUsageDate()));
+
+            String date=gasConsumptionPatternDTOList.get(i).getGasUsageDate();
+
+            //System.out.println("DateToSplit "+date);
+
+            String[] day = date.split("/");
+            System.out.println("DayAlone "+day[0]);
+
+            //Only Day
+            axisValues.add(i, new AxisValue(i).setLabel(day[0]));
+
+            //Full Date
+            //axisValues.add(i, new AxisValue(i).setLabel(gasConsumptionPatternDTOList.get(i).getGasUsageDate()));
         }
 
         /*for (int i = 0; i < yAxisValue.length; i++) {
@@ -146,7 +170,8 @@ public class GraphViewActivity extends AppCompatActivity {
         yAxis.setTextColor(Color.parseColor("#03A9F4"));
         yAxis.setTextSize(16);
 
-        yAxis.setName("GasUsage in Grams");
+        yAxis.setName("GasUsage(gms)");
+        axis.setName("Date");
 
         Viewport viewport = new Viewport(lineChartView.getMaximumViewport());
         int max= Collections.max(findMaxValue);

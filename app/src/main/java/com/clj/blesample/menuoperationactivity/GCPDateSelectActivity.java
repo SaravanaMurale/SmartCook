@@ -32,6 +32,7 @@ public class  GCPDateSelectActivity extends AppCompatActivity implements Adapter
     DatePickerDialog.OnDateSetListener setListenerFromDate, setListenerToDate;
     TextView fromDate, toDate;
     Button submit;
+    TextView monthReportText;
 
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -49,6 +50,7 @@ public class  GCPDateSelectActivity extends AppCompatActivity implements Adapter
         fromDate = (TextView) findViewById(R.id.fromDate);
         toDate = (TextView) findViewById(R.id.toDate);
         submit = (Button) findViewById(R.id.submit);
+        monthReportText=(TextView)findViewById(R.id.monthReportText);
 
 
         date=new Date();
@@ -160,6 +162,7 @@ public class  GCPDateSelectActivity extends AppCompatActivity implements Adapter
                 fromDate.setText(date);
 
                 Date dat=MathUtil.stringToDateConversion(date);
+
                 String stringFromDate=MathUtil.dateToStringConversion(dat);
 
                 selectedFromDate = stringFromDate;
