@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.github.loadingview.LoadingDialog;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -22,12 +24,18 @@ public class TimerTaskActivity extends AppCompatActivity {
    /* Handler handler;
     Runnable r;*/
 
+    LoadingDialog loadingDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timer_task);
         viewButton=(Button)findViewById(R.id.viewButton);
         startTimer=(Button)findViewById(R.id.startTimer);
+
+        loadingDialog=LoadingDialog.Companion.get(this).hide();
+
+        loadingDialog.show();
 
         startTimer.setOnClickListener(new View.OnClickListener() {
             @Override

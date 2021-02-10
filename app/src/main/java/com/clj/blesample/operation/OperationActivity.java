@@ -1,6 +1,7 @@
 package com.clj.blesample.operation;
 
 
+import android.app.Dialog;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.DialogInterface;
@@ -11,7 +12,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.clj.blesample.R;
@@ -38,6 +41,8 @@ public class OperationActivity extends AppCompatActivity implements Observer {
     private List<Fragment> fragments = new ArrayList<>();
     private int currentPage = 0;
     private String[] titles = new String[3];
+
+    private Dialog builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -221,31 +226,36 @@ public class OperationActivity extends AppCompatActivity implements Observer {
     }
 
     private void callAppExitDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(OperationActivity.this);
+        TextView exitYes,exitNo,commonText;
 
-        builder.setTitle("Exit");
+        builder=new Dialog(OperationActivity.this);
 
-        builder.setMessage("Are you sure want to Exit?");
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_signout, null);
+        builder.setContentView(dialogView);
 
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        exitYes = (TextView)dialogView.findViewById(R.id.signoutYes);
+        exitNo = (TextView)dialogView.findViewById(R.id.signoutNo);
+        commonText=(TextView)dialogView.findViewById(R.id.signoutTxt);
+        commonText.setText("Do you want to exit the application?");
+
+        exitYes.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-
+            public void onClick(View view) {
                 finishAffinity();
             }
         });
 
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        exitNo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                dialog.dismiss();
-
+            public void onClick(View view) {
+                builder.dismiss();
             }
         });
 
-        AlertDialog diag = builder.create();
-        diag.show();
+
+builder.show();
+
     }
 
 

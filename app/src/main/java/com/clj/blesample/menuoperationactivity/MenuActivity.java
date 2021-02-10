@@ -1,6 +1,7 @@
 package com.clj.blesample.menuoperationactivity;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,9 +13,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.clj.blesample.R;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
@@ -24,6 +27,8 @@ public class MenuActivity extends AppCompatActivity {
     RelativeLayout profileSettingBlock, gasConsumptionBlock, recipeMenuBlock, productServiceBlock, settingsBlock, contactUsBlock, signOutBlock, preSetMenuBlock,getInTocuBlock;
 
     public static final int REQUEST_PHONE_CALL = 121;
+
+    Dialog builder;
 
 
     @Override
@@ -80,30 +85,36 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(MenuActivity.this);
+                TextView signOutYes,signOutNo;
 
-                builder.setTitle("Signout");
+                //AlertDialog.Builder builder = new AlertDialog.Builder(MenuActivity.this);
 
-                builder.setMessage("Are you sure want to signout?");
+                builder=new Dialog(MenuActivity.this);
 
-                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                LayoutInflater inflater = getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.dialog_signout, null);
+
+                builder.setContentView(dialogView);
+
+                signOutYes = (TextView)dialogView.findViewById(R.id.signoutYes);
+                signOutNo = (TextView)dialogView.findViewById(R.id.signoutNo);
+
+                signOutYes.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View view) {
                         signoutFromDevice();
                     }
                 });
 
-                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                signOutNo.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.dismiss();
-
+                    public void onClick(View view) {
+                        builder.dismiss();
                     }
                 });
 
-                AlertDialog diag = builder.create();
-                diag.show();
+                builder.show();
 
             }
         });
