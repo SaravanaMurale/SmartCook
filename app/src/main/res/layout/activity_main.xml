@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:background="@drawable/bg"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:visibility="invisible">
 
     <ImageView
         android:layout_width="100dp"
@@ -171,6 +173,8 @@
         android:paddingEnd="5dp"
         android:paddingStart="5dp"
         android:scrollbars="none" />
+
+
 
 
 </LinearLayout>

@@ -12,5 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <TextView
+        android:id="@+id/monthReportText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Taken 2 months report"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/red"
+        android:layout_margin="@dimen/five_dp"
+        android:textSize="18sp"
+        />
+
 
 </RelativeLayout>

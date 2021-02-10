@@ -3,8 +3,11 @@ package com.clj.blesample.menuoperationactivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.clj.blesample.R;
@@ -33,6 +36,7 @@ public class GraphViewActivity extends AppCompatActivity {
     int[] yAxisValue = {80, 30, 70, 20, 15, 50, 10};
 
     SqliteManager sqliteManager;
+    TextView monthReportText;
 
     @SuppressLint("NewApi")
     @Override
@@ -42,6 +46,7 @@ public class GraphViewActivity extends AppCompatActivity {
 
         lineChartView = findViewById(R.id.chart);
         sqliteManager = new SqliteManager(GraphViewActivity.this);
+        monthReportText=(TextView)findViewById(R.id.monthReportText);
 
         Intent intent = getIntent();
         String selectedFromDate = intent.getStringExtra("FROMDATE");
@@ -50,13 +55,7 @@ public class GraphViewActivity extends AppCompatActivity {
 
         System.out.println("SelectedData " + selectedFromDate + " " + selectedToDate + " " + selectedBurner);
 
-        String[] fromDataMonth = selectedFromDate.split("/");
-        String[] toDataMonth = selectedToDate.split("/");
-
-        String from=Month.of(Integer.parseInt(fromDataMonth[1])).name();
-        String to=Month.of(Integer.parseInt(toDataMonth[1])).name();
-
-        System.out.println("FromDateMonth"+from+" "+"ToDateMonth"+to);
+        durationMonthCalculation(selectedFromDate,selectedToDate);
 
 
         List<GasConsumptionPatternDTO> gasConsumptionPatternDTOList=new ArrayList<>();
@@ -179,5 +178,25 @@ public class GraphViewActivity extends AppCompatActivity {
         //viewport.top = 50;
         lineChartView.setMaximumViewport(viewport);
         lineChartView.setCurrentViewport(viewport);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void durationMonthCalculation(String selectedFromDate, String selectedToDate) {
+        String[] fromDataMonth = selectedFromDate.split("/");
+        String[] toDataMonth = selectedToDate.split("/");
+
+        String from=Month.of(Integer.parseInt(fromDataMonth[1])).name();
+        String to=Month.of(Integer.parseInt(toDataMonth[1])).name();
+
+        System.out.println("FromDateMonth"+from+" "+"ToDateMonth"+to);
+
+        if(from.equals(to)){
+            monthReportText.setText(from+" Month Report");
+        }else {
+            monthReportText.setText(from+" To "+to+" Month Report");
+        }
+
+
+
     }
 }
