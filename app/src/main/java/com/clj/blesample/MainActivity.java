@@ -81,14 +81,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Switch switchShow;
     private TextView switchStatus, bleConnectStatus;
 
-    Dialog dialog;
+    //Dialog dialog;
 
     ListView listView_device;
 
     Typeface  octinPrisonFont;
 
     LinearLayout mainLayout;
-    ProgressBar progressBar;
 
 
     @Override
@@ -96,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
 
 
         getFont();
@@ -107,10 +105,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(connectedDevice.equals("no_value")){
 
+            progressDialog.dismiss();
             mainLayout.setVisibility(View.VISIBLE);
+
         }else {
-            progressDialog.show();
+            //dialog=MathUtil.showProgressBar(MainActivity.this);
+
             progressDialog.setMessage("Connecting Please Wait");
+            progressDialog.show();
             mainLayout.setVisibility(View.INVISIBLE);
         }
 
@@ -223,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        dialog = new Dialog(getApplicationContext());
+        //dialog = new Dialog(getApplicationContext());
 
         btn_scan = (Button) findViewById(R.id.btn_scan);
         btn_scan.setText(getString(R.string.start_scan));
@@ -248,7 +250,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         img_loading = (ImageView) findViewById(R.id.img_loading);
         operatingAnim = AnimationUtils.loadAnimation(this, R.anim.rotate);
         operatingAnim.setInterpolator(new LinearInterpolator());
+
         progressDialog = new ProgressDialog(this);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setIcon(R.drawable.preethi_logo);
+        progressDialog.setCancelable(false);
+
+        //progressDialog.setTitle("Please Wait");
+
 
         mainLayout=(LinearLayout)findViewById(R.id.mainLayout);
 
@@ -432,7 +441,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 btn_scan.setText(getString(R.string.start_scan));
                 bleConnectStatus.setTextColor(Color.BLACK);
                 bleConnectStatus.setText("Please Connect");
-                MathUtil.dismisProgressBar(MainActivity.this, dialog);
+               // MathUtil.dismisProgressBar(MainActivity.this, dialog);
 
                 //System.out.println("CalledOnScanFinished");
 
@@ -468,8 +477,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onStartConnect() {
                 progressDialog.show();
-                // dialog=MathUtil.showProgressBar(MainActivity.this);
+
                 //progressDialog.setMessage("Connecting Please Wait");
+                 //dialog=MathUtil.showProgressBar(MainActivity.this);
+
 
             }
 
@@ -478,7 +489,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 img_loading.clearAnimation();
                 img_loading.setVisibility(View.INVISIBLE);
                 btn_scan.setText(getString(R.string.start_scan));
-                MathUtil.dismisProgressBar(MainActivity.this, dialog);
+                //MathUtil.dismisProgressBar(MainActivity.this, dialog);
                 progressDialog.dismiss();
                 Toast.makeText(MainActivity.this, getString(R.string.connect_fail), Toast.LENGTH_SHORT).show();
             }
@@ -492,7 +503,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 bleConnectStatus.setText("Connected");
 
                 progressDialog.dismiss();
-                MathUtil.dismisProgressBar(MainActivity.this, dialog);
+                //MathUtil.dismisProgressBar(MainActivity.this, dialog);
                 //Mycode
                 if (BleManager.getInstance().isConnected(bleDevice)) {
 
@@ -522,8 +533,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onDisConnected(boolean isActiveDisConnected, BleDevice bleDevice, BluetoothGatt gatt, int status) {
-                progressDialog.dismiss();
-                MathUtil.dismisProgressBar(MainActivity.this, dialog);
+               progressDialog.dismiss();
+                //MathUtil.dismisProgressBar(MainActivity.this, dialog);
 
                 mDeviceAdapter.removeDevice(bleDevice);
                 mDeviceAdapter.notifyDataSetChanged();

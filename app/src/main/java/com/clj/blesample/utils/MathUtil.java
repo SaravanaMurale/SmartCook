@@ -270,8 +270,9 @@ public class MathUtil {
         csprogress = new Dialog(context, R.style.MyAlertDialogStyle);
         csprogress.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.red(R.color.red)));
         csprogress.setCancelable(false);
+        csprogress.setTitle("Connecting Please Wait...");
         csprogress.setContentView(R.layout.layout_progressbar);
-        csprogress.setCanceledOnTouchOutside(true);
+        csprogress.setCanceledOnTouchOutside(false);
         csprogress.show();
         return csprogress;
     }

@@ -1,13 +1,14 @@
 package com.clj.blesample;
 
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.github.loadingview.LoadingDialog;
+
+import com.agrawalsuneet.dotsloader.loaders.CircularDotsLoader;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -24,7 +25,7 @@ public class TimerTaskActivity extends AppCompatActivity {
    /* Handler handler;
     Runnable r;*/
 
-    LoadingDialog loadingDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +34,15 @@ public class TimerTaskActivity extends AppCompatActivity {
         viewButton=(Button)findViewById(R.id.viewButton);
         startTimer=(Button)findViewById(R.id.startTimer);
 
-        loadingDialog=LoadingDialog.Companion.get(this).hide();
+        CircularDotsLoader loader = new CircularDotsLoader(this);
+        loader.setBigCircleRadius(80);
+        loader.setRadius(100);
+        loader.setAnimDur(300);
+        //loader.setFirstShadowColor(ContextCompat.getColor(this, R.color.blue));
+        //loader.setSecondShadowColor(ContextCompat.getColor(this, R.color.yellow));
 
-        loadingDialog.show();
+
+
 
         startTimer.setOnClickListener(new View.OnClickListener() {
             @Override

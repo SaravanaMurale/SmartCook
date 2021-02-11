@@ -203,17 +203,26 @@ public class MenuActivity extends AppCompatActivity {
 
     private void signoutFromDevice() {
 
-        /*BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         if (adapter.isEnabled()){
             adapter.disable();
-        }*/
+        }
 
-        new Handler().postDelayed(new Runnable() {
+        /*new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                PreferencesUtil.clearAll(MenuActivity.this);
+
+
             }
-        },500);
+        },500);*/
+
+
+
+
+
+
+
+        PreferencesUtil.clearAll(MenuActivity.this);
 
 
         Intent intent = new Intent(MenuActivity.this, LoginActivity.class);
