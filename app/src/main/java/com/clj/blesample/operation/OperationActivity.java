@@ -159,8 +159,6 @@ public class OperationActivity extends AppCompatActivity implements Observer {
 
     private void updateFragment(int position) {
 
-
-
         if (position > fragments.size() - 1) {
             return;
         }
