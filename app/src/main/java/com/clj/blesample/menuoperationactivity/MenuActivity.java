@@ -217,11 +217,6 @@ public class MenuActivity extends AppCompatActivity {
         },500);*/
 
 
-
-
-
-
-
         PreferencesUtil.clearAll(MenuActivity.this);
 
 

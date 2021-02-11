@@ -66,9 +66,9 @@ public class OperationActivity extends AppCompatActivity implements Observer {
 
             //If keyCode==4 onBack Button is pressed, so directly calling Main Activity from characteristicListFragment
             //My Code
-            if (keyCode==4 && currentPage==1){
+            if (keyCode == 4 && currentPage == 1) {
 
-                currentPage=0;
+                currentPage = 0;
             } //end of My Code
 
             System.out.println("KEYCODE" + keyCode);
@@ -86,7 +86,6 @@ public class OperationActivity extends AppCompatActivity implements Observer {
         }
         return super.onKeyDown(keyCode, event);
     }
-
 
 
     private void initView() {
@@ -111,12 +110,12 @@ public class OperationActivity extends AppCompatActivity implements Observer {
         //Getting Ble Device data
         bleDevice = getIntent().getParcelableExtra(KEY_DATA);
 
-        if(bleDevice==null){
+        if (bleDevice == null) {
             finish();
-        }else if(bleDevice!=null){
-            PreferencesUtil.setValueString(OperationActivity.this,PreferencesUtil.BLE_NAME,bleDevice.getName());
-            PreferencesUtil.setValueString(OperationActivity.this,PreferencesUtil.BLE_MAC,bleDevice.getMac());
-            PreferencesUtil.setValueSInt(OperationActivity.this,PreferencesUtil.BLE_RSSI,bleDevice.getRssi());
+        } else if (bleDevice != null) {
+            PreferencesUtil.setValueString(OperationActivity.this, PreferencesUtil.BLE_NAME, bleDevice.getName());
+            PreferencesUtil.setValueString(OperationActivity.this, PreferencesUtil.BLE_MAC, bleDevice.getMac());
+            PreferencesUtil.setValueSInt(OperationActivity.this, PreferencesUtil.BLE_RSSI, bleDevice.getRssi());
         }
 
         //System.out.println("DeviceDetails"+bleDevice.getName()+" "+bleDevice.getMac()+" "+bleDevice.getRssi()+" "+bleDevice.getKey()+" "+bleDevice.getDevice()+" "+bleDevice.describeContents()+" "+bleDevice.getScanRecord()+" "+bleDevice.getTimestampNanos());
@@ -208,7 +207,7 @@ public class OperationActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-       // Toast.makeText(OperationActivity.this,"Bluetooth Connection Terminated",Toast.LENGTH_SHORT).show();
+        // Toast.makeText(OperationActivity.this,"Bluetooth Connection Terminated",Toast.LENGTH_SHORT).show();
         System.out.println("BLEDESTROYCALLED");
         BleManager.getInstance().clearCharacterCallback(bleDevice);
         ObserverManager.getInstance().deleteObserver(this);
@@ -217,24 +216,24 @@ public class OperationActivity extends AppCompatActivity implements Observer {
     @Override
     public void disConnected(BleDevice device) {
         System.out.println("BLEDISCONNECTEDCALLED");
-        Toast.makeText(OperationActivity.this,"Bluetooth Connection Terminated",Toast.LENGTH_SHORT).show();
+        Toast.makeText(OperationActivity.this, "Bluetooth Connection Terminated", Toast.LENGTH_SHORT).show();
         if (device != null && bleDevice != null && device.getKey().equals(bleDevice.getKey())) {
             finish();
         }
     }
 
     private void callAppExitDialog() {
-        TextView exitYes,exitNo,commonText;
+        TextView exitYes, exitNo, commonText;
 
-        builder=new Dialog(OperationActivity.this);
+        builder = new Dialog(OperationActivity.this);
 
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_signout, null);
         builder.setContentView(dialogView);
 
-        exitYes = (TextView)dialogView.findViewById(R.id.signoutYes);
-        exitNo = (TextView)dialogView.findViewById(R.id.signoutNo);
-        commonText=(TextView)dialogView.findViewById(R.id.signoutTxt);
+        exitYes = (TextView) dialogView.findViewById(R.id.signoutYes);
+        exitNo = (TextView) dialogView.findViewById(R.id.signoutNo);
+        commonText = (TextView) dialogView.findViewById(R.id.signoutTxt);
         commonText.setText("Do you want to exit the application?");
 
         exitYes.setOnClickListener(new View.OnClickListener() {
@@ -252,11 +251,9 @@ public class OperationActivity extends AppCompatActivity implements Observer {
         });
 
 
-builder.show();
+        builder.show();
 
     }
-
-
 
 
 }
