@@ -12,8 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.clj.blesample.MainActivity;
 import com.clj.blesample.R;
 import com.clj.blesample.databasemanager.SqliteManager;
+import com.clj.blesample.sessionmanager.PreferencesUtil;
 
 import static com.clj.blesample.utils.MathUtil.ValidateNameWithoutSplChar;
 import static com.clj.blesample.utils.MathUtil.validateEmail;
@@ -192,11 +194,26 @@ public class SignUpActivity extends AppCompatActivity {
                             signUpCPassword.getText().clear();
                             //signUpAddress.getText().clear();
 
-                            Toast.makeText(SignUpActivity.this, "Added Successfully", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(SignUpActivity.this, "Added Successfully", Toast.LENGTH_LONG).show();
 
-                            Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                            /*Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                             startActivity(intent);
-                            finish();
+                            finish();*/
+
+                            String userLoginName = sqliteManager.validateLoginUser(userEmail, userPassword);
+
+                            PreferencesUtil.setValueString(SignUpActivity.this, PreferencesUtil.USER_NAME, userLoginName);
+
+                            if (!userLoginName.equals("empty")) {
+                                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+
+
+                            } else {
+                                Toast.makeText(SignUpActivity.this, "Incorrect Password", Toast.LENGTH_LONG).show();
+                            }
+
 
                         } else {
                             Toast.makeText(SignUpActivity.this, "User Is Not Added ", Toast.LENGTH_LONG).show();
