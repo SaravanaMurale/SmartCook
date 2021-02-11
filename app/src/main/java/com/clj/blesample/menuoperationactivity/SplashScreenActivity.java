@@ -13,6 +13,7 @@ import com.clj.blesample.MainActivity;
 import com.clj.blesample.R;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
 import com.clj.blesample.utils.LogFile;
+import com.clj.blesample.utils.MathUtil;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

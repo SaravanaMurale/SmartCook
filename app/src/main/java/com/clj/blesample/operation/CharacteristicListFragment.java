@@ -786,8 +786,17 @@ public class CharacteristicListFragment extends Fragment {
         notificationIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), NotificationActivity.class);
-                startActivity(intent);
+
+                int notiPreference=PreferencesUtil.getValueInt(getActivity(),PreferencesUtil.NOTI_PREFERENCE);
+
+                if(notiPreference==1 || notiPreference==0){
+                    Intent intent = new Intent(getActivity(), NotificationActivity.class);
+                    startActivity(intent);
+                }else if(notiPreference==-1){
+                    Toast.makeText(getActivity(),"You disabled notification preference",Toast.LENGTH_LONG).show();
+                }
+
+
 
             }
         });

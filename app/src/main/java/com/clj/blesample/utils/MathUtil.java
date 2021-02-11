@@ -30,6 +30,9 @@ public class MathUtil {
     public static final int SET_TIMER_VISIBLE=1;
     public static final int SET_WHISTLE_VISIBLE=2;
 
+    public static final int NOTI_PREFERENCE_ENABLE=1;
+    public static final int NOTI_PREFERENCE_DISABLE=-1;
+
 
     //sets sim,high,off
     public static final int BURNER_FORMET = 1;
