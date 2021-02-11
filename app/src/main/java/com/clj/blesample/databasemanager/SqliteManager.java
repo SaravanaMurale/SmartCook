@@ -63,6 +63,7 @@ public class SqliteManager extends SQLiteOpenHelper {
     public static final String NOTIFI_ALERT = "notificationalerttable";
     public static final String NOTIFI_TEXT = "notifi_text";
     public static final String READ_STATUS = "read_status";
+    public static final String TIME_STAMP="time_stamp";
 
 
     public static final String IMAGE_TABLE = "imagetable";
@@ -147,7 +148,8 @@ public class SqliteManager extends SQLiteOpenHelper {
         String notificationAlertTable = "CREATE TABLE IF NOT EXISTS " + NOTIFI_ALERT + "(\n" +
                 "    " + COLUMN_ID + " INTEGER NOT NULL CONSTRAINT add_cart_pk PRIMARY KEY AUTOINCREMENT,\n" +
                 "    " + NOTIFI_TEXT + " varchar(500) NOT NULL,\n" +
-                "    " + READ_STATUS + " varchar(200) NOT NULL\n" +
+                "    " + READ_STATUS + " varchar(200) NOT NULL,\n" +
+                "    " + TIME_STAMP + " varchar(500) NOT NULL\n" +
                 ");";
 
 
@@ -764,6 +766,11 @@ public class SqliteManager extends SQLiteOpenHelper {
 
         contentValues.put(NOTIFI_TEXT, notificationText);
         contentValues.put(READ_STATUS, "0");
+        contentValues.put(TIME_STAMP, MathUtil.dateMonthAndTime());
+
+
+
+        //System.out.println("DateAndTime"+MathUtil.dateMonthAndTime());
 
         return sqLiteDatabase.insert(NOTIFI_ALERT, null, contentValues) != -1;
 
@@ -853,7 +860,7 @@ public class SqliteManager extends SQLiteOpenHelper {
 
 
                 NotificationResponseDTO notificationResponseDTO = new NotificationResponseDTO(cursorNoti.getInt(0), cursorNoti.getString(1),
-                        cursorNoti.getString(2));
+                        cursorNoti.getString(2),cursorNoti.getString(3));
 
                 notificationResponseDTOList.add(notificationResponseDTO);
 

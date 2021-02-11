@@ -192,7 +192,7 @@ public class SignUpActivity extends AppCompatActivity {
                             signUpCPassword.getText().clear();
                             //signUpAddress.getText().clear();
 
-                            Toast.makeText(SignUpActivity.this, "User Added Successfully", Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignUpActivity.this, "Added Successfully", Toast.LENGTH_LONG).show();
 
                             Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                             startActivity(intent);

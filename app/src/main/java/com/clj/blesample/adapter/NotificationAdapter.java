@@ -58,9 +58,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         if (notificationDTOList.get(i).getNotiReadStatus().equals("0")) {
             notificationViewHolder.notiBlock.setBackgroundColor(Color.WHITE);
             notificationViewHolder.notiAlertText.setText(notificationDTOList.get(i).getNotiText());
+            notificationViewHolder.timeStamp.setText(notificationDTOList.get(i).getNotiTimeStamp());
         } else if (notificationDTOList.get(i).getNotiReadStatus().equals("1")) {
             notificationViewHolder.notiBlock.setBackgroundColor(Color.GRAY);
             notificationViewHolder.notiAlertText.setText(notificationDTOList.get(i).getNotiText());
+            notificationViewHolder.timeStamp.setText(notificationDTOList.get(i).getNotiTimeStamp());
         }
 
 
@@ -77,7 +79,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     class NotificationViewHolder extends RecyclerView.ViewHolder {
 
         ImageView deleteNoti;
-        TextView notiAlertText;
+        TextView notiAlertText,timeStamp;
         RelativeLayout notiBlock;
 
 
@@ -87,6 +89,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             deleteNoti = (ImageView) itemView.findViewById(R.id.deleteNoti);
             notiBlock = (RelativeLayout) itemView.findViewById(R.id.notiBlock);
             notiAlertText = (TextView) itemView.findViewById(R.id.notiAlertText);
+            timeStamp=(TextView)itemView.findViewById(R.id.timeStamp);
 
             deleteNoti.setOnClickListener(new View.OnClickListener() {
                 @Override

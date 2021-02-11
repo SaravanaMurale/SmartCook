@@ -5,6 +5,7 @@ public class NotificationResponseDTO {
     private int notiColumnID;
     private String notiText;
     private String notiReadStatus;
+    private String notiTimeStamp;
 
     public NotificationResponseDTO(int notiColumnID) {
         this.notiColumnID = notiColumnID;
@@ -14,6 +15,13 @@ public class NotificationResponseDTO {
         this.notiColumnID = notiColumnID;
         this.notiText = notiText;
         this.notiReadStatus = notiReadStatus;
+    }
+
+    public NotificationResponseDTO(int notiColumnID, String notiText, String notiReadStatus,String notiTimeStamp) {
+        this.notiColumnID = notiColumnID;
+        this.notiText = notiText;
+        this.notiReadStatus = notiReadStatus;
+        this.notiTimeStamp=notiTimeStamp;
     }
 
     public int getNotiColumnID() {
@@ -38,5 +46,13 @@ public class NotificationResponseDTO {
 
     public void setNotiReadStatus(String notiReadStatus) {
         this.notiReadStatus = notiReadStatus;
+    }
+
+    public String getNotiTimeStamp() {
+        return notiTimeStamp;
+    }
+
+    public void setNotiTimeStamp(String notiTimeStamp) {
+        this.notiTimeStamp = notiTimeStamp;
     }
 }

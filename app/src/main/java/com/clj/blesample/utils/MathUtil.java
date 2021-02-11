@@ -252,6 +252,15 @@ public class MathUtil {
         return dateAndTime;
     }
 
+    public static String dateMonthAndTime() {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM HH:mm");
+        Date d = new Date();
+        String dateAndTime = sdf.format(d);
+
+        return dateAndTime;
+    }
+
     public static Dialog showProgressBar(Context context) {
 
         Dialog csprogress;
