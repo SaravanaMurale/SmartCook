@@ -158,7 +158,10 @@ public class MathUtil {
     }
 
     public static boolean ValidateNameWithoutSplChar(String name){
-        if(!name.matches("^[A-Za-z]+$") ){
+
+        //if(!name.matches("^[A-Za-z]+$") ){//not allows dot
+        //[a-zA-Z.\s] allows dot and space
+        if(!name.matches("^[A-Za-z.]+") ){
             return false;
         }
         return true;
