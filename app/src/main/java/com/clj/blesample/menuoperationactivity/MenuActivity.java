@@ -97,6 +97,7 @@ public class MenuActivity extends AppCompatActivity {
 
                 builder.setContentView(dialogView);
 
+
                 signOutYes = (TextView)dialogView.findViewById(R.id.signoutYes);
                 signOutNo = (TextView)dialogView.findViewById(R.id.signoutNo);
 

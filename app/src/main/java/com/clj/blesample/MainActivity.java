@@ -41,6 +41,7 @@ import android.widget.Toast;
 
 import com.clj.blesample.adapter.DeviceAdapter;
 import com.clj.blesample.comm.ObserverManager;
+import com.clj.blesample.menuoperationactivity.MenuActivity;
 import com.clj.blesample.operation.OperationActivity;
 import com.clj.blesample.sessionmanager.PreferencesUtil;
 import com.clj.blesample.utils.FontUtil;
@@ -454,6 +455,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
 
                     } else {
+
+                        //If already paired device is not matching with current device
+                        progressDialog.dismiss();
+                        PreferencesUtil.remove(MainActivity.this,PreferencesUtil.BLE_MAC_ADDRESS);
+                        mainLayout.setVisibility(View.VISIBLE);
+
                         Toast.makeText(MainActivity.this, "Please Connect", Toast.LENGTH_SHORT).show();
                     }
 
