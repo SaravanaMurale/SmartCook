@@ -30,6 +30,8 @@ public class PreferencesUtil {
 
     public static final String NOTI_PREFERENCE="noti_preference";
 
+    public static final String APP_OPEN_COUNT="app_open_count";
+
     public static void setValueString(Context context, String key, String value) {
 
         if (context == null) return;

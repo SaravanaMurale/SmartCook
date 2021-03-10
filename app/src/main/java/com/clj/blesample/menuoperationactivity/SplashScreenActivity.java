@@ -24,11 +24,36 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
+
+
+
         setContentView(R.layout.activity_splash_screen);
         new SplashDownCountDown(1500, 1000).start();
 
     }
 
+    private void appOpenCount() {
+
+
+
+        int appOpenCount=PreferencesUtil.getValueInt(SplashScreenActivity.this,PreferencesUtil.APP_OPEN_COUNT);
+
+        System.out.println("Appcount"+appOpenCount);
+
+        if(appOpenCount>=50){
+            //System.exit(1);
+            finish();
+        }else {
+
+
+            appOpenCount=appOpenCount+1;
+            PreferencesUtil.setValueSInt(SplashScreenActivity.this,PreferencesUtil.APP_OPEN_COUNT,appOpenCount);
+            actuallyComesInOnFinish();
+
+
+        }
+
+    }
 
 
     private class SplashDownCountDown extends CountDownTimer {
@@ -47,7 +72,11 @@ public class SplashScreenActivity extends AppCompatActivity {
         @Override
         public void onFinish() {
 
-            Intent intent;
+            appOpenCount();
+
+
+
+        /*    Intent intent;
 
             userId = PreferencesUtil.getValueInt(SplashScreenActivity.this, PreferencesUtil.USER_ID);
 
@@ -61,8 +90,28 @@ public class SplashScreenActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
 
-            }
+            }*/
         }
+    }
+
+    private void actuallyComesInOnFinish() {
+
+        Intent intent;
+
+        userId = PreferencesUtil.getValueInt(SplashScreenActivity.this, PreferencesUtil.USER_ID);
+
+        if (userId > 0) {
+            intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+
+        } else {
+            intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+
+        }
+
     }
 
 
