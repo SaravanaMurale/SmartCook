@@ -22,12 +22,9 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-
-
         setContentView(R.layout.activity_splash_screen);
+
+
         new SplashDownCountDown(1500, 1000).start();
 
     }

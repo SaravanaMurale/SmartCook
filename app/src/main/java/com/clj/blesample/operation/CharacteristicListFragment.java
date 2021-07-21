@@ -131,6 +131,8 @@ public class CharacteristicListFragment extends Fragment {
     Timer timer;
     TimerTask timerTask;
 
+    TextView batteryValue;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -176,6 +178,8 @@ public class CharacteristicListFragment extends Fragment {
 
         setTimerBlock = (RelativeLayout) v.findViewById(R.id.setTimerBlock);
         setWhistleBlock = (RelativeLayout) v.findViewById(R.id.setWhistleCountBlock);
+
+        batteryValue=(TextView)v.findViewById(R.id.batteryValue);
 
         whistleSub = (TextView) v.findViewById(R.id.whistleSub);
         whistleAdd = (TextView) v.findViewById(R.id.whistleAdd);
@@ -1846,7 +1850,7 @@ public class CharacteristicListFragment extends Fragment {
 
                 int batteryPercentage = data[5];
 
-                //System.out.println("BatteryPercentage" + batteryPercentage);
+                System.out.println("BatteryPercentage" + batteryPercentage);
 
                 setBatteryStatus(batteryPercentage);
 
@@ -1916,6 +1920,8 @@ public class CharacteristicListFragment extends Fragment {
 
     private void setBatteryStatus(int batteryPercentage) {
 
+
+        batteryValue.setText(""+batteryPercentage+"%");
 
         if (batteryPercentage >= 80) {
             selectBatteryStatus.setImageDrawable(getResources().getDrawable(R.drawable.battery_full));
