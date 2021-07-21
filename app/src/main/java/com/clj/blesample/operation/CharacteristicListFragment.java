@@ -75,7 +75,6 @@ public class CharacteristicListFragment extends Fragment {
 
     int SIZE_OF_CHARACTERISTIC = 0;
 
-
     int currentApiVersion;
 
     CircleImageView seletedUserProfile;
