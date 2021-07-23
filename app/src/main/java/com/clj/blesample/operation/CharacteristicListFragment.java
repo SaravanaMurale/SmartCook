@@ -884,6 +884,7 @@ public class CharacteristicListFragment extends Fragment {
         timerCancel.setTypeface(octinPrisonFont);
         timerTitle.setTypeface(octinPrisonFont);
         timerReset.setTypeface(octinPrisonFont);
+        batteryValue.setTypeface(octinPrisonFont);
 
 
         //mHandler.postDelayed(mRunnable,50000);
