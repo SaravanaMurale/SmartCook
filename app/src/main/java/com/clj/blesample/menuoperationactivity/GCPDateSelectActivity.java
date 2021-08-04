@@ -103,13 +103,10 @@ public class  GCPDateSelectActivity extends AppCompatActivity implements Adapter
 
 
                 }
-
-
-
-
-
             }
         });
+
+
 
 
         spinner.setOnItemSelectedListener(this);
@@ -221,7 +218,5 @@ public class  GCPDateSelectActivity extends AppCompatActivity implements Adapter
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
-
 }
 

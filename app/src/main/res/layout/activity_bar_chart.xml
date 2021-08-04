@@ -86,10 +86,7 @@
         android:background="@drawable/edit_button_border_on"
         android:textColor="@color/red"
         android:textSize="18sp"
-        android:fontFamily="sans-serif-condensed"
-
-        />
-
+        android:fontFamily="sans-serif-condensed" />
 
 
 </RelativeLayout>

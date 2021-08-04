@@ -195,8 +195,5 @@ public class GraphViewActivity extends AppCompatActivity {
         }else {
             monthReportText.setText(from+" To "+to+" Month Report");
         }
-
-
-
     }
 }

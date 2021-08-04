@@ -24,9 +24,6 @@
         android:visibility="visible"
         android:src="@drawable/user" />
 
-
-
-
     <RelativeLayout
         android:id="@+id/profileBlock"
         android:layout_width="match_parent"

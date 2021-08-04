@@ -222,7 +222,6 @@ public class SqliteManager extends SQLiteOpenHelper {
 
         return userId;
 
-
     }
 
     public int checkUserMobileStatus(String mobile){
@@ -238,7 +237,6 @@ public class SqliteManager extends SQLiteOpenHelper {
             do {
 
                 userId=cursor.getInt(0);
-
 
             }
             while (cursor.moveToNext());
@@ -915,6 +913,7 @@ DELETE FROM notificationalerttable WHERE id='3';
 
 delete from notificationalerttable where id in (SELECT id FROM notificationalerttable LIMIT 5)*/
     }
+
 
 
 }

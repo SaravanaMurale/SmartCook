@@ -34,4 +34,5 @@ public class GetInTouchActivity extends AppCompatActivity {
 
 
     }
+
 }
