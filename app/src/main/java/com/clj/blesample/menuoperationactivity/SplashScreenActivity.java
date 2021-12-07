@@ -69,11 +69,11 @@ public class SplashScreenActivity extends AppCompatActivity {
         @Override
         public void onFinish() {
 
-            appOpenCount();
+            //appOpenCount();
 
 
 
-        /*    Intent intent;
+            Intent intent;
 
             userId = PreferencesUtil.getValueInt(SplashScreenActivity.this, PreferencesUtil.USER_ID);
 
@@ -87,7 +87,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
 
-            }*/
+            }
         }
     }
 
